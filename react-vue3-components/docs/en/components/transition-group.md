@@ -65,7 +65,7 @@ Here is an example of `<TransitionGroup>` adding enter/leave animations to a `Ch
 The above example has a noticeable flaw: when an item is inserted or removed, the surrounding elements "jump" immediately instead of moving smoothly. We can fix this by adding a couple of extra CSS rules:
 
 ```jsx
-<TransitionGroup name="list" tag="ul" moveClassName="list-move">
+<TransitionGroup name="list" tag="ul" moveClass="list-move">
   ...
 </TransitionGroup>
 ```
@@ -113,13 +113,13 @@ Now it looks much better, and even shuffling the entire list animates very smoot
 
 [![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?view=editor+%2B+preview&module=%2Fsrc%2Fexamples%2FTransitionGroup%2FListWithFLIP.tsx&initialpath=/examples/transition-group/list-flip)
 
-You can also specify a custom transition class for moving elements by passing the `moveClassName` prop to `<TransitionGroup>`, similar to <a href="./transition#自定义过渡-classname">custom transition classes</a>.
+You can also specify a custom transition class for moving elements by passing the `moveClass` prop to `<TransitionGroup>`, similar to <a href="./transition#自定义过渡-classname">custom transition classes</a>.
 
 ## Required Configuration for Move Animations (FLIP)
 
 `<TransitionGroup>` internally implements the "FLIP" list transition effect. To ensure it works smoothly without flickering, your CSS configuration must meet two key requirements:
 
-- The `transition` property must be set for elements in the moving transition state and used in the `moveClassName` prop.
+- The `transition` property must be set for elements in the moving transition state and used in the `moveClass` prop.
 
 ```css
 /* Transition applied to moving elements */
@@ -129,7 +129,7 @@ You can also specify a custom transition class for moving elements by passing th
 ```
 
 ```jsx
-<TransitionGroup name="list" moveClassName="list-move">
+<TransitionGroup name="list" moveClass="list-move">
 ...
 </TransitionGroup>
 ```
@@ -146,7 +146,7 @@ You can also specify a custom transition class for moving elements by passing th
 }
 ```
 
-> ⚠️ If the above two CSS rules are not configured correctly, or the CSS corresponding to moveClassName is missing, the list will most likely have animation calculation errors or obvious flickering.
+> ⚠️ If the above two CSS rules are not configured correctly, or the CSS corresponding to moveClass is missing, the list will most likely have animation calculation errors or obvious flickering.
 
 ## Staggered List Animations
 
@@ -205,7 +205,7 @@ const onEnter = useCallback((el, done) => {
 | Prop name     | Type     | Description                                              | Required |
 | ------------- | -------- | -------------------------------------------------------- | -------- |
 | tag           | `String` | If not defined, no container is rendered by default      | No       |
-| moveClassName | `String` | Used to customize the CSS className applied during transition | No       |
+| moveClass | `String` | Used to customize the CSS className applied during transition | No       |
 
 ## Events
 

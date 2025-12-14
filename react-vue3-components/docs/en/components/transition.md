@@ -207,17 +207,17 @@ For most CSS animations, we can simply declare them under the `*-enter-active` a
 
 You can also pass the following props to `<Transition>` to specify custom transition class names:
 
-- `enterFrom`
+- `enterFromClass`
 
-- `enterActive`
+- `enterActiveClass`
 
-- `enterTo`
+- `enterToClass`
 
-- `leaveFrom`
+- `leaveFromClass`
 
-- `leaveActive`
+- `leaveActiveClass`
 
-- `leaveTo`
+- `leaveToClass`
 
 These class names you pass will override the default class names for the corresponding stages. This feature is useful when you want to integrate other third-party CSS animation libraries with React's animation mechanism, such as <a target="_blank" href="https://daneden.github.io/animate.css/">Animate.css</a>:
 
@@ -226,8 +226,8 @@ These class names you pass will override the default class names for the corresp
 <Transition
   if={show}
   name="custom-classes"
-  enterActive="animate__animated animate__tada"
-  leaveActive="animate__animated animate__bounceOutRight"
+  enterActiveClass="animate__animated animate__tada"
+  leaveActiveClass="animate__animated animate__bounceOutRight"
 >
   <p>hello</p>
 </Transition>
@@ -491,15 +491,15 @@ When CSS transitions or animations are enabled, within the time set by the `dura
 | css | `Boolean` | Enables or disables all CSS transition effects | No |
 | appear | `Boolean` | Applies transition effect when the component is first rendered | No |
 | duration | `Number \| {enter: Number, leave: Number}` | Defines the time required for enter and leave transitions (in ms) | No |
-| enterFrom | `String` | Custom CSS class name for the **start state** of the enter transition (`-enter-from`) | No |
-| enterActive | `String` | Custom CSS class name for the **active state** of the enter transition (`-enter-active`) | No |
-| enterTo | `String` | Custom CSS class name for the **end state** of the enter transition (`-enter-to`) | No |
+| enterFromClass | `String` | Custom CSS class name for the **start state** of the enter transition (`-enter-from`) | No |
+| enterActiveClass | `String` | Custom CSS class name for the **active state** of the enter transition (`-enter-active`) | No |
+| enterToClass | `String` | Custom CSS class name for the **end state** of the enter transition (`-enter-to`) | No |
 | appearFrom | `String` | Custom CSS class name for the **start state** of the initial render transition (`-appear-from`) | No |
 | appearActive | `String` | Custom CSS class name for the **active state** of the initial render transition (`-appear-active`) | No |
 | appearTo | `String` | Custom CSS class name for the **end state** of the initial render transition (`-appear-to`) | No |
-| leaveFrom | `String` | Custom CSS class name for the **start state** of the leave transition (`-leave-from`) | No |
-| leaveActive | `String` | Custom CSS class name for the **active state** of the leave transition (`-leave-active`) | No |
-| leaveTo | `String` | Custom CSS class name for the **end state** of the leave transition (`-leave-to`) | No |
+| leaveFromClass | `String` | Custom CSS class name for the **start state** of the leave transition (`-leave-from`) | No |
+| leaveActiveClass | `String` | Custom CSS class name for the **active state** of the leave transition (`-leave-active`) | No |
+| leaveToClass | `String` | Custom CSS class name for the **end state** of the leave transition (`-leave-to`) | No |
 
 ## Events
 

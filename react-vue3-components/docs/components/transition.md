@@ -207,17 +207,17 @@ const [show, setShow] = useState(false);
 
 你也可以向 `<Transition>` 传递以下的 props 来指定自定义的过渡 className：
 
-- `enterFrom`
+- `enterFromClass`
 
-- `enterActive`
+- `enterActiveClass`
 
-- `enterTo`
+- `enterToClass`
 
-- `leaveFrom`
+- `leaveFromClass`
 
-- `leaveActive`
+- `leaveActiveClass`
 
-- `leaveTo`
+- `leaveToClass`
 
 你传入的这些 className 会覆盖相应阶段的默认 className 名。这个功能在你想要在 React 的动画机制下集成其他的第三方 CSS 动画库时非常有用，比如 <a target="_blank" href="https://daneden.github.io/animate.css/">Animate.css</a>：
 
@@ -226,8 +226,8 @@ const [show, setShow] = useState(false);
 <Transition
   if={show}
   name="custom-classes"
-  enterActive="animate__animated animate__tada"
-  leaveActive="animate__animated animate__bounceOutRight"
+  enterActiveClass="animate__animated animate__tada"
+  leaveActiveClass="animate__animated animate__bounceOutRight"
 >
   <p>hello</p>
 </Transition>
@@ -491,15 +491,15 @@ const handleClick = useCallback(() => {
 | css          | `Boolean`                                  | 启用或关闭所有 CSS 过渡效果                                  | 否     |
 | appear       | `Boolean`                                  | 在组件初次渲染时应用过渡效果                                 | 否     |
 | duration     | `Number \| {enter: Number, leave: Number}` | 定义进入和离开过渡所需的时间（单位 ms）                      | 否     |
-| enterFrom    | `String`                                   | 自定义进入过渡的**起始状态**（`-enter-from`）的 CSS 类名     | 否     |
-| enterActive  | `String`                                   | 自定义进入过渡的**生效状态**（`-enter-active`）的 CSS 类名   | 否     |
-| enterTo      | `String`                                   | 自定义进入过渡的**结束状态**（`-enter-to`）的 CSS 类名       | 否     |
+| enterFromClass    | `String`                                   | 自定义进入过渡的**起始状态**（`-enter-from`）的 CSS 类名     | 否     |
+| enterActiveClass  | `String`                                   | 自定义进入过渡的**生效状态**（`-enter-active`）的 CSS 类名   | 否     |
+| enterToClass      | `String`                                   | 自定义进入过渡的**结束状态**（`-enter-to`）的 CSS 类名       | 否     |
 | appearFrom   | `String`                                   | 自定义初次渲染过渡的**起始状态**（`-appear-from`）的 CSS 类名 | 否     |
 | appearActive | `String`                                   | 自定义初次渲染过渡的**生效状态**（`-appear-active`）的 CSS 类名 | 否     |
 | appearTo     | `String`                                   | 自定义初次渲染过渡的**结束状态**（`-appear-to`）的 CSS 类名  | 否     |
-| leaveFrom    | `String`                                   | 自定义离开过渡的**起始状态**（`-leave-from`）的 CSS 类名     | 否     |
-| leaveActive  | `String`                                   | 自定义离开过渡的**生效状态**（`-leave-active`）的 CSS 类名   | 否     |
-| leaveTo      | `String`                                   | 自定义离开过渡的**结束状态**（`-leave-to`）的 CSS 类名       | 否     |
+| leaveFromClass    | `String`                                   | 自定义离开过渡的**起始状态**（`-leave-from`）的 CSS 类名     | 否     |
+| leaveActiveClass  | `String`                                   | 自定义离开过渡的**生效状态**（`-leave-active`）的 CSS 类名   | 否     |
+| leaveToClass      | `String`                                   | 自定义离开过渡的**结束状态**（`-leave-to`）的 CSS 类名       | 否     |
 
 ## 事件
 

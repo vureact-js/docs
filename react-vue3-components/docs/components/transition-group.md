@@ -65,7 +65,7 @@
 上面的示例有一些明显的缺陷：当某一项被插入或移除时，它周围的元素会立即发生“跳跃”而不是平稳地移动。我们可以通过添加一些额外的 2 个 CSS 规则来解决这个问题：
 
 ```jsx
-<TransitionGroup name="list" tag="ul" moveClassName="list-move">
+<TransitionGroup name="list" tag="ul" moveClass="list-move">
   ...
 </TransitionGroup>
 ```
@@ -113,13 +113,13 @@
 
 [![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?module=%2Fsrc%2Fexamples%2FTransitionGroup%2FListWithFLIP.tsx&initialpath=/examples/transition-group/list-flip)
 
-你还可以通过向 `<TransitionGroup>` 传递 `moveClassName` prop 为移动元素指定自定义过渡 class，类似于<a href="./transition#自定义过渡-classname">自定义过渡 class</a>。
+你还可以通过向 `<TransitionGroup>` 传递 `moveClass` prop 为移动元素指定自定义过渡 class，类似于<a href="./transition#自定义过渡-classname">自定义过渡 class</a>。
 
 ## 移动动画 (FLIP) 的必要配置
 
 `<TransitionGroup>` 内部实现了“FLIP”列表过渡效果。为了确保其能够平滑、无闪烁地工作，您的 CSS 配置必须满足两个关键要求：
 
-- 必须为移动过渡状态的元素设置 `transition` 属性并在 `moveClassName` prop 使用。
+- 必须为移动过渡状态的元素设置 `transition` 属性并在 `moveClass` prop 使用。
 
 ```css
 /* 对移动中的元素应用的过渡 */
@@ -129,7 +129,7 @@
 ```
 
 ```jsx
-<TransitionGroup name="list" moveClassName="list-move">
+<TransitionGroup name="list" moveClass="list-move">
 ...
 </TransitionGroup>
 ```
@@ -146,7 +146,7 @@
 }
 ```
 
-> ⚠️ 如果未正确配置上述两个 CSS 规则，或缺少 moveClassName 对应的 CSS，列表将大概率出现动画计算错误或明显的闪烁抖动。
+> ⚠️ 如果未正确配置上述两个 CSS 规则，或缺少 moveClass 对应的 CSS，列表将大概率出现动画计算错误或明显的闪烁抖动。
 
 ## 渐进延迟列表动画
 
@@ -205,7 +205,7 @@ const onEnter = useCallback((el, done) => {
 | 属性名        | 类型     | 描述                                     | 必填项 |
 | ------------- | -------- | ---------------------------------------- | ------ |
 | tag           | `String` | 如果未定义，默认不渲染容器               | 否     |
-| moveClassName | `String` | 用于自定义过渡期间被应用的 CSS className | 否     |
+| moveClass | `String` | 用于自定义过渡期间被应用的 CSS className | 否     |
 
 ## 事件
 
