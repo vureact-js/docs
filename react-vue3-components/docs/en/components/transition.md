@@ -2,20 +2,20 @@
 
 We provide two components to help you create state-change-based transitions and animations, which are **almost identical** to Vue's `<Transition>`.
 
-- `<Transition>` applies animations when an element or component enters or leaves the DOM. This chapter will explain how to use it.
+- `<Transition>` applies animations when an element or component enters and leaves the DOM. This chapter will introduce how to use it.
 
 - `<TransitionGroup>` applies animations when elements or components in a JSX list are inserted, moved, or removed. We will introduce it in the <a href="./transition-group">next chapter</a>.
 
 ## Basic Usage
 
-Control the entry or exit of a component through the `if` prop, and declare a transition effect name with the `name` prop.
+Control the display or hiding through the child node itself, without explicit manipulation by `<Transition>`.
 
 ```jsx
 const [show, setShow] = useState(false);
 
 <button onClick={() => setShow(!show)}>Toggle</button>
-<Transition if={show} name="fade">
-  <p>hello</p>
+<Transition name="fade">
+  {show && <p>hello</p>}
 </Transition>
 ```
 
@@ -34,9 +34,9 @@ const [show, setShow] = useState(false);
    ></iframe>
 </div>
 
-[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?view=editor+%2B+preview&module=%2Fsrc%2Fexamples%2FTransition%2FFade.tsx&initialpath=/examples/transition/fade)
+[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?module=%2Fsrc%2Fexamples%2FTransition%2FFade.tsx&initialpath=/examples/transition/fade)
 
-For a named transition effect, the transition class names that act on it will be prefixed with its name. For example, the class names applied in the above example will be `fade-enter-active`. The class names for this "fade" transition should look like this:
+For a named transition effect, the effective transition class names will be prefixed with its name. For example, the class names applied in the above example will be `fade-enter-active`. The class names for this "fade" transition should be like this:
 
 ```css
 .fade-enter-from,
@@ -57,11 +57,11 @@ For more transition effects, please check <a href="../other/transition-css">Tran
 
 ## Transition Duration
 
-The default animation transition duration controlled by `<Transition>` is **500 (ms)**. This means that if the CSS `transition-duration` is the same, there's no need to set the `duration` prop of the component; otherwise, the duration must be set equivalently to ensure the CSS transition effect completes correctly.
+The default animation transition duration controlled by `<Transition>` is **500 (ms)**. This means that if the CSS `transition-duration` is the same as it, there is no need to set the `duration` prop of the component; otherwise, the duration must be set equally to ensure that the CSS transition effect is executed correctly.
 
 ```jsx
 <Transition name="fade" duration={350}>
-  <p>hello</p>
+  ...
 </Transition>
 ```
 
@@ -77,43 +77,43 @@ The default animation transition duration controlled by `<Transition>` is **500 
 }
 ```
 
-When the **CSS durations** of `*-enter-active` and `*-leave-active` are **different**, you can specify the durations for entry and exit separately using an object.
+When the **CSS durations** of `*-enter-active` and `*-leave-active` are **different**, you can specify the time required for entering and leaving separately in the form of an object.
 
-## CSS-Based Transition Effects
+## CSS-based Transition Effects
 
 ### Naming Transition Effects
 
 #### CSS Transition Class Names
 
-There are 6 CSS class names applied to enter and leave transition effects.
+There are a total of 6 CSS class names applied to enter and leave transition effects.
 
 1. ***-enter-from**: **Start state of the enter animation**. Added before the component is first mounted or re-enters the DOM. Removed in the next frame after the component is mounted.
 
-2. ***-enter-active**: **Active state of the enter animation**. Applied throughout the entire enter animation phase. Added before the component is mounted and removed after the transition or animation completes. **Used to define duration, delay, and timing function (Transition / Animation property).**
+2. ***-enter-active**: **Active state of the enter animation**. Applied throughout the entire enter animation phase. Added before the component is mounted and removed after the transition or animation is completed. **Used to define duration, delay, and speed curve type (Transition / Animation property).**
 
-3. ***-enter-to**: **End state of the enter animation**. Added in the next frame after the component is mounted (i.e., at the same time `*-enter-from` is removed) and removed after the transition or animation completes.
+3. ***-enter-to**: **End state of the enter animation**. Added in the next frame after the component is mounted (i.e., at the same time as `*-enter-from` is removed) and removed after the transition or animation is completed.
 
-4. ***-leave-from**: **Start state of the leave animation**. Added immediately when the leave transition is triggered (before the component is unmounted). Removed after one frame.
+4. ***-leave-from**: **Start state of the leave animation**. Added immediately when the leave transition effect is triggered (before the component is unmounted). Removed after one frame.
 
-5. ***-leave-active**: **Active state of the leave animation**. Applied throughout the entire leave animation phase. Added immediately when the leave transition is triggered and removed after the transition or animation completes. **Used to define duration, delay, and timing function (Transition / Animation property).**
+5. ***-leave-active**: **Active state of the leave animation**. Applied throughout the entire leave animation phase. Added immediately when the leave transition effect is triggered and removed after the transition or animation is completed. **Used to define duration, delay, and speed curve type (Transition / Animation property).**
 
-6. ***-leave-to**: **End state of the leave animation**. Added in the next frame after a leave animation is triggered (i.e., at the same time `*-leave-active` is removed) and removed after the transition or animation completes.
+6. ***-leave-to**: **End state of the leave animation**. Added in the next frame after a leave animation is triggered (i.e., at the same time as `*-leave-active` is removed) and removed after the transition or animation is completed.
 
-#### CSS Transitions
+#### CSS transition
 
-`<Transition>` is generally used with <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Transitions/Using">native CSS transitions</a> as you saw in the examples above. The transition CSS property is a shorthand that allows us to define various aspects of a transition at once, including the properties to animate, duration, and <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/easing-function">timing function</a>.
+`<Transition>` is generally used together with <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Transitions/Using">native CSS transitions</a>, as you can see in the example above. The transition CSS property is a shorthand that allows us to define various aspects of a transition at once, including the properties to be animated, duration, and <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/easing-function">timing function</a>.
 
-Here's a more advanced example that transitions multiple properties with different durations and timing functions.
+Here is a more advanced example that uses different durations and timing functions to transition multiple properties.
 
 ```jsx
-<Transition if={show} name="slide-fade" duration={{ enter: 300, leave: 800 }}>
-  <p>hello</p>
+<Transition name="slide-fade" duration={{ enter: 300, leave: 800 }}>
+  {show && <p>hello</p>}
 </Transition>
 ```
 
 ```css
 /*
-  Enter and leave animations can have different durations and timing functions.
+  Enter and leave animations can use different durations and timing functions.
 */
 /* Initial transition appearance */
 .slide-fade-enter-from,
@@ -150,19 +150,17 @@ Here's a more advanced example that transitions multiple properties with differe
    ></iframe>
 </div>
 
-[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?view=editor+%2B+preview&module=%2Fsrc%2Fexamples%2FTransition%2FFade.tsx&initialpath=/examples/transition/slide-fade)
+[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?module=%2Fsrc%2Fexamples%2FTransition%2FFade.tsx&initialpath=/examples/transition/slide-fade)
 
-#### CSS Animations
+#### CSS animation
 
 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations" target="_blank">Native CSS animations</a> are applied in basically the same way as CSS transitions, with one difference: `*-enter-from` is not removed immediately after the element is inserted, but when an `animationend` event is triggered.
 
-For most CSS animations, we can simply declare them under the `*-enter-active` and `*-leave-active` class names. Here's an example:
+For most CSS animations, we can simply declare them under the `*-enter-active` and `*-leave-active` class names. Here is an example:
 
 ```jsx
-<Transition if={show} name="bounce">
-  <p style={{ textAlign: 'center' }}>
-    Hello here is some bouncy text!
-  </p>
+<Transition name="bounce">
+  {show && <p style={{ textAlign: 'center' }}>Hello here is some bouncy text!</p>}
 </Transition>
 ```
 
@@ -201,7 +199,7 @@ For most CSS animations, we can simply declare them under the `*-enter-active` a
    ></iframe>
 </div>
 
-[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?view=editor+%2B+preview&module=%2Fsrc%2Fexamples%2FTransition%2FBounce.tsx&initialpath=/examples/transition/bounce)
+[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?module=%2Fsrc%2Fexamples%2FTransition%2FBounce.tsx&initialpath=/examples/transition/bounce)
 
 #### Custom Transition Class Names
 
@@ -219,17 +217,16 @@ You can also pass the following props to `<Transition>` to specify custom transi
 
 - `leaveToClass`
 
-These class names you pass will override the default class names for the corresponding stages. This feature is useful when you want to integrate other third-party CSS animation libraries with React's animation mechanism, such as <a target="_blank" href="https://daneden.github.io/animate.css/">Animate.css</a>:
+These class names you pass will override the default class names for the corresponding stages. This feature is very useful when you want to integrate other third-party CSS animation libraries under React's animation mechanism, such as <a target="_blank" href="https://daneden.github.io/animate.css/">Animate.css</a>:
 
 ```jsx
-{/* Assuming you have imported Animate.css in your page */}
+{/* Assuming you have imported Animate.css in the page */}
 <Transition
-  if={show}
   name="custom-classes"
   enterActiveClass="animate__animated animate__tada"
   leaveActiveClass="animate__animated animate__bounceOutRight"
 >
-  <p>hello</p>
+  {show && <p>hello</p>}
 </Transition>
 ```
 
@@ -261,29 +258,29 @@ const onBeforeEnter = (el) => {}
 // Use this to start the enter animation
 const onEnter = (el, done) => {
   // Call the callback function done to indicate the end of the transition
-  // This callback is optional if used with CSS
+  // This callback is optional if used in conjunction with CSS
   done()
 }
 
-// Called when the enter transition completes.
+// Called when the enter transition is completed.
 const onAfterEnter = (el) => {}
 
 // Called when the enter transition is cancelled before completion
 const onEnterCancelled = (el) => {}
 
 // Called before the leave hook
-// Most of the time, you should only need the leave hook
+// Most of the time, you should only use the leave hook
 const onBeforeLeave = (el) => {}
 
 // Called when the leave transition starts
 // Use this to start the leave animation
 const onLeave = (el, done) => {
   // Call the callback function done to indicate the end of the transition
-  // This callback is optional if used with CSS
+  // This callback is optional if used in conjunction with CSS
   done()
 }
 
-// Called when the leave transition completes and
+// Called when the leave transition is completed and
 // the element has been removed from the DOM
 const onAfterLeave = (el) => {}
 
@@ -293,7 +290,7 @@ const onLeaveCancelled = (el) => {}
 
 These hooks can be used in combination with CSS transitions or animations, or alone.
 
-When using animations performed solely by JavaScript, it's best to add a `css={false}` prop. This disables all CSS transition effects and prevents CSS rules from accidentally interfering with the transition:
+When using animations executed only by JavaScript, it is best to add a `css={false}` prop. Disabling all CSS transition effects can also prevent CSS rules from accidentally interfering with the transition effects:
 
 ```jsx
 <Transition css={false}>
@@ -303,7 +300,7 @@ When using animations performed solely by JavaScript, it's best to add a `css={f
 
 With `css={false}`, we are fully responsible for controlling when the transition ends. In this case, the callback function `done` is mandatory for the `onEnter` and `onLeave` hooks. Otherwise, the hooks will be called synchronously, and the transition will complete immediately.
 
-Here's an example of performing animations using the <a target="_blank" href="https://gsap.com/">GSAP library</a>. You can also use any library you want, such as <a target="_blank" href="https://animejs.com/">Anime.js</a> or <a target="_blank" href="https://motion.dev/">Motion One</a>:
+Here is an example of performing animations using the <a target="_blank" href="https://gsap.com/">GSAP library</a>. You can also use any library you want, such as <a target="_blank" href="https://animejs.com/">Anime.js</a> or <a target="_blank" href="https://motion.dev/">Motion One</a>:
 
 <div class="iframe-container loading">
   <div class="fallback-content">
@@ -320,9 +317,9 @@ Here's an example of performing animations using the <a target="_blank" href="ht
    ></iframe>
 </div>
 
-[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?view=editor+%2B+preview&module=%2Fsrc%2Fexamples%2FTransition%2FWithGSAP.tsx&initialpath=/examples/transition/with-gsap)
+[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?module=%2Fsrc%2Fexamples%2FTransition%2FWithGSAP.tsx&initialpath=/examples/transition/with-gsap)
 
-## Appear Transition
+## Transition on Appear
 
 If you want to apply a transition effect when a node is first rendered, you can add the `appear` prop:
 
@@ -334,32 +331,32 @@ If you want to apply a transition effect when a node is first rendered, you can 
 
 ## Transition Between Elements
 
-It's not possible to have a solution like Vue where only one element is rendered at any time in the child nodes of `<Transition>`, so the following fallback solution is used:
+In the child nodes of `<Transition>`, ensure that only one element is rendered at any time, and it must have a `key`:
 
 ```jsx
 const [docState, setDocState] = useState("saved");
 
-<Transition if={docState === "saved"} name="slide-up">
-  <button onClick={() => setDocState("edited")}>
-    Edit
-  </button>
-</Transition>
-<Transition if={docState === "edited"} name="slide-up">
-  <button onClick={() => setDocState("editing")}>
-    Save
-  </button>
-</Transition>
-<Transition if={docState === "editing"} name="slide-up">
-  <button onClick={() => setDocState("saved")}>
-    Cancel
-  </button>
-</Transition>
+<Transition name="slide-up">
+  {docState === 'saved' ? (
+    <button key="b1" onClick={() => setDocState('edited')}>
+      Edit
+    </button>
+  ) : docState === 'edited' ? (
+    <button key="b2" onClick={() => setDocState('editing')}>
+      Save
+    </button>
+  ) : (
+    <button key="b3" onClick={() => setDocState('saved')}>
+      Cancel
+    </button>
+  )}
+</Transition>;
 ```
 
 <div class="iframe-container loading">
   <div class="fallback-content">
     <p>Loading interactive example...</p>
-   </div>
+  </div>
 
   <iframe
      onload="this.parentElement.classList.remove('loading')"
@@ -371,15 +368,15 @@ const [docState, setDocState] = useState("saved");
    ></iframe>
 </div>
 
-[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?view=editor+%2B+preview&module=%2Fsrc%2Fexamples%2FTransition%2FMoreToggle.tsx&initialpath=/examples/transition/more-toggle)
+[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?module=%2Fsrc%2Fexamples%2FTransition%2FMoreToggle.tsx&initialpath=/examples/transition/more-toggle)
 
-## Transition Modes
+## Transition Mode
 
-> `mode` is implemented via the <a target="_blank" href="https://reactcommunity.org/react-transition-group/switch-transition">`<SwitchTransition>`</a> component. **Its core task is "content switching"**, which strictly controls which child component is active at the same time. It is not a simple "show/hide" controller; its design goal is to animate the replacement of old content with new content when the key changes.
+> `mode` is implemented through the <a target="_blank" href="https://reactcommunity.org/react-transition-group/switch-transition">`<SwitchTransition>`</a> component. **Its core task is "content switching"**, which strictly controls which child component is active at the same time. It is not a simple "show/hide" controller. Its design goal is to animate the replacement of old content with new content when the key changes.
 
-In the previous examples, the entering and leaving elements start animating at the same time, so we had to set them to `position: absolute` to avoid layout issues when both exist simultaneously.
+In the previous examples, the entering and leaving elements start animating at the same time, so we have to set them to `position: absolute` to avoid layout issues when both exist at the same time.
 
-However, in many cases, this may not be desirable. We may want to execute the leave animation first, and then execute the element's enter animation after it completes. Manually orchestrating such animations is very complex, but fortunately, we can achieve this behavior by passing a `mode` prop to `<Transition>`:
+However, in many cases, this may not meet the requirements. We may want to execute the leave animation first, and then execute the element's enter animation after it is completed. Manually orchestrating such animations is very complex, but fortunately, we can achieve this behavior by passing a `mode` prop to `<Transition>`:
 
 ```jsx
 <Transition mode="out-in">
@@ -387,28 +384,11 @@ However, in many cases, this may not be desirable. We may want to execute the le
 </Transition>
 ```
 
-Here's the previous example modified to use `mode="out-in"`:
+Changing the previous example to `mode="out-in"` looks like this:
 
 ```jsx
-const handleClick = useCallback(() => {
-  setShow(() => !show);
-  setDocState(() =>
-    docState === "saved"
-      ? "edited"
-      : docState === "edited"
-      ? "editing"
-      : "saved"
-  );
-}, [show, docState]);
-
-<Transition if={show} mode="out-in" name="slide-up">
-  <button onClick={handleClick}>
-    {docState === "saved"
-      ? "Edit"
-      : docState === "edited"
-      ? "Save"
-      : "Cancel"}
-  </button>
+<Transition mode="out-in" name="slide-up">
+  ...
 </Transition>
 ```
 
@@ -427,13 +407,13 @@ const handleClick = useCallback(() => {
    ></iframe>
 </div>
 
-[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?view=editor+%2B+preview&module=%2Fsrc%2Fexamples%2FTransition%2FOutIn.tsx&initialpath=/examples/transition/out-in)
+[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?module=%2Fsrc%2Fexamples%2FTransition%2FOutIn.tsx&initialpath=/examples/transition/out-in)
 
-`<Transition>` also supports `mode="in-out"`, although it's not commonly used.
+`<Transition>` also supports `mode="in-out"`, although it is not commonly used.
 
 ## Dynamic Transitions
 
-Props of `<Transition>` (such as `name`) can also be dynamic, allowing us to dynamically apply different types of transitions based on state changes:
+The props of `<Transition>` (such as `name`) can also be dynamic, which allows us to dynamically apply different types of transitions based on state changes:
 
 ```jsx
 <Transition name={transitionName}>
@@ -441,17 +421,16 @@ Props of `<Transition>` (such as `name`) can also be dynamic, allowing us to dyn
 </Transition>
 ```
 
-The usefulness of this feature is that you can predefine multiple sets of CSS transition or animation class names and then dynamically switch between them.
+The use of this feature is that you can predefine multiple sets of CSS transition or animation class names and then switch between them dynamically.
 
-You can also apply different behaviors in JavaScript transition hooks based on the current state of your component. Finally, the ultimate way to create dynamic transitions is to create **reusable transition components** that change transition effects based on dynamic props.
+You can also apply different behaviors in JavaScript transition hooks based on the current state of your component. Finally, the ultimate way to create dynamic transitions is to create **reusable transition components** and let these components change transition effects based on dynamic props.
 
-## Canceling Transitions
+## Preventing Transitions
 
-When CSS transitions or animations are enabled, within the time set by the `duration` prop (default 500 ms), you can forcefully prevent their behavior by quickly toggling the state of the `show` prop, and it will trigger the enter cancellation event `onEnterCancelled` or the leave cancellation event `onLeaveCancelled`.
+When CSS transitions or animations are enabled, within the time set by the `duration` prop (default 500 ms), their behavior can be forced to stop by quickly switching, and the enter cancellation event `onEnterCancelled` or leave cancellation event `onLeaveCancelled` will be triggered.
 
 ```jsx
 <Transition
-  if={show}
   name="fade"
   onEnterCancelled={(el) => {
     console.log("onEnterCancelled!", el);
@@ -460,7 +439,7 @@ When CSS transitions or animations are enabled, within the time set by the `dura
     console.log("onLeaveCancelled!", el);
   }}
 >
-  <p>I can revert the state</p>
+  {show && <p>I can revert the state</p>}
 </Transition>
 ```
 
@@ -479,39 +458,38 @@ When CSS transitions or animations are enabled, within the time set by the `dura
    ></iframe>
 </div>
 
-[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?view=editor+%2B+preview&module=%2Fsrc%2Fexamples%2FTransition%2FCanceled.tsx&initialpath=/examples/transition/canceled)
+[![Edit react-vue3-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/w4c2h5?module=%2Fsrc%2Fexamples%2FTransition%2FCanceled.tsx&initialpath=/examples/transition/canceled)
 
 ## Props
 
-| Property Name | Type | Description | Required |
-|------------|------|-------------|----------|
-| if | `Boolean` | Controls the entry or exit of the component, triggering enter or exit state | No |
-| show | `Boolean` | Controls the entry or exit of the component, triggering enter or exit state (does not unmount the component) | No |
-| mode | `'out-in' \| 'in-out'` | Controls the timing sequence of enter/leave transitions | No |
-| css | `Boolean` | Enables or disables all CSS transition effects | No |
-| appear | `Boolean` | Applies transition effect when the component is first rendered | No |
-| duration | `Number \| {enter: Number, leave: Number}` | Defines the time required for enter and leave transitions (in ms) | No |
-| enterFromClass | `String` | Custom CSS class name for the **start state** of the enter transition (`-enter-from`) | No |
-| enterActiveClass | `String` | Custom CSS class name for the **active state** of the enter transition (`-enter-active`) | No |
-| enterToClass | `String` | Custom CSS class name for the **end state** of the enter transition (`-enter-to`) | No |
-| appearFrom | `String` | Custom CSS class name for the **start state** of the initial render transition (`-appear-from`) | No |
-| appearActive | `String` | Custom CSS class name for the **active state** of the initial render transition (`-appear-active`) | No |
-| appearTo | `String` | Custom CSS class name for the **end state** of the initial render transition (`-appear-to`) | No |
-| leaveFromClass | `String` | Custom CSS class name for the **start state** of the leave transition (`-leave-from`) | No |
-| leaveActiveClass | `String` | Custom CSS class name for the **active state** of the leave transition (`-leave-active`) | No |
-| leaveToClass | `String` | Custom CSS class name for the **end state** of the leave transition (`-leave-to`) | No |
+| Property Name       | Type                                       | Description                                                  | Required |
+| ------------ | ------------------------------------------ | ------------------------------------------------------------ | ------ |
+| mode         | `'out-in' \| 'in-out'`                     | Controls the timing sequence of enter/leave transitions       | No     |
+| css          | `Boolean`                                  | Enables or disables all CSS transition effects                | No     |
+| appear       | `Boolean`                                  | Applies transition effect when the component is first rendered | No     |
+| duration     | `Number \| {enter: Number, leave: Number}` | Defines the time required for enter and leave transitions (in ms) | No     |
+| enterFromClass    | `String`                                   | Custom CSS class name for the **start state** (`-enter-from`) of the enter transition | No     |
+| enterActiveClass  | `String`                                   | Custom CSS class name for the **active state** (`-enter-active`) of the enter transition | No     |
+| enterToClass      | `String`                                   | Custom CSS class name for the **end state** (`-enter-to`) of the enter transition | No     |
+| appearFromClass   | `String`                                   | Custom CSS class name for the **start state** (`-appear-from`) of the initial render transition | No     |
+| appearActiveClass | `String`                                   | Custom CSS class name for the **active state** (`-appear-active`) of the initial render transition | No     |
+| appearToClass     | `String`                                   | Custom CSS class name for the **end state** (`-appear-to`) of the initial render transition | No     |
+| leaveFromClass    | `String`                                   | Custom CSS class name for the **start state** (`-leave-from`) of the leave transition | No     |
+| leaveActiveClass  | `String`                                   | Custom CSS class name for the **active state** (`-leave-active`) of the leave transition | No     |
+| leaveToClass      | `String`                                   | Custom CSS class name for the **end state** (`-leave-to`) of the leave transition | No     |
 
 ## Events
 
-| Function Name | Type | Description |
-|------------|------|-------------|
-| onBeforeEnter | `(el: HTMLElement) => void` | Called before the element is inserted into the DOM. Used to set the `enter-from` state of the element |
-| onEnter | `(el: HTMLElement, done: () => void) => void` | Called in the next frame after the element is inserted into the DOM. Used to start the enter animation. Call the callback function `done` to indicate the end of the transition (optional when used with CSS) |
-| onAfterEnter | `el: HTMLElement) => void` | Called when the enter transition completes |
-| onAppear | `(el: HTMLElement, done: () => void) => void` | Called in the next frame after the element is inserted into the DOM during the component's initial render (when `appear={true}`). Used the same way as `onEnter` |
-| onAfterAppear | `(el: HTMLElement) => void` | Called when the initial render transition completes (when `appear={true}`). |
-| onBeforeLeave | `(el: HTMLElement) => void` | Called before the `onLeave` hook. |
-| onLeave | `(el: HTMLElement, done: () => void) => void` | Called when the leave transition starts. Used to start the leave animation. Call the callback function `done` to indicate the end of the transition (optional when used with CSS) |
-| onAfterLeave | `(el: HTMLElement) => void` | Called when the leave transition completes and the element has been removed from the DOM |
-| onEnterCancelled | `(el: HTMLElement) => void` | Called when the enter transition is cancelled before completion |
-| onLeaveCancelled | `(el: HTMLElement) => void` | Called when the enter transition is cancelled before leaving |
+| Function Name           | Type                                          | Description                                                  |
+| ---------------- | --------------------------------------------- | ------------------------------------------------------------ |
+| onBeforeEnter    | `(el: HTMLElement) => void`                   | Called before the element is inserted into the DOM.          |
+| onEnter          | `(el: HTMLElement, done: () => void) => void` | Called in the next frame after the element is inserted into the DOM. Used to start the enter animation. Call the callback function `done` to indicate the end of the transition (optional when used with CSS) |
+| onAfterEnter     | `el: HTMLElement) => void`                    | Called when the enter transition is completed                |
+| onBeforeAppear   | (el: HTMLElement) => void                     | Called before the element is inserted into the DOM during the initial render of the component (when `appear={true}`). |
+| onAppear         | `(el: HTMLElement, done: () => void) => void` | Called in the next frame after the element is inserted into the DOM during the initial render of the component (when `appear={true}`). |
+| onAfterAppear    | `(el: HTMLElement) => void`                   | Called when the initial render transition is completed (when `appear={true}`). |
+| onBeforeLeave    | `(el: HTMLElement) => void`                   | Called before the `onLeave` hook.                            |
+| onLeave          | `(el: HTMLElement, done: () => void) => void` | Called when the leave transition starts. Used to start the leave animation. Call the callback function `done` to indicate the end of the transition (optional when used with CSS) |
+| onAfterLeave     | `(el: HTMLElement) => void`                   | Called when the leave transition is completed and the element has been removed from the DOM |
+| onEnterCancelled | `(el: HTMLElement) => void`                   | Called when the enter transition is cancelled before completion |
+| onLeaveCancelled | `(el: HTMLElement) => void`                   | Called when the enter transition is cancelled before leaving |

@@ -8,14 +8,14 @@
 
 ## 基本用法
 
-通过 prop `if` 控制组件的进入或离开，`name` prop 来声明一个过渡效果名
+通过子节点自身控制显示或隐藏，无需 `<Transition>` 显式操控。
 
 ```jsx
 const [show, setShow] = useState(false);
 
 <button onClick={() => setShow(!show)}>Toggle</button>
-<Transition if={show} name="fade">
-  <p>hello</p>
+<Transition name="fade">
+  {show && <p>hello</p>}
 </Transition>
 ```
 
@@ -61,7 +61,7 @@ const [show, setShow] = useState(false);
 
 ```jsx
 <Transition name="fade" duration={350}>
-  <p>hello</p>
+  ...
 </Transition>
 ```
 
@@ -106,8 +106,8 @@ const [show, setShow] = useState(false);
 下面是一个更高级的例子，它使用了不同的持续时间和速度曲线来过渡多个属性。
 
 ```jsx
-<Transition if={show} name="slide-fade" duration={{ enter: 300, leave: 800 }}>
-  <p>hello</p>
+<Transition name="slide-fade" duration={{ enter: 300, leave: 800 }}>
+  {show && <p>hello</p>}
 </Transition>
 ```
 
@@ -159,10 +159,8 @@ const [show, setShow] = useState(false);
 对于大多数的 CSS 动画，我们可以简单地在 `*-enter-active` 和 `*-leave-active` className 下声明它们。下面是一个示例：
 
 ```jsx
-<Transition if={show} name="bounce">
-  <p style={{ textAlign: 'center' }}>
-    Hello here is some bouncy text!
-  </p>
+<Transition name="bounce">
+  {show && <p style={{ textAlign: 'center' }}>Hello here is some bouncy text!</p>}
 </Transition>
 ```
 
@@ -224,12 +222,11 @@ const [show, setShow] = useState(false);
 ```jsx
 {/* 假设你已经在页面中引入了 Animate.css */}
 <Transition
-  if={show}
   name="custom-classes"
   enterActiveClass="animate__animated animate__tada"
   leaveActiveClass="animate__animated animate__bounceOutRight"
 >
-  <p>hello</p>
+  {show && <p>hello</p>}
 </Transition>
 ```
 
@@ -334,26 +331,26 @@ const onLeaveCancelled = (el) => {}
 
 ## 元素间过渡
 
-无法做到像 Vue 那样在 `<Transition>` 的子节点中只要确保任一时刻只会有一个元素被渲染的方案，因此使用以下降级方案：
+在 `<Transition>` 的子节点中只要确保任一时刻只会有一个元素被渲染，且必须具有一个 `key`：
 
 ```jsx
 const [docState, setDocState] = useState("saved");
 
-<Transition if={docState === "saved"} name="slide-up">
-  <button onClick={() => setDocState("edited")}>
-    Edit
-  </button>
-</Transition>
-<Transition if={docState === "edited"} name="slide-up">
-  <button onClick={() => setDocState("editing")}>
-    Save
-  </button>
-</Transition>
-<Transition if={docState === "editing"} name="slide-up">
-  <button onClick={() => setDocState("saved")}>
-    Cancel
-  </button>
-</Transition>
+<Transition name="slide-up">
+  {docState === 'saved' ? (
+    <button key="b1" onClick={() => setDocState('edited')}>
+      Edit
+    </button>
+  ) : docState === 'edited' ? (
+    <button key="b2" onClick={() => setDocState('editing')}>
+      Save
+    </button>
+  ) : (
+    <button key="b3" onClick={() => setDocState('saved')}>
+      Cancel
+    </button>
+  )}
+</Transition>;
 ```
 
 <div class="iframe-container loading">
@@ -390,25 +387,8 @@ const [docState, setDocState] = useState("saved");
 将之前的例子改为 `mode="out-in"` 后是这样：
 
 ```jsx
-const handleClick = useCallback(() => {
-  setShow(() => !show);
-  setDocState(() =>
-    docState === "saved"
-      ? "edited"
-      : docState === "edited"
-      ? "editing"
-      : "saved"
-  );
-}, [show, docState]);
-
-<Transition if={show} mode="out-in" name="slide-up">
-  <button onClick={handleClick}>
-    {docState === "saved"
-      ? "Edit"
-      : docState === "edited"
-      ? "Save"
-      : "Cancel"}
-  </button>
+<Transition mode="out-in" name="slide-up">
+  ...
 </Transition>
 ```
 
@@ -447,11 +427,10 @@ const handleClick = useCallback(() => {
 
 ## 阻止过渡
 
-当 CSS 过渡或动画启用时，在 `duration` prop 设定的时间内（默认 500 ms），可以通过快速切换 `show` prop 的状态强制阻止其行为，且会触发取消进入事件 `onEnterCancelled` 或者取消离开事件 `onLeaveCancelled`。
+当 CSS 过渡或动画启用时，在 `duration` prop 设定的时间内（默认 500 ms），可以通过快速切换强制阻止其行为，且会触发取消进入事件 `onEnterCancelled` 或者取消离开事件 `onLeaveCancelled`。
 
 ```jsx
 <Transition
-  if={show}
   name="fade"
   onEnterCancelled={(el) => {
     console.log("onEnterCancelled!", el);
@@ -460,7 +439,7 @@ const handleClick = useCallback(() => {
     console.log("onLeaveCancelled!", el);
   }}
 >
-  <p>I can revert the state</p>
+  {show && <p>I can revert the state</p>}
 </Transition>
 ```
 
@@ -485,8 +464,6 @@ const handleClick = useCallback(() => {
 
 | 属性名       | 类型                                       | 描述                                                         | 必填项 |
 | ------------ | ------------------------------------------ | ------------------------------------------------------------ | ------ |
-| if           | `Boolean`                                  | 控制组件的进入或离开，触发进入或退出状态                     | 否     |
-| show         | `Boolean`                                  | 控制组件的进入或离开，触发进入或退出状态（不卸载组件）       | 否     |
 | mode         | `'out-in' \| 'in-out'`                     | 控制进入/离开过渡的定时顺序                                  | 否     |
 | css          | `Boolean`                                  | 启用或关闭所有 CSS 过渡效果                                  | 否     |
 | appear       | `Boolean`                                  | 在组件初次渲染时应用过渡效果                                 | 否     |
@@ -494,9 +471,9 @@ const handleClick = useCallback(() => {
 | enterFromClass    | `String`                                   | 自定义进入过渡的**起始状态**（`-enter-from`）的 CSS 类名     | 否     |
 | enterActiveClass  | `String`                                   | 自定义进入过渡的**生效状态**（`-enter-active`）的 CSS 类名   | 否     |
 | enterToClass      | `String`                                   | 自定义进入过渡的**结束状态**（`-enter-to`）的 CSS 类名       | 否     |
-| appearFrom   | `String`                                   | 自定义初次渲染过渡的**起始状态**（`-appear-from`）的 CSS 类名 | 否     |
-| appearActive | `String`                                   | 自定义初次渲染过渡的**生效状态**（`-appear-active`）的 CSS 类名 | 否     |
-| appearTo     | `String`                                   | 自定义初次渲染过渡的**结束状态**（`-appear-to`）的 CSS 类名  | 否     |
+| appearFromClass   | `String`                                   | 自定义初次渲染过渡的**起始状态**（`-appear-from`）的 CSS 类名 | 否     |
+| appearActiveClass | `String`                                   | 自定义初次渲染过渡的**生效状态**（`-appear-active`）的 CSS 类名 | 否     |
+| appearToClass     | `String`                                   | 自定义初次渲染过渡的**结束状态**（`-appear-to`）的 CSS 类名  | 否     |
 | leaveFromClass    | `String`                                   | 自定义离开过渡的**起始状态**（`-leave-from`）的 CSS 类名     | 否     |
 | leaveActiveClass  | `String`                                   | 自定义离开过渡的**生效状态**（`-leave-active`）的 CSS 类名   | 否     |
 | leaveToClass      | `String`                                   | 自定义离开过渡的**结束状态**（`-leave-to`）的 CSS 类名       | 否     |
@@ -505,11 +482,12 @@ const handleClick = useCallback(() => {
 
 | 函数名           | 类型                                          | 描述                                                         |
 | ---------------- | --------------------------------------------- | ------------------------------------------------------------ |
-| onBeforeEnter    | `(el: HTMLElement) => void`                   | 在元素被插入到 DOM 之前被调用。用于设置元素的 `enter-from` 状态 |
+| onBeforeEnter    | `(el: HTMLElement) => void`                   | 在元素被插入到 DOM 之前被调用。                              |
 | onEnter          | `(el: HTMLElement, done: () => void) => void` | 在元素被插入到 DOM 之后的下一帧被调用。用于开始进入动画。调用回调函数 `done` 表示过渡结束（与 CSS 结合使用时可选） |
 | onAfterEnter     | `el: HTMLElement) => void`                    | 当进入过渡完成时调用                                         |
-| onAppear         | `(el: HTMLElement, done: () => void) => void` | 在组件初次渲染时（当 `appear={true}`  时），元素被插入到 DOM 之后的下一帧被调用。用法与 `onEnter` 相同 |
-| onAfterAppear    | `(el: HTMLElement) => void`                  | 当初次渲染过渡完成时调用 (当 `appear={true}`  时)。          |
+| onBeforeAppear   | (el: HTMLElement) => void                     | 在组件初次渲染时（当 `appear={true}`  时），在元素被插入到 DOM 之前被调用。 |
+| onAppear         | `(el: HTMLElement, done: () => void) => void` | 在组件初次渲染时（当 `appear={true}`  时），元素被插入到 DOM 之后的下一帧被调用。 |
+| onAfterAppear    | `(el: HTMLElement) => void`                   | 当初次渲染过渡完成时调用 (当 `appear={true}`  时)。          |
 | onBeforeLeave    | `(el: HTMLElement) => void`                   | 在 `onLeave` 钩子之前调用。                                  |
 | onLeave          | `(el: HTMLElement, done: () => void) => void` | 在离开过渡开始时调用。用于开始离开动画。调用回调函数 `done` 表示过渡结束（与 CSS 结合使用时可选 |
 | onAfterLeave     | `(el: HTMLElement) => void`                   | 在离开过渡完成、且元素已从 DOM 中移除时调用                  |
