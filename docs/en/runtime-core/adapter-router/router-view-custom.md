@@ -8,7 +8,7 @@ The RouterView component provides a prop `customRender`, whose `component` param
 
 ## KeepAlive & Transition
 
-When dealing with the [KeepAlive](../components/keep-alive) component, we usually want to keep the route component alive instead of the RouterView itself. To achieve this, we can place the KeepAlive component inside `customRender`:
+When dealing with the [KeepAlive](../adapter-components/keep-alive) component, we usually want to keep the route component alive instead of the RouterView itself. To achieve this, we can place the KeepAlive component inside `customRender`:
 
 ```jsx
 <RouterView
@@ -18,7 +18,7 @@ When dealing with the [KeepAlive](../components/keep-alive) component, we usuall
 />
 ```
 
-We can also use a [Transition](../components/transition) component to achieve transition effects when switching between route components:
+We can also use a [Transition](../adapter-components/transition) component to achieve transition effects when switching between route components:
 
 ```jsx
 <RouterView
