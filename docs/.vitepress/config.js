@@ -67,7 +67,127 @@ export default {
         ],
 
         sidebar: [
-          { text: '', link: '' },
+          {
+            text: '编译器',
+            items: [
+              {
+                text: '介绍',
+                link: ''
+              },
+              {
+                text: '安装',
+                link: ''
+              },
+              {
+                text: '开始使用',
+                link: ''
+              },
+              {
+                text: '重点实现原理',
+                items: [
+                  {
+                    text: 'AST中间层映射',
+                    link: ''
+                  },
+                  {
+                    text: '模板处理',
+                    items: [
+                      {
+                        text: 'v-if',
+                        link: ''
+                      },
+                      {
+                        text: 'v-for',
+                        link: ''
+                      },
+                      {
+                        text: 'v-model',
+                        link: ''
+                      },
+                      {
+                        text: 'v-slot',
+                        link: ''
+                      },
+                      {
+                        text: 'v-bind',
+                        link: ''
+                      },
+                      {
+                        text: 'HTML属性',
+                        link: ''
+                      },
+                    ]
+                  },
+                  {
+                    text: '脚本处理',
+                    items: [
+                      {
+                        text: '依赖分析',
+                        link: ''
+                      },
+                      {
+                        text: '剥离.value后缀',
+                        link: ''
+                      },
+                      {
+                        text: '收集props与emits',
+                        link: ''
+                      },
+                      {
+                        text: '响应式值的更新语法替换',
+                        link: ''
+                      },
+                      {
+                        text: 'watchEffect 清理函数',
+                        link: ''
+                      },
+                      {
+                        text: '优化顶层常量与函数',
+                        link: ''
+                      },
+                    ]
+                  },
+                ]
+              },
+            ]
+          },
+
+          {
+            text: '运行时适配包',
+            items: [
+              {
+                text: '介绍与安装',
+                link: ''
+              },
+              {
+                text: '组件',
+                items: [
+                  {
+                    text: '',
+                    link: ''
+                  },
+                ]
+              },
+              {
+                text: '钩子',
+                items: [
+                  {
+                    text: '',
+                    link: ''
+                  },
+                ]
+              },
+              {
+                text: '路由器',
+                items: [
+                  {
+                    text: '',
+                    link: ''
+                  },
+                ]
+              },
+            ]
+          },
         ],
       }
     },
