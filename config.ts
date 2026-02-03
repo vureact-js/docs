@@ -7,8 +7,7 @@ const commonConfig = defineConfig({
       {
         rel: 'icon',
         href: '/favicon.ico',
-        sizes: 'any',
-        type: 'image/webp',
+        type: 'image/x-icon',
       },
     ],
     [
