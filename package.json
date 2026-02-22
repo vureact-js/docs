@@ -1,6 +1,11 @@
 {
   "private": true,
   "packageManager": "pnpm@10.28.2",
+  "scripts": {
+    "build:runtime": "pnpm -F runtime-core-docs docs:build",
+    "build:compiler": "pnpm -F compiler-core-docs docs:build",
+    "build:router": "pnpm -F vureact-router-docs docs:build"
+  },
   "devDependencies": {
     "vitepress": "^1.6.4",
     "vue": "^3.5.24",
