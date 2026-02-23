@@ -30,7 +30,7 @@ export default defineConfig({
         nav: [
           {
             text: '示例源码',
-            link: 'https://gitee.com/vureact-js/vureact-router/tree/master/packages/router/examples',
+            link: 'https://gitee.com/vureact-js/vureact-router/tree/master/examples',
           },
           {
             text: '生态系统',
@@ -100,7 +100,7 @@ export default defineConfig({
         nav: [
           {
             text: 'Example Code',
-            link: 'https://github.com/vureact-js/vureact-router/tree/master/packages/router/examples',
+            link: 'https://github.com/vureact-js/vureact-router/tree/master/examples',
           },
           {
             text: 'Ecosystem',
