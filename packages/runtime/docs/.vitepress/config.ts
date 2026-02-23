@@ -28,6 +28,10 @@ export default defineConfig({
         ],
         nav: [
           {
+            text: '在线示例',
+            link: 'https://codesandbox.io/p/sandbox/examples-f5rlpk',
+          },
+          {
             text: '生态系统',
             items: [
               {
@@ -129,13 +133,17 @@ export default defineConfig({
         ],
         nav: [
           {
+            text: 'Online Demo',
+            link: 'https://codesandbox.io/p/sandbox/examples-f5rlpk',
+          },
+          {
             text: 'Ecosystem',
             items: [
               {
                 text: 'Official Libraries',
                 items: [
-                  { text: 'VuReact Compiler', link: 'https://vureact.vercel.app' },
-                  { text: 'VuReact Router', link: 'https://router-vureact.vercel.app' },
+                  { text: 'VuReact Compiler', link: 'https://vureact.vercel.app/en' },
+                  { text: 'VuReact Router', link: 'https://router-vureact.vercel.app/en' },
                 ],
               },
             ],
