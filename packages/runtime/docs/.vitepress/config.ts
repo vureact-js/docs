@@ -32,6 +32,10 @@ export default defineConfig({
             link: 'https://codesandbox.io/p/sandbox/examples-f5rlpk',
           },
           {
+            text: '赞助',
+            link: 'https://afdian.com/a/vureact-js/plan',
+          },
+          {
             text: '生态系统',
             items: [
               {
@@ -135,6 +139,10 @@ export default defineConfig({
           {
             text: 'Online Demo',
             link: 'https://codesandbox.io/p/sandbox/examples-f5rlpk',
+          },
+          {
+            text: 'Support',
+            link: 'https://afdian.com/a/vureact-js/plan',
           },
           {
             text: 'Ecosystem',

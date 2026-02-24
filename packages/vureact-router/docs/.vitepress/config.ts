@@ -33,6 +33,10 @@ export default defineConfig({
             link: 'https://gitee.com/vureact-js/vureact-router/tree/master/examples',
           },
           {
+            text: '赞助',
+            link: 'https://afdian.com/a/vureact-js/plan',
+          },
+          {
             text: '生态系统',
             items: [
               {
@@ -103,13 +107,17 @@ export default defineConfig({
             link: 'https://github.com/vureact-js/vureact-router/tree/master/examples',
           },
           {
+            text: 'Support',
+            link: 'https://afdian.com/a/vureact-js/plan',
+          },
+          {
             text: 'Ecosystem',
             items: [
               {
                 text: 'Official Libraries',
                 items: [
-                  { text: 'VuReact Compiler', link: 'https://vureact.vercel.app' },
-                  { text: 'VuReact Runtime', link: 'https://vureact-runtime.vercel.app' },
+                  { text: 'VuReact Compiler', link: 'https://vureact.vercel.app/en' },
+                  { text: 'VuReact Runtime', link: 'https://vureact-runtime.vercel.app/en' },
                 ],
               },
             ],
