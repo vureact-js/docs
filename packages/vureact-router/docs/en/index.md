@@ -4,8 +4,7 @@ layout: home
 title: A Vue Router 4.x style router for React 18+, built for TypeScript and migration-friendly workflows.
 
 hero:
-  name: 'VuReact Router'
-  text: 'Vue Router Style Routing for React'
+  name: 'Vue Router Style Routing for React'
   tagline: 'Built on top of React Router DOM 7.9+ with guards, dynamic routes, and familiar mental models'
   actions:
     - theme: brand
