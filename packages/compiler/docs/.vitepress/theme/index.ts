@@ -1,11 +1,11 @@
 import BackToTopButton from '@miletorix/vitepress-back-to-top-button';
 import '@miletorix/vitepress-back-to-top-button/style.css';
 import DefaultTheme from 'vitepress/theme';
-import './iframe-loading.css';
+import './custom.css';
 
 export default {
   extends: DefaultTheme,
-  enhanceApp({ app }:any) {
+  enhanceApp({ app }: any) {
     BackToTopButton(app);
-  }
-}
+  },
+};

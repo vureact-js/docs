@@ -1,55 +1,72 @@
----
+﻿---
 layout: home
 
-title: VuReact - 下一代 Vue to React 编译器
+title: VuReact | 下一代 Vue 3 -> React 编译工具
 
 hero:
-  name: '下一代 Vue to React 编译器'
-  tagline: '语法兼容，智能优化，核心适配，适用 Vue 3 到 React 18+ 的转换方案。'
+  name: 'VuReact'
+  text: '下一代 Vue 3 -> React 编译工具'
+  tagline: '可控渐进，约定驱动，适用于 Web 跨框架的方案。'
 
   actions:
     - theme: brand
-      text: 快速上手  →
+      text: 开始使用 →
       link: /guide/introduction
 
     - theme: alt
-      text: 安装
-      link: /guide/quick-start
+      text: 快速上手
+      link: /guide/introduction#快速开始
 
 features:
-  - icon: '🎯'
-    title: '模板指令转换'
-    details: '完美转换 v-for、v-if、v-show、v-model 等 Vue 指令为 React 实现。'
+  - icon: ⚖️
+    title: 可控渐进式
+    details: 支持从单个组件到整个项目的渐进迁移路径，规避爆炸式转换带来的技术债务和系统风险。
 
-  - icon: '⚡'
-    title: '响应式数据映射'
-    details: '将 Vue 的 ref、reactive 等响应式 API 转换为兼容的 React hooks。'
+  - icon: 🧭
+    title: 约定驱动
+    details: 基于明确的语法约定而非启发式规则进行编译，确保转换行为的确定性、可分析性和可维护性。
 
-  - icon: '🏗️'
-    title: '组件系统兼容'
-    details: '支持 Vue SFC、异步组件、插槽系统等转换为 React 组件模式。'
+  - icon: 🌀
+    title: 跨框架编译桥
+    details: 探索性的混合编译模式，允许 Vue 和 React 代码在编译层面共存，编译器作为桥梁连接两个生态，负责处理框架间的语法差异。
 
-  - icon: '🔄'
-    title: '语法兼容'
-    details: '支持转换 Vue 3 全部核心语法包括 Composition API、响应式系统、生命周期钩子等。'
+  - icon: 🏆
+    title: 概念验证（实验性）
+    details: 验证"Vue 到 React 完整编译"这一长期技术设想的可行性，通过创新的编译架构和运行时适配，实现前所未有的转换深度和工程完整性。
 
-  - icon: '📡'
-    title: '智能优化'
-    details: '编译器静态分析响应式依赖关系，自动收集并生成最优的 React hooks 结构，避免不必要的重渲染。'
+  - icon: 🔄
+    title: 现代 Vue 语法优先
+    details: 完整支持 Vue 3 script setup 语法与组合式 API，包括 watch、defineProps、defineEmits 等。
 
-  - icon: '📚'
-    title: '核心适配'
-    details: '自动注入运行时适配包，支持 Vue Router、生命周期、provide/inject 等 API。'
+  - icon: ⚛️
+    title: Vue 核心特性适配
+    details: 将响应式系统、生命周期、内置组件（Transition/KeepAlive）等核心特性完整适配到 React，保持开发心智模型一致。
 
-  - icon: '🛠️'
-    title: 'TypeScript 原生支持'
-    details: '完整的 TypeScript 支持，保持类型安全，支持 TSX/JSX 输出。'
+  - icon: 📋
+    title: 模板到 JSX 智能转换
+    details: 将 Vue 模板语法和指令等，智能转换为符合 React 习惯的 JSX 代码，保持逻辑清晰且符合 React 最佳实践。
 
-  - icon: '🚀'
-    title: '自动化构建流程'
-    details: '集成 CLI 工具，支持批量转换、增量编译和开发模式热更新。'
+  - icon: 🎨
+    title: 零运行时样式方案
+    details: 在编译阶段完全处理 SFC 的 scoped 和 module 样式，生成静态 CSS 文件，解决运行时样式性能开销。
 
-  - icon: '⚖️'
-    title: '心智平移'
-    details: '凭借 Vue 的心智模型优势编写 React 代码，提供极速、智能的跨框架迁移体验。'
+  - icon: 📝
+    title: TypeScript 无缝迁移
+    details: 完整保留 TS 类型定义，自动推导并生成对应的 React 组件类型接口，支持 .vue 到 .tsx 的无缝类型转换。
+
+  - icon: ⚡
+    title: CLI 与实时编译
+    details: 提供 build/watch 双模式 CLI，支持增量编译与文件监听，开发体验流畅。
+
+  - icon: 🔬
+    title: 细致的处理
+    details: 从 import 路径修正到类型定义生成，从代码格式化到依赖分析，每一个编译细节都经过精心设计和优化。
+
+  - icon: 📁
+    title: 完整工程化
+    details: 不仅仅是代码转换，而是完整的项目编译：保持目录、生成文件、拷贝资源、管理依赖。
+
+  - icon: 🛠️
+    title: Vite 环境集成
+    details: 可选集成 Vite 官方脚手架，自动初始化标准 React 项目结构与配置。
 ---

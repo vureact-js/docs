@@ -1,0 +1,129 @@
+@keyframes epsilon-psi-scan {
+  0%,
+  100% {
+    /* 基础状态：深邃的心灵紫，像深渊一样静谧 */
+    text-shadow: 0 0 5px rgba(138, 43, 226, 0.4);
+    filter: brightness(0.9);
+  }
+  15% {
+    /* 脉冲瞬间：青色电光一闪而过，代表指令下达 */
+    text-shadow:
+      0 0 2px rgba(0, 255, 255, 0.8),
+      0 0 10px rgba(138, 43, 226, 0.6);
+    filter: brightness(1.2);
+  }
+}
+
+:root {
+  /* 品牌核心：心灵紫 */
+  --vp-c-brand-1: #9932cc;
+  --vp-c-brand-2: #9400d3;
+  --vp-c-brand-3: #8a2be2;
+
+  /* 主页文字颜色：带有淡紫调的浅灰色，更有质感 */
+  --vp-home-hero-text-color: #e0d5f0;
+}
+
+.dark {
+  /* 侧边栏右侧边框：用微弱的尤里紫勾勒出轮廓 */
+  /* --vp-c-divider: #9200ff26; */
+
+  /* 文字：异能冷灰系列 */
+  /* --vp-c-text-1: #b8afc5; */
+  /* --vp-c-text-2: #8a7e95; */
+  --vp-c-text-3: #585d7a; /* 禁用/注脚 */
+
+  /* 1. 代码块背景：比页面背景 (#050010) 稍微深一点点，增加层次感 */
+  /* --vp-code-bg: #9200ff26; */
+
+  /* 2. 代码基础文字：使用我们调优后的厄普西隆紫灰 */
+  --vp-code-color: #c0c5e0;
+
+  /* 3. 代码行号：调低亮度，使其不干扰主代码阅读 */
+  --vp-code-line-number-color: #4a4e69;
+
+  /* 4. 代码块边框：极其细微的紫色勾勒 */
+  --vp-code-block-bg-light: #0d0216;
+
+  .vp-doc {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.015em;
+
+    /* :not(pre, h1, h2, h3, h4, h5, h6) > code {
+      border: 1px solid #4a4e69;
+      border-radius: 4px;
+    } */
+
+    table {
+      border-collapse: collapse;
+      margin: 20px 0;
+      width: 100%;
+
+      /* th {
+        background-color: rgba(138, 43, 226, 0.1);
+        color: var(--vp-c-brand-1);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      } */
+    }
+
+    td {
+      &:nth-child(1) {
+        white-space: nowrap;
+      }
+
+      &:nth-child(2) {
+        white-space: nowrap;
+      }
+
+      &:last-child {
+        white-space: normal;
+      }
+    }
+
+    strong {
+      color: var(--vp-c-brand-1);
+      font-weight: 600;
+    }
+  }
+}
+
+.VPNavBar {
+  .VPNavBarTitle {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: epsilon-psi-scan 8s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+
+    .logo {
+      width: 24px;
+      height: 27px;
+    }
+
+    .title {
+      color: #d1d1e0 !important;
+      font-family: var(--vp-font-family-heading);
+      letter-spacing: 0.05em;
+    }
+  }
+}
+
+.VPHomeHero {
+  .VPButton {
+    transition: opacity 0.3s ease;
+    animation: epsilon-psi-scan 8s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+  }
+}
+
+/* div[class*='language-'] {
+  box-shadow: inset 0 0 20px rgba(138, 43, 226, 0.05);
+  border: 1px solid rgba(138, 43, 226, 0.1) !important;
+  border-radius: 8px;
+} */
+
+/* 增强：行号右侧的分隔线颜色 */
+/* div[class*='language-']::before {
+  color: rgba(138, 43, 226, 0.2);
+} */

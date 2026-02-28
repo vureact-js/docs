@@ -10,17 +10,6 @@ const commonConfig = defineConfig({
         type: 'image/x-icon',
       },
     ],
-    [
-      'style',
-      {},
-      `
-      :root {
-        --vp-c-brand-1: #4DD9E0;
-        --vp-c-brand-2: #3FB9C1;
-        --vp-c-brand-3: #62E0E7;
-      }
-      `,
-    ],
   ],
 
   themeConfig: {
@@ -28,6 +17,24 @@ const commonConfig = defineConfig({
     footer: {
       message: 'Released under the MIT License',
       copyright: 'Copyright © 2025-present Ryan John',
+    },
+
+    search: {
+      provider: 'local',
+      options: {
+        locales: {
+          root: {
+            translations: {
+              button: { buttonText: '搜索文档' },
+            },
+          },
+          en: {
+            translations: {
+              button: { buttonText: 'Search' },
+            },
+          },
+        },
+      },
     },
   },
 });

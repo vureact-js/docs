@@ -4,9 +4,8 @@ layout: home
 title: VuReact Runtime - Vue 3 内置组件、响应式 API 与模板指令工具的 React 适配器。将 Vue 的优秀开发体验带入 React 应用。
 
 hero:
-  name: 'VuReact'
-  text: '运行时适配库'
-  tagline: '将 Vue 3 的优秀组件和响应式系统无缝集成到 React 中'
+  name: 'VuReact Runtime'
+  tagline: '运行时适配库，将 Vue 3 的优秀组件和响应式系统无缝集成到 React 中'
   actions:
     - theme: brand
       text: 快速上手 →
