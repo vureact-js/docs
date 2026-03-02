@@ -1,7 +1,7 @@
 ﻿---
 layout: home
 
-title: VuReact | 下一代 Vue 3 -> React 编译工具
+title: VuReact | 下一代 Vue 3 -> React 智能编译工具
 
 hero:
   name: 'VuReact'

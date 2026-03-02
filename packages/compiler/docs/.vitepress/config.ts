@@ -7,7 +7,7 @@ export default defineConfig({
   title: 'VuReact',
 
   description:
-    'Experimental Vue 3 to React compiler for new projects and controlled progressive migration.',
+    'Next Vue 3 to React intelligent compilation tool. Controllable and progressive, convention-driven, designed for web cross-framework solutions.',
 
   locales: {
     root: {
@@ -15,7 +15,7 @@ export default defineConfig({
       lang: 'zh-CN',
       link: '/',
       description:
-        '实验版 Vue 3 到 React 编译器。优先服务新项目与可控的渐进式迁移，不承诺全量旧项目无改动迁移。',
+        '下一代 Vue 3 -> React 智能编译工具。可控渐进，约定驱动，适用于 Web 跨框架的方案。',
       themeConfig: {
         socialLinks: [
           {
@@ -52,7 +52,7 @@ export default defineConfig({
               { text: '开始', link: '/guide/introduction' },
               { text: '理念', link: '/guide/philosophy' },
               { text: '为什么选 VuReact', link: '/guide/why' },
-              { text: '更新日志', link: '/guide/release-notes' },
+              { text: '更新日志', link: '/guide/changelog' },
             ],
           },
           {
@@ -78,7 +78,7 @@ export default defineConfig({
                 ],
               },
               {
-                text: '☣️心灵控制',
+                text: '☣️ 心灵控制',
                 items: [
                   { text: '说明', link: '/guide/mind-control-readme' },
                   { text: '可控混写', link: '/guide/mind-control-controlled-mixed' },
@@ -141,8 +141,6 @@ export default defineConfig({
       label: 'English',
       lang: 'en-US',
       link: '/en/',
-      description:
-        'Experimental Vue-to-React compiler focused on new projects and controlled progressive migration.',
       themeConfig: {
         socialLinks: [
           {
@@ -152,6 +150,131 @@ export default defineConfig({
           {
             icon: 'gitee',
             link: 'https://gitee.com/vureact-js/core.git',
+          },
+        ],
+        nav: [
+          {
+            text: 'Sponsorship',
+            link: 'https://afdian.com/a/vureact-js/plan',
+          },
+          {
+            text: 'Ecosystem',
+            items: [
+              {
+                text: 'Official Libraries',
+                items: [
+                  { text: 'VuReact Runtime', link: 'https://vureact-runtime.vercel.app/en' },
+                  { text: 'VuReact Router', link: 'https://router-vureact.vercel.app/en' },
+                ],
+              },
+            ],
+          },
+        ],
+        sidebar: [
+          {
+            text: 'Introduction',
+            items: [
+              { text: 'Getting Started', link: '/en/guide/introduction' },
+              { text: 'Philosophy', link: '/en/guide/philosophy' },
+              { text: 'Why Choose VuReact', link: '/en/guide/why' },
+              { text: 'Change Log', link: '/en/guide/changelog' },
+            ],
+          },
+          {
+            text: 'Compilation Examples',
+            items: [
+              {
+                text: 'Beginner',
+                items: [
+                  { text: 'Counter Component', link: '/en/guide/basic-tutorial' },
+                  {
+                    text: 'Template Basic Steady-State Conversion',
+                    link: '/en/guide/beginner-template-stable',
+                  },
+                  {
+                    text: 'Component Communication Steady-State Conversion',
+                    link: '/en/guide/beginner-component-communication',
+                  },
+                ],
+              },
+              {
+                text: 'Advanced',
+                items: [
+                  {
+                    text: 'Context + Events + Slots Pipeline',
+                    link: '/en/guide/advanced-context-events-slots',
+                  },
+                  {
+                    text: 'SFC Style Processing Pipeline',
+                    link: '/en/guide/advanced-style-pipeline',
+                  },
+                  {
+                    text: 'Non-SFC Script File Pipeline',
+                    link: '/en/guide/advanced-script-only-pipeline',
+                  },
+                ],
+              },
+              {
+                text: '☣️Mind Control',
+                items: [
+                  { text: 'Introduction', link: '/en/guide/mind-control-readme' },
+                  {
+                    text: 'Controlled Mixed Writing',
+                    link: '/en/guide/mind-control-controlled-mixed',
+                  },
+                  {
+                    text: 'Full Ecosystem Unleashed',
+                    link: '/en/guide/mind-control-full-ecosystem',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            text: 'Configuration',
+            items: [
+              { text: 'CLI', link: '/en/guide/cli' },
+              { text: 'Plugin', link: '/en/guide/plugin' },
+            ],
+          },
+          { text: 'FAQ', link: '/en/guide/faq' },
+          {
+            text: 'Specifications & Best Practices',
+            items: [
+              { text: 'Compilation Conventions', link: '/en/guide/specification' },
+              { text: 'Best Practices', link: '/en/guide/best-practices' },
+              { text: 'Router Adaptation', link: '/en/guide/router-adaptation' },
+            ],
+          },
+          {
+            text: 'Capability Matrix',
+            items: [
+              { text: 'Overview', link: '/en/guide/capabilities-overview' },
+              { text: 'Template Capabilities', link: '/en/guide/capabilities-template' },
+              { text: 'Script Capabilities', link: '/en/guide/capabilities-script' },
+              { text: 'Style Capabilities', link: '/en/guide/capabilities-style' },
+            ],
+          },
+          {
+            text: 'Conversion Guide',
+            items: [
+              { text: 'Overview', link: '/en/guide/conversion-overview' },
+              { text: 'Template Guide', link: '/en/guide/conversion-template' },
+              { text: 'Script Guide', link: '/en/guide/conversion-script' },
+              { text: 'Style Guide', link: '/en/guide/conversion-style' },
+            ],
+          },
+          {
+            text: 'API',
+            items: [
+              { text: 'Overview', link: '/en/api/' },
+              { text: 'Config API', link: '/en/api/config' },
+              { text: 'Compiler API', link: '/en/api/compiler' },
+              { text: 'Pipeline API', link: '/en/api/pipeline' },
+              { text: 'Plugin System API', link: '/en/api/plugin-system' },
+              { text: 'Types & Results', link: '/en/api/types' },
+              { text: 'Exports Manifest', link: '/en/api/exports' },
+            ],
           },
         ],
       },

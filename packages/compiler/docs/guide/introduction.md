@@ -1,6 +1,6 @@
 ﻿# 开始
 
-## 什么是 VuReact
+## 什么是 VuReact <span class='yuri-badge'>BETA</span>
 
 VuReact（Vue + React 连读，发音 `/vjuːˈriːækt/`）是一个面向 Vue 3 至 React 的智能编译工具链，旨在为新项目与可控的渐进式迁移提供高效、可靠的开发体验。
 
@@ -306,7 +306,7 @@ const increment = useCallback(() => {
 
 ### 版本兼容性
 
-- Vue 3
+- Vue 3.x
 - React 18+
 - Node.js 18+
 
