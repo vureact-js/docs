@@ -2,64 +2,76 @@
 
 ## 什么是 VuReact
 
-VuReact（Vue + React 连读，发音 `/vjuːˈriːækt/`）是一个面向 Vue 3 -> React 的编译工具，专注于为新项目和可控迁移场景提供最佳体验。
+VuReact（Vue + React 连读，发音 `/vjuːˈriːækt/`）是一个面向 Vue 3 至 React 的智能编译工具链，旨在为新项目与可控的渐进式迁移提供高效、可靠的开发体验。
 
-它的目标不是"让任何 Vue 代码都自动变成 React 代码"，而是提供一个 **可预测、可分析、可维护** 的转换路径，让开发者可以在可控前提下推进跨框架开发。
+它不仅执行语法层面的转换，更能深入理解 Vue 代码的语义，并生成遵循 React 最佳实践的优质代码。
 
-另外，VuReact 不是单点的“只做代码改写”工具。它由 **编译时转换** 与 **[运行时适配](https://vureact-runtime.vercel.app/)** 两部分协同组成：
+VuReact 的核心目标并非“无条件地将任意 Vue 代码自动转换为 React 代码”，而是提供一条 **可预测、可分析、可维护** 的升级路径，使开发者能够在工程可控的前提下，平稳推进跨框架演进。
 
-- 编译阶段负责把 Vue 风格输入转换为可分析、可维护的 React 产物，并自动添加运行时依赖；
+此外，VuReact 并非一个孤立的代码改写工具。它由 **编译时转换** 与 **[运行时适配](https://vureact-runtime.vercel.app/)** 两部分协同构成：
 
-- 运行时阶段提供必要的语义适配与行为兜底。两者配合，才能在工程可控的前提下，兼顾转换质量、运行稳定性与落地效率。
+- **编译时** 负责将符合约定的 Vue 代码转换为结构清晰、易于维护的 React 代码，并自动注入必要的运行时依赖；
+- **运行时** 则提供关键的语义适配与行为兼容层，确保转换后的组件在 React 环境中稳定运行。
+
+两者紧密配合，共同保障了转换质量、运行稳定性与项目落地效率的平衡。
 
 ## 解决什么问题
 
-在实际工程里，团队常见两类需求：
+VuReact 旨在解决以下典型场景中的开发痛点：
 
-- 新项目想采用 React 生态，但团队已有 Vue 语法与组件习惯
-- 旧系统希望渐进式迁移，而不是一次性重写
-- 丰富跨框架开发领域
+- **技术栈迁移**：团队希望采用 React 生态，但已积累 Vue 语法习惯与组件资产，期望平滑过渡而非彻底重学
+- **渐进式重构**：旧有 Vue 系统需要逐步迁移至 React，避免高风险的一次性重写与业务中断
+- **开发体验统一**：借助 Vue 的响应式心智模型编写 React 组件，同时免除手动管理依赖项与渲染优化的繁琐
+- **生态扩展**：丰富跨框架的开发工具链，为多技术栈共存或迁移提供标准化方案
 
-问题在于：一旦输入代码不可分析，编译器就无法稳定地产生符合 React Hook 规则的产物。
-
-VuReact 的策略是：先定义约定，再在约定内尽可能高效转换。
+核心挑战在于：若输入代码的语义不可静态分析，编译器便无法稳定生成符合 React Hooks 规则的输出。
+因此，VuReact 采取 **“约定优先”** 的策略：先通过明确的编译约定界定可转换的代码范围，再在该范围内实现高效、可靠的转换。
 
 ## 项目定位
 
-当前阶段定位为 **实验版**，优先服务：
+当前阶段，VuReact 定位为 **实验性工具链**，优先服务于以下场景：
 
-- Vue 3 + Script Setup 语法
-- 按 VuReact 约定编写的新项目
-- 可控范围内的渐进式迁移（分目录、分模块推进）
+- **新项目开发**：直接按照 VuReact 约定编写 Vue 风格的组件，并输出为 React 代码
+- **现代语法支持**：专注于 Vue 3 Composition API 与 `<script setup>` 语法
+- **可控渐进迁移**：支持按目录、模块逐步迁移，允许 Vue 与 React 组件在项目中并存
 
-不优先服务：
+暂不优先支持：
 
-- 复杂旧项目的"零改动一键迁移"
-- 大量历史混合写法且短期无法规整的工程
+- **复杂遗留项目**：期望“零改动一键迁移”的历史代码库
+- **混合历史写法**：包含大量短期内难以统一的传统选项式 API 或非标准模式的工程
 
 ## 这是什么 / 这不是什么
 
-这是：
+**这是**：
 
-- Vue SFC + `<script setup>` 的语法转换工具链
-- 带约束的编译平台，而不是无边界脚本替换
-- 能给出告警/报错并提示你修正输入的工程化工具
+- 一套将 Vue 单文件组件（SFC）及 `<script setup>` 语法转换为 React 代码的编译工具链
+- 一个 **带约束的编译平台**，通过明确的约定保障转换质量与可维护性
+- 具备工程化能力的开发工具，能够对不符合约定的输入给出清晰的告警或错误提示，并引导修正
 
-这不是：
+**这不是**：
 
-- 万能迁移魔术师
-- 对任何写法都兜底的运行时解释器
-- 保证全量旧项目无改动迁移的承诺产品
+- 可处理任意历史代码的“万能迁移魔术师”
+- 对非约定写法进行运行时兜底的解释器
+- 承诺无需任何调整即可全量迁移旧项目的商业化产品
 
 ## 核心特性
 
-VuReact 提供了以下关键能力：
+VuReact 提供以下关键能力：
 
-- **🔄 Script setup 深度支持**：完整支持 Vue 3 Composition API，提供最接近原生的开发体验
-- **📝 TypeScript 支持**：完整保留 Vue SFC 中的类型定义，自动生成精确的 React 组件类型
-- **⚡ 零运行时样式方案**：编译时完全处理 scoped 和 module 样式，生成生产就绪的静态 CSS
-- **🌉 混合开发支持**：允许 Vue 和 React 代码在同一个项目中共存，实现渐进迁移
-- **🔧 完整的工程化编译**：不仅仅是代码转换，而是完整的项目编译解决方案
+- **深度支持 `<script setup>`**：完整支持 Vue 3 Composition API，提供接近原生的开发体验
+- **完整的 TypeScript 支持**：保留 Vue SFC 中的类型定义，自动生成精确的 React 组件类型
+- **零运行时样式方案**：在编译时完全处理 `scoped` 和 `module` 样式，甚至 `Less` 和 `Sass`，生成生产就绪的静态 CSS
+- **混合开发支持**：允许 Vue 和 React 代码在同一项目中并存，支持渐进式迁移
+- **完整的工程化编译**：不仅是代码转换，更是完整的项目编译解决方案
+- **智能编译**：涵盖语法转换、模板解析、样式处理、类型保留与工程优化
+
+### 智能编译特性
+
+- **语法智能转换**：将 Vue 3 组合式 API 智能映射为 React Hooks
+- **模板智能解析**：将 Vue 模板指令智能转换为 JSX
+- **样式智能处理**：将 Scoped CSS 等智能适配为 React 可运行 CSS 产物
+- **类型智能保留**：智能迁移 TypeScript 类型系统
+- **工程智能优化**：智能处理依赖分析、缓存机制与代码优化
 
 ## 快速开始
 
@@ -97,7 +109,7 @@ my-vue-app/
 │   │   └── Counter.vue
 │   └── main.ts
 ├── package.json
-└── vite.config.ts
+└── vureact.config.js
 ```
 
 创建一个简单的计数器组件 `src/components/Counter.vue`：
@@ -127,7 +139,7 @@ const reset = () => {
 };
 </script>
 
-<style scoped>
+<style>
 .counter {
   padding: 20px;
   border: 1px solid #e0e0e0;
@@ -148,6 +160,9 @@ export default defineConfig({
   // 输入路径，包含要编译的 Vue 文件；允许输入单文件 'xxx.vue'
   input: 'src',
 
+  // 启用编译缓存
+  cache: true,
+
   // 排除 Vue 入口文件，避免语义冲突
   exclude: ['src/main.ts'],
 
@@ -156,13 +171,15 @@ export default defineConfig({
     workspace: '.vureact',
 
     // 输出目录名
-    outDir: 'dist',
+    outDir: 'react-app',
 
     // 自动初始化 Vite React 环境
     bootstrapVite: true,
   },
 });
 ```
+
+实际上，除了 `exclude` 需要手动指定外，其他选项均采用示例配置中的默认值，无需额外配置。
 
 ### 4. 运行编译
 
@@ -183,7 +200,7 @@ npx vureact watch
 ```txt
 my-vue-app/
 ├── .vureact/           # 工作区
-│   ├── dist/           # 生成的 React 代码
+│   ├── react-app/      # 生成的 React 代码
 │   │   └── src/
 │   │       └── components/
 │   │           ├── Counter.tsx
@@ -199,7 +216,7 @@ my-vue-app/
 
 ```bash
 # 进入生成的 React 项目
-cd .vureact/dist
+cd .vureact/react-app
 
 # 安装依赖
 npm install
@@ -217,7 +234,7 @@ npm run dev
 ```tsx
 import { memo, useCallback } from 'react';
 import { useVRef } from '@vureact/runtime-core';
-import './counter-a1b2c3.css';
+import './counter.css';
 
 const Counter = memo(() => {
   const count = useVRef(0);
@@ -231,20 +248,27 @@ const Counter = memo(() => {
   }, [count.value]);
 
   return (
-    <div className="counter" data-css-a1b2c3>
-      <h2 data-css-a1b2c3>计数器示例</h2>
-      <p data-css-a1b2c3>当前计数: {count.value}</p>
-      <button onClick={increment} data-css-a1b2c3>
-        增加
-      </button>
-      <button onClick={reset} data-css-a1b2c3>
-        重置
-      </button>
+    <div className="counter">
+      <h2>计数器示例</h2>
+      <p>当前计数: {count.value}</p>
+      <button onClick={increment}>增加</button>
+      <button onClick={reset}>重置</button>
     </div>
   );
 });
 
 export default Counter;
+```
+
+生成附属的 counter.css 文件：
+
+```css
+.counter {
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  max-width: 300px;
+}
 ```
 
 ## 迁移策略建议
@@ -261,9 +285,9 @@ export default Counter;
 - **团队风险**：保持开发体验一致，降低学习成本
 - **时间风险**：支持按模块渐进迁移，避免一次性重写
 
-### 5. **优化代码示例的注释**
+### 代码示例的注释
 
-在生成的 Counter.tsx 示例中增加注释，说明转换逻辑：
+可以自主选择在生成的 Counter.tsx 示例中增加注释，说明转换逻辑：
 
 ```tsx
 // 自动从 Vue 的 ref() 转换为 @vureact/runtime-core 提供的适配 useVRef()
@@ -279,8 +303,6 @@ const increment = useCallback(() => {
 ```
 
 ### 次要建议
-
----
 
 ### 版本兼容性
 
@@ -299,13 +321,15 @@ const increment = useCallback(() => {
 ### 生态集成
 
 - **[Vue 核心适配包](https://vureact-runtime.vercel.app/)**：提供 React 版的 Vue 常用内置组件、核心 Composition API 等
-- **[路由适配包](https://router-vureact.vercel.app/)**：支持 Vue Router 4.x -> React Router DOM 7.9+ 转换
+- **[Vue 路由适配包](https://router-vureact.vercel.app/)**：支持 Vue Router 4.x -> React Router DOM 7.9+ 转换
 - **状态管理**：暂无
 - **UI 库**：暂无
+
+如果确实需要，可以选择 [☣️混合编写](/guide/mind-control-readme)，以此直接使用 React 生态。
 
 ## 下一步建议
 
 1. **阅读理念**：了解 [VuReact 的设计哲学](./philosophy)，理解"可控优先"的核心原则
 2. **评估适用性**：查看 [为什么选 VuReact](./why)，确认项目是否适合使用
-3. **学习规范**：在正式使用前，务必通读 [编译约定](./specification)
-4. **尝试示例**：通过 [基础示例](./basic-tutorial) 学习更多转换模式
+3. **尝试示例**：通过 [编译示例](./basic-tutorial) 了解更多转换模式
+4. **学习规范**：在正式使用前，务必通读 [编译约定](./specification)

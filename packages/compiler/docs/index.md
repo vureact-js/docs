@@ -5,7 +5,7 @@ title: VuReact | 下一代 Vue 3 -> React 编译工具
 
 hero:
   name: 'VuReact'
-  text: '下一代 Vue 3 -> React 编译工具'
+  text: '下一代 Vue 3 -> React 智能编译工具'
   tagline: '可控渐进，约定驱动，适用于 Web 跨框架的方案。'
 
   actions:
@@ -38,17 +38,21 @@ features:
     title: 现代 Vue 语法优先
     details: 完整支持 Vue 3 script setup 语法与组合式 API，包括 watch、defineProps、defineEmits 等。
 
-  - icon: ⚛️
-    title: Vue 核心特性适配
-    details: 将响应式系统、生命周期、内置组件（Transition/KeepAlive）等核心特性完整适配到 React，保持开发心智模型一致。
-
   - icon: 📋
     title: 模板到 JSX 智能转换
     details: 将 Vue 模板语法和指令等，智能转换为符合 React 习惯的 JSX 代码，保持逻辑清晰且符合 React 最佳实践。
 
+  - icon: ⚛️
+    title: Vue 核心特性适配
+    details: 将响应式系统、生命周期、内置组件（Transition/KeepAlive）等核心特性完整适配到 React，保持开发心智模型一致。
+
   - icon: 🎨
     title: 零运行时样式方案
-    details: 在编译阶段完全处理 SFC 的 scoped 和 module 样式，生成静态 CSS 文件，解决运行时样式性能开销。
+    details: 在编译阶段完全处理 SFC 的 scoped 和 module 样式，以及 Less 和 Sass，生成静态 CSS 文件，解决运行时样式性能开销。
+
+  - icon: 🔬
+    title: 细致的处理
+    details: 从 import 路径修正到类型定义生成，从代码格式化到依赖分析，每一个编译细节都经过精心设计和优化。
 
   - icon: 📝
     title: TypeScript 无缝迁移
@@ -57,10 +61,6 @@ features:
   - icon: ⚡
     title: CLI 与实时编译
     details: 提供 build/watch 双模式 CLI，支持增量编译与文件监听，开发体验流畅。
-
-  - icon: 🔬
-    title: 细致的处理
-    details: 从 import 路径修正到类型定义生成，从代码格式化到依赖分析，每一个编译细节都经过精心设计和优化。
 
   - icon: 📁
     title: 完整工程化

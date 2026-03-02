@@ -48,7 +48,7 @@ my-app/
 // @vr-name: Counter （注：用于告诉编译器，该生成什么组件名）
 import { computed, ref } from 'vue';
 
-// 也可以使用这个宏来定义组件名
+// 也可以使用宏定义组件名
 defineOptions({ name: 'Counter' });
 
 const step = ref(1);
@@ -66,11 +66,15 @@ const methods = {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+@border-color: #ddd;
+@border-radius: 8px;
+@padding-base: 12px;
+
 .counter-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 12px;
+  border: 1px solid @border-color;
+  border-radius: @border-radius;
+  padding: @padding-base;
 }
 </style>
 ```
@@ -174,22 +178,34 @@ const Counter = memo(() => {
 export default Counter;
 ```
 
+CSS 文件内容：
+
+```css
+.counter-card[data-css-a1b2c3] {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+}
+```
+
 ## 关键观察点
 
 1. `// @vr-name: Counter` 这段特殊注释定义了组件名
-2. `ref` / `computed` 被转换为 runtime 适配 API（`useVRef` / `useComputed`）
-3. 模板事件回调会生成符合 React 语义的 `onClick`
-4. `scoped` 样式会生成带哈希的 css 文件，并在元素上标注作用域属性
-5. 组件默认会走 `memo` 包装
-6. 顶层箭头函数依赖会尝试注入 `useCallback`
-7. 顶层对象依赖会尝试注入 `useMemo`
-8. 对 JSX 中的原 `ref` 状态值补上 `.value`
+2. 组件默认会走 `memo` 包装
+3. `ref` / `computed` 被转换为 runtime 适配 API（`useVRef` / `useComputed`）
+4. 模板事件回调会生成符合 React 语义的 `onClick`
+5. 顶层箭头函数依赖会尝试注入 `useCallback`
+6. 顶层对象依赖会尝试注入 `useMemo`
+7. 对 JSX 中的原 `ref` 状态值补上 `.value`
+8. `less` 样式被编译为 css 代码
+9. `scoped` 样式会生成带哈希的 css 文件，并在元素上标注作用域属性
 
 ## 常见失败点
 
 - 没排除 `src/main.ts`
 - 在非顶层调用会被转换为 Hook 的 API
 - 模板里出现不可分析表达式并被告警
+- 关闭样式预处理且使用 `scoped`，导致作用域失效
 
 ## 下一步
 

@@ -56,32 +56,50 @@ export default defineConfig({
             ],
           },
           {
-            text: '入门',
+            text: '编译示例',
             items: [
               {
-                text: '转换示例',
+                text: '入门',
                 items: [
                   { text: '计数器组件', link: '/guide/basic-tutorial' },
-                  { text: '子组件通信与插槽', link: '/guide/child-component-tutorial' },
-                  { text: '计数器 & 子组件通信', link: '/guide/counter-child-tutorial' },
+                  { text: '模板基础稳态转换', link: '/guide/beginner-template-stable' },
+                  { text: '组件通信稳态转换', link: '/guide/beginner-component-communication' },
                 ],
               },
-              { text: '常见问题', link: '/guide/faq' },
+              {
+                text: '进阶',
+                items: [
+                  {
+                    text: '上下文 + 事件 + 插槽链路',
+                    link: '/guide/advanced-context-events-slots',
+                  },
+                  { text: 'SFC 样式处理链路', link: '/guide/advanced-style-pipeline' },
+                  { text: '非 SFC 脚本文件链路', link: '/guide/advanced-script-only-pipeline' },
+                ],
+              },
+              {
+                text: '☣️心灵控制',
+                items: [
+                  { text: '说明', link: '/guide/mind-control-readme' },
+                  { text: '可控混写', link: '/guide/mind-control-controlled-mixed' },
+                  { text: '彻底暴走', link: '/guide/mind-control-full-ecosystem' },
+                ],
+              },
             ],
           },
           {
-            text: '配置与使用',
+            text: '配置',
             items: [
-              { text: 'CLI 与配置', link: '/guide/cli-and-config' },
-              { text: '使用插件', link: '/guide/plugin' },
+              { text: 'CLI', link: '/guide/cli' },
+              { text: '插件', link: '/guide/plugin' },
             ],
           },
+          { text: '常见问题', link: '/guide/faq' },
           {
             text: '规范与最佳实践',
             items: [
               { text: '编译约定', link: '/guide/specification' },
               { text: '最佳实践', link: '/guide/best-practices' },
-              { text: '混合编写（激进）', link: '/guide/mixed-writing' },
               { text: '路由适配', link: '/guide/router-adaptation' },
             ],
           },
@@ -103,7 +121,18 @@ export default defineConfig({
               { text: '样式指南', link: '/guide/conversion-style' },
             ],
           },
-          { text: 'API 参考', items: [] },
+          {
+            text: 'API',
+            items: [
+              { text: '总览', link: '/api/' },
+              { text: '配置 API', link: '/api/config' },
+              { text: '编译器 API', link: '/api/compiler' },
+              { text: '流水线 API', link: '/api/pipeline' },
+              { text: '插件系统 API', link: '/api/plugin-system' },
+              { text: '类型与结果', link: '/api/types' },
+              { text: '导出清单', link: '/api/exports' },
+            ],
+          },
         ],
       },
     },

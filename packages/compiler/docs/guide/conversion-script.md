@@ -173,27 +173,7 @@ useUpdated(() => {
 }, [state.value]);
 ```
 
-## 5. 顶层箭头函数：按依赖自动 `useCallback`
-
-Vue 输入：
-
-```vue
-<script setup lang="ts">
-const inc = () => {
-  count.value += step.value;
-};
-</script>
-```
-
-React 输出（示意）：
-
-```tsx
-const inc = useCallback(() => {
-  count.value += step.value;
-}, [count.value, step.value]);
-```
-
-## 6. `defineAsyncComponent`：映射到 `React.lazy`
+## 5. `defineAsyncComponent`：映射到 `React.lazy`
 
 Vue 输入：
 
@@ -211,7 +191,7 @@ const AsyncPanel = lazy(() => import('./Panel.jsx'));
 
 约束：仅支持 ESM 动态 `import('...')` 形式。
 
-## 7. `provide`/`inject`
+## 6. `provide`/`inject`
 
 转换为 Provider 适配结构与 useInject 钩子
 
@@ -243,6 +223,211 @@ React 输出（示意）：
 子组件
 
 const theme = useInject<string>('theme');
+```
+
+## 7. 静态提升与优化
+
+### 静态提升
+
+### `const`
+
+针对**顶层常量声明** ，若其初始值为 JavaScript 基础数据类型的字面量（如字符串、数字、布尔值等），则会被提升至组件外部。
+
+Vue 输入：
+
+```vue
+<script setup lang="ts">
+const defaultValue = 1;
+const isEnabled = true;
+</script>
+```
+
+React 输出（示意）：
+
+```tsx
+const defaultValue = 1;
+const isEnabled = true;
+
+// 示例组件
+const Component = memo(() => {
+  return <></>;
+});
+```
+
+### 优化：自动依赖分析
+
+编译器内置了强大的依赖分析器，遵循 React 规则，智能分析`顶层箭头函数`与`顶层变量声明`的依赖关系。
+
+### `useCallback`
+
+针对**顶层箭头函数**，若其函数体中存在可分析依赖，则会自动进行优化
+
+Vue 输入：
+
+```vue
+<script setup lang="ts">
+const inc = () => {
+  count.value++;
+};
+
+const fn = () => {};
+
+const fn2 = () => {
+  const value = foo.value;
+  const fn4 = () => {
+    value + state.bar.c--;
+  };
+
+  fn();
+};
+</script>
+```
+
+React 输出（示意）：
+
+```tsx
+const inc = useCallback(() => {
+  count.value++;
+}, [count.value]);
+
+// 由于被 fn2 调用，因此被追加为 useCallback
+const fn = useCallback(() => {}, []);
+
+const fn2 = useCallback(() => {
+  // 对初始值进行溯源，并收集 foo.value
+  const value = foo.value;
+
+  // 忽略对局部箭头函数的优化
+  const fn4 = () => {
+    value + state.bar.c--;
+  };
+
+  // 调用普通函数
+  fn();
+}, [foo.value, state.bar.c, fn]);
+```
+
+### `useMemo`
+
+针对**顶层变量声明**且带有初始值的，若其初始值表达式中存在可分析依赖，则会自动进行优化
+
+Vue 输入：
+
+```vue
+<script setup lang="ts">
+const fooRef = ref(0);
+const reactiveState = reactive({ foo: 'bar', bar: { c: 1 } });
+
+const memoizedObj = {
+  title: 'test',
+  bar: fooRef.value,
+  add: () => {
+    reactiveState.bar.c++;
+  },
+};
+
+const staticObj = {
+  foo: 1,
+  state: { bar: { c: 1 } },
+};
+
+const staticList = [1, 2, 3];
+
+const reactiveList = [fooRef.value, 1, 2];
+
+const mixedList = [
+  { name: reactiveState.foo, age: fooRef.value },
+  { name: 'A', age: 20 },
+];
+
+const nestedObj = {
+  a: {
+    b: {
+      c: reactiveList[0],
+      d: () => {
+        return memoizedObj.bar;
+      },
+    },
+    e: mixedList,
+  },
+};
+
+const computeFn = () => {
+  memoizedObj.add();
+  return nestedObj.a.b.d();
+};
+
+const formattedValue = memoizedObj.bar.toFixed(2);
+</script>
+```
+
+React 输出（示意）：
+
+```tsx
+const memoizedObj = useMemo(
+  () => ({
+    title: 'test',
+    bar: fooRef.value,
+    add: () => {
+      reactiveState.bar.c++;
+    },
+  }),
+  [fooRef.value, reactiveState.bar.c],
+);
+
+// 无依赖
+const staticObj = {
+  foo: 1,
+  state: {
+    bar: {
+      c: 1,
+    },
+  },
+};
+
+const reactiveList = useMemo(() => [fooRef.value, 1, 2], [fooRef.value]);
+
+// 无依赖
+const staticList = [1, 2, 3];
+
+const mixedList = useMemo(
+  () => [
+    {
+      name: reactiveState.foo,
+      age: fooRef.value,
+    },
+    {
+      name: 'A',
+      age: 20,
+    },
+  ],
+  [reactiveState.foo, fooRef.value],
+);
+
+const nestedObj = useMemo(
+  () => ({
+    a: {
+      b: {
+        c: reactiveList[0],
+        d: () => {
+          return memoizedObj.bar;
+        },
+      },
+      e: mixedList,
+    },
+  }),
+  [reactiveList[0], memoizedObj.bar, mixedList],
+);
+
+const computeFn = useMemo(
+  () => () => {
+    memoizedObj.add();
+    return nestedObj.a.b.d();
+  },
+  [memoizedObj, nestedObj.a.b],
+);
+
+const formattedValue = useMemo(() => memoizedObj.bar.toFixed(2), [memoizedObj.bar]);
 ```
 
 ## 8. 路由 API（在 router 生态接入时）
