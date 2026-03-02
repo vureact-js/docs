@@ -1,5 +1,7 @@
 ﻿# Introduction
 
+## VuReact Router <Badge type='warning' text='beta' />
+
 ## Background
 
 `react-router-dom` is powerful in React projects, but teams migrating from Vue Router often face these frictions:
@@ -15,12 +17,7 @@
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {
-  createRouter,
-  createWebHashHistory,
-  RouterLink,
-  RouterView,
-} from '@vureact/router';
+import { createRouter, createWebHashHistory, RouterLink, RouterView } from '@vureact/router';
 
 const router = createRouter({
   history: createWebHashHistory(),

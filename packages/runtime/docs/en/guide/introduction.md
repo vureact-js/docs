@@ -1,6 +1,6 @@
 # Introduction
 
-## What is VuReact Runtime?
+## What is VuReact Runtime <Badge type='warning' text='beta' />
 
 **VuReact Runtime** is a Vue 3 feature adaptation layer designed specifically for React, enabling you to seamlessly use core Vue 3 features in React applications—including built-in components, reactive APIs, and template directive utilities.
 
