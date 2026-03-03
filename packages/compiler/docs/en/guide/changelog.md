@@ -1,12 +1,12 @@
 # Changelog
 
-## [1.0.0-beta "Mind Control"] - 2026-03-03
+## [1.0.0 "Mind Control"] - 2026-03-03
 
-### 🚩 Milestone Release: VuReact 1.0.0-beta — "Mind Control"
+### 🚩 Milestone Release: VuReact 1.0.0 — "Mind Control"
 
 > "There is only one true mind." — Yuri
 
-This is the first beta release of VuReact, codenamed "Mind Control". This version marks a crucial milestone in advancing Vue-to-React compilation from proof-of-concept to engineering practice.
+This is the first release of VuReact, codenamed "Mind Control". This version marks a crucial milestone in advancing Vue-to-React compilation from proof-of-concept to engineering practice.
 
 ### ✨ Core Breakthroughs
 
@@ -153,7 +153,7 @@ Special thanks to:
 
 ### 🔮 Future Outlook
 
-The 1.0.0-beta "Mind Control" release is the starting point of VuReact's journey. In the future, we will continue to explore:
+The 1.0.0 "Mind Control" release is the starting point of VuReact's journey. In the future, we will continue to explore:
 
 - **Deeper Transformation Capabilities**: Support for more Vue features and complex scenarios
 - **Better Developer Experience**: Improved error prompts and debugging tools

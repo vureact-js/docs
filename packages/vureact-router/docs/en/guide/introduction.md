@@ -1,6 +1,6 @@
 ﻿# Introduction
 
-## VuReact Router <Badge type='warning' text='beta' />
+## VuReact Router
 
 ## Background
 

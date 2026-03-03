@@ -1,7 +1,5 @@
 ﻿# 简介
 
-## VuReact Router <Badge type='warning' text='beta' />
-
 ## 问题背景
 
 在 React 项目中直接使用 `react-router-dom` 足够灵活，但当团队来自 Vue Router 生态，或想要寻找适配方案时，常见痛点是：

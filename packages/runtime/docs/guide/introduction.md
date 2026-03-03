@@ -1,6 +1,6 @@
 # 简介
 
-## 什么是 VuReact Runtime <Badge type='warning' text='beta' />
+## 什么是 VuReact Runtime
 
 **VuReact Runtime** 是一个专为 React 设计的 Vue 3 特性适配层，它允许您在 React 应用中无缝使用 Vue 3 的核心特性，包括内置组件、响应式 API 和模板指令工具。
 
