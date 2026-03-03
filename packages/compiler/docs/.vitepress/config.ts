@@ -62,8 +62,9 @@ export default defineConfig({
                 text: '入门',
                 items: [
                   { text: '计数器组件', link: '/guide/basic-tutorial' },
-                  { text: '模板基础稳态转换', link: '/guide/beginner-template-stable' },
-                  { text: '组件通信稳态转换', link: '/guide/beginner-component-communication' },
+                  { text: '模板基础', link: '/guide/beginner-template-stable' },
+                  { text: '组件通信', link: '/guide/beginner-component-communication' },
+                  { text: '组件引用', link: '/guide/beginner-component-references' },
                 ],
               },
               {
@@ -78,7 +79,7 @@ export default defineConfig({
                 ],
               },
               {
-                text: '☣️ 心灵控制',
+                text: '心灵控制 ☣️',
                 items: [
                   { text: '说明', link: '/guide/mind-control-readme' },
                   { text: '可控混写', link: '/guide/mind-control-controlled-mixed' },
@@ -188,12 +189,16 @@ export default defineConfig({
                 items: [
                   { text: 'Counter Component', link: '/en/guide/basic-tutorial' },
                   {
-                    text: 'Template Basic Steady-State Conversion',
+                    text: 'Template Basic',
                     link: '/en/guide/beginner-template-stable',
                   },
                   {
-                    text: 'Component Communication Steady-State Conversion',
+                    text: 'Component Communication',
                     link: '/en/guide/beginner-component-communication',
+                  },
+                  {
+                    text: 'Component References',
+                    link: '/en/guide/beginner-component-references',
                   },
                 ],
               },
@@ -215,7 +220,7 @@ export default defineConfig({
                 ],
               },
               {
-                text: '☣️Mind Control',
+                text: 'Mind Control ☣️',
                 items: [
                   { text: 'Introduction', link: '/en/guide/mind-control-readme' },
                   {

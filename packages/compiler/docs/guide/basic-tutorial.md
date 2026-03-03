@@ -105,8 +105,27 @@ export default defineConfig({
 
 ## Step 3：执行编译
 
+### 方式一：使用 npx 命令
+
+在根目录下运行：
+
 ```bash
 npx vureact build
+```
+
+### 方式二：使用 npm scripts
+
+在 `package.json` 里添加脚本命令：
+
+```json
+"scripts": {
+  "watch": "vureact watch",
+  "build": "vureact build"
+}
+```
+
+```bash
+npm run build
 ```
 
 ## Step 4：查看输出目录树

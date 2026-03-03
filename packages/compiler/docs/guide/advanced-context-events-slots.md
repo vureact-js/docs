@@ -12,6 +12,18 @@
 
 ```vue
 <!-- ParentPage.vue -->
+<template>
+  <ThemeCard :level="level" @upgrade="onUpgrade">
+    <template #header>
+      <p>Header</p>
+    </template>
+
+    <template #footer="{ level, theme }">
+      <small>theme={{ theme }}, level={{ level }}</small>
+    </template>
+  </ThemeCard>
+</template>
+
 <script setup lang="ts">
 // @vr-name: ParentPage
 import { provide, ref } from 'vue';
@@ -24,22 +36,23 @@ const onUpgrade = (next: number) => {
   level.value = next;
 };
 </script>
-
-<template>
-  <ThemeCard :level="level" @upgrade="onUpgrade">
-    <template #header>
-      <p>Header</p>
-    </template>
-
-    <template #footer="{ level, theme }">
-      <small>theme={{ theme }}, level={{ level }}</small>
-    </template>
-  </ThemeCard>
-</template>
 ```
 
 ```vue
 <!-- ThemeCard.vue -->
+<template>
+  <section>
+    <slot name="header"></slot>
+
+    <p>Theme: {{ theme }}</p>
+    <p>Level: {{ props.level }}</p>
+
+    <button @click="upgrade">Upgrade</button>
+
+    <slot name="footer" :level="props.level" :theme="theme" />
+  </section>
+</template>
+
 <script setup lang="ts">
 // @vr-name: ThemeCard
 import { inject } from 'vue';
@@ -53,19 +66,6 @@ const upgrade = () => {
   emit('upgrade', props.level + 1);
 };
 </script>
-
-<template>
-  <section>
-    <slot name="header"></slot>
-
-    <p>Theme: {{ theme }}</p>
-    <p>Level: {{ props.level }}</p>
-
-    <button @click="upgrade">Upgrade</button>
-
-    <slot name="footer" :level="props.level" :theme="theme" />
-  </section>
-</template>
 ```
 
 ## 3. 输出示例（React，简化）
