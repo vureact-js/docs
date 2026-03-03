@@ -6,7 +6,7 @@
 
 ### Background
 
-VuReact Runtime was originally developed to address **runtime scenarios that the [VuReact Compiler](https://vureact.vercel.app) cannot handle**. During the compilation and conversion process from Vue 3 to React, some features cannot be fully processed at compile time and require runtime support. This library is a tailored solution for these scenarios.
+VuReact Runtime was originally developed to address **runtime scenarios that the [VuReact Compiler](https://vureact.top/en) cannot handle**. During the compilation and conversion process from Vue 3 to React, some features cannot be fully processed at compile time and require runtime support. This library is a tailored solution for these scenarios.
 
 Although it is customized for the VuReact Compiler, it is completely independent in design and **can be used standalone** without relying on any compilation tools.
 

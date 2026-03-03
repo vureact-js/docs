@@ -124,7 +124,7 @@ React Output (illustration):
 <button onClick={dir.on('click.stop.prevent', submit)}>Submit</button>
 ```
 
-Note: Events with modifiers use the [runtime](https://vureact-runtime.vercel.app/guide/utils/adapter-utils.html) directive helper; `.capture` maps to `onClickCapture`.
+Note: Events with modifiers use the [runtime](https://runtime.vureact.top/en/guide/utils/adapter-utils.html) directive helper; `.capture` maps to `onClickCapture`.
 
 ## 5. Binding: `v-bind` / `:prop` / `class` / `style`
 
@@ -159,7 +159,7 @@ React Output (illustration):
 />
 ```
 
-Note: Complex `class/style` merging uses the [runtime](https://vureact-runtime.vercel.app/guide/utils/adapter-utils.html) helper functions.
+Note: Complex `class/style` merging uses the [runtime](https://runtime.vureact.top/guide/utils/adapter-utils.html) helper functions.
 
 ### Keyless `v-bind`
 
@@ -525,5 +525,5 @@ The simpler and more statically analyzable template expressions are, the more st
 ## Next Steps
 
 - See [Script Conversion Guide](./conversion-script) - Learn about script conversion rules
-- See [Runtime Components](https://vureact-runtime.vercel.app/guide/components/keep-alive.html) - Learn about detailed usage of runtime components
-- See [Runtime Helper Functions](https://vureact-runtime.vercel.app/guide/utils/adapter-utils.html) - Learn about detailed usage of runtime helper functions
+- See [Runtime Components](https://runtime.vureact.top/guide/components/keep-alive.html) - Learn about detailed usage of runtime components
+- See [Runtime Helper Functions](https://runtime.vureact.top/guide/utils/adapter-utils.html) - Learn about detailed usage of runtime helper functions

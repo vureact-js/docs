@@ -18,7 +18,7 @@
 | `onMounted` / `onUnmounted`                           | `useMounted` / `useUnmounted`                                  |
 | `onBeforeUpdate` / `onUpdated`                        | `useBeforeUpdate` / `useUpdated`                               |
 
-更多详细内容请移步 [运行时 Hooks 文档](https://vureact-runtime.vercel.app/guide/hooks/reactive.html)
+更多详细内容请移步 [运行时 Hooks 文档](https://runtime.vureact.top/guide/hooks/reactive.html)
 
 ### 示例：`ref` + `computed`
 
@@ -450,4 +450,4 @@ const formattedValue = useMemo(() => memoizedObj.bar.toFixed(2), [memoizedObj.ba
 ## 下一步
 
 - 查看 [Style 转换指南](./conversion-style) - 了解样式转换规则
-- 查看 [运行时 Hooks 文档](https://vureact-runtime.vercel.app/guide/hooks/reactive.html) - 了解运行时 API 详细用法
+- 查看 [运行时 Hooks 文档](https://runtime.vureact.top/guide/hooks/reactive.html) - 了解运行时 API 详细用法

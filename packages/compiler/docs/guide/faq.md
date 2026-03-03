@@ -272,7 +272,7 @@ graph TD
 
 ### Q9: 如何处理 Vue 路由？
 
-**A:** 路由转换提供了 [VuReact Router](https://router-vureact.vercel.app/guide/introduction.html) 适配包，编译器会处理，但入口配置等需要手动微调，因为：
+**A:** 路由转换提供了 [VuReact Router](https://router.vureact.top/guide/introduction.html) 适配包，编译器会处理，但入口配置等需要手动微调，因为：
 
 1. **工程上下文**：路由配置涉及项目结构
 2. **语法差异**：路由配置中的组件使用，需改用 JSX Element 写法

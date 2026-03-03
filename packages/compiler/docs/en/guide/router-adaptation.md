@@ -14,5 +14,5 @@ Routing is an engineering-level context, not a single-file syntax replacement. T
 
 ## Further Reading
 
-- VuReact Router Basics: <https://router-vureact.vercel.app/guide/introduction>
-- VuReact Router Quick Start: <https://router-vureact.vercel.app/guide/quick-start>
+- VuReact Router Basics: <https://router.vureact.top/en/guide/introduction>
+- VuReact Router Quick Start: <https://router.vureact.top/en/guide/quick-start>

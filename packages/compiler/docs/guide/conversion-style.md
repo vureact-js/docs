@@ -385,4 +385,4 @@ PostCSS 处理                直接输出
 
 ## 12. 下一步
 
-- 查看 [运行时辅助工具](https://vureact-runtime.vercel.app/guide/utils/v-style.html) - 了解 `dir.xxx` 详细用法
+- 查看 [运行时辅助工具](https://runtime.vureact.top/guide/utils/v-style.html) - 了解 `dir.xxx` 详细用法

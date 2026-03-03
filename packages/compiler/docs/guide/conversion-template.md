@@ -124,7 +124,7 @@ React 输出（示意）：
 <button onClick={dir.on('click.stop.prevent', submit)}>Submit</button>
 ```
 
-说明：带修饰符时会走 [runtime](https://vureact-runtime.vercel.app/guide/utils/adapter-utils.html) 指令辅助；`.capture` 会映射到 `onClickCapture`。
+说明：带修饰符时会走 [runtime](https://runtime.vureact.top/guide/utils/adapter-utils.html) 指令辅助；`.capture` 会映射到 `onClickCapture`。
 
 ## 5. 绑定：`v-bind` / `:prop` / `class` / `style`
 
@@ -159,7 +159,7 @@ React 输出（示意）：
 />
 ```
 
-说明：复杂 `class/style` 合并会走 [runtime](https://vureact-runtime.vercel.app/guide/utils/adapter-utils.html) 辅助函数。
+说明：复杂 `class/style` 合并会走 [runtime](https://runtime.vureact.top/guide/utils/adapter-utils.html) 辅助函数。
 
 ### 无参数 `v-bind`
 
@@ -525,5 +525,5 @@ VuReact 的模板转换遵循以下流程：
 ## 下一步
 
 - 查看 [Script 转换指南](./conversion-script) - 了解脚本转换规则
-- 查看 [运行时组件](https://vureact-runtime.vercel.app/guide/components/keep-alive.html) - 了解运行时组件详细用法
-- 查看 [运行时辅助函数](https://vureact-runtime.vercel.app/guide/utils/adapter-utils.html) - 了解运行时辅助函数详细用法
+- 查看 [运行时组件](https://runtime.vureact.top/guide/components/keep-alive.html) - 了解运行时组件详细用法
+- 查看 [运行时辅助函数](https://runtime.vureact.top/guide/utils/adapter-utils.html) - 了解运行时辅助函数详细用法

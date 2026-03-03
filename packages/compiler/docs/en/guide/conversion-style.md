@@ -385,4 +385,4 @@ Styles represent a high-risk aspect of migration. We recommend:
 
 ## 12. Next Steps
 
-- See [Runtime Helpers](https://vureact-runtime.vercel.app/guide/utils/v-style.html) - Learn detailed usage of `dir.xxx`
+- See [Runtime Helpers](https://runtime.vureact.top/en/guide/utils/v-style.html) - Learn detailed usage of `dir.xxx`

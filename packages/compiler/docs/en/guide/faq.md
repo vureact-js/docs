@@ -272,7 +272,7 @@ For detailed support status, please refer to the [Capability Matrix](./capabilit
 
 ### Q9: How to handle Vue Router?
 
-**A:** Router conversion provides the [VuReact Router](https://router-vureact.vercel.app/guide/introduction.html) adaptation package, which the compiler will process, but entry configuration and other parts need manual fine-tuning because:
+**A:** Router conversion provides the [VuReact Router](https://router.vureact.top/en/guide/introduction.html) adaptation package, which the compiler will process, but entry configuration and other parts need manual fine-tuning because:
 
 1. **Project context**: Router configuration involves project structure.
 2. **Syntax differences**: Component usage in router configuration needs to be rewritten using JSX Element syntax.

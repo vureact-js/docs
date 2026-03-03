@@ -8,7 +8,7 @@ It does more than just syntax-level conversion—it deeply understands the seman
 
 VuReact’s core goal is not to "unconditionally auto-convert arbitrary Vue code to React code", but to provide a **predictable, analyzable, and maintainable** upgrade path, enabling developers to smoothly advance cross-framework evolution under the premise of engineering control.
 
-Furthermore, VuReact is not an isolated code rewriting tool. It consists of two synergistic components: **compile-time transformation** and **[runtime adaptation](https://vureact-runtime.vercel.app/)**:
+Furthermore, VuReact is not an isolated code rewriting tool. It consists of two synergistic components: **compile-time transformation** and **[runtime adaptation](https://runtime.vureact.top/en/)**:
 
 - **Compile-time**: Converts Vue code that complies with conventions into clean, maintainable React code, and automatically injects necessary runtime dependencies;
 - **Runtime**: Provides critical semantic adaptation and behavior compatibility layers to ensure converted components run stably in React environments.
@@ -320,8 +320,8 @@ In benchmark tests, the converted React application:
 
 ### Ecosystem Integration
 
-- **[Vue Core Adaptation Package](https://vureact-runtime.vercel.app/)**: Provides React versions of Vue's commonly used built-in components, core Composition API, etc.
-- **[Vue Router Adaptation Package](https://router-vureact.vercel.app/)**: Supports conversion from Vue Router 4.x -> React Router DOM 7.9+
+- **[Vue Core Adaptation Package](https://runtime.vureact.top/en/)**: Provides React versions of Vue's commonly used built-in components, core Composition API, etc.
+- **[Vue Router Adaptation Package](https://router.vureact.top/en/)**: Supports conversion from Vue Router 4.x -> React Router DOM 7.9+
 - **State Management**: None yet
 - **UI Libraries**: None yet
 

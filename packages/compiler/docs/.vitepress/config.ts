@@ -38,8 +38,8 @@ export default defineConfig({
               {
                 text: '官方库',
                 items: [
-                  { text: 'VuReact Runtime', link: 'https://vureact-runtime.vercel.app' },
-                  { text: 'VuReact Router', link: 'https://router-vureact.vercel.app' },
+                  { text: 'VuReact Runtime', link: 'https://runtime.vureact.top' },
+                  { text: 'VuReact Router', link: 'https://router.vureact.top' },
                 ],
               },
             ],
@@ -163,8 +163,8 @@ export default defineConfig({
               {
                 text: 'Official Libraries',
                 items: [
-                  { text: 'VuReact Runtime', link: 'https://vureact-runtime.vercel.app/en' },
-                  { text: 'VuReact Router', link: 'https://router-vureact.vercel.app/en' },
+                  { text: 'VuReact Runtime', link: 'https://runtime.vureact.top/en' },
+                  { text: 'VuReact Router', link: 'https://router.vureact.top/en' },
                 ],
               },
             ],

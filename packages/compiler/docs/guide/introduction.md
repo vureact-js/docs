@@ -8,7 +8,7 @@ VuReact（Vue + React 连读，发音 `/vjuːˈriːækt/`）是一个面向 Vue 
 
 VuReact 的核心目标并非“无条件地将任意 Vue 代码自动转换为 React 代码”，而是提供一条 **可预测、可分析、可维护** 的升级路径，使开发者能够在工程可控的前提下，平稳推进跨框架演进。
 
-此外，VuReact 并非一个孤立的代码改写工具。它由 **编译时转换** 与 **[运行时适配](https://vureact-runtime.vercel.app/)** 两部分协同构成：
+此外，VuReact 并非一个孤立的代码改写工具。它由 **编译时转换** 与 **[运行时适配](https://runtime.vureact.top/)** 两部分协同构成：
 
 - **编译时** 负责将符合约定的 Vue 代码转换为结构清晰、易于维护的 React 代码，并自动注入必要的运行时依赖；
 - **运行时** 则提供关键的语义适配与行为兼容层，确保转换后的组件在 React 环境中稳定运行。
@@ -320,8 +320,8 @@ const increment = useCallback(() => {
 
 ### 生态集成
 
-- **[Vue 核心适配包](https://vureact-runtime.vercel.app/)**：提供 React 版的 Vue 常用内置组件、核心 Composition API 等
-- **[Vue 路由适配包](https://router-vureact.vercel.app/)**：支持 Vue Router 4.x -> React Router DOM 7.9+ 转换
+- **[Vue 核心适配包](https://runtime.vureact.top/)**：提供 React 版的 Vue 常用内置组件、核心 Composition API 等
+- **[Vue 路由适配包](https://router.vureact.top/)**：支持 Vue Router 4.x -> React Router DOM 7.9+ 转换
 - **状态管理**：暂无
 - **UI 库**：暂无
 

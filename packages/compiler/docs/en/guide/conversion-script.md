@@ -18,7 +18,7 @@ This page demonstrates common and advanced Script layer conversions in the forma
 | `onMounted` / `onUnmounted`                           | `useMounted` / `useUnmounted`                                  |
 | `onBeforeUpdate` / `onUpdated`                        | `useBeforeUpdate` / `useUpdated`                               |
 
-For more details, please refer to the [Runtime Hooks Documentation](https://vureact-runtime.vercel.app/guide/hooks/reactive.html)
+For more details, please refer to the [Runtime Hooks Documentation](https://runtime.vureact.top/en/guide/hooks/reactive.html)
 
 ### Example: `ref` + `computed`
 
@@ -450,4 +450,4 @@ const formattedValue = useMemo(() => memoizedObj.bar.toFixed(2), [memoizedObj.ba
 ## Next Steps
 
 - See [Style Conversion Guide](./conversion-style) - Learn about style conversion rules
-- See [Runtime Hooks Documentation](https://vureact-runtime.vercel.app/guide/hooks/reactive.html) - Learn about detailed usage of runtime APIs
+- See [Runtime Hooks Documentation](https://runtime.vureact.top/guide/hooks/reactive.html) - Learn about detailed usage of runtime APIs
