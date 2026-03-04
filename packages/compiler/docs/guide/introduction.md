@@ -139,7 +139,7 @@ const reset = () => {
 };
 </script>
 
-<style>
+<style scoped>
 .counter {
   padding: 20px;
   border: 1px solid #e0e0e0;
@@ -204,7 +204,7 @@ my-vue-app/
 │   │   └── src/
 │   │       └── components/
 │   │           ├── Counter.tsx
-│   │           └── counter-[hash].css
+│   │           └── Counter-[hash].css
 │   └── cache/          # 编译缓存
 ├── src/                # 原始 Vue 代码
 └── vureact.config.js   # 配置文件
@@ -234,7 +234,7 @@ npm run dev
 ```tsx
 import { memo, useCallback } from 'react';
 import { useVRef } from '@vureact/runtime-core';
-import './counter.css';
+import './Counter-abc123.css';
 
 const Counter = memo(() => {
   const count = useVRef(0);
@@ -248,11 +248,11 @@ const Counter = memo(() => {
   }, [count.value]);
 
   return (
-    <div className="counter">
-      <h2>计数器示例</h2>
-      <p>当前计数: {count.value}</p>
-      <button onClick={increment}>增加</button>
-      <button onClick={reset}>重置</button>
+    <div className="counter" data-css-abc123>
+      <h2 data-css-abc123>计数器示例</h2>
+      <p data-css-abc123>当前计数: {count.value}</p>
+      <button onClick={increment} data-css-abc123>增加</button>
+      <button onClick={reset} data-css-abc123>重置</button>
     </div>
   );
 });
@@ -263,7 +263,7 @@ export default Counter;
 生成附属的 counter.css 文件：
 
 ```css
-.counter {
+.counter[data-css-abc123] {
   padding: 20px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;

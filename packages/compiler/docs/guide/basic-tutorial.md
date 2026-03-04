@@ -141,7 +141,7 @@ my-app/
 │     └─ src/
 │        └─ components/
 │           ├─ Counter.tsx
-│           └─ counter-<hash>.css
+│           └─ Counter-<hash>.css
 ├─ src/
 │  └─ ...
 └─ vureact.config.js
@@ -154,9 +154,8 @@ my-app/
 ```tsx
 import { memo, useCallback, useMemo } from 'react';
 import { useComputed, useVRef } from '@vureact/runtime-core';
-import './counter-a1b2c3.css';
+import './Counter-a1b2c3.css';
 
-// 固定使用 memo 包裹组件
 const Counter = memo(() => {
   // ref/computed 转换成了对等的适配 API
   const step = useVRef(1);
@@ -210,18 +209,18 @@ CSS 文件内容：
 ## 关键观察点
 
 1. `// @vr-name: Counter` 这段特殊注释定义了组件名
-2. 组件默认会走 `memo` 包装
+2. 非纯 UI 展示组件，默认会走 `memo` 包装
 3. `ref` / `computed` 被转换为 runtime 适配 API（`useVRef` / `useComputed`）
 4. 模板事件回调会生成符合 React 语义的 `onClick`
 5. 顶层箭头函数依赖会尝试注入 `useCallback`
-6. 顶层对象依赖会尝试注入 `useMemo`
+6. 顶层变量声明会尝试注入 `useMemo`
 7. 对 JSX 中的原 `ref` 状态值补上 `.value`
 8. `less` 样式被编译为 css 代码
 9. `scoped` 样式会生成带哈希的 css 文件，并在元素上标注作用域属性
 
 ## 常见失败点
 
-- 没排除 `src/main.ts`
+- 没排除 Vue 入口文件，如 `src/main.ts` 或 `App.vue`
 - 在非顶层调用会被转换为 Hook 的 API
 - 模板里出现不可分析表达式并被告警
 - 关闭样式预处理且使用 `scoped`，导致作用域失效
