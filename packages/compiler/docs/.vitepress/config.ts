@@ -33,6 +33,10 @@ export default defineConfig({
             link: 'https://afdian.com/a/vureact-js/plan',
           },
           {
+            text: '在线演示',
+            link: 'https://codesandbox.io/p/devbox/compiler-examples-n8yg68',
+          },
+          {
             text: '生态系统',
             items: [
               {
@@ -79,7 +83,11 @@ export default defineConfig({
                 ],
               },
               {
-                text: '心灵控制 ☣️',
+                text: '掌握',
+                items: [{ text: '演练场', link: '/guide/playground' }],
+              },
+              {
+                text: '心灵控制',
                 items: [
                   { text: '说明', link: '/guide/mind-control-readme' },
                   { text: '可控混写', link: '/guide/mind-control-controlled-mixed' },
@@ -159,6 +167,10 @@ export default defineConfig({
             link: 'https://afdian.com/a/vureact-js/plan',
           },
           {
+            text: 'Playground',
+            link: 'https://codesandbox.io/p/devbox/compiler-examples-n8yg68',
+          },
+          {
             text: 'Ecosystem',
             items: [
               {
@@ -220,7 +232,11 @@ export default defineConfig({
                 ],
               },
               {
-                text: 'Mind Control ☣️',
+                text: 'Proficient',
+                items: [{ text: 'playground', link: '/en/guide/playground' }],
+              },
+              {
+                text: 'Mind Control',
                 items: [
                   { text: 'Introduction', link: '/en/guide/mind-control-readme' },
                   {
