@@ -29,7 +29,7 @@ VuReact 旨在解决以下典型场景中的开发痛点：
 
 ## 项目定位
 
-当前阶段，VuReact 定位为 **实验性工具链**，优先服务于以下场景：
+当前阶段，VuReact 优先服务于以下场景：
 
 - **新项目开发**：直接按照 VuReact 约定编写 Vue 风格的组件，并输出为 React 代码
 - **现代语法支持**：专注于 Vue 3 Composition API 与 `<script setup>` 语法
@@ -251,8 +251,12 @@ const Counter = memo(() => {
     <div className="counter" data-css-abc123>
       <h2 data-css-abc123>计数器示例</h2>
       <p data-css-abc123>当前计数: {count.value}</p>
-      <button onClick={increment} data-css-abc123>增加</button>
-      <button onClick={reset} data-css-abc123>重置</button>
+      <button onClick={increment} data-css-abc123>
+        增加
+      </button>
+      <button onClick={reset} data-css-abc123>
+        重置
+      </button>
     </div>
   );
 });

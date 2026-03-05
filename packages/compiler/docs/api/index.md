@@ -20,5 +20,6 @@
 - [编译器 API](./compiler)
 - [流水线 API](./pipeline)
 - [插件系统 API](./plugin-system)
+- [上下文 API](./compiler-context)
 - [类型与结果](./types)
 - [导出清单](./exports)

@@ -1,4 +1,4 @@
-﻿# SFC 样式处理链路
+﻿# 组件内样式
 
 本章展示编译器如何处理 SFC 中的样式块，包括 `scoped`、`module`、`less/sass`。
 

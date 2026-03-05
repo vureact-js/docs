@@ -1,17 +1,17 @@
-﻿# Script-Only Pipeline (Non-SFC)
+﻿# Script File Processing Pipeline
 
-This chapter illustrates the compilation pipeline for `*.ts/*.js` files (non-`.vue`) in VuReact.
+This chapter demonstrates the compilation path of `*.ts/*.js` (non-`.vue`) files in VuReact.
 
 ## 1. Applicable Scenarios
 
 1. Writing standard Hooks.
-2. Retaining partial script utility files during the migration phase.
-3. First handling Composition API and dependency analysis, then gradually migrating the template layer.
-4. Expecting to uniformly process SFCs and scripts through the same CLI/caching system.
+2. Retaining some script utility files during the migration phase.
+3. Processing Composition API and dependency analysis first, then gradually migrating the template layer.
+4. Expecting to handle SFC and script uniformly through the same set of CLI/cache system.
 
 ## 2. Input Example (test-script.ts)
 
-❌ Incorrect usage: Using transformable APIs directly anywhere:
+❌ Incorrect usage: Using APIs to be transformed anywhere directly:
 
 ```ts
 import { computed, reactive, ref, watchEffect } from 'vue';
@@ -31,7 +31,7 @@ watchEffect(() => {
 export { count, double, inc, state };
 ```
 
-✅ Correct usage: Using APIs inside top-level functions:
+✅ Correct usage: Using them within top-level functions:
 
 ```ts
 function useMyHook() {
@@ -73,14 +73,14 @@ function useMyHook() {
 }
 ```
 
-## 4. Differences from the SFC Pipeline
+## 4. Differences from SFC Pipeline
 
-1. Script-only files skip the template and style processing phases.
-2. Macros (`defineProps/defineEmits/...`) should not be used in regular script files.
-3. API adaptation, dependency analysis, code generation, and plugin hooks are still executed.
-4. Compilation warnings are likely to be emitted if Hooks are used outside top-level functions.
+1. Script-only files do not go through the template and style processing stages.
+2. Macros (`defineProps/defineEmits/...`) should not be used in ordinary script files.
+3. API adaptation, dependency analysis, code generation and plugin hooks are still executed.
+4. Compilation warnings are prone to be emitted if hooks are used outside of top-level functions.
 
 ## 5. Recommendations
 
-1. Only route "genuinely script module" files through this pipeline.
-2. Component files should still primarily use SFCs to fully leverage template capabilities.
+1. Only route files that are "indeed script modules" through this pipeline.
+2. Component files should still be mainly based on SFC to facilitate the full exertion of template capabilities.

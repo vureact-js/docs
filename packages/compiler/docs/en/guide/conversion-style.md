@@ -1,6 +1,6 @@
 ﻿# Style Conversion Guide
 
-> Note: Examples are simplified for comparison purposes. The final output is subject to local compilation artifacts.
+> Note: Examples are simplified for comparison purposes; the final output shall be based on local compilation artifacts.
 
 ## 1. Style Block Extraction and File Generation
 
@@ -55,7 +55,7 @@ Generated CSS files follow these naming conventions:
 
 ### Scoped Style Conversion
 
-Vue's `scoped` styles are processed via PostCSS to generate CSS with scoped identifiers and inject DOM attributes.
+Vue's `scoped` styles are processed via PostCSS to generate scoped CSS with unique identifiers and inject DOM attributes.
 
 Vue Input:
 
@@ -105,7 +105,7 @@ export default function Counter() {
 
 ### Module Style Conversion
 
-Vue's CSS Modules are converted to React-compatible module import format.
+Vue's CSS Modules are converted to React-compatible module import syntax.
 
 Vue Input:
 
@@ -176,9 +176,23 @@ $primary: #42b883;
 </style>
 ```
 
+Single style files also support `less` and `sass`:
+
+```scss
+$primary: #42b883;
+
+.button {
+  background: $primary;
+
+  &:hover {
+    background: darken($primary, 10%);
+  }
+}
+```
+
 ### Output Processing
 
-Preprocessor code is converted to standard CSS during compilation, and corresponding CSS files are generated.
+Preprocessor code is transpiled to standard CSS during compilation, with corresponding CSS files generated.
 
 ## 5. Runtime Style Helpers
 
@@ -254,17 +268,17 @@ export default function Component() {
 
 ### Multiple Style Blocks
 
-| Scenario                  | Status          | Description                                          |
-| ------------------------- | --------------- | ---------------------------------------------------- |
-| Multiple `<style>` blocks | Partial support | Only the first one takes effect, warnings for others |
-| Mixed scoped and global   | Supported       | Unified style is recommended                         |
-| Dynamic style blocks      | Not supported   | Cannot be analyzed at compile time                   |
+| Scenario                       | Status          | Description                                                |
+| ------------------------------ | --------------- | ---------------------------------------------------------- |
+| Multiple `<style>` blocks      | Partial support | Only the first block takes effect; others trigger warnings |
+| Mixed scoped and global styles | Supported       | Unified style is recommended                               |
+| Dynamic style blocks           | Not supported   | Cannot be analyzed at compile time                         |
 
 ### @import Limitations
 
 ```vue
 <style scoped>
-/* Warning: @import content may retain global impact */
+/* Warning: @import content may retain global effects */
 @import './base.css';
 
 .local {
@@ -273,15 +287,15 @@ export default function Component() {
 </style>
 ```
 
-The compiler will issue a warning, recommending inlining imported styles to maintain scoping.
+The compiler issues a warning, recommending inlining imported styles to maintain scoping.
 
 ### CSS Variables (CSS Custom Properties)
 
 | Scenario                       | Status        | Description              |
 | ------------------------------ | ------------- | ------------------------ |
 | Native CSS variable definition | Supported     | Output normally          |
-| `v-bind` bound CSS variables   | Not supported | Error during parsing     |
-| CSS variables used in JS       | Not supported | Manual handling required |
+| `v-bind` bound CSS variables   | Not supported | Errors during parsing    |
+| CSS variables used in JS       | Not supported | Requires manual handling |
 
 ## 8. Output File Structure
 
@@ -314,9 +328,9 @@ File generation rules:
    - Generate CSS files
    - Inject scope attributes into templates
    - Generate style import statements
-4. **Post-processing stage**:
+4. **Postprocessing stage**:
    - Optimize CSS output
-   - Handle resource references (e.g., images, fonts)
+   - Process resource references (e.g., images, fonts)
 
 ### Scope Processing Flow
 
@@ -347,7 +361,7 @@ Output CSS file ←───────────────┘
 
 ### Migration Strategy
 
-1. **Incremental migration**:
+1. **Progressive migration**:
    - Migrate style-free components first
    - Then migrate components with simple styles
    - Finally handle complex styles
@@ -360,7 +374,7 @@ Output CSS file ←───────────────┘
    - Remove unused styles
    - Optimize CSS selectors
 
-### Common Issue Handling
+### Common Issue Resolution
 
 1. **Style conflicts**:
    - Use more specific selectors
@@ -377,12 +391,12 @@ Output CSS file ←───────────────┘
 
 ## 11. Relationship to Migration Strategy
 
-Styles represent a high-risk aspect of migration. We recommend:
+Styles represent a high-risk aspect of migration; recommendations:
 
 1. **Establish baseline**: First establish a style constraint baseline
-2. **Gradually expand**: Then expand the scope of module migration
+2. **Gradual expansion**: Then expand the scope of module migration
 3. **Regression testing**: Perform visual regression testing after each migration
 
 ## 12. Next Steps
 
-- See [Runtime Helpers](https://runtime.vureact.top/en/guide/utils/v-style.html) - Learn detailed usage of `dir.xxx`
+- See [Runtime Helpers](https://runtime.vureact.top/guide/utils/v-style.html) - Learn detailed usage of `dir.xxx`

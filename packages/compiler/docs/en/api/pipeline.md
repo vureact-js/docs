@@ -1,50 +1,50 @@
-﻿# 流水线 API
+﻿# Pipeline API
 
-本页是低层编译流水线接口，适合需要自定义编译链路的场景。
+This page documents the low-level compilation pipeline interfaces, suitable for scenarios requiring a custom compilation chain.
 
 ## `parseSFC(source, ctx, options?)`
 
-稳定性：`Low-level`
+Stability: `Low-level`
 
-解析 Vue SFC，返回 `ParseResult`（template/script/style）。
+Parses a Vue SFC (Single-File Component) and returns a `ParseResult` (containing template/script/style).
 
 ## `parseOnlyScript(source, ctx, options?)`
 
-稳定性：`Low-level`
+Stability: `Low-level`
 
-仅解析非 SFC 脚本输入（`script-js/script-ts`）。
+Parses only non-SFC script inputs (`script-js/script-ts`).
 
 ## `parse(source, ctx, options?)`
 
-稳定性：`Low-level`
+Stability: `Low-level`
 
-统一入口：根据 `ctx.inputType` 自动分派到 SFC 或 script 解析器。
+Unified entry: automatically dispatches to the SFC or script parser based on `ctx.inputType`.
 
 ## `transform(ast, ctx, options?)`
 
-稳定性：`Low-level`
+Stability: `Low-level`
 
-把解析结果转换为 `ReactIRDescriptor`。
+Converts the parsing result into a `ReactIRDescriptor`.
 
 ## `generateComponent(ir, ctx, options?)`
 
-稳定性：`Low-level`
+Stability: `Low-level`
 
-用于 SFC 输入，生成组件级 AST 与代码。
+Used for SFC inputs; generates component-level AST and code.
 
 ## `generateOnlyScript(ir, ctx, options?)`
 
-稳定性：`Low-level`
+Stability: `Low-level`
 
-用于 script-only 输入，只生成脚本代码。
+Used for script-only inputs; generates only script code.
 
 ## `generate(ir, ctx, options?)`
 
-稳定性：`Low-level`
+Stability: `Low-level`
 
-统一入口：根据 `ctx.inputType` 自动分派到对应 generator。
+Unified entry: automatically dispatches to the corresponding generator based on `ctx.inputType`.
 
-## 最小手工流水线示例
+## Minimal Manual Pipeline Example
 
 ```ts
 import { createCompilationCtx } from '@vureact/compiler-core';
@@ -60,7 +60,7 @@ const out = generate(ir, ctx.data);
 console.log(out.code);
 ```
 
-## 注意
+## Notes
 
-1. 低层 API 需要你自己管理上下文和落盘行为。
-2. 若不是做工具链扩展，优先用 `VuReact.execute()`。
+1. Low-level APIs require you to manage the context and disk-writing behavior yourself.
+2. Unless extending the toolchain, prefer using `VuReact.execute()`.

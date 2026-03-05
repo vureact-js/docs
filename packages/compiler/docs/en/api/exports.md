@@ -1,11 +1,11 @@
-﻿# 导出清单
+﻿# Export List
 
-本页用于快速检索 `@vureact/compiler-core` 当前对外导出。
+This page is used for quick lookup of the current public exports of `@vureact/compiler-core`.
 
-## 函数
+## Functions
 
 1. `defineConfig`
-2. `parseSFC`
+2. `parseSFC` (Single-File Component parsing)
 3. `parseOnlyScript`
 4. `parse`
 5. `transform`
@@ -13,14 +13,14 @@
 7. `generateOnlyScript`
 8. `generate`
 
-## 类
+## Classes
 
 1. `VuReact`
 2. `BaseCompiler`
 3. `FileCompiler`
 4. `Helper`
 
-## 配置/插件类型
+## Configuration/Plugin Types
 
 1. `CompilerOptions`
 2. `PluginRegister`
@@ -29,19 +29,21 @@
 5. `GeneratorOptions`
 6. `GeneratorResult`
 
-## 结果/单元类型
+## Result/Unit Types
 
 1. `ParseResult`
-2. `ReactIRDescriptor`
+2. `ReactIRDescriptor` (React Intermediate Representation Descriptor)
 3. `CompilationResult`
 4. `SFCCompilationResult`
 5. `ScriptCompilationResult`
-6. `CompilationUnit`
-7. `SFCUnit`
-8. `ScriptUnit`
-9. `AssetUnit`
+6. `StyleCompilationResult`
+7. `CompilationUnit`
+8. `SFCUnit`
+9. `ScriptUnit`
+10. `StyleUnit`
+11. `AssetUnit`
 
-## 缓存相关
+## Cache-related
 
 1. `CacheKey`
 2. `CacheMeta`
@@ -52,10 +54,10 @@
 7. `CacheCheckResult`
 8. `FileMeta`
 
-## 参考入口
+## Reference Entries
 
-- [配置 API](./config)
-- [编译器 API](./compiler)
-- [流水线 API](./pipeline)
-- [插件系统 API](./plugin-system)
-- [类型与结果](./types)
+- [Configuration API](./config)
+- [Compiler API](./compiler)
+- [Pipeline API](./pipeline)
+- [Plugin System API](./plugin-system)
+- [Types and Results](./types)

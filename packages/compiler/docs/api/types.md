@@ -11,17 +11,19 @@
 1. `CompilationResult`：统一结果联合类型。
 2. `SFCCompilationResult`：SFC 产物（jsx + css 信息）。
 3. `ScriptCompilationResult`：script-only 产物。
+4. `StyleCompilationResult`：style-only 产物。
 
 ## 编译单元类型
 
 1. `CompilationUnit`：通用单元。
 2. `SFCUnit`：SFC 单元。
 3. `ScriptUnit`：脚本单元。
-4. `AssetUnit`：资源单元。
+4. `StyleUnit`：样式单元。
+5. `AssetUnit`：资源单元。
 
 ## 缓存相关类型
 
-1. `CacheKey`：`SFC | SCRIPT | ASSET`。
+1. `CacheKey`：`SFC | SCRIPT | STYLE | ASSET`。
 2. `CacheMeta`、`FileCacheMeta`、`Vue2ReactCacheMeta`。
 3. `LoadedCache<T>`：缓存加载结构。
 4. `CacheCheckResult`：缓存命中检查结果。

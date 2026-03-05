@@ -1,17 +1,31 @@
-﻿# Context + Events + Slots Pipeline
+﻿# Advanced Features of Single-File Components (SFC)
 
-This chapter is an "Advanced Pipeline" example: concatenating `provide/inject`, `emits`, and `scoped slot` in one scenario.
+This chapter presents an "advanced link" example: chaining `provide/inject`, `emits`, and `scoped slots` in a single scenario. Note that VuReact actually supports far more features than those listed here.
 
-## 1. Scenario Objectives
+## Context + Events + Slots Link
 
-1. The upper-level page delivers the theme via `provide`.
-2. Child components read the theme via `inject` and trigger events.
-3. Parent components retrieve child component states through scoped slots for secondary rendering.
+### 1. Scenario Objectives
 
-## 2. Input Example (Vue)
+1. The upper-level page delivers a theme via `provide`.
+2. Child components read the theme through `inject` and trigger events.
+3. Parent components obtain child component state via scoped slots for secondary rendering.
+
+### 2. Input Example (Vue)
 
 ```vue
 <!-- ParentPage.vue -->
+<template>
+  <ThemeCard :level="level" @upgrade="onUpgrade">
+    <template #header>
+      <p>Header</p>
+    </template>
+
+    <template #footer="{ level, theme }">
+      <small>theme={{ theme }}, level={{ level }}</small>
+    </template>
+  </ThemeCard>
+</template>
+
 <script setup lang="ts">
 // @vr-name: ParentPage
 import { provide, ref } from 'vue';
@@ -24,22 +38,23 @@ const onUpgrade = (next: number) => {
   level.value = next;
 };
 </script>
-
-<template>
-  <ThemeCard :level="level" @upgrade="onUpgrade">
-    <template #header>
-      <p>Header</p>
-    </template>
-
-    <template #footer="{ level, theme }">
-      <small>theme={{ theme }}, level={{ level }}</small>
-    </template>
-  </ThemeCard>
-</template>
 ```
 
 ```vue
 <!-- ThemeCard.vue -->
+<template>
+  <section>
+    <slot name="header"></slot>
+
+    <p>Theme: {{ theme }}</p>
+    <p>Level: {{ props.level }}</p>
+
+    <button @click="upgrade">Upgrade</button>
+
+    <slot name="footer" :level="props.level" :theme="theme" />
+  </section>
+</template>
+
 <script setup lang="ts">
 // @vr-name: ThemeCard
 import { inject } from 'vue';
@@ -53,25 +68,12 @@ const upgrade = () => {
   emit('upgrade', props.level + 1);
 };
 </script>
-
-<template>
-  <section>
-    <slot name="header"></slot>
-
-    <p>Theme: {{ theme }}</p>
-    <p>Level: {{ props.level }}</p>
-
-    <button @click="upgrade">Upgrade</button>
-
-    <slot name="footer" :level="props.level" :theme="theme" />
-  </section>
-</template>
 ```
 
-## 3. Output Example (React, Simplified)
+### 3. Output Example (React, Simplified)
 
 ```tsx
-// ParentPage side: provide(...) is converted to Provider wrapper structure
+// ParentPage side: provide(...) is converted to a Provider wrapper structure
 return (
   <Provider name={'theme'} value={'ocean'}>
     <ThemeCard
@@ -97,12 +99,12 @@ const upgrade = useCallback(() => {
 }, [props.level, props.onUpgrade]);
 ```
 
-## 4. Key Notes
+### 4. Key Notes
 
 1. `provide/inject` is adapted at runtime, not via string replacement.
 2. It is still recommended to use stable strings for `emit` event names.
-3. In advanced scenarios, scoped slots still hold the semantics of "function-type props".
+3. In advanced scenarios, scoped slots still retain the semantics of "function-type props".
 
 ## Next Steps
 
-- See [SFC Style Processing Pipeline](./advanced-style-pipeline)3. In advanced scenarios, scoped slots still hold the semantics of "function-type props".
+- See [SFC Style Processing Pipeline](./advanced-style-pipeline)

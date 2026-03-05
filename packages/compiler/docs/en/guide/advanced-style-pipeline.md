@@ -1,4 +1,4 @@
-﻿# SFC Style Processing Pipeline
+﻿# In-component Styling
 
 This chapter demonstrates how the compiler processes style blocks in SFCs, including `scoped`, `module`, and `less/sass` support.
 
@@ -91,7 +91,7 @@ const Demo = memo(() => {
 });
 ```
 
-CSS file content `demo-<hash>.module.css`:
+CSS File Content `demo-<hash>.module.css`:
 
 ```css
 .container[data-css-abc123] {
@@ -108,7 +108,7 @@ CSS file content `demo-<hash>.module.css`:
   margin-top: 12px;
   border: 1px solid rgb(0, 118.4415584416, 228);
   border-radius: 4px;
-  padding: 6px 12px;
+  padding: 6px;
 }
 
 .button[data-css-abc123] {
@@ -127,28 +127,24 @@ CSS file content `demo-<hash>.module.css`:
   transition: all 0.3s;
 }
 
-.button[data-css-abc123] .btn-primary[data-css-abc123]:hover {
-  background-color: darken(rgb(177, 217.5194805195, 255), 10%);
-}
-
 .button[data-css-abc123] .btn-primary[data-css-abc123] {
   color: rgb(0, 91.9480519481, 177);
   border: 1px solid rgb(0, 118.4415584416, 228);
 }
 ```
 
-## 3. Key Points of Advanced Pipeline
+## 3. Advanced Pipeline Key Points
 
 1. `lang="scss"/"less"` will be preprocessed first before entering the CSS output phase.
-2. `module` will be mapped to module imports (`$style.xxx`), and the module name can be customized.
+2. `module` will be mapped to module imports (`$style.xxx`), with customizable module names.
 3. `scoped` generates a scope identifier and injects it into native nodes (a stable ID generated based on the file path).
-4. Complex `:class/:style` bindings will use runtime helpers (e.g., `dir.cls/dir.style`).
+4. Complex `:class/:style` bindings use runtime helpers (e.g., `dir.cls/dir.style`).
 
 ## 4. Current Boundaries
 
 1. Multiple `<style>` blocks: Currently, the first style block is used as the main path.
 2. `cssVars` (`v-bind()` CSS variables) are not in the scope of stable support.
-3. `scoped + @import` requires careful verification for global pollution.
+3. `scoped + @import` requires careful validation for global pollution.
 
 ## Next Steps
 

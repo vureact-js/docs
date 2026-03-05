@@ -1,15 +1,15 @@
-﻿# 插件系统 API
+﻿# Plugin System API
 
-## 总览
+## Overview
 
-`CompilerOptions.plugins` 支持 4 类扩展点：
+`CompilerOptions.plugins` supports 4 types of extension points:
 
-1. `parser`：解析阶段。
-2. `transformer`：转换阶段。
-3. `codegen`：代码生成阶段。
-4. 末阶段插件：`plugins` 下除前三类外的键，编译完成后执行。
+1. `parser`: Parsing phase.
+2. `transformer`: Transformation phase.
+3. `codegen`: Code generation phase.
+4. Post-compilation plugins: Keys under `plugins` excluding the first three types, executed after compilation is completed.
 
-## 基础类型
+## Basic Types
 
 ```ts
 interface PluginRegister<T> {
@@ -17,7 +17,7 @@ interface PluginRegister<T> {
 }
 ```
 
-## 配置示例
+## Configuration Example
 
 ```ts
 import { defineConfig } from '@vureact/compiler-core';
@@ -26,35 +26,35 @@ export default defineConfig({
   plugins: {
     parser: {
       collectParseMeta(result, ctx) {
-        // ParseResult 扩展
+        // ParseResult extension
       },
     },
     transformer: {
       inspectIR(result, ctx) {
-        // ReactIRDescriptor 扩展
+        // ReactIRDescriptor extension
       },
     },
     codegen: {
       patchOutput(result, ctx) {
-        // GeneratorResult 扩展
+        // GeneratorResult extension
       },
     },
     afterCompile(result, ctx) {
-      // CompilationResult 末阶段处理
+      // Post-processing of CompilationResult
     },
   },
 });
 ```
 
-## 执行顺序
+## Execution Order
 
 1. parser
 2. transformer
 3. codegen
-4. 末阶段插件
+4. Post-compilation plugins
 
-## 约束
+## Constraints
 
-1. 插件是同步执行模型。
-2. 插件异常会被捕获并打印，不会直接中断整个编译进程。
-3. 插件应避免依赖内部未文档化细节，尽量只依赖公开结构。
+1. Plugins follow a synchronous execution model.
+2. Plugin exceptions are caught and printed, and will not directly interrupt the entire compilation process.
+3. Plugins should avoid relying on undocumented internal details and should only depend on public structures as much as possible.

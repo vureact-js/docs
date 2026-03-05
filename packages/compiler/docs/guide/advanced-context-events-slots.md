@@ -1,14 +1,16 @@
-﻿# 上下文 + 事件 + 插槽链路
+﻿# SFC 高级特性
 
-本章是“高级链路”示例：在一个场景中串联 `provide/inject`、`emits`、`scoped slot`。
+本章是“高级链路”示例：在一个场景中串联 `provide/inject`、`emits`、`scoped slot`。注意，VuReact 实际支持的特性远不止列举的这些。
 
-## 1. 场景目标
+## 上下文 + 事件 + 插槽链路
+
+### 1. 场景目标
 
 1. 上层页面通过 `provide` 下发主题。
 2. 子组件通过 `inject` 读取主题并触发事件。
 3. 父组件通过作用域插槽拿到子组件状态做二次渲染。
 
-## 2. 输入示例（Vue）
+### 2. 输入示例（Vue）
 
 ```vue
 <!-- ParentPage.vue -->
@@ -68,7 +70,7 @@ const upgrade = () => {
 </script>
 ```
 
-## 3. 输出示例（React，简化）
+### 3. 输出示例（React，简化）
 
 ```tsx
 // ParentPage 侧：provide(...) 会转换为 Provider 包装结构
@@ -97,7 +99,7 @@ const upgrade = useCallback(() => {
 }, [props.level, props.onUpgrade]);
 ```
 
-## 4. 关键说明
+### 4. 关键说明
 
 1. `provide/inject` 走 runtime 适配，不是字符串替换。
 2. `emit` 事件名仍建议稳定字符串。

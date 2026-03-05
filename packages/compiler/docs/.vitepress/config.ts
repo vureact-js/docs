@@ -37,6 +37,14 @@ export default defineConfig({
             link: 'https://codesandbox.io/p/devbox/compiler-examples-n8yg68',
           },
           {
+            text: '指南',
+            items: [
+              { text: '能力矩阵', link: '/guide/capabilities-overview' },
+              { text: '转换指南', link: '/guide/conversion-overview' },
+              { text: 'API', link: '/api/' },
+            ],
+          },
+          {
             text: '生态系统',
             items: [
               {
@@ -75,11 +83,12 @@ export default defineConfig({
                 text: '进阶',
                 items: [
                   {
-                    text: '上下文 + 事件 + 插槽链路',
+                    text: 'SFC 高级特性',
                     link: '/guide/advanced-context-events-slots',
                   },
-                  { text: 'SFC 样式处理链路', link: '/guide/advanced-style-pipeline' },
-                  { text: '非 SFC 脚本文件链路', link: '/guide/advanced-script-only-pipeline' },
+                  { text: '组件内样式', link: '/guide/advanced-style-pipeline' },
+                  { text: '脚本文件', link: '/guide/advanced-script-only-pipeline' },
+                  { text: '样式文件', link: '/guide/advanced-style-only-pipeline' },
                 ],
               },
               {
@@ -91,7 +100,7 @@ export default defineConfig({
                 items: [
                   { text: '说明', link: '/guide/mind-control-readme' },
                   { text: '可控混写', link: '/guide/mind-control-controlled-mixed' },
-                  { text: '彻底暴走', link: '/guide/mind-control-full-ecosystem' },
+                  { text: '全生态释放', link: '/guide/mind-control-full-ecosystem' },
                 ],
               },
             ],
@@ -138,6 +147,7 @@ export default defineConfig({
               { text: '编译器 API', link: '/api/compiler' },
               { text: '流水线 API', link: '/api/pipeline' },
               { text: '插件系统 API', link: '/api/plugin-system' },
+              { text: '上下文 API', link: '/api/compiler-context' },
               { text: '类型与结果', link: '/api/types' },
               { text: '导出清单', link: '/api/exports' },
             ],
@@ -169,6 +179,14 @@ export default defineConfig({
           {
             text: 'Playground',
             link: 'https://codesandbox.io/p/devbox/compiler-examples-n8yg68',
+          },
+          {
+            text: 'Guide',
+            items: [
+              { text: 'Capability Matrix', link: '/en/guide/capabilities-overview' },
+              { text: 'Conversion Guide', link: '/en/guide/conversion-overview' },
+              { text: 'API', link: '/api/' },
+            ],
           },
           {
             text: 'Ecosystem',
@@ -218,17 +236,12 @@ export default defineConfig({
                 text: 'Advanced',
                 items: [
                   {
-                    text: 'Context + Events + Slots Pipeline',
-                    link: '/en/guide/advanced-context-events-slots',
+                    text: 'SFC Advanced Features',
+                    link: '/guide/advanced-context-events-slots',
                   },
-                  {
-                    text: 'SFC Style Processing Pipeline',
-                    link: '/en/guide/advanced-style-pipeline',
-                  },
-                  {
-                    text: 'Non-SFC Script File Pipeline',
-                    link: '/en/guide/advanced-script-only-pipeline',
-                  },
+                  { text: 'Styles in Components', link: '/en/guide/advanced-style-pipeline' },
+                  { text: 'Script Files', link: '/en/guide/advanced-script-only-pipeline' },
+                  { text: 'Style Files', link: '/en/guide/advanced-style-only-pipeline' },
                 ],
               },
               {
@@ -293,6 +306,7 @@ export default defineConfig({
               { text: 'Compiler API', link: '/en/api/compiler' },
               { text: 'Pipeline API', link: '/en/api/pipeline' },
               { text: 'Plugin System API', link: '/en/api/plugin-system' },
+              { text: 'Context API', link: '/en/api/compiler-context' },
               { text: 'Types & Results', link: '/en/api/types' },
               { text: 'Exports Manifest', link: '/en/api/exports' },
             ],

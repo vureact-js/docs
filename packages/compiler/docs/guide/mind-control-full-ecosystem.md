@@ -1,6 +1,4 @@
-﻿# 彻底暴走
-
-> ⚠️ 本章仅用于展示“能力边界”，不代表默认推荐写法。
+﻿# 全生态释放
 
 本章演示：在 Vue SFC 中直接接入 React 生态（`TanStack Query + Zustand`），用于覆盖“没有适配包时如何落地”的现实场景。
 
@@ -17,18 +15,27 @@
     <p v-if="query.isPending">loading...</p>
     <p v-else-if="query.isError">failed</p>
     <ul v-else>
-      <li v-for="item in query.data" :key="item.id">{{ item.title }}</li>
+      <!-- jsx map 语法 -->
+      {query.data.map(item =>
+        <li key={item.id}>{item.title}</li>
+      )}
     </ul>
   </section>
 </template>
 
 <script setup lang="ts">
 // @vr-name: MindControlChaos
+import { useEffect } from 'react';
 import { ref } from 'vue';
 import { useQuery } from '@tanstack/react-query';
 import { create } from 'zustand';
 
 const title = ref('Mind Control - Chaos Mode');
+
+// React API 直连
+useEffect(() => {
+  console.log('title', title.value)
+},[title.value]);
 
 // Zustand 直连
 const useCounterStore = create<{ count: number; inc: () => void }>((set) => ({
@@ -55,12 +62,14 @@ const query = useQuery({
 1. React Provider 体系（如 `QueryClientProvider`）要在应用入口正确接好。
 2. 生态库版本和 React 版本兼容性由项目自行管理。
 3. 一旦写法越界，问题通常不是编译器能自动修复的。
+4. 手动管理 React Hook 依赖（编译器处理范围内的 API 除外）。
 
 ## 3. 风险清单
 
 1. 心智模型切换失败会导致“看似能编译、实际不可维护”。
 2. Hook 依赖和状态来源混乱后，调试成本极高。
 3. 团队成员若不熟悉双栈，接手成本会显著上升。
+4. 专属于 VuReact 能运行，而 Vue 无法处理。
 
 ## 4. 建议的落地方式
 

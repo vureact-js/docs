@@ -36,10 +36,12 @@
 3. `CompilationResult`
 4. `SFCCompilationResult`
 5. `ScriptCompilationResult`
-6. `CompilationUnit`
-7. `SFCUnit`
-8. `ScriptUnit`
-9. `AssetUnit`
+6. `StyleCompilationResult`
+7. `CompilationUnit`
+8. `SFCUnit`
+9. `ScriptUnit`
+10. `StyleUnit`
+11. `AssetUnit`
 
 ## 缓存相关
 

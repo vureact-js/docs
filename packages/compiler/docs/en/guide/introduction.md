@@ -2,18 +2,18 @@
 
 ## What is VuReact
 
-VuReact (a blend of Vue + React, pronounced /vjuːˈriːækt/) is an intelligent compilation toolchain for migrating from Vue 3 to React, designed to deliver an efficient and reliable development experience for new projects and controlled progressive migration.
+VuReact (a portmanteau of Vue + React, pronounced /vjuːˈriːækt/) is an intelligent compilation toolchain for migrating from Vue 3 to React, designed to deliver an efficient and reliable development experience for new projects and controlled progressive migration.
 
-It does more than just syntax-level conversion—it deeply understands the semantics of Vue code and generates high-quality React code that adheres to React best practices.
+It not only performs syntax-level conversions but also deeply understands the semantics of Vue code, generating high-quality React code that adheres to React best practices.
 
-VuReact’s core goal is not to "unconditionally auto-convert arbitrary Vue code to React code", but to provide a **predictable, analyzable, and maintainable** upgrade path, enabling developers to smoothly advance cross-framework evolution under the premise of engineering control.
+The core goal of VuReact is not to "unconditionally convert arbitrary Vue code to React code automatically", but to provide a **predictable, analyzable, and maintainable** upgrade path, enabling developers to smoothly advance cross-framework evolution under the premise of engineering control.
 
-Furthermore, VuReact is not an isolated code rewriting tool. It consists of two synergistic components: **compile-time transformation** and **[runtime adaptation](https://runtime.vureact.top/en/)**:
+Furthermore, VuReact is not an isolated code rewriting tool. It consists of two synergistic components: **compile-time conversion** and **[runtime adaptation](https://runtime.vureact.top/)**:
 
-- **Compile-time**: Converts Vue code that complies with conventions into clean, maintainable React code, and automatically injects necessary runtime dependencies;
-- **Runtime**: Provides critical semantic adaptation and behavior compatibility layers to ensure converted components run stably in React environments.
+- **Compile-time**: Converts Vue code that complies with conventions into clear, maintainable React code, and automatically injects necessary runtime dependencies;
+- **Runtime**: Provides critical semantic adaptation and behavior compatibility layers to ensure converted components run stably in the React environment.
 
-These two components work closely together to balance conversion quality, runtime stability, and project implementation efficiency.
+These two parts work closely together to balance conversion quality, runtime stability, and project implementation efficiency.
 
 ## Problems Solved
 
@@ -21,24 +21,24 @@ VuReact aims to address the following typical development pain points:
 
 - **Tech Stack Migration**: Teams want to adopt the React ecosystem but have accumulated Vue syntax habits and component assets, expecting a smooth transition rather than a complete relearning process
 - **Progressive Refactoring**: Legacy Vue systems need to be gradually migrated to React, avoiding high-risk one-time rewrites and business interruptions
-- **Unified Development Experience**: Write React components using Vue’s reactive mental model while eliminating the hassle of manually managing dependencies and rendering optimizations
+- **Unified Development Experience**: Write React components using Vue's reactive mental model, while eliminating the tedious work of manually managing dependencies and rendering optimizations
 - **Ecosystem Expansion**: Enrich cross-framework development toolchains and provide standardized solutions for multi-tech-stack coexistence or migration
 
-The core challenge is: if the semantics of input code cannot be statically analyzed, the compiler cannot stably generate output that complies with React Hooks rules.
-Therefore, VuReact adopts a **"convention-first"** strategy: first define the scope of convertible code through clear compilation conventions, then implement efficient and reliable conversion within that scope.
+The core challenge is: if the semantics of the input code cannot be statically analyzed, the compiler cannot stably generate output that complies with React Hooks rules.
+Therefore, VuReact adopts a **"convention-first"** strategy: first define the scope of convertible code through clear compilation conventions, then achieve efficient and reliable conversion within that scope.
 
 ## Project Positioning
 
-In its current phase, VuReact is positioned as an **experimental toolchain**, prioritizing support for the following scenarios:
+In the current phase, VuReact prioritizes serving the following scenarios:
 
-- **New Project Development**: Write Vue-style components directly following VuReact conventions and output React code
+- **New Project Development**: Write Vue-style components directly according to VuReact conventions and output them as React code
 - **Modern Syntax Support**: Focus on Vue 3 Composition API and `<script setup>` syntax
-- **Controlled Progressive Migration**: Support gradual migration by directory/module, allowing Vue and React components to coexist in the same project
+- **Controlled Progressive Migration**: Support gradual migration by directory or module, allowing Vue and React components to coexist in the project
 
-It does not prioritize support for:
+It does not prioritize supporting:
 
-- **Complex Legacy Projects**: Historical codebases expecting "zero-modification one-click migration"
-- **Mixed Historical Syntax**: Projects containing a large amount of traditional Options API or non-standard patterns that are difficult to unify in the short term
+- **Complex Legacy Projects**: Historical codebases that expect "zero-modification one-click migration"
+- **Mixed Historical Syntax**: Projects containing a large number of traditional Options API or non-standard patterns that are difficult to unify in the short term
 
 ## What It Is / What It Is Not
 
@@ -46,36 +46,36 @@ It does not prioritize support for:
 
 - A compilation toolchain for converting Vue Single-File Components (SFCs) and `<script setup>` syntax to React code
 - A **constrained compilation platform** that ensures conversion quality and maintainability through clear conventions
-- An engineering-capable development tool that provides clear warnings or error prompts for non-compliant input and guides corrections
+- An engineering-capable development tool that can provide clear warnings or error prompts for non-conforming input and guide corrections
 
 **What It Is Not**:
 
 - A "universal migration magician" that can handle arbitrary historical code
-- An interpreter that provides runtime fallbacks for non-conventional syntax
-- A commercial product promising full migration of old projects without any adjustments
+- An interpreter that provides runtime fallback for non-conventional syntax
+- A commercial product that promises full migration of old projects without any adjustments
 
 ## Core Features
 
 VuReact offers the following key capabilities:
 
-- **Deep `<script setup>` Support**: Full support for Vue 3 Composition API, delivering a near-native development experience
-- **Complete TypeScript Support**: Preserves type definitions in Vue SFCs and automatically generates precise React component types
-- **Zero-Runtime Styling Solution**: Fully processes `scoped` and `module` styles (even Less and Sass) at compile time to generate production-ready static CSS
-- **Mixed Development Support**: Allows Vue and React code to coexist in the same project, supporting progressive migration
-- **Complete Engineering Compilation**: More than just code conversion—it’s a complete project compilation solution
-- **Intelligent Compilation**: Covers syntax conversion, template parsing, style processing, type preservation, and engineering optimization
+- **Deep `<script setup>` Support**: Full support for Vue 3 Composition API, providing a near-native development experience
+- **Complete TypeScript Support**: Preserve type definitions in Vue SFCs and automatically generate precise React component types
+- **Zero-Runtime Styling Solution**: Fully process `scoped` and `module` styles (even Less and Sass) at compile time, generating production-ready static CSS
+- **Mixed Development Support**: Allow Vue and React code to coexist in the same project, supporting progressive migration
+- **Complete Engineering Compilation**: More than just code conversion, it is a complete project compilation solution
+- **Intelligent Compilation**: Covering syntax conversion, template parsing, style processing, type preservation, and engineering optimization
 
 ### Intelligent Compilation Features
 
-- **Intelligent Syntax Conversion**: Intelligently maps Vue 3 Composition API to React Hooks
-- **Intelligent Template Parsing**: Intelligently converts Vue template directives to JSX
-- **Intelligent Style Processing**: Intelligently adapts Scoped CSS and other styles to React-runnable CSS output
-- **Intelligent Type Preservation**: Intelligently migrates TypeScript type systems
-- **Intelligent Engineering Optimization**: Intelligently handles dependency analysis, caching mechanisms, and code optimization
+- **Intelligent Syntax Conversion**: Intelligently map Vue 3 Composition API to React Hooks
+- **Intelligent Template Parsing**: Intelligently convert Vue template directives to JSX
+- **Intelligent Style Processing**: Intelligently adapt Scoped CSS etc. to React-runnable CSS output
+- **Intelligent Type Preservation**: Intelligently migrate TypeScript type systems
+- **Intelligent Engineering Optimization**: Intelligently handle dependency analysis, caching mechanisms, and code optimization
 
 ## Quick Start
 
-This section guides you through creating, compiling, and running your first VuReact project.
+This section will guide you through creating, compiling, and running your first VuReact project.
 
 ### Prerequisites
 
@@ -125,7 +125,7 @@ Create a simple counter component `src/components/Counter.vue`:
 </template>
 
 <script setup>
-// @vr-name: Counter (Note: This comment tells the compiler the generated component name)
+// @vr-name: Counter (Note: This comment tells the compiler the name of the generated component)
 import { ref } from 'vue';
 
 const count = ref(0);
@@ -139,7 +139,7 @@ const reset = () => {
 };
 </script>
 
-<style>
+<style scoped>
 .counter {
   padding: 20px;
   border: 1px solid #e0e0e0;
@@ -163,11 +163,11 @@ export default defineConfig({
   // Enable compilation cache
   cache: true,
 
-  // Exclude Vue entry file to avoid semantic conflicts
+  // Exclude Vue entry files to avoid semantic conflicts
   exclude: ['src/main.ts'],
 
   output: {
-    // Workspace directory for compilation artifacts and cache
+    // Workspace directory to store compilation output and cache
     workspace: '.vureact',
 
     // Output directory name
@@ -179,7 +179,7 @@ export default defineConfig({
 });
 ```
 
-In practice, except for `exclude` which needs to be specified manually, other options use default values from the sample configuration and require no additional setup.
+In fact, except for `exclude` which needs to be specified manually, other options use the default values in the sample configuration and require no additional configuration.
 
 ### 4. Run the Compilation
 
@@ -195,7 +195,7 @@ npx vureact watch
 
 ### 5. View the Output
 
-After compilation, you will see a structure similar to the following:
+After compilation is complete, you will see a structure similar to the following:
 
 ```txt
 my-vue-app/
@@ -204,7 +204,7 @@ my-vue-app/
 │   │   └── src/
 │   │       └── components/
 │   │           ├── Counter.tsx
-│   │           └── counter-[hash].css
+│   │           └── Counter-[hash].css
 │   └── cache/          # Compilation cache
 ├── src/                # Original Vue code
 └── vureact.config.js   # Configuration file
@@ -234,7 +234,7 @@ The generated `Counter.tsx` file will look roughly like this:
 ```tsx
 import { memo, useCallback } from 'react';
 import { useVRef } from '@vureact/runtime-core';
-import './counter.css';
+import './Counter-abc123.css';
 
 const Counter = memo(() => {
   const count = useVRef(0);
@@ -248,11 +248,15 @@ const Counter = memo(() => {
   }, [count.value]);
 
   return (
-    <div className="counter">
-      <h2>Counter Example</h2>
-      <p>Current count: {count.value}</p>
-      <button onClick={increment}>Increment</button>
-      <button onClick={reset}>Reset</button>
+    <div className="counter" data-css-abc123>
+      <h2 data-css-abc123>Counter Example</h2>
+      <p data-css-abc123>Current count: {count.value}</p>
+      <button onClick={increment} data-css-abc123>
+        Increment
+      </button>
+      <button onClick={reset} data-css-abc123>
+        Reset
+      </button>
     </div>
   );
 });
@@ -260,10 +264,10 @@ const Counter = memo(() => {
 export default Counter;
 ```
 
-The accompanying counter.css file generated:
+The accompanying counter.css file is generated as:
 
 ```css
-.counter {
+.counter[data-css-abc123] {
   padding: 20px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -287,10 +291,10 @@ The accompanying counter.css file generated:
 
 ### Annotations for Code Examples
 
-You can optionally add comments to the generated Counter.tsx example to explain conversion logic:
+You can optionally add comments to the generated Counter.tsx example to explain the conversion logic:
 
 ```tsx
-// Automatically converted from Vue's ref() to useVRef() provided by @vureact/runtime-core
+// Automatically converted from Vue's ref() to the adapted useVRef() provided by @vureact/runtime-core
 const count = useVRef(0);
 
 // Automatically converted from @click to onClick, with intelligent dependency analysis and useCallback optimization added
@@ -306,7 +310,7 @@ const increment = useCallback(() => {
 
 ### Version Compatibility
 
-- Vue 3
+- Vue 3.x
 - React 18+
 - Node.js 18+
 
@@ -314,14 +318,14 @@ const increment = useCallback(() => {
 
 In benchmark tests, the converted React application:
 
-- First screen load time: Comparable to native React applications
+- First-screen load time: Comparable to native React applications
 - Runtime memory usage: Increase < 5%
-- Build artifact size: Increase < 10%
+- Build output size: Increase < 10%
 
 ### Ecosystem Integration
 
-- **[Vue Core Adaptation Package](https://runtime.vureact.top/en/)**: Provides React versions of Vue's commonly used built-in components, core Composition API, etc.
-- **[Vue Router Adaptation Package](https://router.vureact.top/en/)**: Supports conversion from Vue Router 4.x -> React Router DOM 7.9+
+- **[Vue Core Adaptation Package](https://runtime.vureact.top/)**: Provides React versions of Vue's commonly used built-in components, core Composition API, etc.
+- **[Vue Router Adaptation Package](https://router.vureact.top/)**: Supports conversion from Vue Router 4.x to React Router DOM 7.9+
 - **State Management**: None yet
 - **UI Libraries**: None yet
 
@@ -329,7 +333,7 @@ If necessary, you can choose [☣️Mixed Writing](/guide/mind-control-readme) t
 
 ## Next Steps
 
-1. **Read the Philosophy**: Understand [VuReact's Design Philosophy](./philosophy) and grasp the core principle of "control first"
+1. **Read the Philosophy**: Learn about [VuReact's Design Philosophy](./philosophy) to understand the core principle of "control first"
 2. **Evaluate Applicability**: Check [Why Choose VuReact](./why) to confirm if the project is suitable for use
 3. **Try Examples**: Explore more conversion patterns through [Compilation Examples](./basic-tutorial)
-4. **Learn Specifications**: Before official use, be sure to read through the [Compilation Conventions](./specification)
+4. **Learn Specifications**: Before official use, be sure to read the [Compilation Conventions](./specification) thoroughly

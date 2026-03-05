@@ -176,6 +176,20 @@ $primary: #42b883;
 </style>
 ```
 
+单样式文件，同样支持 `less` 和 `sass`：
+
+```scss
+$primary: #42b883;
+
+.button {
+  background: $primary;
+
+  &:hover {
+    background: darken($primary, 10%);
+  }
+}
+```
+
 ### 输出处理
 
 预处理器代码会在编译时转换为标准 CSS，生成对应的 CSS 文件。

@@ -1,24 +1,25 @@
-﻿# API 总览
+﻿# API Overview
 
-本目录面向“直接调用 `@vureact/compiler-core` 编程接口”的开发者。
+This directory is intended for developers who "directly invoke the programming interfaces of `@vureact/compiler-core`".
 
-## 分层
+## Layering
 
-1. 稳定高层 API：`defineConfig`、`VuReact`、CLI 配置对应能力。
-2. 进阶 API：`BaseCompiler`、`FileCompiler`、插件分阶段钩子。
-3. 低层流水线 API：`parse*`、`transform`、`generate*`。
+1. Stable High-level APIs: `defineConfig`, `VuReact`, and capabilities corresponding to CLI configurations.
+2. Advanced APIs: `BaseCompiler`, `FileCompiler`, and plugin phased hooks.
+3. Low-level Pipeline APIs: `parse*`, `transform`, `generate*`.
 
-## 稳定性约定
+## Stability Conventions
 
-1. `Stable`：推荐直接使用。
-2. `Advanced`：可用，但需要理解编译链路。
-3. `Low-level`：适合框架/工具开发者。
+1. `Stable`: Recommended for direct use.
+2. `Advanced`: Usable, but requires understanding of the compilation chain.
+3. `Low-level`: Suitable for framework/tool developers.
 
-## 目录
+## Directory
 
-- [配置 API](./config)
-- [编译器 API](./compiler)
-- [流水线 API](./pipeline)
-- [插件系统 API](./plugin-system)
-- [类型与结果](./types)
-- [导出清单](./exports)
+- [Configuration API](./config)
+- [Compiler API](./compiler)
+- [Pipeline API](./pipeline)
+- [Plugin System API](./plugin-system)
+- [Compiler Context API](./compiler-context)
+- [Types and Results](./types)
+- [Export Manifest](./exports)
