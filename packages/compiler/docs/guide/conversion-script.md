@@ -42,7 +42,7 @@ const state = useVRef(1);
 const double = useComputed(() => state.value * 2);
 ```
 
-## 2. 宏：`defineProps` / `defineEmits` / `defineSlots`
+## 2. 宏 API
 
 ### `defineProps`（类型参数 + 运行时写法）
 
@@ -123,6 +123,120 @@ type ICompProps = {
 };
 ```
 
+### `defineOptions` 与组件名
+
+Vue 输入：
+
+```vue
+<script setup lang="ts">
+defineOptions({
+  name: 'MyComponent',
+  inheritAttrs: false,
+});
+</script>
+```
+
+React 输出（示意）：
+
+```tsx
+const MyComponent = () => {};
+// inheritAttrs 在 React 中无直接对应概念，会被忽略
+```
+
+说明：
+
+- 其他选项如 `inheritAttrs`、`customOptions` 等，在 React 中无直接对应概念，会被忽略或警告
+- 建议优先使用特殊注释 `// @vr-name: Xxxx` 定义组件名
+
+### `defineExpose` 与组件数据暴露
+
+Vue 输入：
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+
+defineProps<{ title: string }>();
+
+const count = ref(0);
+const increment = () => count.value++;
+
+defineExpose({
+  count,
+  increment,
+});
+</script>
+```
+
+React 输出（示意）：
+
+```tsx
+import { forwardRef, useImperativeHandle, memo } from 'react';
+import { useVRef } from '@vureact/runtime-core';
+
+type IComponentProps = { title: string };
+
+const Component = memo(
+  forwardRef<any, IComponentProps>((props, expose) => {
+    const count = useVRef(0);
+
+    const increment = () => count.value++;
+
+    useImperativeHandle(expose, () => ({
+      count,
+      increment,
+    }));
+
+    return <div>{count.value}</div>;
+  }),
+);
+
+export default Component;
+```
+
+说明：
+
+- `defineExpose` 转换为 `forwardRef` + `useImperativeHandle` 组合
+- 暴露的 ref 对象保持 `.value` 访问方式，与 Vue 保持一致
+- 父组件通过 `ref.current.count.value` 访问暴露的值
+- ref 类型使用 `any`，props 类型正常添加，开发者可手动添加具体类型
+
+父组件使用示例：
+
+```tsx
+// 父组件
+const Parent = () => {
+  const childRef = useRef<{ count: { value: number }; increment: () => void }>();
+
+  useEffect(() => {
+    // 访问子组件暴露的内容
+    console.log(childRef.current?.count.value); // 0
+    childRef.current?.increment(); // 调用子组件方法
+    console.log(childRef.current?.count.value); // 1
+  }, []);
+
+  return <Component ref={childRef} />;
+};
+```
+
+### `defineAsyncComponent` 与动态异步组件导入
+
+Vue 输入：
+
+```vue
+<script setup lang="ts">
+const AsyncPanel = defineAsyncComponent(() => import('./Panel.vue'));
+</script>
+```
+
+React 输出（示意）：
+
+```tsx
+const AsyncPanel = lazy(() => import('./Panel.jsx'));
+```
+
+约束：仅支持 ESM 动态 `import('...')` 形式。
+
 ## 3. `useTemplateRef`：`useRef` + `.current`
 
 Vue 输入：
@@ -172,26 +286,6 @@ useUpdated(() => {
   console.log(state.value);
 }, [state.value]);
 ```
-
-## 5. `defineAsyncComponent`：映射到 `React.lazy`
-
-Vue 输入：
-
-```vue
-<script setup lang="ts">
-const AsyncPanel = defineAsyncComponent(() => import('./Panel.vue'));
-</script>
-```
-
-React 输出（示意）：
-
-```tsx
-const AsyncPanel = lazy(() => import('./Panel.jsx'));
-```
-
-约束：仅支持 ESM 动态 `import('...')` 形式。
-
-## 6. `provide`/`inject`
 
 转换为 Provider 适配结构与 useInject 钩子
 

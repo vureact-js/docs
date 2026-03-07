@@ -148,4 +148,4 @@ CSS 文件内容 `demo-<hash>.module.css`:
 
 ## 下一步
 
-- 查看 [非 SFC 脚本文件链路](./advanced-script-only-pipeline)
+- 查看 [脚本文件](./advanced-script-only-pipeline)

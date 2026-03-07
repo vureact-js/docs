@@ -39,6 +39,11 @@ export default defineConfig({
           {
             text: '指南',
             items: [
+              { text: '介绍', link: '/guide/introduction' },
+              { text: '编译示例', link: '/guide/basic-tutorial' },
+              { text: '配置', link: '/guide/cli' },
+              { text: '常见问题', link: '/guide/faq' },
+              { text: '规范与最佳实践', link: '/guide/specification' },
               { text: '能力矩阵', link: '/guide/capabilities-overview' },
               { text: '转换指南', link: '/guide/conversion-overview' },
               { text: 'API', link: '/api/' },
@@ -183,6 +188,11 @@ export default defineConfig({
           {
             text: 'Guide',
             items: [
+              { text: 'Introduction', link: '/guide/introduction' },
+              { text: 'Compilation Examples', link: '/guide/basic-tutorial' },
+              { text: 'Configuration', link: '/guide/cli' },
+              { text: 'FAQ', link: '/guide/faq' },
+              { text: 'Specifications & Best Practices', link: '/guide/specification' },
               { text: 'Capability Matrix', link: '/en/guide/capabilities-overview' },
               { text: 'Conversion Guide', link: '/en/guide/conversion-overview' },
               { text: 'API', link: '/api/' },
