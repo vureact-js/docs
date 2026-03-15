@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.2.1] - 2026-03-15
+
+### Fixed
+
+- Fixed the conversion logic of `provide` and improved the property handling of the Provider component
+- Fixed event call conversion, uniformly making event calls optional (`onClick?.()`)
+- Fixed the event name generation logic in `v-model` conversion
+- Fixed the issue where `scopeId` should not be injected into `template` and `slot` exit nodes in templates
+- Fixed the type definition of slot scope parameters to support fields containing illegal identifiers such as hyphens
+- Fixed type imports such as `ReactNode` to ensure the `type` modifier is added correctly
+- Fixed the adaptation mapping of Vue Router history mode APIs
+- Fixed `emit` event name formatting to support the conversion of `update:xxx` -> `onUpdateXxx`
+- Fixed the processing order of `provide` to ensure original calls are collected and removed before renaming
+- Fixed the style scoped attribute injection logic to avoid incorrect injection on specific nodes
+
+---
+
+## [1.2.0] - 2026-03-06
+
+### Added
+
+- Added transformation processing for the `defineExpose` macro API
+- Added `React.forwardRef` wrapper for components when `defineExpose` is used
+- Optimized API adaptation processing
+- Optimized handling of component refs
+
+---
+
 ## v1.1.1 - 2026-03-05
 
 ### Fixes
