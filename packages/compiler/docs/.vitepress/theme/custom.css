@@ -71,29 +71,8 @@
   }
 }
 
-.VPNavBar {
-  .VPNavBarTitle {
-    display: inline-block;
-    transition: opacity 0.3s ease;
-    background-clip: text;
-    -webkit-background-clip: text;
-    animation: epsilon-psi-scan 8s cubic-bezier(0.19, 1, 0.22, 1) infinite;
-
-    .logo {
-      width: 24px;
-      height: 27px;
-    }
-
-    .title {
-      color: #d1d1e0 !important;
-      font-family: var(--vp-font-family-heading);
-      letter-spacing: 0.05em;
-    }
-  }
-}
-
 .VPHomeHero {
-  .VPButton {
+  .VPButton.brand {
     transition: opacity 0.3s ease;
     animation: epsilon-psi-scan 8s cubic-bezier(0.19, 1, 0.22, 1) infinite;
   }

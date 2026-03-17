@@ -7,15 +7,14 @@ export default defineConfig({
   title: 'VuReact',
 
   description:
-    'Next Vue 3 to React intelligent compilation tool. Controllable and progressive, convention-driven, designed for web cross-framework solutions.',
+    'Next Vue to React intelligent compilation toolchain that compiles Vue 3 into runnable React 18+ code',
 
   locales: {
     root: {
       label: '简体中文',
       lang: 'zh-CN',
       link: '/',
-      description:
-        '下一代 Vue 3 -> React 智能编译工具。可控渐进，约定驱动，适用于 Web 跨框架的方案。',
+      description: '下一代 Vue -> React 智能编译工具链，将 Vue 3 编译为可运行的 React 18+ 代码',
       themeConfig: {
         socialLinks: [
           {

@@ -13,7 +13,7 @@ const commonConfig = defineConfig({
   ],
 
   themeConfig: {
-    logo: '/logo.webp',
+    logo: '/logo.png',
     footer: {
       message: 'Released under the MIT License',
       copyright: 'Copyright © 2025-present Ryan John',
