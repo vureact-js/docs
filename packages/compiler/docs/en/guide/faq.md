@@ -1,16 +1,14 @@
 # Frequently Asked Questions (FAQ)
 
-## Installation and Configuration
-
-### Q1: What are the prerequisites for installing VuReact?
+## Q1: What are the prerequisites for installing VuReact?
 
 **A:** The following conditions must be met:
 
 - Node.js 18.0.0 or higher
-- An existing Vue 3 project (using `<script setup>` syntax)
+- An existing Vue 3.x project (using `<script setup>` syntax)
 - Package manager: npm, yarn, or pnpm
 
-### Q2: How to verify a successful installation?
+## Q2: How to verify if the installation is successful?
 
 **A:** Run the following command to check the version:
 
@@ -20,11 +18,11 @@ npx vureact --version
 
 If the version number is displayed, the installation is successful.
 
-### Q3: Where should the configuration file be placed?
+## Q3: Where should the configuration file be placed?
 
 **A:** The configuration file `vureact.config.js` should be placed in the project root directory, at the same level as `package.json`.
 
-### Q4: How to configure multiple environments (development/production)?
+## Q4: How to configure multiple environments (development/production)?
 
 **A:** Environment variables can be used in the configuration file:
 
@@ -32,12 +30,8 @@ If the version number is displayed, the installation is successful.
 import { defineConfig } from '@vureact/compiler-core';
 
 export default defineConfig({
-  input: 'src',
-  exclude: ['src/main.ts'],
   output: {
-    workspace: '.vureact',
-    outDir: process.env.NODE_ENV === 'production' ? 'dist' : 'dev',
-    bootstrapVite: true,
+    outDir: process.env.NODE_ENV === 'production' ? 'react-app' : 'dev',
   },
   format: {
     enabled: process.env.NODE_ENV === 'production',
@@ -45,21 +39,19 @@ export default defineConfig({
 });
 ```
 
-## Compilation and Transformation
+## Q5: Why is a Hook rule error reported during compilation?
 
-### Q1: Why do Hook rule errors occur during compilation?
-
-**A:** This is usually because Vue reactive APIs are not called at the top level. Please check:
+**A:** This usually happens because Vue reactive APIs are not called at the top level. Please check:
 
 ```vue
-<!-- ❌ Error example: called inside conditional statement -->
+<!-- ❌ Error example: Called inside a conditional statement -->
 <script setup>
 if (condition) {
-  const count = ref(0); // Error occurs here
+  const count = ref(0); // Error will occur here
 }
 </script>
 
-<!-- ✅ Correct example: called at the top level -->
+<!-- ✅ Correct example: Called at the top level -->
 <script setup>
 const count = ref(0); // Defined at the top level
 
@@ -69,7 +61,7 @@ if (condition) {
 </script>
 ```
 
-### Q2: How to exclude specific files or directories?
+## Q6: How to exclude specific files or directories?
 
 **A:** Use the `exclude` option in the configuration:
 
@@ -80,19 +72,18 @@ export default defineConfig({
     'src/main.ts', // Exclude entry file
     'src/legacy/**', // Exclude legacy code directory
     '**/*.test.vue', // Exclude test files
-    '**/node_modules/**', // Exclude node_modules
   ],
 });
 ```
 
-### Q3: Where are the compiled files located?
+## Q7: Where are the compiled files located?
 
 **A:** Default output directory structure:
 
 ```txt
 Project root/
-├── .vureact/              # Workspace
-│   ├── dist/              # Generated React code
+├── .vureact/             # Workspace
+│   ├── react-app/        # Generated React code
 │   │   ├── src/          # Transformed source code
 │   │   ├── package.json  # React project configuration
 │   │   └── vite.config.ts
@@ -100,7 +91,7 @@ Project root/
 └── src/                  # Original Vue code
 ```
 
-### Q4: How to clear the compilation cache?
+## Q8: How to clear the compilation cache?
 
 **A:** Delete the workspace directory:
 
@@ -112,23 +103,21 @@ rm -rf .vureact
 rm -rf .vureact/cache
 ```
 
-### Q5: How to skip processing non-CSS styles?
+## Q9: How to skip processing non-CSS styles?
 
 **A:** Add the compiler option `preprocessStyles: false` to output the corresponding style code and files as-is.
 
-### Q6: Why does scoped not work after disabling preprocessing for non-CSS styles?
+## Q10: Why does scoped not work after disabling preprocessing for non-CSS styles?
 
-**A:** Parsing of non-CSS code is not currently supported, so processing of scoped is ignored.
+**A:** Parsing of non-CSS code is not supported at present, so processing of scoped is ignored.
 
-## Migration Strategy
+## Q11: Why is it not recommended to migrate the entire project at once?
 
-### Q1: Why is it not recommended to migrate the entire project at once?
-
-**A:** Migrating everything at once carries high risks:
+**A:** Migrating all at once carries high risks:
 
 1. **Difficult to verify**: With a large amount of code converted simultaneously, it's hard to verify correctness one by one.
-2. **Difficult to rollback**: If issues arise, the entire migration needs to be reverted.
-3. **Team pressure**: Business development must be paused for the migration.
+2. **Difficult to rollback**: If problems occur, the entire migration needs to be reverted.
+3. **Team pressure**: Business development needs to be paused for migration.
 
 **Recommended approach:**
 
@@ -138,21 +127,21 @@ graph TD
     B --> C[Verify functional correctness]
     C --> D[Establish acceptance criteria]
     D --> E[Extend to adjacent modules]
-    E --> F[Complete entire project]
+    E --> F[Complete the entire project]
 ```
 
-### Q2: How to select a pilot module?
+## Q12: How to select a pilot module?
 
 **A:** Criteria for selecting a pilot module:
 
 1. **Clear boundaries**: Independent functionality with simple dependencies.
 2. **Moderate complexity**: Not the simplest nor the most complex.
 3. **Business value**: Has actual business value to validate real scenarios.
-4. **Team familiarity**: The development team is familiar with the module's business logic.
+4. **Team familiarity**: The development team is familiar with the business logic of the module.
 
-### Q3: How to continue business development during migration?
+## Q13: How to continue business development during migration?
 
-**A:** A branch strategy is recommended:
+**A:** It is recommended to adopt a branch strategy:
 
 ```txt
 Main branch (main)
@@ -165,156 +154,148 @@ Migration branch (migration)
     └── Sync from main branch regularly
 ```
 
-## Performance and Optimization
+## Q14: What is the performance of the generated React code?
 
-### Q1: What is the performance of the generated React code?
+**A:** The code generated by VuReact is optimized:
 
-**A:** Code generated by VuReact is optimized:
+1. **Low runtime overhead**: The adaptation layer is carefully designed with minimal performance overhead.
+2. **Compliant with React best practices**: Uses `memo`, `useCallback`, etc., for optimization.
+3. **Good code readability**: The generated code is clear and easy to read, facilitating subsequent optimization.
 
-1. **Low runtime overhead**: The adaptation layer is carefully designed with minimal performance cost.
-2. **Follows React best practices**: Uses `memo`, `useCallback`, etc., for optimization.
-3. **Good code readability**: Generated code is clear and easy to read, facilitating subsequent optimization.
-
-### Q2: How to reduce compilation time?
+## Q15: How to reduce compilation time?
 
 **A:** The following measures can be taken:
 
 1. **Use caching**: VuReact automatically caches compilation results.
 2. **Incremental compilation**: Only compile modified files.
 3. **Exclude unnecessary files**: Configure the `exclude` option appropriately.
-4. **Modular compilation**: Compile core modules first, then expand gradually.
+4. **Module-by-module compilation**: Compile core modules first, then expand gradually.
 
-## Error Handling
-
-### Q1: What to do when encountering compilation errors?
+## Q16: What to do when encountering compilation errors?
 
 **A:** Troubleshoot by following these steps:
 
-1. **Check error messages**: Error messages indicate the specific file and line number.
-2. **Verify code conventions**: Ensure code complies with [compilation conventions](./specification).
+1. **Check error messages**: Error messages will indicate the specific file and line number.
+2. **Check code conventions**: Ensure the code complies with the [compilation conventions](./specification).
 3. **Simplify reproduction**: Create a minimal reproducible code snippet.
 
-### Q2: How to report a bug?
+## Q17: How to report a Bug?
 
 **A:** Please provide the following information:
 
 1. **VuReact version**: `npx vureact --version`
 2. **Node.js version**: `node --version`
-3. **Reproduction steps**: Detailed description of how to reproduce the issue.
+3. **Reproduction steps**: Describe in detail how to reproduce the issue.
 4. **Error message**: Complete error stack trace.
 5. **Relevant code**: Minimal reproducible code snippet.
 
 Issues can be submitted at [GitHub Issues](https://github.com/vureact-js/core/issues).
 
-## Feature Support
+## Q18: Which Vue 3 features does VuReact support?
 
-### Q1: Which Vue 3 features does VuReact support?
-
-**A:** Full support for script setup, Composition API, defineProps/defineEmits/defineSlots, watch/computed, and other core features.
+**A:** Fully supports core features such as script setup, Composition API, defineProps/defineEmits/defineSlots, watch/computed, etc.
 
 For detailed support status, please refer to the [Capability Matrix](./capabilities-overview).
 
-### Q2: What is the performance of the converted code?
+## Q19: What is the performance after conversion?
 
-**A:** Through compile-time optimization and a zero-runtime styling solution, the converted React code is close to handwritten code by humans, and the application performance is comparable to native React applications.
+**A:** Through compile-time optimization and a zero-runtime style solution, the converted React code is close to handwritten code by humans, and the application performance is comparable to native React applications.
 
-### Q3: Is Vue 2 or Options API supported?
+## Q20: Does it support Vue 2 or Options API?
 
 **A:** The current version focuses on Vue 3 + Composition API and is not recommended for Vue 2 or Options API projects.
 
-### Q4: How to debug the converted code?
+## Q21: How to debug the converted code?
 
-**A:** Since it is a source-to-source conversion, you can run and debug the React application normally.
+**A:** Since it is a source-to-source level conversion, you can run and debug the React application normally.
 
-### Q5: Why are some Vue APIs not adapted?
+## Q22: Why are some Vue APIs not adapted?
 
 **A:** The compiler adopts a **targeted identification strategy** instead of fully covering all Vue APIs:
 
 1. Scope locking mechanism: The compiler maintains a **clear scope of API adaptation** ([Capability Matrix Overview](/guide/capabilities-overview)) and only processes Vue APIs that are known and have implemented adaptations.
 
 2. Selective adaptation principles:
-   - **Core API priority**: Prioritize adapting Vue 3's core reactive APIs and lifecycle hooks.
-   - **High-frequency usage priority**: Determine adaptation priority based on actual project usage frequency.
-   - **Semantic convertibility priority**: Only adapt APIs whose semantics can be directly mapped to React concepts.
+   - **Core API first**: Prioritize adapting Vue 3's core reactive APIs and lifecycle hooks.
+   - **High-frequency usage first**: Determine adaptation priorities based on actual project usage frequency.
+   - **Semantically convertible first**: Only adapt APIs whose semantics can be directly mapped to React concepts.
 
 3. Handling of unprocessed code:
-   - **Preserved as-is**: Calls to Vue APIs outside the adaptation scope are retained in the output code without modification.
+   - **Retained as-is**: Calls to Vue APIs outside the adaptation scope are retained in the output code as-is.
    - **Runtime compatibility**: Some unprocessed APIs may still work in the React runtime environment (e.g., pure utility functions).
-   - **Compile-time warnings**: For obviously incompatible APIs, the compiler issues warning prompts.
+   - **Compile-time warnings**: For obviously incompatible APIs, the compiler will issue warning prompts.
 
 4. Extensibility design:
    - **Plugin mechanism**: Support extending the API adaptation scope through plugins.
    - **Progressive adaptation**: New API adaptations can be added gradually according to project needs.
 
-### Q6: What are common types of unprocessed APIs?
+## Q23: What are the common types of unprocessed APIs?
 
 **A:** Common types of unprocessed APIs include:
 
-| Type                           | Examples                      | Reason                            | Recommendation                                              |
-| ------------------------------ | ----------------------------- | --------------------------------- | ----------------------------------------------------------- |
-| **Vue 2 Legacy APIs**          | `$set`, `$delete` ...         | Deprecated in Vue 3               | Migrate to Vue 3 reactive APIs                              |
-| **Vue-specific Concepts**      | `$parent`, `$children` ...    | No equivalent in React            | Use Context or Props instead                                |
-| **Complex Reactive Utilities** | `customRef`, `markRaw` ...    | High implementation complexity    | Implement manually or use React native solutions            |
-| **Ecosystem-specific**         | `$store` (Vuex), `$pinia` ... | Requires specific runtime support | Use corresponding React state management libraries directly |
+| Type                           | Example                       | Reason                             | Suggestion                                                  |
+| ------------------------------ | ----------------------------- | ---------------------------------- | ----------------------------------------------------------- |
+| **Vue 2 Legacy APIs**          | `$set`, `$delete` ...         | Deprecated in Vue 3                | Migrate to Vue 3 reactive APIs                              |
+| **Vue-specific Concepts**      | `$parent`, `$children` ...    | No corresponding concepts in React | Use Context or Props instead                                |
+| **Complex Reactive Utilities** | `customRef`, `markRaw` ...    | High implementation complexity     | Implement manually or use React native solutions            |
+| **Ecosystem-specific**         | `$store` (Vuex), `$pinia` ... | Requires specific runtime support  | Use corresponding React state management libraries directly |
 
-### Q7: What handling strategies are recommended for unprocessed APIs?
+## Q24: What are the recommended handling strategies for unprocessed APIs?
 
 **A:** The following strategies are recommended:
 
 1. **Code review**: Focus on unprocessed Vue API calls during migration.
 2. **Progressive migration**: Migrate core logic first, then handle edge cases gradually.
 3. **Alternative solutions**: Find corresponding solutions in the React ecosystem for unprocessed APIs.
-4. **Contribute extensions**: If specific API adaptation is needed, extend the compiler's capabilities through the plugin mechanism.
+4. **Contribute extensions**: If there is a need for specific API adaptation, extend the compiler capabilities through the plugin mechanism.
 
-### Q8: Why do the generated React component names differ from those in Vue?
+## Q25: Why is the generated React component name inconsistent with that in Vue?
 
-**A:** Use the special comment `// @vr-name: ComponentName` or the `name` option in `defineOptions` to explicitly tell the compiler the component name.
+**A:** Use the special comment `// @vr-name: ComponentName` or the `name` option of `defineOptions` to explicitly tell the compiler the component name.
 
-### Q9: How to handle Vue Router?
+## Q26: How to handle Vue Router?
 
-**A:** Router conversion provides the [VuReact Router](https://router.vureact.top/en/guide/introduction.html) adaptation package, which the compiler will process, but entry configuration and other parts need manual fine-tuning because:
+**A:** Router conversion provides the [VuReact Router](https://router.vureact.top/guide/introduction.html) adaptation package, which will be processed by the compiler, but entry configuration and other parts need manual fine-tuning because:
 
-1. **Project context**: Router configuration involves project structure.
-2. **Syntax differences**: Component usage in router configuration needs to be rewritten using JSX Element syntax.
+1. **Project context**: Routing configuration involves project structure.
+2. **Syntax differences**: The use of components in routing configuration needs to be changed to JSX Element syntax.
 
 For detailed migration guidelines, please refer to [Router Adaptation](./router-adaptation).
 
-### Q10: Is TypeScript supported?
+## Q27: Does it support TypeScript?
 
-**A:** ✅ TypeScript is fully supported. VuReact will:
+**A:** ✅ Fully supports TypeScript. VuReact will:
 
 1. Preserve original type definitions.
 2. Generate correct TypeScript types.
 3. Output `tsconfig.json` configuration.
 
-### Q11: How to handle third-party Vue libraries?
+## Q28: How to handle third-party Vue libraries?
 
-**A:** Handle on a case-by-case basis:
+**A:** Handle in different cases:
 
 1. **Pure utility libraries**: Can usually be used directly.
 2. **UI component libraries**: Need to find corresponding React versions or alternatives.
-3. **Vue-specific libraries**: Need to be rewritten or replaced with alternatives.
+3. **Vue-specific libraries**: Need to be rewritten or find alternatives.
 
 It is recommended to evaluate alternatives for third-party libraries before migration.
 
-## Advanced Questions
+## Q29: Can custom conversion rules be defined?
 
-### Q1: Can custom transformation rules be defined?
-
-**A:** ✅ Customization is supported through the plugin system:
+**A:** ✅ Supported through the plugin system:
 
 ```javascript
 export default defineConfig({
   plugins: {
-    // Parser phase plugins
+    // Parser phase plugin
     parser: {
       // Custom parsing logic
     },
-    // Transformer phase plugins
+    // Transformer phase plugin
     transformer: {
       // Custom transformation logic
     },
-    // Code generation phase plugins
+    // Code generation phase plugin
     codegen: {
       // Custom generation logic
     },
@@ -322,33 +303,38 @@ export default defineConfig({
 });
 ```
 
-### Q2: How to maintain the project after migration is completed?
+## Q30: What to do if ESLint / TypeScript reports errors?
 
-**A:** After the migration is completed:
+**A:** Resolve by following these steps:
 
-1. **Maintain it like a regular React project**: You can use all React ecosystem tools (such as React DevTools, ESLint React plugins, React Testing Library, etc.), without relying on VuReact-related compilation tools.
-2. **Continuous optimization is possible**: The generated React code remains readable and can be manually optimized based on React best practices (e.g., adjusting component splitting, optimizing Hooks usage, adding performance caching strategies, etc.).
-3. **Modification rollback is allowed**: If there are minor issues with the generated code, you can directly edit the React code, but note that:
-   - If you need to re-run VuReact compilation later, manually modified code will be overwritten. It is recommended to exclude the corresponding files from the compilation process after modification (via the `exclude` configuration).
-   - For important modifications, it is advisable to synchronize them back to the original Vue code (if dual-end code needs to be retained), or completely disable the VuReact compilation process.
-4. **VuReact can be upgraded**: If recompilation is needed later (e.g., the original Vue code has iterations), upgrading VuReact to the latest version can get better conversion logic, more API adaptation support, and reduce the cost of manual adjustment.
-5. **Version management recommendations**:
+1. **Error cause**: The adaptation Hooks provided by `@vureact/runtime-core` may be incompatible with ESLint's existing React Hook rules. Note that the internal implementation of these Hooks fully complies with React specifications and does not affect actual operation.
 
-   ```txt
-   # Recommended git commit specification
-   - feat(react): Optimize Hooks usage of XX component
-   - fix(react): Fix event binding logic of XX component
-   - chore(vureact): Upgrade VuReact to vx.x.x and recompile
-   ```
+2. **Solutions**:
+   - **Ignore errors**: These ESLint warnings can be safely ignored.
+   - **Disable detection**: Turn off relevant rules (e.g., `react-hooks/exhaustive-deps`) in the ESLint configuration.
+   - **TypeScript compilation**: If running the `tsc -b` command reports errors, it is recommended to use other build commands (e.g., `vite build`).
 
-### Q3: Are there community or support channels?
+## Q31: How to maintain after migration is completed?
 
-**A:** Yes, you can get support through the following channels:
+**A:** After migration is completed:
+
+1. **Maintain like a normal React project**: All React ecosystem tools can be used.
+2. **Continuous optimization**: The generated code can be manually optimized.
+3. **Rollback modifications**: If needed, the generated React code can be edited directly, but care should be taken to avoid overwriting by subsequent compilations.
+4. **Upgrade VuReact**: New versions may provide better conversion effects.
+
+## Q32: What to do if an error occurs when accessing routes?
+
+**A:** For common issues related to route conversion, please refer to the [FAQ section of the Router Adaptation chapter](/en/guide/router-adaptation#FAQ).
+
+## Q33: Is there a community or support channel?
+
+**A:** Yes, support can be obtained through the following channels:
 
 1. **GitHub Discussions**: Technical discussions and Q&A [GitHub Discussions](https://github.com/vureact-js/core/discussions)
 2. **GitHub**: Bug reports and feature requests [GitHub Issues](https://github.com/vureact-js/core/issues)
-3. **Documentation**: Detailed [Usage Guide](/guide/introduction)
-4. **Example projects**: Refer to [Sample Code](https://gitee.com/vureact-js/core/tree/master/packages/compiler-core/examples)
+3. **Documentation**: Detailed [User Guide](/en/guide/introduction)
+4. **Example projects**: Refer to [sample code](https://gitee.com/vureact-js/core/tree/master/packages/compiler-core/examples)
 5. **Sponsorship**: Support the author! [Afadian](https://afdian.com/a/vureact-js/plan)
 
 ---

@@ -1,16 +1,14 @@
 # 常见问题 (FAQ)
 
-## 安装与配置
-
-### Q1: 安装 VuReact 需要什么前提条件？
+## Q1: 安装 VuReact 需要什么前提条件？
 
 **A:** 需要满足以下条件：
 
 - Node.js 18.0.0 或更高版本
-- 现有的 Vue 3 项目（使用 `<script setup>` 语法）
+- 现有的 Vue 3.x 项目（使用 `<script setup>` 语法）
 - 包管理器：npm、yarn 或 pnpm
 
-### Q2: 如何验证安装是否成功？
+## Q2: 如何验证安装是否成功？
 
 **A:** 运行以下命令检查版本：
 
@@ -20,11 +18,11 @@ npx vureact --version
 
 如果显示版本号，说明安装成功。
 
-### Q3: 配置文件应该放在哪里？
+## Q3: 配置文件应该放在哪里？
 
 **A:** 配置文件 `vureact.config.js` 应该放在项目根目录，与 `package.json` 同级。
 
-### Q4: 如何配置多环境（开发/生产）？
+## Q4: 如何配置多环境（开发/生产）？
 
 **A:** 可以在配置文件中使用环境变量：
 
@@ -32,12 +30,8 @@ npx vureact --version
 import { defineConfig } from '@vureact/compiler-core';
 
 export default defineConfig({
-  input: 'src',
-  exclude: ['src/main.ts'],
   output: {
-    workspace: '.vureact',
-    outDir: process.env.NODE_ENV === 'production' ? 'dist' : 'dev',
-    bootstrapVite: true,
+    outDir: process.env.NODE_ENV === 'production' ? 'react-app' : 'dev',
   },
   format: {
     enabled: process.env.NODE_ENV === 'production',
@@ -45,9 +39,7 @@ export default defineConfig({
 });
 ```
 
-## 编译与转换
-
-### Q1: 为什么编译时报告 Hook 规则错误？
+## Q5: 为什么编译时报告 Hook 规则错误？
 
 **A:** 这通常是因为 Vue 响应式 API 没有在顶层调用。请检查：
 
@@ -69,7 +61,7 @@ if (condition) {
 </script>
 ```
 
-### Q2: 如何排除特定文件或目录？
+## Q6: 如何排除特定文件或目录？
 
 **A:** 在配置中使用 `exclude` 选项：
 
@@ -80,19 +72,18 @@ export default defineConfig({
     'src/main.ts', // 排除入口文件
     'src/legacy/**', // 排除旧代码目录
     '**/*.test.vue', // 排除测试文件
-    '**/node_modules/**', // 排除 node_modules
   ],
 });
 ```
 
-### Q3: 编译后的文件在哪里？
+## Q7: 编译后的文件在哪里？
 
 **A:** 默认输出目录结构：
 
 ```txt
 项目根目录/
-├── .vureact/              # 工作区
-│   ├── dist/              # 生成的 React 代码
+├── .vureact/             # 工作区
+│   ├── react-app/        # 生成的 React 代码
 │   │   ├── src/          # 转换后的源代码
 │   │   ├── package.json  # React 项目配置
 │   │   └── vite.config.ts
@@ -100,7 +91,7 @@ export default defineConfig({
 └── src/                  # 原始 Vue 代码
 ```
 
-### Q4: 如何清理编译缓存？
+## Q8: 如何清理编译缓存？
 
 **A:** 删除工作区目录：
 
@@ -112,17 +103,15 @@ rm -rf .vureact
 rm -rf .vureact/cache
 ```
 
-### Q5: 如何不处理非 CSS 样式？
+## Q9: 如何不处理非 CSS 样式？
 
 **A:** 添加编译器选项 `preprocessStyles: false`，原封不动的输出对应样式代码和文件
 
-### Q6: 对非 CSS 样式关闭了预处理，为什么 scoped 没效果？
+## Q10: 对非 CSS 样式关闭了预处理，为什么 scoped 没效果？
 
 **A:** 目前暂不支持解析非 CSS 代码，因此忽略对 scoped 的处理
 
-## 迁移策略
-
-### Q1: 为什么不建议一次性全仓迁移？
+## Q11: 为什么不建议一次性全仓迁移？
 
 **A:** 一次性迁移风险太高：
 
@@ -141,7 +130,7 @@ graph TD
     E --> F[完成整个项目]
 ```
 
-### Q2: 如何选择试点模块？
+## Q12: 如何选择试点模块？
 
 **A:** 选择试点模块的标准：
 
@@ -150,7 +139,7 @@ graph TD
 3. **业务价值**：有实际业务价值，能验证真实场景
 4. **团队熟悉**：开发团队熟悉该模块的业务逻辑
 
-### Q3: 迁移过程中如何继续业务开发？
+## Q13: 迁移过程中如何继续业务开发？
 
 **A:** 建议采用分支策略：
 
@@ -165,9 +154,7 @@ graph TD
     └── 定期从主分支同步
 ```
 
-## 性能与优化
-
-### Q1: 生成的 React 代码性能如何？
+## Q14: 生成的 React 代码性能如何？
 
 **A:** VuReact 生成的代码经过优化：
 
@@ -175,7 +162,7 @@ graph TD
 2. **符合 React 最佳实践**：使用 `memo`、`useCallback` 等优化
 3. **代码可读性好**：生成的代码清晰易读，便于后续优化
 
-### Q2: 如何减少编译时间？
+## Q15: 如何减少编译时间？
 
 **A:** 可以采取以下措施：
 
@@ -184,9 +171,7 @@ graph TD
 3. **排除不需要的文件**：合理配置 `exclude` 选项
 4. **分模块编译**：先编译核心模块，再逐步扩展
 
-## 错误处理
-
-### Q1: 遇到编译错误怎么办？
+## Q16: 遇到编译错误怎么办？
 
 **A:** 按以下步骤排查：
 
@@ -194,7 +179,7 @@ graph TD
 2. **检查代码约定**：确保代码符合 [编译约定](./specification)
 3. **简化复现**：创建一个最小复现代码片段
 
-### Q2: 如何报告 Bug？
+## Q17: 如何报告 Bug？
 
 **A:** 请提供以下信息：
 
@@ -206,27 +191,25 @@ graph TD
 
 可以在 [GitHub Issues](https://github.com/vureact-js/core/issues) 提交问题。
 
-## 功能支持
-
-### Q1: VuReact 支持哪些 Vue 3 特性？
+## Q18: VuReact 支持哪些 Vue 3 特性？
 
 **A:** 完整支持 script setup、Composition API、defineProps/defineEmits/defineSlots、watch/computed 等核心特性。
 
 详细支持情况请查看 [能力矩阵](./capabilities-overview)。
 
-### Q2: 转换后的性能如何？
+## Q19: 转换后的性能如何？
 
 **A:** 通过编译时优化和零运行时样式方案，转换后的 React 代码接近人类手写，且应用性能与原生 React 应用相当。
 
-### Q3: 是否支持 Vue 2 或 Options API？
+## Q20: 是否支持 Vue 2 或 Options API？
 
 **A:** 当前版本专注于 Vue 3 + Composition API，不推荐用于 Vue 2 或 Options API 项目。
 
-### Q4: 如何调试转换后的代码？
+## Q21: 如何调试转换后的代码？
 
 **A:** 因为是源码到源码级别的转换，因此正常运行 React 应用和调试即可。
 
-### Q5: 为什么有些 Vue API 没有适配处理？
+## Q22: 为什么有些 Vue API 没有适配处理？
 
 **A:** 编译器采用**针对性识别策略**，而非全量覆盖所有 Vue API：
 
@@ -246,7 +229,7 @@ graph TD
    - **插件机制**：支持通过插件扩展 API 适配范围
    - **渐进适配**：可根据项目需求逐步增加新的 API 适配
 
-### Q6: 有哪些常见的未处理 API 类型？
+## Q23: 有哪些常见的未处理 API 类型？
 
 **A:** 常见未处理 API 类型包括：
 
@@ -257,7 +240,7 @@ graph TD
 | **复杂响应式工具** | `customRef`, `markRaw` ...    | 实现复杂度高     | 手动实现或使用 React 原生方案   |
 | **生态系统特定**   | `$store` (Vuex), `$pinia` ... | 需特定运行时支持 | 直接使用对应的 React 状态管理库 |
 
-### Q7: 对于未处理的 API 有什么处理策略建议？
+## Q24: 对于未处理的 API 有什么处理策略建议？
 
 **A:** 建议采取以下策略：
 
@@ -266,11 +249,11 @@ graph TD
 3. **替代方案**：为未处理的 API 寻找 React 生态中的对应解决方案
 4. **贡献扩展**：如有特定 API 适配需求，可通过插件机制扩展编译器能力
 
-### Q8: 为什么生成的 React 组件名与 Vue 中的不一致？
+## Q25: 为什么生成的 React 组件名与 Vue 中的不一致？
 
 **A:** 使用特殊注释 `// @vr-name: 组件名` 或 `defineOptions` 的 `name` 选项，显式告诉编译器组件名
 
-### Q9: 如何处理 Vue 路由？
+## Q26: 如何处理 Vue 路由？
 
 **A:** 路由转换提供了 [VuReact Router](https://router.vureact.top/guide/introduction.html) 适配包，编译器会处理，但入口配置等需要手动微调，因为：
 
@@ -279,7 +262,7 @@ graph TD
 
 具体迁移指南请查看 [路由适配](./router-adaptation)。
 
-### Q10: 支持 TypeScript 吗？
+## Q27: 支持 TypeScript 吗？
 
 **A:** ✅ 完全支持 TypeScript。VuReact 会：
 
@@ -287,7 +270,7 @@ graph TD
 2. 生成正确的 TypeScript 类型
 3. 输出 `tsconfig.json` 配置
 
-### Q11: 如何处理第三方 Vue 库？
+## Q28: 如何处理第三方 Vue 库？
 
 **A:** 分情况处理：
 
@@ -297,9 +280,7 @@ graph TD
 
 建议在迁移前评估第三方库的替代方案。
 
-## 进阶问题
-
-### Q1: 可以自定义转换规则吗？
+## Q29: 可以自定义转换规则吗？
 
 **A:** ✅ 支持通过插件系统自定义：
 
@@ -322,7 +303,18 @@ export default defineConfig({
 });
 ```
 
-### Q2: 迁移完成后如何维护？
+## Q30: ESLint / TypeScript 报错怎么办？
+
+**A:** 按以下步骤解决：
+
+1. **报错原因**：`@vureact/runtime-core` 提供的适配 Hooks 可能与 ESLint 现有的 React Hook 规则不兼容。请注意，这些 Hooks 的内部实现完全遵循 React 规范，不影响实际运行。
+
+2. **解决方案**：
+   - **忽略报错**：可以安全地忽略这些 ESLint 警告。
+   - **关闭检测**：在 ESLint 配置中关闭相关规则（如 `react-hooks/exhaustive-deps`）。
+   - **TypeScript 编译**：如果运行 `tsc -b` 命令报错，建议改用其他构建命令（如 `vite build`）。
+
+## Q31: 迁移完成后如何维护？
 
 **A:** 迁移完成后：
 
@@ -331,7 +323,11 @@ export default defineConfig({
 3. **可以回退修改**：如果需要，可以直接编辑生成的 React 代码，但需避免被后续编译覆盖
 4. **可以升级 VuReact**：新版本可能会提供更好的转换效果
 
-### Q3: 有社区或支持渠道吗？
+## Q32: 访问路由导致报错怎么办？
+
+**A:** 关于路由转换的常见问题，请参考 [路由适配章节的 FAQ](/guide/router-adaptation#常见问题)。
+
+## Q33: 有社区或支持渠道吗？
 
 **A:** 是的，可以通过以下渠道获取支持：
 

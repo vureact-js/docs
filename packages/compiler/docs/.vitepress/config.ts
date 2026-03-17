@@ -39,7 +39,7 @@ export default defineConfig({
             text: '指南',
             items: [
               { text: '介绍', link: '/guide/introduction' },
-              { text: '编译示例', link: '/guide/basic-tutorial' },
+              { text: '教程与实战', link: '/guide/basic-tutorial' },
               { text: '配置', link: '/guide/cli' },
               { text: '常见问题', link: '/guide/faq' },
               { text: '规范与最佳实践', link: '/guide/specification' },
@@ -72,32 +72,24 @@ export default defineConfig({
             ],
           },
           {
-            text: '编译示例',
+            text: '教程与实战',
             items: [
               {
-                text: '入门',
+                text: '基础教程',
                 items: [
                   { text: '计数器组件', link: '/guide/basic-tutorial' },
                   { text: '模板基础', link: '/guide/beginner-template-stable' },
                   { text: '组件通信', link: '/guide/beginner-component-communication' },
                   { text: '组件引用', link: '/guide/beginner-component-references' },
-                ],
-              },
-              {
-                text: '进阶',
-                items: [
-                  {
-                    text: 'SFC 高级特性',
-                    link: '/guide/advanced-context-events-slots',
-                  },
+                  { text: 'SFC高级特性', link: '/guide/advanced-context-events-slots' },
                   { text: '组件内样式', link: '/guide/advanced-style-pipeline' },
-                  { text: '脚本文件', link: '/guide/advanced-script-only-pipeline' },
-                  { text: '样式文件', link: '/guide/advanced-style-only-pipeline' },
+                  { text: '脚本文件处理', link: '/guide/advanced-script-only-pipeline' },
+                  { text: '样式文件处理', link: '/guide/advanced-style-only-pipeline' },
                 ],
               },
               {
-                text: '掌握',
-                items: [{ text: '演练场', link: '/guide/playground' }],
+                text: '项目实战',
+                items: [{ text: 'CRM管理后台', link: '/guide/crm-admin-backend' }],
               },
               {
                 text: '心灵控制',
@@ -114,6 +106,7 @@ export default defineConfig({
             items: [
               { text: 'CLI', link: '/guide/cli' },
               { text: '插件', link: '/guide/plugin' },
+              { text: '路由适配', link: '/guide/router-adaptation' },
             ],
           },
           { text: '常见问题', link: '/guide/faq' },
@@ -122,7 +115,6 @@ export default defineConfig({
             items: [
               { text: '编译约定', link: '/guide/specification' },
               { text: '最佳实践', link: '/guide/best-practices' },
-              { text: '路由适配', link: '/guide/router-adaptation' },
             ],
           },
           {
@@ -188,7 +180,7 @@ export default defineConfig({
             text: 'Guide',
             items: [
               { text: 'Introduction', link: '/guide/introduction' },
-              { text: 'Compilation Examples', link: '/guide/basic-tutorial' },
+              { text: 'Tuts & Practices', link: '/guide/basic-tutorial' },
               { text: 'Configuration', link: '/guide/cli' },
               { text: 'FAQ', link: '/guide/faq' },
               { text: 'Specifications & Best Practices', link: '/guide/specification' },
@@ -221,10 +213,10 @@ export default defineConfig({
             ],
           },
           {
-            text: 'Compilation Examples',
+            text: 'Tuts & Practices',
             items: [
               {
-                text: 'Beginner',
+                text: 'Basic Tutorials',
                 items: [
                   { text: 'Counter Component', link: '/en/guide/basic-tutorial' },
                   {
@@ -239,11 +231,6 @@ export default defineConfig({
                     text: 'Component References',
                     link: '/en/guide/beginner-component-references',
                   },
-                ],
-              },
-              {
-                text: 'Advanced',
-                items: [
                   {
                     text: 'SFC Advanced Features',
                     link: '/guide/advanced-context-events-slots',
@@ -254,8 +241,8 @@ export default defineConfig({
                 ],
               },
               {
-                text: 'Proficient',
-                items: [{ text: 'playground', link: '/en/guide/playground' }],
+                text: 'Project Practice',
+                items: [{ text: 'CRM Admin Backend', link: '/guide/crm-admin-backend' }],
               },
               {
                 text: 'Mind Control',
@@ -278,6 +265,7 @@ export default defineConfig({
             items: [
               { text: 'CLI', link: '/en/guide/cli' },
               { text: 'Plugin', link: '/en/guide/plugin' },
+              { text: 'Router Adaptation', link: '/en/guide/router-adaptation' },
             ],
           },
           { text: 'FAQ', link: '/en/guide/faq' },

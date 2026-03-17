@@ -1,6 +1,31 @@
 # Changelog
 
-## [1.2.1] - 2026-03-15
+## v1.3.0 - 2026-03-17
+
+### Added
+
+- Added CLI update check feature, automatically checks for new versions on startup
+- Added routing configuration documentation, automatically generates configuration guide when using routing
+- Added support for `update-notifier` dependency
+
+### Fixed
+
+- Fixed ref variable access in `v-for` loops, automatically adds `.value` suffix
+- Fixed event call conversion, uniformly changed to optional calls (`onClick?.()`)
+- Fixed optional chaining protection in dependency analysis, avoids runtime errors caused by ref.value access
+- Fixed cache management, avoids storing style source code, reduces cache size
+- Fixed CLI build configuration, ensures correct shebang injection
+
+### Changed
+
+- Optimized example project structure, removed old example projects
+- Updated README documentation, improved project description and badge layout
+- Updated FAQ documentation, added common Q&A
+- Optimized compilation pipeline execution flow, improved error handling and progress display
+
+---
+
+## v1.2.1 - 2026-03-15
 
 ### Fixed
 
@@ -17,7 +42,7 @@
 
 ---
 
-## [1.2.0] - 2026-03-06
+## v1.2.0 - 2026-03-06
 
 ### Added
 
