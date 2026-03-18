@@ -714,7 +714,7 @@ npm run dev
 After completing this project, you can:
 
 1. **Apply to real projects**: Create your own admin backend by referring to this [project source code](https://github.com/vureact-js/core/tree/master/packages/compiler-core/examples/crm-ops-portal)
-2. **Online Demo**: [CodeSandbox Link](xxx)
+2. **Online Demo**: [CodeSandbox Link](https://codesandbox.io/p/devbox/compiler-examples-n8yg68)
 3. **Router Adaptation Guide**: [Router Adaptation Documentation](/guide/router-adaptation)
 4. **Explore Advanced Features**: Learn the [Mind Control](/guide/mind-control-readme) chapter to master hybrid development
 5. **In-depth Learning**: Check the [Capability Matrix](/guide/capabilities-overview) to understand fully supported features

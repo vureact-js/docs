@@ -712,7 +712,7 @@ npm run dev
 完成本项目的学习后，你可以：
 
 1. **应用到实际项目**：参考此[项目源码](https://github.com/vureact-js/core/tree/master/packages/compiler-core/examples/crm-ops-portal)创建自己的管理后台
-2. **在线演示**：[CodeSandbox 链接](xxx)
+2. **在线演示**：[CodeSandbox 链接](https://codesandbox.io/p/devbox/compiler-examples-n8yg68)
 3. **路由适配指南**：[路由适配文档](/guide/router-adaptation)
 4. **探索高级特性**：学习[心灵控制](/guide/mind-control-readme)章节掌握混合开发
 5. **深入学习**：查看[能力矩阵](/guide/capabilities-overview)了解完整支持特性
