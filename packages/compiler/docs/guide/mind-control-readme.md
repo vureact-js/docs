@@ -33,4 +33,4 @@
 ## 本分组阅读顺序
 
 1. [可控混写](./mind-control-controlled-mixed)
-2. [彻底暴走](./mind-control-full-ecosystem)
+2. [全生态释放](./mind-control-full-ecosystem)

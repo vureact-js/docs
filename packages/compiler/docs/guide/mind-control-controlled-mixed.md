@@ -60,4 +60,4 @@ const doubled = useMemo(() => count.value * 2, [count.value]);
 
 ## 下一步
 
-- 查看 [彻底暴走](./mind-control-full-ecosystem)
+- 查看 [全生态释放](./mind-control-full-ecosystem)

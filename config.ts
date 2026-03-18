@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitepress';
 
 const commonConfig = defineConfig({
+  appearance: 'dark',
+
   head: [
     [
       'link',
