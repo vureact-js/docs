@@ -384,8 +384,7 @@ const inc = useCallback(() => {
   count.value++;
 }, [count.value]);
 
-// 由于被 fn2 调用，因此被追加为 useCallback
-const fn = useCallback(() => {}, []);
+const fn = () => {};
 
 const fn2 = useCallback(() => {
   // 对初始值进行溯源，并收集 foo.value
@@ -396,9 +395,8 @@ const fn2 = useCallback(() => {
     value + state.bar.c--;
   };
 
-  // 调用普通函数
   fn();
-}, [foo.value, state.bar.c, fn]);
+}, [foo.value, state.bar.c]);
 ```
 
 ### `useMemo`

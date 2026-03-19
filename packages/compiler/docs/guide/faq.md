@@ -337,6 +337,10 @@ export default defineConfig({
 4. **示例项目**：参考 [示例代码](https://gitee.com/vureact-js/core/tree/master/packages/compiler-core/examples)
 5. **赞助**：支持作者！ [爱发电](https://afdian.com/a/vureact-js/plan)
 
+## Q34: 如何解决 React 中 "Objects are not valid as a React child" 的问题？
+
+如果你的项目中使用了路由，且当运行 React 应用并进入页面后发现这种错误，通常是由于没有手动调整路由配置文件导致的，详细解决方案请移步 [路由适配指南](/guide/router-adaptation)，按照指南处理之后请重启 dev 服务。
+
 ---
 
 **没有找到答案？** 请查看完整文档或提交新的问题 [GitHub Issues](https://github.com/vureact-js/core/issues)。

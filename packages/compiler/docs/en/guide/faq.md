@@ -337,6 +337,10 @@ export default defineConfig({
 4. **Example projects**: Refer to [sample code](https://gitee.com/vureact-js/core/tree/master/packages/compiler-core/examples)
 5. **Sponsorship**: Support the author! [Afadian](https://afdian.com/a/vureact-js/plan)
 
+## Q34: How to resolve the "Objects are not valid as a React child" issue in React?
+
+If your project uses routing and you encounter this error when running the React application and navigating to a page, it is usually caused by not manually adjusting the routing configuration file. For a detailed solution, please refer to the [Router Adaptation Guide](/en/guide/router-adaptation). After following the guide, please restart the dev server.
+
 ---
 
 **Didn't find an answer?** Please check the complete documentation or submit a new issue [GitHub Issues](https://github.com/vureact-js/core/issues).

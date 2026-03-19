@@ -290,8 +290,7 @@ const inc = useCallback(() => {
   count.value++;
 }, [count.value]);
 
-// Added as useCallback because it is called by fn2
-const fn = useCallback(() => {}, []);
+const fn = () => {};
 
 const fn2 = useCallback(() => {
   // Trace the initial value and collect foo.value
@@ -302,9 +301,8 @@ const fn2 = useCallback(() => {
     value + state.bar.c--;
   };
 
-  // Call ordinary function
   fn();
-}, [foo.value, state.bar.c, fn]);
+}, [foo.value, state.bar.c]);
 ```
 
 ### `useMemo`
