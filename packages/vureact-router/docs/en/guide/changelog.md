@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.1.1 - 2026-03-20
+
+### Fixed
+
+- Fixed an issue where the `component` option in route configuration could not correctly recognize React higher-order components such as `memo`, `forwardRef`, `lazy`, etc.
+
 ## v1.1.0 - 2026-03-20
 
 ### Added
@@ -18,5 +24,3 @@
 - Fixed type import paths to ensure correct module dependencies
 - Improved route matching logic to ensure more accurate route resolution
 - Fixed component rendering logic to correctly handle various component types
-
----
