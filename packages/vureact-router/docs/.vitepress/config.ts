@@ -57,6 +57,7 @@ export default defineConfig({
               { text: '快速上手', link: '/guide/quick-start' },
             ],
           },
+          { text: '更新日志', link: '/guide/changelog.md' },
           {
             text: '教程',
             items: [
@@ -131,6 +132,7 @@ export default defineConfig({
               { text: 'Quick Start', link: '/en/guide/quick-start' },
             ],
           },
+          { text: 'Change Log', link: '/en/guide/changelog.md' },
           {
             text: 'Guide',
             items: [
