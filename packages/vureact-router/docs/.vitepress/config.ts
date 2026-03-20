@@ -42,8 +42,8 @@ export default defineConfig({
               {
                 text: '官方库',
                 items: [
-                  { text: 'VuReact Compiler', link: 'https://vureact.top' },
-                  { text: 'VuReact Runtime', link: 'https://runtime.vureact.top' },
+                  { text: 'VuReact 1.x', link: 'https://vureact.top' },
+                  { text: 'VuReact Runtime 1.x', link: 'https://runtime.vureact.top' },
                 ],
               },
             ],
@@ -117,8 +117,8 @@ export default defineConfig({
               {
                 text: 'Official Libraries',
                 items: [
-                  { text: 'VuReact Compiler', link: 'https://vureact.top/en' },
-                  { text: 'VuReact Runtime', link: 'https://runtime.vureact.top/en' },
+                  { text: 'VuReact 1.x', link: 'https://vureact.top/en' },
+                  { text: 'VuReact Runtime 1.x', link: 'https://runtime.vureact.top/en' },
                 ],
               },
             ],
