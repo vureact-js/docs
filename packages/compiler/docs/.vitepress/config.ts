@@ -6,15 +6,14 @@ export default defineConfig({
 
   title: 'VuReact',
 
-  description:
-    'Next Vue to React intelligent compilation toolchain that compiles Vue 3 into runnable React 18+ code',
+  description: 'Semantic-aware Vue 3 to React 18+ compiler for progressive migration.',
 
   locales: {
     root: {
       label: '简体中文',
       lang: 'zh-CN',
       link: '/',
-      description: '下一代 Vue -> React 智能编译工具链，将 Vue 3 编译为可运行的 React 18+ 代码',
+      description: '面向语义级代码迁移的智能 Vue 3 转 React 18+ 编译器',
       themeConfig: {
         socialLinks: [
           {

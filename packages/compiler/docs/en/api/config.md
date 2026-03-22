@@ -14,7 +14,7 @@ export default defineConfig(options: CompilerOptions);
 
 ## `CompilerOptions`
 
-````ts
+```ts
 interface CompilerOptions {
   /**
    * Manually specify the root directory.
@@ -60,9 +60,22 @@ interface CompilerOptions {
       | boolean
       | {
           /**
+           * Specify the React template type.
            * @default 'react-ts'
            */
-          template: 'react-ts' | 'react';
+          template?: 'react-ts' | 'react';
+
+          /**
+           * Specify the Vite version for initial installation, which must start with '@'.
+           * @default '@latest'
+           */
+          vite?: string;
+
+          /**
+           * Specify the React version for initial installation.
+           * @default 'latest'
+           */
+          react?: string;
         };
 
     /**
@@ -122,28 +135,28 @@ interface CompilerOptions {
   preprocessStyles?: boolean;
 
   /**
+   * Used to inject Router Provider in React's main.tsx or main.jsx
+   */
+  router?: {
+    /**
+     * Path to the Vue Router config file.
+     * Must be the location where `createRouter` is **exported as default**.
+     */
+    configFile: string;
+
+    /**
+     * Automatically update the react app entry file to use the VuReact Router Provider.
+     *
+     * Note: Injection only occurs when `output.bootstrapVite` is enabled.
+     *
+     * @default true
+     */
+    autoUpdateEntry?: boolean;
+  };
+
+  /**
    * Can be used to add plugins and customize the output results of
    * parsing/transforming/code generation/compilation completion stages respectively.
-   *
-   * @example
-   * ```ts
-   * plugins: {
-   *  // Example: Add custom data to the parsing result
-   *  parser: {
-   *   myPlugin: (result, ctx) => {
-   *     result.metadata = {
-   *       timestamp: Date.now()
-   *     }
-   *   },
-   *  },
-   *
-   *  // If the key names such as parse/transform/codegen are not specified,
-   *  // the plugin will execute after compilation is completed.
-   *  yourPlguin: (result) => {
-   *    console.log(result)
-   *  }
-   * }
-   * ```
    */
   plugins?: PluginRegister<CompilationResult> & {
     /**
@@ -188,6 +201,7 @@ interface CompilerOptions {
   logging?: {
     /**
      * Whether to enable log output
+     * (Note: CLI important logs will still be output)
      * @default true
      */
     enabled?: boolean;
@@ -211,11 +225,11 @@ interface CompilerOptions {
    * In `watch` mode, executed after a file is added or recompiled.
    *
    * @param event File addition or modification event
-   * @param unit The current compilation unit of the single-file component (SFC) or script file to be compiled
+   * @param unit The current compilation unit of the single-file component (SFC) or script file to compiled
    */
   onChange?: (event: 'add' | 'change', unit: CompilationUnit) => Promise<void | undefined>;
 }
-````
+```
 
 ## Detailed Configuration Explanation
 

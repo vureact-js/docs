@@ -14,7 +14,7 @@ export default defineConfig(options: CompilerOptions);
 
 ## `CompilerOptions`
 
-````ts
+```ts
 interface CompilerOptions {
   /**
    * 手动指定根目录。
@@ -60,9 +60,22 @@ interface CompilerOptions {
       | boolean
       | {
           /**
+           * 指定 React 模板类型。
            * @default 'react-ts'
            */
-          template: 'react-ts' | 'react';
+          template?: 'react-ts' | 'react';
+
+          /**
+           * 指定初始安装的 Vite 版本，必须以 '@' 开头。
+           * @default '@latest'
+           */
+          vite?: string;
+
+          /**
+           * 指定初始安装的 React 版本。
+           * @default 'latest'
+           */
+          react?: string;
         };
 
     /**
@@ -122,28 +135,27 @@ interface CompilerOptions {
   preprocessStyles?: boolean;
 
   /**
+   * 指定 Vue Router 配置文件的路径。
+   * 用于在 React 的 main.tsx 或 main.jsx 中注入 Router Provider。
+   */
+  router?: {
+    /**
+     * Vue Router 配置文件的路径。
+     * 该文件必须有默认导出 createRouter 的 API。
+     */
+    configFile: string;
+
+    /**
+     * 自动更新 React 应用入口文件以使用 Router Provider。
+     * 注意：仅当 `output.bootstrapVite` 启用时才会进行注入。
+     * @default true
+     */
+    autoUpdateEntry?: boolean;
+  };
+
+  /**
    * 可用于添加插件，并分别自定义
    * 解析/转换/代码生成/编译完成阶段的输出结果。
-   *
-   * @example
-   * ```ts
-   * plugins: {
-   *  // 示例：为解析结果添加自定义数据
-   *  parser: {
-   *   myPlugin: (result, ctx) => {
-   *     result.metadata = {
-   *       timestamp: Date.now()
-   *     }
-   *   },
-   *  },
-   *
-   *  // 若未指定 parse/transform/codegen 这些键名，
-   *  // 插件将在编译完成后执行。
-   *  yourPlguin: (result) => {
-   *    console.log(result)
-   *  }
-   * }
-   * ```
    */
   plugins?: PluginRegister<CompilationResult> & {
     /**
@@ -187,7 +199,7 @@ interface CompilerOptions {
    */
   logging?: {
     /**
-     * 是否启用日志输出
+     * 是否启用日志输出（注：CLI 重要日志仍会输出）
      * @default true
      */
     enabled?: boolean;
@@ -211,11 +223,11 @@ interface CompilerOptions {
    * 在 `watch` 模式下，文件被新增或重新编译后执行。
    *
    * @param event 文件新增或修改事件
-   * @param unit 当前待编译的单文件组件（SFC）或脚本文件编译单元
+   * @param unit 当前编译的单文件组件（SFC）或脚本文件编译单元
    */
   onChange?: (event: 'add' | 'change', unit: CompilationUnit) => Promise<void | undefined>;
 }
-````
+```
 
 ## 详细配置说明
 
