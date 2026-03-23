@@ -1,7 +1,7 @@
 ﻿---
 layout: home
 
-title: VuReact | Semantically Compile Vue 3 into React 18+
+title: VuReact | A semantics-aware Vue to React compiler for progressive migration
 
 hero:
   name: 'VuReact'

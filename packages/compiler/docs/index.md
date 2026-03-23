@@ -1,7 +1,7 @@
 ﻿---
 layout: home
 
-title: VuReact | 语义驱动的 Vue 3 → React 18+ 迁移编译器
+title: VuReact | 渐进式语义驱动的 Vue → React 迁移编译器
 
 hero:
   name: 'VuReact'
