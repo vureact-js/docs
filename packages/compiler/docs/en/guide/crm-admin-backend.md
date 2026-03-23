@@ -4,11 +4,24 @@
 
 The [CRM Operations Portal](https://github.com/vureact-js/core/tree/master/packages/compiler-core/examples/crm-ops-portal) is a complete Vue 3 admin backend project that demonstrates VuReact's transformation capabilities in practical applications. This project includes:
 
-- **6 Page Components**: Dashboard, Customer Management, Leads Pipeline, Tasks Board, System Settings, Login/Registration
+- **8 Page Components**: Dashboard, Customer Management, Leads Pipeline, Tasks Board, Notifications Center, Approvals Center, System Settings, Login/Registration
 - **6 Universal Components**: KPI Card, Filter Bar, Status Pill, Sales Stage, Customer Table, Theme Card
 - **Complete Routing System**: Vue Router configuration and route guards
 - **Style System**: Sass styles and CSS variable theming
 - **Mock Data Layer**: Complete API simulation and state management
+
+## Collaboration Center Case Analysis
+
+This iteration upgrades the CRM sample from isolated feature demos to a cross-page collaboration workflow:
+
+- **Notifications Center**: status/type filters, keyword search, single-item actions, mark-all-as-read.
+- **Approvals Center**: submit approval, approve/reject actions, timeline history and detail panel.
+- **Business linkage**:
+  - High-value leads (`>= 100`) trigger approval flow automatically.
+  - Tasks moved to `blocked` trigger collaboration notifications.
+  - Dashboard includes collaboration summary cards and quick links.
+
+This section demonstrates real business flow + conversion stability + runtime feasibility in one scenario.
 
 ## Project Structure
 
@@ -20,6 +33,8 @@ crm-ops-portal/
 │   │   ├── Customers.vue         # Customer Management - Tables & filters
 │   │   ├── LeadsPipeline.vue     # Sales Leads - Pipeline view
 │   │   ├── TasksBoard.vue        # Tasks Board - Kanban layout
+│   │   ├── NotificationsCenter.vue # Notifications - Collaboration inbox
+│   │   ├── ApprovalsCenter.vue   # Approvals - Decision workflow
 │   │   ├── Settings.vue          # System Settings - Form configuration
 │   │   └── auth/                 # Authentication pages
 │   │       ├── Login.vue         # Login page

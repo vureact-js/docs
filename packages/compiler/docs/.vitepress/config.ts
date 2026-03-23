@@ -6,14 +6,14 @@ export default defineConfig({
 
   title: 'VuReact',
 
-  description: 'Semantic-aware Vue 3 to React 18+ compiler for progressive migration.',
+  description: 'Semantically Compile Vue 3 into React 18+',
 
   locales: {
     root: {
       label: '简体中文',
       lang: 'zh-CN',
       link: '/',
-      description: '面向语义级代码迁移的智能 Vue 3 转 React 18+ 编译器',
+      description: '语义驱动的 Vue 3 → React 18+ 迁移编译器',
       themeConfig: {
         socialLinks: [
           {

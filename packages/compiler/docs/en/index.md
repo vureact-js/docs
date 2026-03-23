@@ -1,11 +1,11 @@
 ﻿---
 layout: home
 
-title: VuReact | An Intelligent Vue 3 to React 18+ Compiler for Semantic-Level Code Migration
+title: VuReact | Semantically Compile Vue 3 into React 18+
 
 hero:
   name: 'VuReact'
-  text: 'Semantic-Level Vue 3 to React Compiler'
+  text: 'Semantically Compile Vue 3 into React'
   tagline: 'Semantic Awareness, Progressive Migration, Convention-Driven'
 
   actions:
@@ -20,25 +20,25 @@ hero:
 features:
   - icon: 🧠
     title: Semantic Awareness
-    details: Intelligently convert Vue template syntax and directives into React-idiomatic JSX code, fully preserve TypeScript type definitions, and automatically generate React component interfaces
+    details: Understand Vue like a compiler, output React like a pro
 
   - icon: ⚖️
     title: Progressive Migration
-    details: Support controllable progressive migration from single files to entire projects, avoiding technical debt and system risks caused by one-time large-scale conversion
+    details: Start small, scale to full projects—no risky rewrites
 
   - icon: 🧭
     title: Convention-Driven
-    details: Compile based on clear syntactic conventions rather than heuristic rules, ensuring deterministic, analyzable, and maintainable conversion behavior with full support for modern Vue syntax
+    details: Predictable transforms powered by clear conventions, not guesses
 
   - icon: ⚛️
     title: Complete Feature Adaptation
-    details: Fully adapt Vue core features such as reactive system, lifecycle, and built-in components to React, and handle scoped and module styles entirely at compile time to achieve zero runtime overhead
+    details: Vue features, fully mapped to React—zero runtime cost
 
   - icon: ⚡
     title: Engineering Toolchain
-    details: Provide build/watch dual-mode CLI, support incremental compilation and file watching, and implement a complete engineering process from code conversion to full project compilation
+    details: Build, watch, and scale with a production-ready CLI
 
   - icon: 🌀
     title: Innovative Exploration
-    details: Explore the cross-framework compilation bridge mode, allow Vue and React code to coexist at the compilation level, and verify the technical feasibility of "complete Vue-to-React compilation"
+    details: A new bridge between Vue and React at compile time
 ---

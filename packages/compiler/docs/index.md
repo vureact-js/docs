@@ -1,11 +1,11 @@
 ﻿---
 layout: home
 
-title: VuReact | 面向语义级代码迁移的智能 Vue 3 转 React 18+ 编译器
+title: VuReact | 语义驱动的 Vue 3 → React 18+ 迁移编译器
 
 hero:
   name: 'VuReact'
-  text: '语义级 Vue 3 -> React 迁移编译器'
+  text: '语义驱动的 Vue 3 → React 迁移编译器'
   tagline: '语义感知，渐进迁移，约定驱动'
 
   actions:
@@ -20,7 +20,7 @@ hero:
 features:
   - icon: 🧠
     title: 语义感知
-    details: 将Vue模板语法和指令智能转换为符合React习惯的JSX代码，完整保留TypeScript类型定义并自动生成React组件接口
+    details: 深度理解Vue语法的完整语义结构，包括模板指令、script setup逻辑、组合式API和TypeScript类型，智能生成符合React最佳实践的代码
 
   - icon: ⚖️
     title: 渐进迁移
@@ -32,7 +32,7 @@ features:
 
   - icon: ⚛️
     title: 完整特性适配
-    details: 将响应式系统、生命周期、内置组件等Vue核心特性完整适配到React，且编译阶段完全处理scoped和module样式等，实现零运行时开销
+    details: 将响应式系统、生命周期、内置组件、路由等Vue核心特性完整适配到React，编译阶段完全处理scoped、module和样式语言，实现零运行时开销
 
   - icon: ⚡
     title: 工程化工具链
