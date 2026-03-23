@@ -88,7 +88,7 @@ export default defineConfig({
               },
               {
                 text: '项目实战',
-                items: [{ text: 'CRM管理后台', link: '/guide/crm-admin-backend' }],
+                items: [{ text: 'CRM 后台迁移实战', link: '/guide/crm-admin-backend' }],
               },
               {
                 text: '心灵控制',
@@ -242,7 +242,12 @@ export default defineConfig({
               },
               {
                 text: 'Project Practice',
-                items: [{ text: 'CRM Admin Backend', link: '/guide/crm-admin-backend' }],
+                items: [
+                  {
+                    text: 'CRM Migration Practice',
+                    link: '/en/guide/crm-admin-backend',
+                  },
+                ],
               },
               {
                 text: 'Mind Control',

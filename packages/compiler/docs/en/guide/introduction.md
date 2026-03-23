@@ -34,6 +34,7 @@ In the current phase, VuReact prioritizes serving the following scenarios:
 - **New Project Development**: Write Vue-style components directly according to VuReact conventions and output them as React code
 - **Modern Syntax Support**: Focus on Vue 3 Composition API and `<script setup>` syntax
 - **Controlled Progressive Migration**: Support gradual migration by directory or module, allowing Vue and React components to coexist in the project
+- **Developer Experience**: Enables teams to leverage Vue’s mental model while writing React, with support for cross-framework development
 
 It does not prioritize supporting:
 

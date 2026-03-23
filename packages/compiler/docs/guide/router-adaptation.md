@@ -226,6 +226,6 @@ createRoot(document.getElementById('root')!).render(
 ## 下一步
 
 - [VuReact Router 官方文档](https://router.vureact.top)
-- [CRM项目路由示例](/guide/crm-admin-backend)
+- [CRM 后台迁移实战](./crm-admin-backend/index)
 - [编译问题反馈](https://github.com/vureact-js/core/issues)
 - [路由问题反馈](https://github.com/vureact-js/vureact-router/issues)

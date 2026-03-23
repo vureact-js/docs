@@ -226,6 +226,6 @@ After compilation, enter the product directory (e.g., `.vureact/react-app`) and 
 ## Next Steps
 
 - [VuReact Router Official Documentation](https://router.vureact.top/en)
-- [CRM Project Router Example](/en/guide/crm-admin-backend)
+- [CRM Migration Practice](./crm-admin-backend)
 - [Compilation Issue Feedback](https://github.com/vureact-js/core/issues)
 - [Router Issue Feedback](https://github.com/vureact-js/vureact-router/issues)
