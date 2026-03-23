@@ -14,7 +14,7 @@ CRM 客户与销售运营台 Vue 3 项目迁移实战。
 2. 享受 Vue 优秀的心智模型并编写 React。
 3. 体验真正的跨框架 Vue + React 混合开发，并产出 React 代码。
 
-在开始之前，你可以提前访问本教程的 [在线示例](https://codesandbox.io/p/devbox/compiler-examples-n8yg68) 进行预览和体验。
+在开始之前，你可以提前访问本教程的 [在线示例](https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master) 进行预览和体验。
 
 ## 学前检查
 

@@ -32,7 +32,7 @@ export default defineConfig({
           },
           {
             text: '在线演示',
-            link: 'https://codesandbox.io/p/devbox/compiler-examples-n8yg68',
+            link: 'https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master',
           },
           {
             text: '指南',
@@ -174,7 +174,7 @@ export default defineConfig({
           },
           {
             text: 'Playground',
-            link: 'https://codesandbox.io/p/devbox/compiler-examples-n8yg68',
+            link: 'https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master',
           },
           {
             text: 'Guide',

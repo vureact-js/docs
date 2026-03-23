@@ -15,7 +15,7 @@ VuReact supports not only SFC files, but also standalone **Script** and **Style*
 3. Developers exploring true cross-framework development with Vue + React, producing React output
 
 Before starting, you can preview the tutorial via the **online demo**:
-[https://codesandbox.io/p/devbox/compiler-examples-n8yg68](https://codesandbox.io/p/devbox/compiler-examples-n8yg68)
+[https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master](https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master)
 
 ## Prerequisites
 
