@@ -14,7 +14,7 @@ CRM 客户与销售运营台 Vue 3 项目迁移实战。
 2. 享受 Vue 优秀的心智模型并编写 React。
 3. 体验真正的跨框架 Vue + React 混合开发，并产出 React 代码。
 
-在开始之前，你可以提前访问本教程的 [在线示例](https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master) 进行预览和体验。
+在开始之前，你可以提前访问本教程的 [在线演示](https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master) 进行 [预览](https://r862dm-5173.csb.app) 和体验。
 
 ## 学前检查
 
@@ -23,7 +23,7 @@ CRM 客户与销售运营台 Vue 3 项目迁移实战。
 - 你的项目使用 Vue3（含 `<script setup>`）。
 - 你接受“可控迁移”，而不是“一键零修改全自动”。
 - 你希望先跑通一个真实案例，再迁移自己的业务仓。
-- 你正计划与编程 AI 协作，将 Vue 项目迁移至 React（推荐）。
+- 你正计划 **与编程 AI 协作**，将 Vue 项目迁移至 React（`推荐`）。
 
 ### 能力边界（请先确认）
 
@@ -34,22 +34,30 @@ CRM 客户与销售运营台 Vue 3 项目迁移实战。
 
 ### 准备项
 
-- Node.js 20+（本项目使用 Vite 8.x 作为构建工具）
+- Node.js 20+
 - npm 9+
-- 已克隆并安装 [core](https://github.com/vureact-js/core) 仓依赖
+- 已克隆 [crm-admin-backend](https://github.com/vureact-js/example-crm-admin-backend) 仓并安装依赖
 
 ## Step 1：准备示例与配置
 
 ### 命令
 
 ```bash
-cd core/packages/compiler-core/examples/crm-ops-portal
+cd crm-admin-backend
 npm install
 ```
 
 ### 你会看到什么
 
-- 依赖安装完成，项目目录可执行 `vr:build`。
+- 依赖安装完成，项目目录中 `package.json` 可执行 `vr:build`。
+
+```json
+"scripts": {
+  "vr:watch": "vureact watch",
+  "vr:build": "vureact build"
+}
+```
+
 - 根目录存在 `vureact.config.ts` 与 `src/`。
 
 ### 失败时检查
@@ -72,19 +80,30 @@ npm run vr:build
 
 ### 你会看到什么
 
+- 控制台输出编译统计（SFC/script/style 处理数量）。
+
+<img src="./images/1.png" />
+
 - 生成 `.vureact/react-app` 目录，且与 Vue 源结构一致。
 
-<img src="./images/3.png"  />
+<div style="display: flex;">
+  <div style="font-size: 14px; text-align: center;">
+    <img src="./images/2.png" />
+    <p>(Vue 目录)</p>
+  </div>
+ <div style="font-size: 14px; text-align: center; margin-left: 46px">
+    <img src="./images/2-1.png" style="width: 172px; height: 482px" />
+    <p>(.vureact 目录)</p>
+ </div>
+</div>
 
-- 控制台输出编译统计（SFC/script/style 处理数量）。
-- 若有 warning，会显示具体文件位置（本次警告可忽略）。
-
-<img src="./images/1.png" style="height: 268px" />
+- 若有 warning，会显示具体文件位置。
 
 ### 失败时检查
 
+- Npm/Network 错误：检查当前是否联网。
 - SFC 语法错误：先修复源 Vue 文件再编译。
-- 路由相关告警：继续执行 Step 3 进行路由接入校正。
+- 路由相关告警：继续执行 [Step 3](#step-3-处理路由接入-关键) 进行路由接入校正。
 
 ### 通过标准
 
@@ -148,6 +167,8 @@ export default router;
 
 - 页面路由（如 Dashboard/Customers/Leads/Tasks 等）可被访问。
 
+<img src="./images/4.png"  />
+
 ### 失败时检查
 
 - 页面空白：通常是 `main.tsx` 仍直接渲染 `<App />`。
@@ -169,9 +190,12 @@ npm run dev
 ### 你会看到什么
 
 - Vite dev server 启动成功（默认本地端口）。
+
+<img src="./images/5.png"  />
+
 - 浏览器打开后进入登录页，再进入 CRM 主界面。
 
-<img src="./images/2.png"  />
+<img src="./images/6.png"  />
 
 ### 失败时检查
 
@@ -230,7 +254,7 @@ cd .vureact/react-app && npm install && npm run dev
 
 ### 失败时检查
 
-- 路由空白：优先看 Step 3。
+- 路由空白：优先看 [Step 3](#step-3-处理路由接入-关键)。
 - 编译失败：回到报错文件，修源代码后重编译。
 - 类型不通过：检查生成产物中路由/运行时包导入是否正确，或不检查类型。
 
@@ -242,24 +266,48 @@ cd .vureact/react-app && npm install && npm run dev
 
 ### 命令
 
-```bash
-# 1) 在你的 Vue 项目安装编译器
-npm i -D @vureact/compiler-core
+- 在你的 Vue 项目安装编译器。
 
-# 2) 创建配置后执行迁移
+```bash
+npm i -D @vureact/compiler-core
+```
+
+- 接着在项目根目录下创建配置文件。
+
+```ts
+// vureact.config.ts
+import { defineConfig } from '@vureact/compiler-core';
+
+// 最小化示例配置，可根据实际需求进行调整
+export default defineConfig({
+  input: 'src',
+  exclude: ['src/main.ts'],
+  output: {
+    workspace: '.vureact',
+    outDir: 'react-app',
+    bootstrapVite: true,
+  },
+});
+```
+
+具体配置方法请参考 [配置 API](/api/config) 文档。
+
+- 执行迁移。
+
+```bash
 npx vureact build
 
-# 2.1) 或指定编译某个目录（可选）
+# 或指定编译某个目录（可选）
 npx vureact build -i src/components
 
-# 2.2) 或指定编译某个文件（可选）
+# 或指定编译某个文件（可选）
 npx vureact build -i src/pages/Home.vue
 ```
 
 ### 你会看到什么
 
 - 你的业务仓生成对应 React 产物目录。
-- 可复用本教程的 Step 3~Step 6 验收路径。
+- 可复用本教程的 [Step 3](#step-3-处理路由接入-关键)~[Step 6](#step-6-就近排错-按症状) 验收路径。
 
 ### 失败时检查
 
@@ -274,7 +322,7 @@ npx vureact build -i src/pages/Home.vue
 
 ```bash
 # Vue 示例目录
-cd core/packages/compiler-core/examples/crm-ops-portal
+cd crm-ops-portal
 npm install
 npm run vr:build
 
@@ -301,3 +349,12 @@ npm run dev
 - 问题反馈：
   - [Compiler Issues](https://github.com/vureact-js/core/issues)
   - [Router Issues](https://github.com/vureact-js/vureact-router/issues)
+
+## 附录 D：继续学习导航
+
+完成本教程后，建议按以下顺序继续：
+
+1. [CLI 指南](/guide/cli)：掌握 `build/watch`、输入范围与工程化命令用法。
+2. [配置 API](/api/config)：系统理解 `input/exclude/output/router` 等核心配置项。
+3. [编译约定](/guide/specification)：明确编译器的行为边界与代码约定，降低迁移偏差。
+4. [最佳实践](/guide/best-practices)：建立可回滚、可验收、可扩展的迁移流程。

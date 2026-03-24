@@ -1,70 +1,76 @@
-﻿# CRM Admin Migration Guide
+﻿# CRM Backend Migration Practice
 
-A hands-on migration guide for a CRM customer and sales operations dashboard built with Vue 3.
+A hands-on migration tutorial for migrating a Vue 3-based CRM Customer and Sales Operations Portal to React using VuReact.
 
 ## Overview
 
-This is a **step-by-step, follow-along tutorial** designed to help you complete a full VuReact migration cycle independently, starting from a `Vue 3 + Vite + Vue Router` project.
+This is a follow-along migration guide designed to help you complete a full VuReact migration cycle independently, based on a `Vue3 + Vite + Vue Router` project.
 
-VuReact supports not only SFC files, but also standalone **Script** and **Style** files, and automatically copies static assets.
+VuReact not only supports processing Single-File Components (SFCs) but also standalone Script and Style files, with automatic copying of static asset files.
 
-### Who is this for?
+**Intended Audience**:
 
-1. Developers maintaining Vue 3 projects who want to migrate progressively to the React ecosystem
-2. Developers who enjoy Vue’s mental model but want to write React
-3. Developers exploring true cross-framework development with Vue + React, producing React output
+1. Developers maintaining Vue 3 business projects who want to incrementally migrate to the React ecosystem.
+2. Those who appreciate Vue's intuitive mental model and wish to write React code with similar ergonomics.
+3. Anyone looking to experience true cross-framework hybrid development (Vue + React) and generate production-ready React code.
 
-Before starting, you can preview the tutorial via the **online demo**:
-[https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master](https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master)
+Before getting started, you can preview and interact with the tutorial's [playground](https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master) at [this link](https://r862dm-5173.csb.app).
 
-## Prerequisites
+## Pre-Migration Checklist
 
 ### Applicable Scenarios
 
-- Your project uses Vue 3 (including `<script setup>`)
-- You accept **controlled migration**, not “one-click zero-change automation”
-- You want to validate a real case before migrating your own project
-- You plan to collaborate with AI tools to migrate Vue to React (recommended)
+- Your project uses Vue 3 (including `<script setup>` syntax).
+- You accept a "controlled migration" approach (not "one-click, zero-modification fully automated").
+- You want to validate a real-world case before migrating your own business repository.
+- You plan to **collaborate with AI** to migrate Vue projects to React (`recommended`).
 
-### Capability Boundaries (Important)
+### Capability Boundaries (Please Confirm First)
 
-- Routing is auto-adapted, but may require manual adjustments depending on project structure
-- The goal is **runnable, maintainable, and evolvable code**, not exact 1:1 output
-- Unsupported APIs/types are preserved as-is in the React output
-- The example covers common admin scenarios, but uses mock APIs instead of real backend integration
+- Routing is automatically adapted but may require manual correction of entry points and routing files in certain project structures.
+- The migration goal is "runnable, maintainable, and evolvable code"—not "character-by-character identical output".
+- Unsupported APIs or type interfaces will be preserved as-is in the React output.
+- The example covers common backend scenarios but does not include full integration with backend APIs or permission platforms (mock APIs are used instead).
 
-### Requirements
+### Prerequisites
 
-- Node.js 20+ (Vite 8.x is used)
+- Node.js 20+ (this project uses Vite 8.x as the build tool)
 - npm 9+
-- Clone and install dependencies from the [core repo](https://github.com/vureact-js/core)
+- Cloned and installed dependencies for the [crm-admin-backend](https://github.com/vureact-js/example-crm-admin-backend) repository
 
-## Step 1: Setup Example Project
+## Step 1: Prepare the Example and Configuration
 
-### Command
+### Commands
 
 ```bash
-cd core/packages/compiler-core/examples/crm-ops-portal
+cd crm-admin-backend
 npm install
 ```
 
-### Expected
+### Expected Outcomes
 
-- Dependencies installed successfully
-- Project is ready to run `vr:build`
-- `vureact.config.ts` and `src/` exist
+- Dependencies are installed successfully, and the `package.json` in the project directory includes a runnable `vr:build` script:
 
-### Troubleshooting
+```json
+"scripts": {
+  "vr:watch": "vureact watch",
+  "vr:build": "vureact build"
+}
+```
 
-- npm not found → check Node/npm installation
-- install fails → clear lockfile conflicts and retry
-- stuck → copy error logs and ask AI
+- A `vureact.config.ts` file exists in the root directory, along with a `src/` folder.
+
+### Troubleshooting Failed Installations
+
+- `npm` command unavailable: Verify Node.js/npm installation.
+- Installation failures: Resolve lock file conflicts first, then retry.
+- Unresolved issues: Copy the error message and consult AI tools for assistance.
 
 ### Success Criteria
 
-- `npm install` completes without blocking errors
+- `npm install` completes without blocking errors.
 
-## Step 2: Run VuReact Compilation
+## Step 2: Execute VuReact Compilation
 
 ### Command
 
@@ -72,30 +78,40 @@ npm install
 npm run vr:build
 ```
 
-### Expected
+### Expected Outcomes
 
-- `.vureact/react-app` is generated
-- Directory structure mirrors the Vue project
+- The console outputs compilation statistics (number of SFC/script/style files processed):
 
-<img src="/guide/crm-admin-backend/images/3.png"  />
+<img src="/guide/crm-admin-backend/images/1.png" />
 
-- Compilation stats are printed (SFC/script/style)
-- Warnings (if any) show file locations
+- A `.vureact/react-app` directory is generated, mirroring the structure of the original Vue source code:
 
-<img src="/guide/crm-admin-backend/images/1.png"  />
+<div style="display: flex;">
+  <div style="font-size: 14px; text-align: center;">
+    <img src="/guide/crm-admin-backend/images/2.png" />
+    <p>(Vue Directory)</p>
+  </div>
+ <div style="font-size: 14px; text-align: center; margin-left: 46px">
+    <img src="/guide/crm-admin-backend/images/2-1.png" style="width: 172px; height: 482px" />
+    <p>(.vureact Directory)</p>
+ </div>
+</div>
 
-### Troubleshooting
+- Warnings (if any) will display the specific file path.
 
-- SFC syntax error → fix source Vue file
-- Router warnings → proceed to Step 3
+### Troubleshooting Compilation Failures
+
+- Npm/Network errors: Verify internet connectivity.
+- SFC syntax errors: Fix the original Vue files before recompiling.
+- Routing-related warnings: Proceed to [Step 3](#step-3-handle-routing-integration-critical) to correct routing integration.
 
 ### Success Criteria
 
-- Output contains `src/main.tsx`, `src/router`, etc.
+- The output directory exists and contains React project files such as `src/main.tsx` and `src/router`.
 
-## Step 3: Router Integration (Critical)
+## Step 3: Handle Routing Integration (Critical)
 
-For details: Router Adaptation Guide
+> For detailed background, see: [Router Adaptation Guide](/guide/router-adaptation)
 
 ### Command
 
@@ -104,28 +120,66 @@ cd .vureact/react-app
 npm install
 ```
 
-### Key Checks
+If manual correction is needed, focus on verifying:
 
-- `src/main.tsx` renders `<RouterProvider />`
-- Router imports come from `@vureact/router`
+- Whether `src/main.tsx` renders `<router.RouterProvider />`
+- Whether routing configurations are imported from `@vureact/router`
 
-### Expected
+### Expected Outcomes
 
-- App entry uses RouterProvider
-- `vue-router` replaced with `@vureact/router`
-- Pages like Dashboard / Customers / Leads / Tasks are accessible
+- The app entry point is uniformly managed by `RouterProvider`:
 
-### Troubleshooting
+```tsx
+// src/main.tsx
+import RouterInstance from './router/index';
 
-- Blank page → likely still rendering `<App />`
-- Router errors → check router export
-- still broken → follow manual adaptation guide
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <RouterInstance.RouterProvider />
+  </StrictMode>,
+);
+```
+
+- Imports of `'vue-router'` are replaced with `'@vureact/router'`:
+
+```ts
+// src/router/index.ts
+import { createRouter, createWebHashHistory } from '@vureact/router';
+import { isAuthed } from '../data/mock-api';
+import routes from './routes';
+
+const router = createRouter({ history: createWebHashHistory(), routes });
+
+router.beforeEach((to, _from, next) => {
+  if (to.meta.public) {
+    next();
+    return;
+  }
+  if (!isAuthed()) {
+    next({ name: 'login', query: { redirect: to.fullPath } });
+    return;
+  }
+  next();
+});
+
+export default router;
+```
+
+- Page routes (e.g., Dashboard/Customers/Leads/Tasks) are accessible:
+
+<img src="/guide/crm-admin-backend/images/4.png"  />
+
+### Troubleshooting Routing Issues
+
+- Blank page: Typically caused by `main.tsx` directly rendering `<App />` instead of the router provider.
+- Routing component errors: Verify correct exports in `router/index`.
+- Persistent issues: Follow the "Manual Adaptation Plan" in the Router Adaptation Guide step-by-step.
 
 ### Success Criteria
 
-- Routing works without blank screen
+- Routes switch normally after startup, with no global blank screens.
 
-## Step 4: Run React Output
+## Step 4: Launch the React Build
 
 ### Command
 
@@ -133,125 +187,173 @@ npm install
 npm run dev
 ```
 
-### Expected
+### Expected Outcomes
 
-- Vite dev server starts
-- App opens to login page → CRM dashboard
+- The Vite dev server starts successfully (on the default local port):
 
-<img src="/guide/crm-admin-backend/images/2.png"  />
+<img src="/guide/crm-admin-backend/images/5.png"  />
 
-### Troubleshooting
+- The browser opens to the login page, then navigates to the CRM main interface:
 
-- Missing deps → install and restart
-- TS errors → check router/imports
-- Vite errors → verify Node version
-- consider upgrading VuReact
+<img src="/guide/crm-admin-backend/images/6.png"  />
 
-### Success Criteria
+### Troubleshooting Launch Failures
 
-- App runs, hot reload works, no blocking errors
-
-## Step 5: Feature Validation
-
-Manually verify the following flows:
-
-### Expected
-
-- Notification center: filtering, search, mark as read
-- Approval center: submit / approve / reject / history
-- Lead pipeline: triggers approval flow
-- Task board: blocked tasks trigger notifications
-- Dashboard: synced summary updates
-
-### Troubleshooting
-
-- No trigger → check mock API usage
-- Data not updating → check reload/watch logic
+- Missing dependencies: Install missing packages per the installation logs and restart.
+- TypeScript errors: Prioritize checking routing entry points and import paths.
+- Vite errors: Verify Node.js version compatibility with Vite 8.x.
+- Consider upgrading to the latest version of VuReact.
 
 ### Success Criteria
 
-- Full flow works:
-  **Lead/Task → Collaboration → Dashboard**
+- The React build is accessible, supports hot reloading, and starts without blocking errors.
+- Modifications to Vue source files trigger synchronous updates in the React build and UI.
 
-## Step 6: Debug by Symptoms
+## Step 5: Page Acceptance (Business Cycle Validation)
+
+Manually validate the following paths in the running application:
+
+### Expected Outcomes
+
+- **Notification Center**: Filtering, keyword search, single notification handling, mark all as read.
+- **Approval Center**: Initiate approvals, approve/reject requests, track approval history.
+- **Lead Pipeline**: High-value leads trigger approval workflows.
+- **Task Board**: Blocked tasks trigger collaborative notifications.
+- **Dashboard**: Collaborative summaries (unread/awaiting approval/today’s tasks) update interactively.
+
+### Troubleshooting Business Logic Issues
+
+- Failed workflow triggers: Check if rule entry points in `mock-api` are called by the page.
+- Stale data: Verify page reload/watch logic.
+
+### Success Criteria
+
+- The full "Lead/Task Action → Collaboration Center → Dashboard Summary" workflow functions end-to-end.
+
+## Step 6: Nearby Debugging (By Symptom)
 
 ### Commands
 
 ```bash
+# Recompile
 npm run vr:build
 
+# Restart the build
 cd .vureact/react-app && npm run dev
 
-rm .vureact
+# Or delete the build and recompile
+rm -rf .vureact
 npm run vr:build
 cd .vureact/react-app && npm install && npm run dev
 ```
 
-### Common Issues
+### Expected Outcomes
 
-- Router entry
-- Missing dependencies
-- Syntax errors
-- Type issues
-- Version mismatch
+- Most issues fall into these categories: routing entry errors, missing dependencies, source file syntax issues, type constraints, version incompatibility.
+
+### Troubleshooting Guidance
+
+- Blank routing page: Refer to the [Router Adaptation Guide](/guide/router-adaptation) first.
+- Compilation failures: Fix the source file and recompile.
+- Type errors: Verify correct imports of routing/runtime packages in the generated build, or skip type checking temporarily.
 
 ### Success Criteria
 
-- Can locate and fix common issues within 10 minutes
+- Common blocking errors can be identified and resolved within 10 minutes.
 
-## Step 7: Migrate Your Own Project
+## Step 7: Migrate to Your Business Repository (Minimal Template)
 
 ### Commands
 
+- Install the compiler in your Vue project:
+
 ```bash
 npm i -D @vureact/compiler-core
+```
 
+- Create a configuration file in the project root directory:
+
+```ts
+// vureact.config.ts
+import { defineConfig } from '@vureact/compiler-core';
+
+// Minimal example configuration (adjust for your project needs)
+export default defineConfig({
+  input: 'src',
+  exclude: ['src/main.ts'],
+  output: {
+    workspace: '.vureact',
+    outDir: 'react-app',
+    bootstrapVite: true,
+  },
+});
+```
+
+For detailed configuration, see the [Config API](/api/config) documentation.
+
+- Execute the migration:
+
+```bash
 npx vureact build
 
+# Optional: Compile a specific directory
 npx vureact build -i src/components
+
+# Optional: Compile a specific file
 npx vureact build -i src/pages/Home.vue
 ```
 
-### Expected
+### Expected Outcomes
 
-- React output generated for your project
-- Same validation steps apply
+- A corresponding React build directory is generated in your business repository.
+- You can reuse the acceptance criteria from [Step 3](#step-3-handle-routing-integration-critical) to [Step 6](#step-6-nearby-debugging-by-symptom) of this tutorial.
 
-### Troubleshooting
+### Troubleshooting Business Repository Migration
 
-- Start small (directory-level migration)
-- Complex routing → use manual adaptation
+- Start with a narrow migration scope (incremental directory-level migration) instead of migrating the entire repository at once.
+- For complex routing scenarios, implement "manual adaptation" first to ensure the build runs.
 
 ### Success Criteria
 
-- At least one core business flow runs in React
+- At least one core business workflow in your project runs successfully in the React build.
 
-## Appendix A: Quick Commands
+## Appendix A: Command Cheat Sheet
 
 ```bash
-cd core/packages/compiler-core/examples/crm-ops-portal
+# Vue example directory
+cd crm-ops-portal
 npm install
 npm run vr:build
 
+# React build directory
 cd .vureact/react-app
 npm install
 npm run dev
 ```
 
-## Appendix B: Feature Coverage
+## Appendix B: Capability Mapping (This Case)
 
-- Templates: directives, events
-- Components: `defineProps`, `defineEmits`, slots
-- Script: `ref`, `computed`, `watch`
-- DI: `provide` / `inject`
-- Router: guards, links, views
-- Styles: scoped, Sass
+- Templates: Covers common directives, events, etc.
+- Components: `defineProps` / `defineEmits` / slots
+- Scripts: `ref` / `computed` / `watch`, etc.
+- Dependency Injection: `provide` / `inject`
+- Routing: `createRouter` / `router-link` / `router-view`, and navigation guards
+- Styles: `scoped` / Sass syntax
 
 ## Appendix C: Troubleshooting Index
 
-- Router blank → Router Adaptation Guide
-- Syntax coverage → Capabilities Overview
-- Warnings → Best Practices
-- Issues:
-  - Compiler Issues
-  - Router Issues
+- Blank routing page: First check the [Router Adaptation Guide](/guide/router-adaptation)
+- Syntax coverage: See [Capability Matrix](/guide/capabilities-overview)
+- Compilation warning handling: See [Best Practices](/guide/best-practices)
+- Feedback Channels:
+  - [Compiler Issues](https://github.com/vureact-js/core/issues)
+  - [Router Issues](https://github.com/vureact-js/vureact-router/issues)
+
+## Appendix D: Next Learning Path
+
+After finishing this tutorial, continue in this order:
+
+1. [CLI Guide](/en/guide/cli): learn `build/watch`, input scope control, and command workflow.
+2. [Config API](/en/api/config): understand `input/exclude/output/router` and other core options.
+3. [Compilation Specification](/en/guide/specification): align with compiler conventions and boundary rules.
+4. [Best Practices](/en/guide/best-practices): establish a migration process that is rollback-friendly and verifiable.
