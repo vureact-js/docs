@@ -1,23 +1,21 @@
-# What Is Semantic-Aware?
+# What Is Semantic-Aware Compilation?
 
 **Semantic-aware compilation** does not mechanically replace Vue syntax with React syntax.  
-It first understands runtime semantics (reactivity, lifecycle, and data flow), then generates code that is valid in React.
+It first understands runtime semantics (reactivity, lifecycle, data flow), then generates code that is valid in React.
 
 If you remember one sentence, make it this:
 
-> **VuReact is not about “how to rewrite code text”, but about “how that code should remain correct in React”.**
+> **VuReact is not just “rewriting code text”, it is preserving correctness in React semantics.**
 
 ## 1. Core Concept: How Is It Different from Syntax-Level Conversion?
 
 The difference is simple:
-
 - syntax-level conversion asks “what does this look like?”
 - semantic-aware conversion asks “what does this actually do?”
 
 ### Comparison A: `ref` is not just a rename
 
 Vue input:
-
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -27,51 +25,50 @@ const inc = () => count.value++;
 ```
 
 Typical mechanical conversion (illustrative):
-
 ```tsx
-const [count, setCount] = useState(0); // similar syntax, but semantics changed
-const inc = () => count++; // behavior is incorrect
+const [count, setCount] = useState(0); // similar syntax, different semantics
+const inc = () => count++; // incorrect behavior
 ```
 
 Semantic-aware output (illustrative):
-
 ```tsx
-const count = useVRef(0); // keeps reactive reference semantics
+const count = useVRef(0);
 const inc = useCallback(() => {
-  count.value++; // preserves runtime behavior
-}, [count.value]); // dependency is semantically inferred
+  count.value++;
+}, [count.value]);
 ```
 
-**Key point**: this is not a keyword rename; it preserves reactive behavior and rebuilds valid React structure.
+**Key point**: this is semantic preservation, not keyword substitution.
 
 ## 2. What Problems Does It Solve?
 
 The real pain in Vue -> React migration is usually **semantic loss**, not syntax mismatch.
 Common issues:
-
 1. behavior drift after directive/structure conversion (conditions, loops, slots, two-way binding)
-2. unstable output patterns across similar files
-3. reduced readability and harder long-term maintenance
+2. unstable output across similar files
+3. weaker readability and maintainability
+4. **dependency loss or incomplete dependency collection**, causing stale closures, state desync, or intermittent behavior bugs
 
 Why semantic-aware compilation helps:
 
 - **Stability**: similar inputs produce more consistent outputs
-- **Maintainability**: generated structure is closer to React engineering practices
+- **Maintainability**: output stays closer to React engineering structure
 - **Mental clarity**: teams reason in “input behavior -> output behavior”
+- **Dependency reliability**: automatic dependency analysis/collection reduces hidden missing-dependency risks
+
+**Reading tip**: if your top concern is missing dependencies and how to prevent them, jump to Section 5 first, then return here.
 
 ## 3. How It Differs from Common Approaches
 
-Most migration approaches fall into three buckets:
-
+Most approaches fall into three buckets:
 1. syntax replacement: fast but fragile in complex cases
 2. AST mapping: stricter, but still mechanical without semantic staging
-3. runtime proxying: quick short-term wins, but may shift complexity to runtime
+3. runtime proxying: fast short-term, but may shift complexity to runtime
 
 VuReact takes a different route:
-
 - staged processing (parse -> understand -> generate)
 - semantic context first, generation second
-- decisions made at compile time whenever possible
+- compile-time decisions whenever possible
 
 **Key point**: this improves predictability and long-term maintainability.
 
@@ -80,23 +77,20 @@ VuReact takes a different route:
 ## 4.1 Template: structure, scope, and directive semantics
 
 Template processing focuses on:
-
 - branch relationships (`v-if / v-else-if / v-else`)
 - loop semantics (`v-for` source/value/index/key)
 - event modifier semantics (`v-on`)
 - slot scope semantics (`v-slot`)
-- `v-model` behavior across different targets
+- `v-model` behavior on different targets
 
 ### Comparison B: `v-model` is not only an event-name change
 
 Vue input:
-
 ```vue
 <ChildPanel v-model="title" />
 ```
 
 Semantic-aware output (illustrative):
-
 ```tsx
 <ChildPanel
   modelValue={title.value}
@@ -106,14 +100,13 @@ Semantic-aware output (illustrative):
 />
 ```
 
-**Key point**: this rebuilds a **data-flow contract**, not just an attribute rename.
+**Key point**: this rebuilds a data-flow contract, not only an attribute rename.
 
 ### Comparison C: Nested conditional directives -> JSX ternary structure
 
-This is a classic semantic case: it is not about replacing `v-if` with `? :`, but preserving branch relationships and fallback order.
+This is a core semantic case: not just replacing `v-if` with `? :`, but preserving branch dependency and fallback order.
 
 Vue input (illustrative):
-
 ```vue
 <template>
   <div v-if="user">
@@ -126,7 +119,6 @@ Vue input (illustrative):
 ```
 
 Semantic-aware output (illustrative):
-
 ```tsx
 {
   user ? (
@@ -143,17 +135,13 @@ Semantic-aware output (illustrative):
 }
 ```
 
-**Key point**: the compiler preserves branch dependency and fallback semantics, not just syntax labels.
-
 ### Comparison D: `v-for` -> `map / Object.entries`
 
 `v-for` reconstruction depends on data shape:
-
 - arrays usually become `map`
 - objects usually become `Object.entries(...).map(...)`
 
 Vue input (illustrative):
-
 ```vue
 <template>
   <li v-for="(item, i) in list" :key="item.id">{{ i }} - {{ item.name }}</li>
@@ -162,14 +150,9 @@ Vue input (illustrative):
 ```
 
 Semantic-aware output (illustrative):
-
 ```tsx
 {
-  list.map((item, i) => (
-    <li key={item.id}>
-      {i} - {item.name}
-    </li>
-  ));
+  list.map((item, i) => <li key={item.id}>{i} - {item.name}</li>);
 }
 {
   Object.entries(obj).map(([key, val], i) => (
@@ -180,28 +163,186 @@ Semantic-aware output (illustrative):
 }
 ```
 
-**Key point**: this preserves iteration semantics, key stability, and the role of value/key/index.
+### Template readability tips (for more stable conversion)
+
+1. keep condition chains flat when possible
+2. always provide stable `:key` in loops
+3. keep template expressions simple; move complex logic to script
+4. use clear slot param names and avoid deeply nested destructuring
+5. keep one dominant data-flow style per template area
 
 ## 4.2 Script: align reactivity, lifecycle, and setup logic
 
 Script processing handles:
-
-- reactive API semantic mapping (`ref/computed/watch`)
+- reactive API mapping (`ref/computed/watch`)
 - macro semantics (`defineProps`, `defineEmits`, `defineExpose`, etc.)
-- lifecycle + dependency relationships
-- how setup logic becomes valid React component structure
+- lifecycle and dependency relationships
+- setup logic into valid React component structure
 
 In short:  
 **Script alignment happens under analyzable, executable, and maintainable constraints.**
 
-## 5. Static Hoisting and Top-Level `useMemo` Optimization
+## 5. Automatic Dependency Analysis and Collection (Critical Capability)
 
-### 5.1 Static Hoisting
+The highlight here is not “put every variable into a dependency array.”  
+The real capability is: **target-based triggering, scope-aware filtering, and trace-back collection across references**.
 
+From compiler test scenarios, this works from basic reads to deep nesting and alias/destructure trace-back.  
+So it is not “collect on every statement”; it has explicit triggers and boundaries.
+
+### 5.1 When dependency analysis is triggered
+
+Analysis is triggered only for targets that are rebuilt into dependency-shaped React structures:
+
+1. top-level arrow functions (typically rebuilt to `useCallback`)
+2. top-level objects/arrays/expressions (typically rebuilt to `useMemo`)
+3. reactive reads inside those targets (`ref.value`, chained `reactive` access)
+4. traceable aliases, destructuring, and cross-variable references
+
+**Key point**: identify the analysis target first, then collect dependencies.
+
+### 5.2 What is intentionally not collected (designed boundaries)
+
+To avoid false positives, the strategy is conservative in these cases:
+
+1. normal `function` declarations (not dependency-shaped rewrite targets)
+2. temporary callbacks passed as arguments, class methods, local functions in object methods
+3. reactive variables created inside a function, or local shadowing of outer names
+4. highly dynamic access paths (for example dynamic index access), handled with limited inference
+
+**Key point**: this is intentional for **predictable, explainable, maintainable** output.
+
+### 5.3 Complex nested case: object + array + function cross-references
+
+Vue input (illustrative):
+```vue
+<script setup lang="ts">
+const fooRef = ref(0);
+const reactiveState = reactive({ foo: 'bar', bar: { c: 1 } });
+
+const memoizedObj = {
+  title: 'test',
+  bar: fooRef.value,
+  add: () => {
+    reactiveState.bar.c++;
+  },
+};
+
+const reactiveList = [fooRef.value, 1, 2];
+const mixedList = [
+  { name: reactiveState.foo, age: fooRef.value },
+  { name: 'A', age: 20 },
+];
+
+const nestedObj = {
+  a: {
+    b: {
+      c: reactiveList[0],
+      d: () => memoizedObj.bar,
+    },
+    e: mixedList,
+  },
+};
+
+const computeFn = () => {
+  memoizedObj.add();
+  return nestedObj.a.b.d();
+};
+</script>
+```
+
+Semantic-aware output (illustrative):
+```tsx
+const memoizedObj = useMemo(
+  () => ({
+    title: 'test',
+    bar: fooRef.value,
+    add: () => {
+      reactiveState.bar.c++;
+    },
+  }),
+  [fooRef.value, reactiveState.bar?.c],
+);
+
+const reactiveList = useMemo(() => [fooRef.value, 1, 2], [fooRef.value]);
+const mixedList = useMemo(
+  () => [{ name: reactiveState.foo, age: fooRef.value }, { name: 'A', age: 20 }],
+  [reactiveState.foo, fooRef.value],
+);
+
+const nestedObj = useMemo(
+  () => ({
+    a: {
+      b: { c: reactiveList[0], d: () => memoizedObj.bar },
+      e: mixedList,
+    },
+  }),
+  [reactiveList[0], memoizedObj.bar, mixedList],
+);
+
+const computeFn = useCallback(() => {
+  memoizedObj.add();
+  return nestedObj.a.b.d();
+}, [memoizedObj, nestedObj.a?.b]);
+```
+
+Notice what stands out:  
+dependencies for `nestedObj` are collected across layers and references, not guessed loosely.
+
+### 5.4 Trace-back collection case: alias chains and destructuring
+
+Vue input (illustrative):
+```vue
+<script setup lang="ts">
+const state = reactive({ foo: 'bar' });
+const listRef = ref([1, 2, 3]);
+
+const aliasA = state.foo;
+const aliasB = aliasA;
+const aliasC = aliasB;
+
+const { foo: stateFoo } = state;
+const [first] = listRef.value;
+
+const traceFn = () => {
+  aliasC;
+  stateFoo;
+  first;
+};
+</script>
+```
+
+Semantic-aware output (illustrative):
+```tsx
+const aliasA = useMemo(() => state.foo, [state.foo]);
+const aliasB = useMemo(() => aliasA, [aliasA]);
+const aliasC = useMemo(() => aliasB, [aliasB]);
+
+const { foo: stateFoo } = useMemo(() => state, [state]);
+const [first] = useMemo(() => listRef.value, [listRef.value]);
+
+const traceFn = useCallback(() => {
+  aliasC;
+  stateFoo;
+  first;
+}, [aliasC, stateFoo, first]);
+```
+
+**Key point**: collection does not stop at surface variable names; it can follow alias/destructure paths.
+
+### 5.5 Writing tips for more stable dependency analysis
+
+1. keep key callbacks and view-model-like values at top level
+2. avoid mixing dynamic paths with deeply nested anonymous callbacks
+3. aliases/destructuring are fine, but keep reference chains readable
+4. isolate highly dynamic logic locally and keep main flow analyzable
+
+## 6. Static Hoisting and Top-Level `useMemo` Optimization
+
+### 6.1 Static Hoisting
 When top-level values are proven static, they are hoisted outside the component to avoid repeated creation.
 
 Vue input (illustrative):
-
 ```vue
 <script setup lang="ts">
 const TITLE = 'User Panel';
@@ -210,7 +351,6 @@ const RETRY_LIMIT = 3;
 ```
 
 Semantic-aware output (illustrative):
-
 ```tsx
 const TITLE = 'User Panel';
 const RETRY_LIMIT = 3;
@@ -220,18 +360,11 @@ const UserPanel = memo(() => {
 });
 ```
 
-**Value**:
-
-- fewer repeated allocations on render
-- cleaner static/dynamic separation
-- output closer to hand-optimized React
-
-### 5.2 Top-Level `useMemo` Optimization
+### 6.2 Top-level `useMemo` optimization
 
 If a top-level variable depends on reactive state, semantic compilation rebuilds it with `useMemo` and inferred dependencies.
 
 Vue input (illustrative):
-
 ```vue
 <script setup lang="ts">
 const count = ref(1);
@@ -242,14 +375,7 @@ const profile = {
 </script>
 ```
 
-Plain conversion (illustrative):
-
-```tsx
-const profile = { label: 'Count', value: count.value }; // recreated every render
-```
-
 Semantic-aware output (illustrative):
-
 ```tsx
 const profile = useMemo(
   () => ({
@@ -260,53 +386,23 @@ const profile = useMemo(
 );
 ```
 
-**Key point**: this is not “blindly adding hooks”; it is a semantic decision based on dependency understanding.
+## 7. Macro Semantics: `defineProps`, `defineEmits`, `defineSlots`, `defineExpose`
 
-### 5.3 Combined Mini Example
-
-Vue input (illustrative):
-
-```vue
-<script setup lang="ts">
-const BASE = 'panel';
-const count = ref(0);
-const options = { key: BASE, value: count.value };
-</script>
-```
-
-Semantic-aware output (illustrative):
-
-```tsx
-const BASE = 'panel'; // static hoisting
-const count = useVRef(0);
-const options = useMemo(() => ({ key: BASE, value: count.value }), [count.value]);
-```
-
-Simple reading:
-semantic compilation decides what should stay static and what should be memoized.
-
-## 6. Macro Semantics: `defineProps`, `defineEmits`, `defineSlots`, `defineExpose`
-
-These four macros define a component’s interface semantics in Vue.  
-Semantic-aware compilation does not keep them as macro calls; it rebuilds them into natural React interface shapes.
-
-Combined illustration:
+These macros define component interface semantics in Vue.  
+Semantic-aware compilation rebuilds them into native React interface shapes.
 
 Vue input (illustrative):
-
 ```vue
 <script setup lang="ts">
 const props = defineProps<{ title: string }>();
 const emit = defineEmits<{ (e: 'save', id: number): void }>();
 const slots = defineSlots<{ default?: () => any; footer?: (p: { count: number }) => any }>();
-
 const count = ref(0);
 defineExpose({ count });
 </script>
 ```
 
 Semantic-aware output (illustrative):
-
 ```tsx
 type IComponentProps = {
   title: string;
@@ -314,96 +410,45 @@ type IComponentProps = {
   children?: React.ReactNode;
   footer?: (p: { count: number }) => React.ReactNode;
 };
-
-const Component = memo(
-  forwardRef<any, IComponentProps>((props, expose) => {
-    const count = useVRef(0);
-
-    useImperativeHandle(expose, () => ({ count }));
-
-    return <>{props.children}</>;
-  }),
-);
 ```
 
-### 6.1 `defineProps`: from macro declaration to input contract
+**Key point**: these macros define input/output/slot/expose boundaries; semantic compilation preserves those boundaries in React.
 
-`defineProps` declares the input contract.  
-Semantic compilation rebuilds this as React props typing and props access paths.
-**Key point**: what matters is a clear input boundary, not preserving macro syntax.
-
-### 6.2 `defineEmits`: from event declaration to callback protocol
-
-`defineEmits` is an output-event contract.  
-Semantic compilation rebuilds it as `onXxx` callbacks and maps `emit(...)` into `props.onXxx?.(...)`.
-**Key point**: this preserves outward communication semantics.
-
-### 6.3 `defineSlots`: from slot declaration to function/node props
-
-`defineSlots` describes how child content is injected.  
-Semantic compilation rebuilds this as `children` and/or function props in React.
-**Key point**: it preserves slot scope and invocation relationships.
-
-### 6.4 `defineExpose`: from exposed object to `ref` capability boundary
-
-`defineExpose` defines what is publicly exposed to the parent.  
-Semantic compilation rebuilds this as `forwardRef + useImperativeHandle`.
-**Key point**: it preserves public capability boundaries.
-
-One-line summary:  
-**These macros define input, output, slot, and exposure boundaries; semantic compilation carries those boundaries into React in a stable way.**
-
-## 7. What Does the Compiled Output Look Like?
+## 8. What Does the Compiled Output Look Like?
 
 Typical shape (illustrative):
-
 ```tsx
 import { memo, useMemo, useCallback } from 'react';
 import { useVRef, useComputed } from '@vureact/runtime-core';
-
-const LABEL = 'Counter'; // static hoisting
-const Counter = memo((props) => {
-  const count = useVRef(0);
-  const double = useComputed(() => count.value * 2);
-
-  const meta = useMemo(() => ({ label: LABEL, value: count.value }), [count.value]);
-
-  const onAdd = useCallback(() => {
-    count.value++;
-  }, [count.value]);
-
-  return (
-    <div>
-      {meta.label}: {double.value}
-    </div>
-  );
-});
-
-export default Counter;
 ```
 
 Output characteristics:
-
 - **clear React component structure**
 - **runtime adapters** preserve Vue semantics where needed
-- **native React maintainability** stays intact for manual edits
+- **native React maintainability** is preserved for manual edits
 
-## 8. Why “Semantic-Aware + AI Collaboration” Works Better
+## 9. Why “Semantic-Aware + AI Collaboration” Works Better
 
-1. **AI understands structure more easily**: clearer responsibilities and data flow
-2. **AI follow-up edits are more stable**: easier batch consistency
-3. **progressive migration is smoother**: module-level parallel rollout
-4. **large projects gain more**: stability/readability/batchability beats “magic conversion”
+1. **AI understands structure better**
+2. **AI follow-up edits stay more stable**
+3. **progressive migration is easier to run in parallel**
+4. **large projects gain more from stability/readability/batchability**
 
 > **One-line takeaway**: clearer semantics means lower AI collaboration cost.
 
-## 9. Summary
+## 10. Summary
 
 The real value of semantic-aware compilation is not rewrite speed, but:
-
 - **output stability**
 - **team readability**
 - **long-term editability**
 
 VuReact takes an engineering route:  
 more understanding and constraints at compile time, more reliable React output.
+
+Continue reading:
+1. [Philosophy](./philosophy)
+2. [Conversion Overview](./conversion-overview)
+3. [Template Conversion Guide](./conversion-template)
+4. [Script Conversion Guide](./conversion-script)
+5. [Router Adaptation Guide](./router-adaptation)
