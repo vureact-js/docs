@@ -1,16 +1,16 @@
-﻿# createRouter
+# createRouter
 
 ## 签名
 
 ```ts
-function createRouter(options: CreateRouterOptions): RouterInstance
+function createRouter(options: RouterOptions): Router
 ```
 
 ## 参数
 
 ```ts
-interface CreateRouterOptions {
-  routes: RouteConfig[];
+interface RouterOptions {
+  routes: RouteRecordRaw[];
   history?: RouterMode;
   initialEntries?: string[];
   initialIndex?: number;
@@ -31,18 +31,18 @@ type RouterMode = 'hash' | 'history' | 'memoryHistory';
 
 ## 返回值
 
-返回 `RouterInstance`，包含：
+返回 `Router`，包含：
 
 - `router`（底层 DataRouter 实例）
 - `RouterProvider`（应用根 Provider）
 - 全局守卫注册方法
 - 动态路由与解析能力
 
-详见：[RouterInstance](./router-instance.md)。
+详见：[Router](./router-instance.md)。
 
 ## 行为细节
 
-- `RouteConfig.component` 支持同步 `ReactNode` 或异步 loader `() => import(...)`。
+- `RouteRecordRaw.component` 支持同步 `ReactNode` 或异步 loader `() => import(...)`。
 - 调用时会注册运行时配置（active class、query parse/stringify）。
 - 会把源路由与转换后的路由保存到内部容器，供 `resolve`/`hasRoute` 等 API 使用。
 
@@ -58,10 +58,10 @@ import {
   createRouter,
   createWebHashHistory,
   RouterView,
-  type RouteConfig,
+  type RouteRecordRaw,
 } from '@vureact/router';
 
-const routes: RouteConfig[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: <RouterView />,

@@ -1,4 +1,4 @@
-﻿# Global and Route Guards
+# Global and Route Guards
 
 ## Background
 
@@ -8,7 +8,7 @@ When routing is used for auth, auditing, and analytics, you need deterministic c
 - route-level entry constraints
 - success/failure tracking
 
-`@vureact/router` exposes global guards on `RouterInstance` and route-level `beforeEnter` on `RouteConfig`.
+`@vureact/router` exposes global guards on `Router` and route-level `beforeEnter` on `RouteRecordRaw`.
 
 ## Minimal Runnable Example
 

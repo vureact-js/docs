@@ -1,4 +1,4 @@
-﻿# Router Components
+# Router Components
 
 ## Signature
 
@@ -20,7 +20,7 @@ function RouterLink(props: RouterLinkProps): ReactNode
 
 ### RouterLink (core)
 
-- `to`: `string | RouterOptions`
+- `to`: `RouteLocationRaw`
 - `replace?: boolean`
 - `activeClassName?` / `exactActiveClassName?`
 - `activeClass?` / `exactActiveClass?` (aliases)

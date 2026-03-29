@@ -1,4 +1,4 @@
-﻿# 路由 Hooks
+# 路由 Hooks
 
 ## 签名
 
@@ -26,7 +26,7 @@ function useBeforeRouteEnter(fn: ComponentGuard): void
 
 参数：
 
-- `options.to`: `string | RouterOptions`
+- `options.to`: `RouteLocationRaw`
 - `options.replace?`: `boolean`
 
 返回：

@@ -1,4 +1,4 @@
-﻿# 全局守卫与路由守卫
+# 全局守卫与路由守卫
 
 ## 问题背景
 
@@ -8,7 +8,7 @@
 - 页面进入前的数据门禁
 - 导航成功/失败日志
 
-`@vureact/router` 通过 `RouterInstance` 提供全局守卫，通过 `RouteConfig.beforeEnter` 提供路由级守卫。
+`@vureact/router` 通过 `Router` 提供全局守卫，通过 `RouteRecordRaw.beforeEnter` 提供路由级守卫。
 
 ## 最小可运行示例
 

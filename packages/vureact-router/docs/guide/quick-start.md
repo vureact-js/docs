@@ -1,4 +1,4 @@
-﻿# 快速上手
+# 快速上手
 
 本节目标：在 React 18+ 项目中快速搭建一个可运行的 `@vureact/router` 应用，并覆盖最核心的导航流程。
 
@@ -23,9 +23,9 @@ pnpm add @vureact/router
 ### 2. 创建路由
 
 ```tsx
-import { createRouter, createWebHashHistory, RouterView, type RouteConfig } from '@vureact/router';
+import { createRouter, createWebHashHistory, RouterView, type RouteRecordRaw } from '@vureact/router';
 
-const routes: RouteConfig[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: <RouterView />,
@@ -75,7 +75,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 - `createWebHashHistory()` / `createWebHistory()` / `createMemoryHistory()`
   - 三种历史模式工厂，传给 `createRouter({ history })`。
 - `redirect`
-  - `RouteConfig` 中支持字符串、对象、函数三种重定向表达。
+  - `RouteRecordRaw` 中支持字符串、对象、函数三种重定向表达。
 - `RouterLink` 的 `to`
   - 可为字符串，或 `{ path/name, params, query, hash, state }` 对象。
 

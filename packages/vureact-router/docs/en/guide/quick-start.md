@@ -1,4 +1,4 @@
-﻿# Quick Start
+# Quick Start
 
 This page gets a React 18+ app running with `@vureact/router`, including route config, provider setup, and basic navigation.
 
@@ -23,9 +23,9 @@ pnpm add @vureact/router
 ### 2. Create Router
 
 ```tsx
-import { createRouter, createWebHashHistory, RouterView, type RouteConfig } from '@vureact/router';
+import { createRouter, createWebHashHistory, RouterView, type RouteRecordRaw } from '@vureact/router';
 
-const routes: RouteConfig[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: <RouterView />,

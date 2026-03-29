@@ -1,19 +1,19 @@
-﻿# RouteConfig
+# RouteRecordRaw
 
 ## Signature
 
 ```ts
-interface RouteConfig extends ExclusiveGuards {
+interface RouteRecordRaw extends ExclusiveGuards {
   path?: string;
   name?: string;
   state?: any;
   sensitive?: boolean;
   component?: ReactNode | ComponentLoader;
-  children?: RouteConfig[];
+  children?: RouteRecordRaw[];
   linkActiveClassName?: string;
   linkInActiveClassName?: string;
   linkExactActiveClassName?: string;
-  redirect?: string | RouterOptions | ((to: RouteConfig) => string | RouterOptions);
+  redirect?: RouteLocationRaw | ((to: RouteRecordRaw) => RouteLocationRaw);
   loader?: NonIndexRouteObject['loader'];
   meta?: { [x: string]: any; loadingComponent?: ReactNode };
 }
@@ -31,7 +31,7 @@ interface RouteConfig extends ExclusiveGuards {
 
 ## Returns
 
-`RouteConfig` is a declaration type, not a function return value.
+`RouteRecordRaw` is a declaration type, not a function return value.
 
 ## Behavior Details
 
@@ -48,9 +48,9 @@ interface RouteConfig extends ExclusiveGuards {
 ## Example
 
 ```tsx
-import type { RouteConfig } from '@vureact/router';
+import type { RouteRecordRaw } from '@vureact/router';
 
-export const routes: RouteConfig[] = [
+export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'layout',

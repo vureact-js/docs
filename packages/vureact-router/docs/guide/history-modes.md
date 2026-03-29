@@ -1,4 +1,4 @@
-﻿# 历史模式
+# 历史模式
 
 ## 问题背景
 
@@ -53,7 +53,7 @@ const memoryRouter = createRouter({
 
 - history 模式通常需要服务端配置 fallback，否则刷新子路径会 404。
 - memory 模式不会修改浏览器地址栏，适合测试用例和非浏览器容器。
-- 切换模式只影响 URL 与历史记录行为，不改变 `RouteConfig` 写法。
+- 切换模式只影响 URL 与历史记录行为，不改变 `RouteRecordRaw` 写法。
 
 ## Vue Router 对照
 

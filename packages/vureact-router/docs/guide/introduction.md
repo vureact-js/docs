@@ -1,4 +1,4 @@
-﻿# 简介
+# 简介
 
 ## 问题背景
 
@@ -51,7 +51,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 ## 关键 API 解释
 
 - `createRouter(options)`
-  - 创建 `RouterInstance`，包含 `RouterProvider`、守卫注册方法与扩展 API（`addRoute/resolve` 等）。
+  - 创建 `Router`，包含 `RouterProvider`、守卫注册方法与扩展 API（`addRoute/resolve` 等）。
 - `RouterView`
   - 渲染当前匹配路由组件，也负责在内部串联守卫执行流程。
 - `RouterLink`
@@ -63,7 +63,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 - 必须在 `router.RouterProvider` 内使用 `RouterLink`、`RouterView`、`useRouter`、`useRoute`。
 - `createRouter` 默认 history 是 `createWebHashHistory()`，不是 browser history。
-- `RouteConfig.component` 既支持同步 `ReactNode`，也支持异步组件 loader（`() => import(...)`）。
+- `RouteRecordRaw.component` 既支持同步 `ReactNode`，也支持异步组件 loader（`() => import(...)`）。
 
 ## Vue Router 对照
 

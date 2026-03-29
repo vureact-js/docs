@@ -1,4 +1,4 @@
-﻿# Router Hooks
+# Router Hooks
 
 ## Signature
 
@@ -26,7 +26,7 @@ No parameters. Returns route snapshot fields (`path/fullPath/params/query/hash/m
 
 Parameters:
 
-- `options.to`: `string | RouterOptions`
+- `options.to`: `RouteLocationRaw`
 - `options.replace?`: `boolean`
 
 Returns:

@@ -1,4 +1,4 @@
-﻿# RouterLink
+# RouterLink
 
 ## Background
 
@@ -47,7 +47,7 @@ export default function Nav() {
 ## Key APIs
 
 - `to`
-  - Accepts `string | RouterOptions`.
+  - Accepts `RouteLocationRaw`.
 - `activeClassName` / `exactActiveClassName`
   - Per-link active class override (`activeClass` and `exactActiveClass` are aliases).
 - `inActiveClassName`

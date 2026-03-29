@@ -10,12 +10,22 @@
 
 ---
 
-## v1.2.0 - 2026-03-29
+## v2.0.0 - 2026-03-29
 
 ### ✨ New Features
 
-- Added subpath export `@vureact/router/type-compat` to provide type aliases compatible with Vue Router 4.x
-- Added Vue Router compatible type aliases such as `RouteRecordRaw`, `Router`, `RouterOptions`
+- Removed the `@vureact/router/type-compat` subpath export. All Vue Router-style types are now exported from `@vureact/router`.
+- Renamed types: `CreateRouterOptions` -> `RouterOptions`, `RouterInstance` -> `Router`, `RouteConfig` -> `RouteRecordRaw`.
+- `useRouter()` now returns the main `Router` type, aligning semantically with the return value of `createRouter()`.
+- Added `RouteLocationOptions` and standardized `RouteLocationRaw = string | RouteLocationOptions`.
+
+### Migration Guide
+
+Upgrading from v1.x to v2.0.0:
+
+1. Change all `import type { ... } from '@vureact/router/type-compat'` to import from `@vureact/router`.
+2. Update type names: `RouterInstance` -> `Router`, `CreateRouterOptions` -> `RouterOptions`, `RouteConfig` -> `RouteRecordRaw`.
+3. Check usage of `useRouter()` to ensure no dependency on the old return type name.
 
 ## v1.1.1 - 2026-03-20
 
@@ -32,7 +42,7 @@
 ### 🚀 Improvements
 
 - Refactored the `convertRoute` function to improve the processing logic for component types
-- Updated the `RouteConfig` type definition; `ComponentType` now supports the `FunctionComponent` type
+- Updated the `RouteRecordRaw` type definition; `ComponentType` now supports the `FunctionComponent` type
 - Improved the `buildResolvedTo` function to enhance the robustness and null value handling of path resolution
 - Improved the code organization structure to enhance maintainability and readability
 

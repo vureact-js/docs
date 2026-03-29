@@ -1,4 +1,4 @@
-﻿# Basic Routing
+# Basic Routing
 
 ## Background
 
@@ -8,14 +8,14 @@ Most apps need three baseline routing patterns:
 - Nested route structure
 - Fallback handling (404)
 
-`RouteConfig` supports all of them.
+`RouteRecordRaw` supports all of them.
 
 ## Minimal Runnable Example
 
 ```tsx
-import { createRouter, createWebHistory, RouterView, type RouteConfig } from '@vureact/router';
+import { createRouter, createWebHistory, RouterView, type RouteRecordRaw } from '@vureact/router';
 
-const routes: RouteConfig[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'layout',

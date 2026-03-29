@@ -1,4 +1,4 @@
-﻿# History Modes
+# History Modes
 
 ## Background
 
@@ -49,7 +49,7 @@ const memoryRouter = createRouter({
 
 - Browser history mode usually requires server fallback for deep links.
 - Memory mode does not update browser URL.
-- Changing history mode does not change `RouteConfig` shape.
+- Changing history mode does not change `RouteRecordRaw` shape.
 
 ## Vue Router Mapping
 

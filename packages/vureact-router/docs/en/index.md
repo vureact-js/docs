@@ -1,4 +1,4 @@
-﻿---
+---
 layout: home
 
 title: A Vue Router 4.x style router for React 18+, built for TypeScript and migration-friendly workflows.
@@ -29,7 +29,7 @@ features:
 
   - icon: ⚙️
     title: TypeScript First
-    details: Strong typings for RouteConfig, RouterInstance, and RouteLocation make large apps safer.
+    details: Strong typings for RouteRecordRaw, Router, and RouteLocation make large apps safer.
 
   - icon: 🔁
     title: Multiple History Modes

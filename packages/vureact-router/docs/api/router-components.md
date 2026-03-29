@@ -1,4 +1,4 @@
-﻿# 路由组件
+# 路由组件
 
 ## 签名
 
@@ -20,7 +20,7 @@ function RouterLink(props: RouterLinkProps): ReactNode
 
 ### RouterLink（核心）
 
-- `to`: `string | RouterOptions`
+- `to`: `RouteLocationRaw`
 - `replace?: boolean`
 - `activeClassName?` / `exactActiveClassName?`
 - `activeClass?` / `exactActiveClass?`（别名）

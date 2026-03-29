@@ -1,4 +1,4 @@
-﻿---
+---
 layout: home
 
 title: VuReact Router - 适用于 React 18+、风格类似 Vue Router 4.x 的路由库，提供熟悉的路由组织方式与守卫能力。
@@ -29,7 +29,7 @@ features:
 
   - icon: ⚙️
     title: TypeScript First
-    details: RouteConfig、RouterInstance、RouteLocation 等核心类型完整可推导，适合中大型工程。
+    details: RouteRecordRaw、Router、RouteLocation 等核心类型完整可推导，适合中大型工程。
 
   - icon: 🔁
     title: 多历史模式

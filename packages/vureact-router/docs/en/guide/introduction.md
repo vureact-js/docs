@@ -1,4 +1,4 @@
-﻿# Introduction
+# Introduction
 
 ## VuReact Router
 
@@ -53,7 +53,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 ## Key APIs
 
 - `createRouter(options)`
-  - Creates a `RouterInstance` with `RouterProvider`, guards, and route extension APIs.
+  - Creates a `Router` with `RouterProvider`, guards, and route extension APIs.
 - `RouterView`
   - Renders matched route components and coordinates guard execution.
 - `RouterLink`
@@ -65,7 +65,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 - Always use `RouterLink`, `RouterView`, `useRouter`, and `useRoute` inside `router.RouterProvider`.
 - `createRouter` defaults to `createWebHashHistory()` if `history` is omitted.
-- `RouteConfig.component` supports both sync `ReactNode` and async component loader.
+- `RouteRecordRaw.component` supports both sync `ReactNode` and async component loader.
 
 ## Vue Router Mapping
 

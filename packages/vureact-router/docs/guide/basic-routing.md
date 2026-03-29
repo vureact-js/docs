@@ -1,4 +1,4 @@
-﻿# 基础路由
+# 基础路由
 
 ## 问题背景
 
@@ -8,14 +8,14 @@
 - 页面层级（嵌套路由）
 - 未匹配兜底（404）
 
-`@vureact/router` 的 `RouteConfig` 同时支持这三类能力。
+`@vureact/router` 的 `RouteRecordRaw` 同时支持这三类能力。
 
 ## 最小可运行示例
 
 ```tsx
-import { createRouter, createWebHistory, RouterView, type RouteConfig } from '@vureact/router';
+import { createRouter, createWebHistory, RouterView, type RouteRecordRaw } from '@vureact/router';
 
-const routes: RouteConfig[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'layout',

@@ -1,19 +1,19 @@
-﻿# RouteConfig
+# RouteRecordRaw
 
 ## 签名
 
 ```ts
-interface RouteConfig extends ExclusiveGuards {
+interface RouteRecordRaw extends ExclusiveGuards {
   path?: string;
   name?: string;
   state?: any;
   sensitive?: boolean;
   component?: ReactNode | ComponentLoader;
-  children?: RouteConfig[];
+  children?: RouteRecordRaw[];
   linkActiveClassName?: string;
   linkInActiveClassName?: string;
   linkExactActiveClassName?: string;
-  redirect?: string | RouterOptions | ((to: RouteConfig) => string | RouterOptions);
+  redirect?: RouteLocationRaw | ((to: RouteRecordRaw) => RouteLocationRaw);
   loader?: NonIndexRouteObject['loader'];
   meta?: { [x: string]: any; loadingComponent?: ReactNode };
 }
@@ -31,7 +31,7 @@ interface RouteConfig extends ExclusiveGuards {
 
 ## 返回值
 
-`RouteConfig` 本身是声明类型，不是函数调用结果。
+`RouteRecordRaw` 本身是声明类型，不是函数调用结果。
 
 ## 行为细节
 
@@ -48,9 +48,9 @@ interface RouteConfig extends ExclusiveGuards {
 ## 示例
 
 ```tsx
-import type { RouteConfig } from '@vureact/router';
+import type { RouteRecordRaw } from '@vureact/router';
 
-export const routes: RouteConfig[] = [
+export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'layout',

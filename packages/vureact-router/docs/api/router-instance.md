@@ -1,25 +1,25 @@
-﻿# RouterInstance
+# Router
 
 ## 签名
 
 ```ts
-interface RouterInstance extends GlobalGuards {
+interface Router extends GlobalGuards {
   router: DataRouter;
   RouterProvider: FunctionComponent;
   clearAll: () => void;
-  getRoutes: () => Readonly<GlobalRouteConfig>;
+  getRoutes: () => Readonly<GlobalRouteRecordRaw>;
   addRoute: {
-    (route: RouteConfig): void;
-    (parentName: string, route: RouteConfig): void;
+    (route: RouteRecordRaw): void;
+    (parentName: string, route: RouteRecordRaw): void;
   };
   hasRoute: (name: string) => boolean;
-  resolve: (to: string | RouterOptions) => RouteLocation;
+  resolve: (to: RouteLocationRaw) => RouteLocation;
 }
 ```
 
 ## 参数
 
-`RouterInstance` 来自 `createRouter(options)` 的返回值，本身不直接接收参数。
+`Router` 来自 `createRouter(options)` 的返回值，本身不直接接收参数。
 
 ## 返回值
 

@@ -1,16 +1,16 @@
-﻿# createRouter
+# createRouter
 
 ## Signature
 
 ```ts
-function createRouter(options: CreateRouterOptions): RouterInstance
+function createRouter(options: RouterOptions): Router
 ```
 
 ## Parameters
 
 ```ts
-interface CreateRouterOptions {
-  routes: RouteConfig[];
+interface RouterOptions {
+  routes: RouteRecordRaw[];
   history?: RouterMode;
   initialEntries?: string[];
   initialIndex?: number;
@@ -31,18 +31,18 @@ type RouterMode = 'hash' | 'history' | 'memoryHistory';
 
 ## Returns
 
-Returns a `RouterInstance` containing:
+Returns a `Router` containing:
 
 - `router` (underlying DataRouter)
 - `RouterProvider`
 - global guard registration methods
 - dynamic routing and resolve APIs
 
-See: [RouterInstance](./router-instance.md).
+See: [Router](./router-instance.md).
 
 ## Behavior Details
 
-- `RouteConfig.component` supports sync `ReactNode` and async loader `() => import(...)`.
+- `RouteRecordRaw.component` supports sync `ReactNode` and async loader `() => import(...)`.
 - Runtime config for active class and query parsing is registered during creation.
 - Internal route containers are initialized for `resolve` / `hasRoute` / matching metadata.
 
@@ -58,10 +58,10 @@ import {
   createRouter,
   createWebHashHistory,
   RouterView,
-  type RouteConfig,
+  type RouteRecordRaw,
 } from '@vureact/router';
 
-const routes: RouteConfig[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: <RouterView />,
