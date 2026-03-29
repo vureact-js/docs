@@ -14,7 +14,7 @@ export default defineConfig(options: CompilerOptions);
 
 ## `CompilerOptions`
 
-```ts
+````ts
 interface CompilerOptions {
   /**
    * 手动指定根目录。
@@ -96,6 +96,23 @@ interface CompilerOptions {
      * ]
      */
     ignoreAssets?: string[];
+
+    /**
+     * 自定义产物文件 package.json。
+     * 该函数会接收默认的 package.json 产物对象，
+     * 并需要返回修改后的版本。
+     *
+     * 注：该配置项仅在 `bootstrapVite` 启用时生效。
+     *
+     * @example
+     * ```js
+     * packageJson: (defaultPkg) => {
+     *   // 修改并返回新结果
+     *   defaultPkg.dependencies['my-library'] = '^1.0.0';
+     *   return defaultPkg;
+     * }
+     * ```
+     */
   };
 
   /**
@@ -227,7 +244,7 @@ interface CompilerOptions {
    */
   onChange?: (event: 'add' | 'change', unit: CompilationUnit) => Promise<void | undefined>;
 }
-```
+````
 
 ## 详细配置说明
 

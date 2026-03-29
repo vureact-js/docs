@@ -14,7 +14,7 @@ export default defineConfig(options: CompilerOptions);
 
 ## `CompilerOptions`
 
-```ts
+````ts
 interface CompilerOptions {
   /**
    * Manually specify the root directory.
@@ -96,6 +96,23 @@ interface CompilerOptions {
      * ]
      */
     ignoreAssets?: string[];
+
+    /**
+     * Customize the generated package.json file.
+     * This function receives the default package.json object
+     * and should return the modified version.
+     *
+     * Note: This option only takes effect when `bootstrapVite` is enabled.
+     *
+     * @example
+     * ```js
+     * packageJson: (defaultPkg) => {
+     *   // Modify and return the copy
+     *   defaultPkg.dependencies['my-library'] = '^1.0.0';
+     *   return defaultPkg;
+     * }
+     * ```
+     */
   };
 
   /**
@@ -229,7 +246,7 @@ interface CompilerOptions {
    */
   onChange?: (event: 'add' | 'change', unit: CompilationUnit) => Promise<void | undefined>;
 }
-```
+````
 
 ## Detailed Configuration Explanation
 
