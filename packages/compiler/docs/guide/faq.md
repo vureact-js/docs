@@ -339,7 +339,17 @@ export default defineConfig({
 
 ## Q34: 如何解决 React 中 "Objects are not valid as a React child" 的问题？
 
-如果你的项目中使用了路由，且当运行 React 应用并进入页面后发现这种错误，通常是由于没有手动调整路由配置文件导致的，详细解决方案请移步 [路由适配指南](/guide/router-adaptation)，按照指南处理之后请重启 dev 服务。
+**A:** 解决方案请移步 [路由适配指南](/guide/router-adaptation)，按照指南处理之后请重启 dev 服务。
+
+## Q35: 启用 React 应用后发现页面样式丢失怎么办？
+
+**A:** 请按以下步骤排查：
+
+1. **检查样式文件导入**：确认 Vue 项目入口文件（如 `main.ts`）中是否导入了全局样式文件（如 `app.css`）。若存在，请确保在生成的 React 项目入口文件（如 `main.tsx`）中**保持相同的导入语句**。
+
+2. **检查样式文件路径**：确认导入的样式文件路径是否正确。由于项目结构可能发生变化，请检查相对路径是否需要调整。
+
+3. **检查编译配置**：确认 `vureact.config.js` 中未设置 `preprocessStyles: false`，否则样式代码可能未被正确处理。
 
 ---
 

@@ -8,6 +8,36 @@
 - Historical versions are listed in reverse chronological order
 - For more complete release details, please refer to `core/packages/compiler-core/CHANGELOG.md` in the repository
 
+## v1.5.0
+
+`2026-03-30`
+
+### ✨ Features
+
+- Added `output.packageJson` option: Supports custom configuration of the generated `package.json` content for more flexible package management.
+
+### 🐞 Bug Fixes
+
+- Fixed the issue where some event names were not normalized and event handlers were not properly wrapped: Improved event handling logic to ensure consistent event name formatting.
+- Fixed the issue where top-level slot type rewriting was not skipped for non-SFC script files: Optimized type handling logic to avoid unnecessary type modifications for non-SFC files.
+- Fixed the issue where `React.memo` imports were incorrectly injected into script files: Improved import injection logic to prevent erroneous injection of unnecessary React APIs.
+- Fixed the issue where the terminal process did not exit after Vite initialization failure: Improved error handling flow to ensure proper process exit on failure.
+- Fixed the issue where `dir` utility imports were incorrectly injected into script files: Optimized import analysis to avoid injecting unnecessary utility packages.
+- Fixed the issue where the adapter mistook local variables with the same name as Vue APIs: Improved Vue API detection logic to avoid conflicts with local variables.
+- Fixed the formatting error when dynamic HTML attribute values were string types: Improved attribute value processing to ensure correct conversion of string types.
+- Fixed the issue where HTML `data-*` attributes were not converted to camelCase when used as dynamic attributes: Improved dynamic attribute processing to ensure correct camelCase conversion of `data-*` attributes.
+- Fixed the issue where HTML attribute values using template literals were compiled as plain text: Improved attribute value processing logic to ensure template literals are preserved correctly.
+
+### 🚀 Optimizations
+
+- No longer warn about `@import` in SFC style blocks: Simplified style processing and reduced unnecessary warning messages.
+- Added error alerts for unsupported Vue APIs: Provided clearer error prompts to help users identify unsupported APIs.
+- Replaced all imported Vue type interfaces with `any`: Simplified type handling to avoid type compatibility issues.
+- Optimized processing logic for runtime import injection: Improved runtime import injection mechanism to enhance compilation efficiency.
+- `vue-router` imports are no longer removed; they are mapped to `@vureact-router` while preserving type imports: Improved route import processing to ensure type integrity.
+- Bumped the runtime adapter package version to the latest 1.5.0: Kept the runtime package synchronized with the compiler version.
+- Optimized scoped style ID injection logic: Avoid injecting `scopeId` into unnecessary elements such as pure structural elements that don't require styles.
+
 ## v1.4.0
 
 `2026-03-22`

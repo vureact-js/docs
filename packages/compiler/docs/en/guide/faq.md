@@ -339,7 +339,17 @@ export default defineConfig({
 
 ## Q34: How to resolve the "Objects are not valid as a React child" issue in React?
 
-If your project uses routing and you encounter this error when running the React application and navigating to a page, it is usually caused by not manually adjusting the routing configuration file. For a detailed solution, please refer to the [Router Adaptation Guide](/en/guide/router-adaptation). After following the guide, please restart the dev server.
+**A:** For a detailed solution, please refer to the [Router Adaptation Guide](/en/guide/router-adaptation). After following the guide, please restart the dev server.
+
+## Q35: What to do if page styles are lost after enabling a React app?
+
+**A:** Please troubleshoot by following these steps:
+
+1. **Check style file imports**: Verify if the global style file (e.g., `app.css`) is imported in the entry file of the Vue project (e.g., `main.ts`). If it exists, ensure the **same import statement is retained** in the entry file of the generated React project (e.g., `main.tsx`).
+
+2. **Check style file paths**: Confirm that the import paths of style files are correct. Since the project structure may have changed, check if the relative paths need to be adjusted.
+
+3. **Check compilation configuration**: Make sure `preprocessStyles: false` is not set in `vureact.config.js`; otherwise, the style code may not be processed correctly.
 
 ---
 
