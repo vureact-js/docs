@@ -34,7 +34,7 @@ Before getting started, you can preview and interact with the tutorial's [playgr
 
 ### Prerequisites
 
-- Node.js 20+ (this project uses Vite 8.x as the build tool)
+- Node.js 19+
 - npm 9+
 - Cloned and installed dependencies for the [crm-admin-backend](https://github.com/vureact-js/example-crm-admin-backend) repository
 

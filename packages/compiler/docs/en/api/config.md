@@ -14,7 +14,7 @@ export default defineConfig(options: CompilerOptions);
 
 ## `CompilerOptions`
 
-````ts
+```ts
 interface CompilerOptions {
   /**
    * Manually specify the root directory.
@@ -103,16 +103,8 @@ interface CompilerOptions {
      * and should return the modified version.
      *
      * Note: This option only takes effect when `bootstrapVite` is enabled.
-     *
-     * @example
-     * ```js
-     * packageJson: (defaultPkg) => {
-     *   // Modify and return the copy
-     *   defaultPkg.dependencies['my-library'] = '^1.0.0';
-     *   return defaultPkg;
-     * }
-     * ```
      */
+    packageJson: (data: Record<string, any>) => Record<string, any>;
   };
 
   /**
@@ -234,19 +226,16 @@ interface CompilerOptions {
   };
 
   /**
-   * Executed only after the first full compilation is successful.
+   * Executed after successful compilation in build mode.
    */
   onSuccess?: () => Promise<void | undefined>;
 
   /**
-   * In `watch` mode, executed after a file is added or recompiled.
-   *
-   * @param event File addition or modification event
-   * @param unit The current compilation unit of the single-file component (SFC) or script file to compiled
+   * Executed post successful incremental compilation in watch mode.
    */
   onChange?: (event: 'add' | 'change', unit: CompilationUnit) => Promise<void | undefined>;
 }
-````
+```
 
 ## Detailed Configuration Explanation
 

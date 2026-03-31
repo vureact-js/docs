@@ -31,8 +31,17 @@ export default defineConfig({
             link: 'https://afdian.com/a/vureact-js/plan',
           },
           {
-            text: '在线演示',
-            link: 'https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master',
+            text: '在线案例',
+            items: [
+              {
+                text: '客户关系管理后台（标准）',
+                link: 'https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master',
+              },
+              {
+                text: '客户支持协同后台（混写）',
+                link: 'https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true',
+              },
+            ],
           },
           {
             text: '指南',
@@ -89,7 +98,13 @@ export default defineConfig({
               },
               {
                 text: '项目实战',
-                items: [{ text: 'CRM 后台迁移实战', link: '/guide/crm-admin-backend' }],
+                items: [
+                  { text: '客户关系管理后台', link: '/guide/crm-admin-backend/' },
+                  {
+                    text: '客户支持协同后台',
+                    link: '/guide/customer-support-hub/',
+                  },
+                ],
               },
               {
                 text: '心灵控制',
@@ -175,7 +190,16 @@ export default defineConfig({
           },
           {
             text: 'Playground',
-            link: 'https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master',
+            items: [
+              {
+                text: 'CRM Admin Dashboard (Standard)',
+                link: 'https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master',
+              },
+              {
+                text: 'Customer Support Hub (Mixed)',
+                link: 'https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true',
+              },
+            ],
           },
           {
             text: 'Guide',
@@ -246,8 +270,12 @@ export default defineConfig({
                 text: 'Project Practice',
                 items: [
                   {
-                    text: 'CRM Migration Practice',
+                    text: 'CRM Admin Dashboard',
                     link: '/en/guide/crm-admin-backend',
+                  },
+                  {
+                    text: 'Customer Support Hub',
+                    link: '/en/guide/customer-support-hub',
                   },
                 ],
               },

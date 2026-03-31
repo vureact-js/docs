@@ -1,6 +1,6 @@
 ﻿# Instructions
 
-> ☣️ This chapter contains advanced experimental content. Please complete the beginner and intermediate chapters before proceeding.
+> ☣️ This chapter contains advanced content. Please complete the beginner and intermediate chapters before proceeding.
 
 ## What is "Mind Control"
 

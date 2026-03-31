@@ -1,6 +1,6 @@
-# CRM 后台迁移实战
+# 客户关系管理后台
 
-CRM 客户与销售运营台 Vue 3 项目迁移实战。
+客户关系管理后台 Vue 项目迁移实战。
 
 ## 概述
 
@@ -34,7 +34,7 @@ CRM 客户与销售运营台 Vue 3 项目迁移实战。
 
 ### 准备项
 
-- Node.js 20+
+- Node.js 19+
 - npm 9+
 - 已克隆 [crm-admin-backend](https://github.com/vureact-js/example-crm-admin-backend) 仓并安装依赖
 

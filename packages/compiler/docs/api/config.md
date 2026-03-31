@@ -14,7 +14,7 @@ export default defineConfig(options: CompilerOptions);
 
 ## `CompilerOptions`
 
-````ts
+```ts
 interface CompilerOptions {
   /**
    * 手动指定根目录。
@@ -103,16 +103,8 @@ interface CompilerOptions {
      * 并需要返回修改后的版本。
      *
      * 注：该配置项仅在 `bootstrapVite` 启用时生效。
-     *
-     * @example
-     * ```js
-     * packageJson: (defaultPkg) => {
-     *   // 修改并返回新结果
-     *   defaultPkg.dependencies['my-library'] = '^1.0.0';
-     *   return defaultPkg;
-     * }
-     * ```
      */
+    packageJson: (data: Record<string, any>) => Record<string, any>;
   };
 
   /**
@@ -232,19 +224,16 @@ interface CompilerOptions {
   };
 
   /**
-   * 仅在第一次完整编译成功后执行。
+   * 在 build 模式下，全量编译成功后执行。
    */
   onSuccess?: () => Promise<void | undefined>;
 
   /**
-   * 在 `watch` 模式下，文件被新增或重新编译后执行。
-   *
-   * @param event 文件新增或修改事件
-   * @param unit 当前编译的单文件组件（SFC）或脚本文件编译单元
+   * 在 watch 模式下，增量编译成功后执行。
    */
   onChange?: (event: 'add' | 'change', unit: CompilationUnit) => Promise<void | undefined>;
 }
-````
+```
 
 ## 详细配置说明
 
