@@ -7,7 +7,23 @@ A hands-on migration tutorial for a mixed-code project based on the Vue + React 
 This is a hands-on migration tutorial that helps you implement **full ecosystem enablement** and finish a closed-loop **controllable mixed-coding migration** with VuReact in real-world business scenarios, using:
 **Vue + Vue Router + Ant Design (React) + Zustand (React)**.
 
-Before getting started, you can preview and experience the tutorial in advance via the [online demo](https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true) and [live preview](https://skx7pn-5173.csb.app/).
+### Playground
+
+Before getting started, you can preview and experience the tutorial in advance via the [playground](https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true) and [preview](https://skx7pn-5173.csb.app/).
+
+### Video Tutorial
+
+You can also quickly learn the full migration process through the video below.
+
+<iframe
+  style="width: 100%; min-height: 400px"
+  src="//player.bilibili.com/player.html?isOutside=true&aid=116328518392375&bvid=BV1en97BuEkd&cid=37146790756&p=1&danmaku=0&autoplay=0&t=0"
+  scrolling="no"
+  border="0"
+  frameborder="no"
+  framespacing="0"
+  allowfullscreen="true"
+></iframe>
 
 ### Prerequisites
 

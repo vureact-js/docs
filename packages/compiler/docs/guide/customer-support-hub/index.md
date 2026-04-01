@@ -8,7 +8,23 @@
 
 `Vue + Vue Router + Ant Design (React) + Zustand (React)`，实现全生态释放，完成在真实业务场景下的 VuReact “可控混写” 迁移闭环。
 
+### 在线演示
+
 在开始之前，你可以提前访问本教程的 [在线演示](https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true) 进行 [预览](https://skx7pn-5173.csb.app/) 和体验。
+
+### 视频教程
+
+你也可以通过以下视频快速了解整个迁移过程（建议进入B站高清播放）：
+
+<iframe
+  style="width: 100%; min-height: 400px"
+  src="//player.bilibili.com/player.html?isOutside=true&aid=116328518392375&bvid=BV1en97BuEkd&cid=37146790756&p=1&danmaku=0&autoplay=0&t=0"
+  scrolling="no"
+  border="0"
+  frameborder="no"
+  framespacing="0"
+  allowfullscreen="true"
+></iframe>
 
 ### 准备项
 
