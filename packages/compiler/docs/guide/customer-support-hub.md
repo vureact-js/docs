@@ -17,7 +17,7 @@
 你也可以通过以下视频快速了解整个迁移过程：
 
 <video muted controls>
-  <source src="/videos/customer-support-hub.mp4" type="video/mp4" />
+  <source src="/static/customer-support-hub.mp4" type="video/mp4" />
   您的浏览器不支持视频播放。
 </video>
 

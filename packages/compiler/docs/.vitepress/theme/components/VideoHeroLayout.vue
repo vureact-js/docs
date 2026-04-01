@@ -3,8 +3,16 @@
     <!-- 该 slot 位置介于 hero 和 features 区域之间 -->
     <template #home-hero-after>
       <div class="hero-video-wrapper">
-        <video autoplay loop muted playsinline class="hero-video" poster="/videos/hero-poster.png">
-          <source src="/videos/hero.mp4" type="video/mp4" />
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="auto"
+          class="hero-video"
+          poster="/static/hero-poster.png"
+        >
+          <source src="/static/intro.mp4" type="video/mp4" />
           您的浏览器不支持视频播放。
         </video>
       </div>

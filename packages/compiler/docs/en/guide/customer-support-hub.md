@@ -16,7 +16,7 @@ Before getting started, you can preview and experience the tutorial in advance v
 You can also quickly understand the entire migration process through the following video:
 
 <video muted controls>
-  <source src="/videos/customer-support-hub.mp4" type="video/mp4" />
+  <source src="/static/customer-support-hub.mp4" type="video/mp4" />
   Your browser does not support video playback.
 </video>
 
