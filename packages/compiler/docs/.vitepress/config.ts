@@ -99,10 +99,10 @@ export default defineConfig({
               {
                 text: '项目实战',
                 items: [
-                  { text: '客户关系管理后台', link: '/guide/crm-admin-backend/' },
+                  { text: '客户关系管理后台', link: '/guide/crm-admin-backend' },
                   {
                     text: '客户支持协同后台',
-                    link: '/guide/customer-support-hub/',
+                    link: '/guide/customer-support-hub',
                   },
                 ],
               },
@@ -259,7 +259,7 @@ export default defineConfig({
                   },
                   {
                     text: 'SFC Advanced Features',
-                    link: '/guide/advanced-context-events-slots',
+                    link: '/en/guide/advanced-context-events-slots',
                   },
                   { text: 'Styles in Components', link: '/en/guide/advanced-style-pipeline' },
                   { text: 'Script Files', link: '/en/guide/advanced-script-only-pipeline' },

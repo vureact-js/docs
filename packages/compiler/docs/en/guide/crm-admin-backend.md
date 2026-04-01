@@ -82,17 +82,17 @@ npm run vr:build
 
 - The console outputs compilation statistics (number of SFC/script/style files processed):
 
-<img src="/guide/crm-admin-backend/images/1.png" />
+<img src="../../public/images/crm-admin-backend/1.png" />
 
 - A `.vureact/react-app` directory is generated, mirroring the structure of the original Vue source code:
 
 <div style="display: flex;">
   <div style="font-size: 14px; text-align: center;">
-    <img src="/guide/crm-admin-backend/images/2.png" />
+    <img src="../../public/images/crm-admin-backend/2.png" />
     <p>(Vue Directory)</p>
   </div>
  <div style="font-size: 14px; text-align: center; margin-left: 46px">
-    <img src="/guide/crm-admin-backend/images/2-1.png" style="width: 172px; height: 482px" />
+    <img src="../../public/images/crm-admin-backend/2-1.png" style="width: 172px; height: 482px" />
     <p>(.vureact Directory)</p>
  </div>
 </div>
@@ -167,7 +167,7 @@ export default router;
 
 - Page routes (e.g., Dashboard/Customers/Leads/Tasks) are accessible:
 
-<img src="/guide/crm-admin-backend/images/4.png"  />
+<img src="../../public/images/crm-admin-backend/4.png"  />
 
 ### Troubleshooting Routing Issues
 
@@ -191,11 +191,11 @@ npm run dev
 
 - The Vite dev server starts successfully (on the default local port):
 
-<img src="/guide/crm-admin-backend/images/5.png"  />
+<img src="../../public/images/crm-admin-backend/5.png"  />
 
 - The browser opens to the login page, then navigates to the CRM main interface:
 
-<img src="/guide/crm-admin-backend/images/6.png"  />
+<img src="../../public/images/crm-admin-backend/6.png"  />
 
 ### Troubleshooting Launch Failures
 

@@ -11,19 +11,14 @@ This is a hands-on migration tutorial that helps you implement **full ecosystem 
 
 Before getting started, you can preview and experience the tutorial in advance via the [playground](https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true) and [preview](https://skx7pn-5173.csb.app/).
 
-### Video Tutorial
+### Video Demonstration
 
-You can also quickly learn the full migration process through the video below.
+You can also quickly understand the entire migration process through the following video:
 
-<iframe
-  style="width: 100%; min-height: 400px"
-  src="//player.bilibili.com/player.html?isOutside=true&aid=116328518392375&bvid=BV1en97BuEkd&cid=37146790756&p=1&danmaku=0&autoplay=0&t=0"
-  scrolling="no"
-  border="0"
-  frameborder="no"
-  framespacing="0"
-  allowfullscreen="true"
-></iframe>
+<video muted controls>
+  <source src="/videos/customer-support-hub.mp4" type="video/mp4" />
+  Your browser does not support video playback.
+</video>
 
 ### Prerequisites
 
@@ -89,11 +84,11 @@ npm run vr:watch
 
 - Console output showing compilation statistics (number of SFC/script/style processed).
 
-<img src="/guide/customer-support-hub/images/console.png"  />
+<img src="../../public/images/customer-support-hub/console.png"  />
 
 - A `.vureact/react-app` directory is generated, mirroring the structure of the Vue source code.
 
-<img src="/guide/customer-support-hub/images/menus.png"  />
+<img src="../../public/images/customer-support-hub/menus.png"  />
 
 - After successful compilation, React entry style imports are automatically processed according to `vureact.config.ts` configuration (completed by the `onSuccess` hook).
 
@@ -157,7 +152,7 @@ router.beforeEach((to, _from, next) => {
 
 - Page routes (e.g., Dashboard/Tickets/Customers/Agents/Knowledge/SLA/Settings) are accessible.
 
-<img src="/guide/customer-support-hub/images/pages.png"  />
+<img src="../../public/images/customer-support-hub/pages.png"  />
 
 ### 3.2 Troubleshooting Routing Issues
 
@@ -313,11 +308,11 @@ npm run dev
 - Vite dev server starts successfully (default local port).
 - Browser opens to the login page.
 
-<img src="/guide/customer-support-hub/images/login.png"  />
+<img src="../../public/images/customer-support-hub/login.png"  />
 
 - After login, enter the customer support collaboration main interface.
 
-<img src="/guide/customer-support-hub/images/dashboard.png"  />
+<img src="../../public/images/customer-support-hub/dashboard.png"  />
 
 - Hot reload is available: Modify Vue source files and React output pages update synchronously.
 
@@ -346,20 +341,20 @@ Manually verify the following paths in the running page.
 - Login and guards: Accessing business pages without login redirects to login; after login, redirect back to the target page.
 - Ticket list and details: Filter/search tickets; view timeline and SLA snapshots after entering details page.
 
-<img src="/guide/customer-support-hub/images/tickets.png"  />
+<img src="../../public/images/customer-support-hub/tickets.png"  />
 
 - Ticket action linkage: After performing claim, assign, escalate, or status update actions, corresponding records are added to the activity feed.
 
-<img src="/guide/customer-support-hub/images/ticket-detail.png"  />
+<img src="../../public/images/customer-support-hub/ticket-detail.png"  />
 
 - SLA dashboard linkage: After ticket escalation or approaching deadline, dashboard risk status updates synchronously; SLA configuration updates take effect immediately.
 - Customer page linkage: View customer risk scores, create new tickets via "quick ticket creation", and retrieve them in the ticket list.
 
-<img src="/guide/customer-support-hub/images/customer-detail.png"  />
+<img src="../../public/images/customer-support-hub/customer-detail.png"  />
 
 - Knowledge base search: Filter articles by keywords or tags with normal pagination data.
 
-<img src="/guide/customer-support-hub/images/knowledge.png"  />
+<img src="../../public/images/customer-support-hub/knowledge.png"  />
 
 ### 7.2 Troubleshooting Business Linkage Issues
 
