@@ -10,7 +10,7 @@
           playsinline
           preload="auto"
           class="hero-video"
-          poster="/static/hero-poster.png"
+          poster="https://i.postimg.cc/SsJCGfZv/demo.gif"
         >
           <source src="/static/intro.mp4" type="video/mp4" />
           您的浏览器不支持视频播放。
