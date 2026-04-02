@@ -27,8 +27,12 @@ export default defineConfig({
         ],
         nav: [
           {
+            text: '联系作者',
+            link: '/guide/contact',
+          },
+          {
             text: '赞助',
-            link: 'https://afdian.com/a/vureact-js/plan',
+            link: '/guide/sponsor',
           },
           {
             text: '在线案例',
@@ -164,6 +168,13 @@ export default defineConfig({
               { text: '导出清单', link: '/api/exports' },
             ],
           },
+          {
+            text: '其他',
+            items: [
+              { text: '赞助', link: '/guide/sponsor' },
+              { text: '联系作者', link: '/guide/contact' },
+            ],
+          },
         ],
       },
     },
@@ -185,8 +196,12 @@ export default defineConfig({
         ],
         nav: [
           {
-            text: 'Sponsorship',
-            link: 'https://afdian.com/a/vureact-js/plan',
+            text: 'Contact',
+            link: '/en/guide/contact',
+          },
+          {
+            text: 'Sponsor',
+            link: '/en/guide/sponsor',
           },
           {
             text: 'Playground',
@@ -342,6 +357,13 @@ export default defineConfig({
               { text: 'Context API', link: '/en/api/compiler-context' },
               { text: 'Types & Results', link: '/en/api/types' },
               { text: 'Exports Manifest', link: '/en/api/exports' },
+            ],
+          },
+          {
+            text: 'Others',
+            items: [
+              { text: 'Sponsor', link: '/en/guide/sponsor' },
+              { text: 'Contact', link: '/en/guide/contact' },
             ],
           },
         ],
