@@ -27,7 +27,7 @@ export default defineConfig({
         ],
         nav: [
           {
-            text: '联系作者',
+            text: '联系',
             link: '/guide/contact',
           },
           {
@@ -51,6 +51,7 @@ export default defineConfig({
             text: '指南',
             items: [
               { text: '介绍', link: '/guide/introduction' },
+              { text: '更新日志', link: '/guide/changelog' },
               { text: '教程与实战', link: '/guide/basic-tutorial' },
               { text: '配置', link: '/guide/cli' },
               { text: '常见问题', link: '/guide/faq' },
@@ -172,7 +173,7 @@ export default defineConfig({
             text: '其他',
             items: [
               { text: '赞助', link: '/guide/sponsor' },
-              { text: '联系作者', link: '/guide/contact' },
+              { text: '联系', link: '/guide/contact' },
             ],
           },
         ],
@@ -220,6 +221,7 @@ export default defineConfig({
             text: 'Guide',
             items: [
               { text: 'Introduction', link: '/guide/introduction' },
+              { text: 'Changelog', link: '/guide/changelog' },
               { text: 'Tuts & Practices', link: '/guide/basic-tutorial' },
               { text: 'Configuration', link: '/guide/cli' },
               { text: 'FAQ', link: '/guide/faq' },
