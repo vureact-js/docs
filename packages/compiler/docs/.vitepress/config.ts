@@ -104,9 +104,9 @@ export default defineConfig({
               {
                 text: '项目实战',
                 items: [
-                  { text: '客户关系管理后台', link: '/guide/crm-admin-backend' },
+                  { text: '客户关系管理后台（标准）', link: '/guide/crm-admin-backend' },
                   {
-                    text: '客户支持协同后台',
+                    text: '客户支持协同后台（混写）',
                     link: '/guide/customer-support-hub',
                   },
                 ],
