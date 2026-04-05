@@ -8,11 +8,11 @@
           loop
           muted
           playsinline
-          preload="auto"
+          preload="metadata"
           class="hero-video"
-          poster="https://i.postimg.cc/SsJCGfZv/demo.gif"
+          poster="/images/hero_demo_poster.jpg"
         >
-          <source src="/static/intro.mp4" type="video/mp4" />
+          <source src="/static/hero_demo_3MB.mp4" type="video/mp4" />
           您的浏览器不支持视频播放。
         </video>
       </div>
