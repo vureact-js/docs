@@ -1,12 +1,12 @@
 ﻿---
 layout: home
 
-title: VuReact | 渐进式语义驱动的 Vue → React 迁移编译器
+title: 写 Vue，生成可维护的 React
 
 hero:
   name: 'VuReact'
-  text: '语义驱动的 Vue 3 → React 迁移编译器'
-  tagline: '语义感知，渐进迁移，约定驱动'
+  text: '写 Vue，生成可维护的 React'
+  tagline: '语义感知 · 渐进迁移 · 约定驱动'
 
   actions:
     - theme: brand
@@ -20,7 +20,7 @@ hero:
 features:
   - icon: 🧠
     title: 语义感知
-    details: 深度理解Vue语法的完整语义结构，包括模板指令、script setup逻辑、组合式API和TypeScript类型，智能生成符合React最佳实践的代码
+    details: 深度理解Vue语法的完整语义结构，包括模板指令、script setup逻辑、组合式API和TypeScript类型等，智能生成符合React最佳实践的代码
 
   - icon: ⚖️
     title: 渐进迁移

@@ -1,12 +1,12 @@
 ﻿---
 layout: home
 
-title: VuReact | A semantics-aware Vue to React compiler for progressive migration
+title: Write in Vue, compile to React
 
 hero:
   name: 'VuReact'
-  text: 'Semantically Compile Vue 3 into React'
-  tagline: 'Semantic Awareness, Progressive Migration, Convention-Driven'
+  text: 'Write in Vue, compile to React'
+  tagline: 'Semantic-aware · Incremental migration · Convention-driven'
 
   actions:
     - theme: brand
@@ -19,15 +19,15 @@ hero:
 
 features:
   - icon: 🧠
-    title: Semantic Awareness
-    details: Understand Vue like a compiler, output React like a pro
+    title: Semantic-aware
+    details: Understand Vue 3 like a compiler, generate maintainable React 18+ like a pro
 
   - icon: ⚖️
-    title: Progressive Migration
+    title: Incremental Migration
     details: Start small, scale to full projects—no risky rewrites
 
   - icon: 🧭
-    title: Convention-Driven
+    title: Convention-driven
     details: Predictable transforms powered by clear conventions, not guesses
 
   - icon: ⚛️

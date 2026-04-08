@@ -2,7 +2,7 @@
 
 ## 什么是 VuReact
 
-VuReact（Vue + React 连读，发音 `/vjuːˈriːækt/`）是一个渐进式 [语义驱动](./what-is-semantic-aware) 的 Vue 3 → React 18+ 迁移编译器，旨在为 Vue 项目与可控的渐进式迁移提供高效、可靠的开发体验。
+VuReact（发音 `/vjuːˈriːækt/`）是一个让你用 Vue 3 语法编写 React 18+ 应用的编译器。其核心价值不仅限于项目迁移，更在于将 Vue 的开发体验与 React 生态能力无缝结合，产出可维护、可演进、生产就绪的 React 代码。
 
 它不仅执行语法层面的转换，更能深入理解 Vue 代码的语义，并生成遵循 React 最佳实践的优质代码。
 

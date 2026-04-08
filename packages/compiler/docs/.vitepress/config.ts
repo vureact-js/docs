@@ -6,14 +6,14 @@ export default defineConfig({
 
   title: 'VuReact',
 
-  description: 'A semantics-aware Vue to React compiler for progressive migration',
+  description: 'Write in Vue 3, compile to React 18+ code.',
 
   locales: {
     root: {
       label: '简体中文',
       lang: 'zh-CN',
       link: '/',
-      description: '渐进式语义驱动的 Vue → React 迁移编译器',
+      description: '一个让你用 Vue 3 语法编写 React 18+ 应用的编译器。',
       themeConfig: {
         socialLinks: [
           {
@@ -80,8 +80,8 @@ export default defineConfig({
             items: [
               { text: '开始', link: '/guide/introduction' },
               { text: '理念', link: '/guide/philosophy' },
+              { text: '什么是语义感知', link: '/guide/what-is-semantic-aware' },
               { text: '为什么选 VuReact', link: '/guide/why' },
-              { text: '什么是语义驱动', link: '/guide/what-is-semantic-aware' },
               { text: '更新日志', link: '/guide/changelog' },
             ],
           },
@@ -250,8 +250,8 @@ export default defineConfig({
             items: [
               { text: 'Getting Started', link: '/en/guide/introduction' },
               { text: 'Philosophy', link: '/en/guide/philosophy' },
-              { text: 'Why Choose VuReact', link: '/en/guide/why' },
               { text: 'What is Semantics-Aware', link: '/en/guide/what-is-semantic-aware' },
+              { text: 'Why Choose VuReact', link: '/en/guide/why' },
               { text: 'Change Log', link: '/en/guide/changelog' },
             ],
           },

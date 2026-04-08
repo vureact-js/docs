@@ -2,7 +2,7 @@
 
 ## What is VuReact
 
-VuReact (a portmanteau of Vue + React, pronounced /vjuːˈriːækt/) is a semantics-aware Vue 3 to React 18+ compiler for progressive migration, designed to provide an efficient and reliable developer experience for controlled migration of Vue projects.
+VuReact (pronounced `/vjuːˈriːækt/`) is a compiler that allows you to write React 18+ applications using Vue 3 syntax. Its core value extends beyond project migration, focusing on seamlessly integrating Vue's development experience with React's ecosystem capabilities, producing maintainable, evolvable, and production-ready React code.
 
 It not only performs syntax-level conversions but also deeply understands the semantics of Vue code, generating high-quality React code that adheres to React best practices.
 

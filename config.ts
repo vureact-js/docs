@@ -18,7 +18,7 @@ const commonConfig = defineConfig({
     logo: '/logo.png',
     footer: {
       message: 'Released under the MIT License',
-      copyright: 'Copyright © 2025-present Ryan John',
+      copyright: 'Copyright © 2025-present Ruihong Zhong',
     },
 
     search: {
