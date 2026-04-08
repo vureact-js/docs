@@ -2,6 +2,16 @@
 
 `vureact` follows [Semantic Versioning 2.0.0](sslocal://flow/file_open?url=http%3A%2F%2Fsemver.org%2F&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=). Versions are in descending chronological order.
 
+## v1.5.2 (2026-04-08)
+
+### 🐞 Bug Fixes
+
+- Fixed non-functional output from incomplete traditional `<script>` syntax conversion; now throws clear compile-time error
+
+### 🚀 Optimizations
+
+- Removed incomplete handling logic for traditional syntax to prevent runtime errors
+
 ## v1.5.1 (2026-04-04)
 
 ### 🐞 Bug Fixes
@@ -186,4 +196,5 @@
 - Compile-time scoped / module CSS output
 - Basic CLI (build / watch), cache, Vite init, hybrid development
 
+> Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>
 > Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>
