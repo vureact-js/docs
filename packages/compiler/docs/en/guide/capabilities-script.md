@@ -64,6 +64,12 @@
 | ---------------- | ----------------- | ------------- | ---------------------------------------- |
 | `useTemplateRef` | `useRef`          | Pure Function | Template ref (converted to React useRef) |
 
+### Injected Attribute API
+
+| Vue API    | Target       | Type         | Description                                                  |
+| ---------- | ------------ | ------------ | ------------------------------------------------------------ |
+| `useAttrs` | Compile-time | Pure JS code | Pass-through attributes (converted to React props reference) |
+
 ### Routing-related API
 
 | Vue Router-style API  | Adaptation Target      | Category      | Description                           |

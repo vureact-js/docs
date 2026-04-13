@@ -437,13 +437,198 @@ const formattedValue = useMemo(() => memoizedObj.bar.toFixed(2), [memoizedObj.ba
 | `onBeforeRouteLeave` / `onBeforeRouteUpdate` / `onBeforeRouteEnter` | `useBeforeRouteLeave` / `useBeforeRouteUpdate` / `useBeforeRouteEnter` |
 | `createWebHistory` / `createWebHashHistory` / `createMemoryHistory` | `createWebHistory` / `createWebHashHistory` / `createMemoryHistory`    |
 
-## 9. Strong Constraints and Common Failure Points
+## 9. `useAttrs`: Fallthrough Attributes Handling
+
+In Vue, `useAttrs()` is used to retrieve fallthrough attributes not declared in `defineProps`, such as `class`, `style`, custom attributes, etc. In React, all attributes are passed via `props`, so `useAttrs()` is converted to a reference to `props`.
+
+> A fallthrough attribute is essentially an untyped JavaScript runtime object that merges with declared props to form the final set of component attributes.
+
+### Basic Transformation
+
+**Vue Input:**
+
+```html
+<script setup lang="ts">
+  const attrs = useAttrs();
+</script>
+```
+
+**React Output (Simplified):**
+
+```tsx
+const attrs = props as Record<string, unknown>;
+```
+
+### TypeScript Type Handling
+
+The compiler automatically adds appropriate type assertions based on different scenarios:
+
+1. **Default Type**: Uses `Record<string, unknown>` if no type is specified
+2. **Type Assertion**: Preserves existing type assertions
+3. **Variable Type Annotation**: Uses the annotated type if present
+4. **Props Type Handling**: Automatically adds a props parameter with the default type if the component declares no props; intersects with the default type if props are already declared.
+
+#### Example: Multiple Type Usages
+
+**Vue Input:**
+
+```vue
+<script setup lang="ts">
+interface Attrs {
+  class?: string;
+  style?: string;
+  [key: string]: unknown;
+}
+
+// Basic usage
+const attrs = useAttrs();
+
+// Destructuring + type assertion
+const { style, class: cls } = useAttrs() as Attrs;
+
+// With type annotation
+const typeAnnotation: Attrs = useAttrs();
+</script>
+```
+
+**React Output (Simplified):**
+
+```tsx
+interface Attrs {
+  class?: string;
+  style?: string;
+  [key: string]: unknown;
+}
+
+// Basic usage
+const attrs = props as Record<string, unknown>;
+
+// Destructuring + type assertion
+const { style, class: cls } = props as Attrs;
+
+// With type annotation
+const typeAnnotation = props as Attrs;
+```
+
+### Usage in Templates
+
+When accessing `attrs` properties in templates, the compiler correctly handles optional chaining and dynamic property access:
+
+**Vue Input:**
+
+```html
+<template>
+  <div
+    :class="[
+      'red',
+      attrs.class,
+      attrs.xx.class,
+      attrs['class'],
+      attrs.xx['class'],
+      attrs?.['class'],
+    ]"
+  >
+    {{ attrs?.xxx?.['class'] }}
+  </div>
+</template>
+```
+
+**React Output (Simplified):**
+
+```tsx
+<div
+  className={dir.cls([
+    'red',
+    attrs.class,
+    attrs.xx.class,
+    attrs['class'],
+    attrs.xx['class'],
+    attrs?.['class'],
+  ])}
+>
+  {attrs?.xxx?.['class']}
+</div>
+```
+
+### JavaScript Environment
+
+In plain JavaScript, `useAttrs()` is directly replaced with a reference to `props`:
+
+**Vue Input:**
+
+```vue
+<script setup>
+const attrs = useAttrs();
+</script>
+```
+
+**React Output (Simplified):**
+
+```tsx
+const attrs = props;
+```
+
+### Notes
+
+1. **Attribute Merging**: In React, `props` contains all passed attributes, both declared and undeclared.
+2. **Type Safety**: Explicit type annotations for `useAttrs()` are recommended for better type hints.
+3. **Attribute Access**: Optional chaining is preserved when accessing `attrs` in templates.
+4. **Relationship with `defineProps`**: `useAttrs()` retrieves attributes not declared in `defineProps`; after conversion to React, all attributes are accessed via `props`.
+
+### Full Example
+
+**Vue Input:**
+
+```vue
+<template>
+  <div :class="attrs.class" :style="attrs.style">
+    {{ attrs.title }}
+  </div>
+</template>
+
+<script setup lang="ts">
+interface CustomAttrs {
+  class?: string;
+  style?: string;
+  title?: string;
+}
+
+const props = defineProps<{ id: string }>();
+const attrs = useAttrs() as CustomAttrs;
+</script>
+```
+
+**React Output (Simplified):**
+
+```tsx
+interface CustomAttrs {
+  class?: string;
+  style?: string;
+  title?: string;
+}
+
+type ICompProps = {
+  id: string;
+};
+
+const Comp = memo((props: ICompProps & Record<string, unknown>) => {
+  const attrs = props as CustomAttrs;
+
+  return (
+    <div className={attrs.class} style={attrs.style}>
+      {attrs.title}
+    </div>
+  );
+});
+```
+
+## 10. Strong Constraints and Common Failure Points
 
 1. Macros can only be used at the top level of SFC and must be assigned to variables
 2. Calls to be converted to Hooks must comply with React's top-level rules
 3. Dynamic/unanalyzable syntax will trigger warnings, errors, or be handled conservatively
 4. It is recommended to use stable strings for event names, avoiding dynamic `emit(eventName)`
-5. No manual adjustment is made to the routing configuration content (e.g., not changing the value of the `component` option to JSX tag syntax)
+5. Transferred attributes should use explicit `useAttrs()` and manually use its return value
 
 ## Next Steps
 

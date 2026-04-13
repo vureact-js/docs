@@ -531,13 +531,198 @@ const formattedValue = useMemo(() => memoizedObj.bar.toFixed(2), [memoizedObj.ba
 | `onBeforeRouteLeave` / `onBeforeRouteUpdate` / `onBeforeRouteEnter` | `useBeforeRouteLeave` / `useBeforeRouteUpdate` / `useBeforeRouteEnter` |
 | `createWebHistory` / `createWebHashHistory` / `createMemoryHistory` | `createWebHistory` / `createWebHashHistory` / `createMemoryHistory`    |
 
-## 9. 强约束与常见失败点
+## 9. `useAttrs`：透传属性处理
+
+Vue 的 `useAttrs()` 用于获取未在 `defineProps` / `defineProps` 中声明的透传属性（如 `class`、`style`、自定义属性等）。在 React 中，所有属性都通过 `props` 传递，因此 `useAttrs()` 被转换为对 `props` 的引用。
+
+> 透传 Attribute 本质上是一个无类型约束的 JavaScript 运行时对象，它会与已声明的 props 合并，共同构成组件的最终属性集合。
+
+### 基本转换
+
+Vue 输入：
+
+```vue
+<script setup lang="ts">
+const attrs = useAttrs();
+</script>
+```
+
+React 输出（示意）：
+
+```tsx
+const attrs = props as Record<string, unknown>;
+```
+
+### TypeScript 类型处理
+
+编译器会根据不同情况自动添加适当的类型断言：
+
+1. **默认类型**：若未指定类型，使用 `Record<string, unknown>`
+2. **类型断言**：若已有类型断言，会保留类型注解
+3. **变量类型注解**：若变量有类型注解，会使用该类型
+4. **Props 类型处理**：若组件未声明 `props`，则自动添加 props 参数并应用默认类型；若已声明 props，则将其与默认类型进行交叉合并。
+
+#### 示例：多种类型用法
+
+Vue 输入：
+
+```vue
+<script setup lang="ts">
+interface Attrs {
+  class?: string;
+  style?: string;
+  [key: string]: unknown;
+}
+
+// 基本用法
+const attrs = useAttrs();
+
+// 解构 + 类型断言
+const { style, class: cls } = useAttrs() as Attrs;
+
+// 带类型注解
+const typeAnnotation: Attrs = useAttrs();
+</script>
+```
+
+React 输出（示意）：
+
+```tsx
+interface Attrs {
+  class?: string;
+  style?: string;
+  [key: string]: unknown;
+}
+
+// 基本用法
+const attrs = props as Record<string, unknown>;
+
+// 解构 + 类型断言
+const { style, class: cls } = props as Attrs;
+
+// 带类型注解
+const typeAnnotation = props as Attrs;
+```
+
+### 模板中的使用
+
+在模板中访问 `attrs` 的属性时，编译器会正确处理可选链操作符和动态属性访问：
+
+Vue 输入：
+
+```vue
+<template>
+  <div
+    :class="[
+      'red',
+      attrs.class,
+      attrs.xx.class,
+      attrs['class'],
+      attrs.xx['class'],
+      attrs?.['class'],
+    ]"
+  >
+    {{ attrs?.xxx?.['class'] }}
+  </div>
+</template>
+```
+
+React 输出（示意）：
+
+```tsx
+<div
+  className={dir.cls([
+    'red',
+    attrs.class,
+    attrs.xx.class,
+    attrs['class'],
+    attrs.xx['class'],
+    attrs?.['class'],
+  ])}
+>
+  {attrs?.xxx?.['class']}
+</div>
+```
+
+### JavaScript 环境
+
+在纯 JavaScript 环境中，`useAttrs()` 会直接替换为 `props` 引用：
+
+Vue 输入：
+
+```vue
+<script setup>
+const attrs = useAttrs();
+</script>
+```
+
+React 输出（示意）：
+
+```tsx
+const attrs = props;
+```
+
+### 注意事项
+
+1. **属性合并**：在 React 中，`props` 包含了所有传入的属性，包括已声明的和未声明的
+2. **类型安全**：建议为 `useAttrs()` 添加明确的类型注解，以获得更好的类型提示
+3. **属性访问**：在模板中访问 `attrs` 属性时，可选链操作符会被正确保留
+4. **与 `defineProps` 的关系**：`useAttrs()` 获取的是未在 `defineProps` 中声明的属性，但在 React 转换后，所有属性都通过 `props` 访问
+
+### 完整示例
+
+Vue 输入：
+
+```vue
+<template>
+  <div :class="attrs.class" :style="attrs.style">
+    {{ attrs.title }}
+  </div>
+</template>
+
+<script setup lang="ts">
+interface CustomAttrs {
+  class?: string;
+  style?: string;
+  title?: string;
+}
+
+const props = defineProps<{ id: string }>();
+const attrs = useAttrs() as CustomAttrs;
+</script>
+```
+
+React 输出（示意）：
+
+```tsx
+interface CustomAttrs {
+  class?: string;
+  style?: string;
+  title?: string;
+}
+
+type ICompProps = {
+  id: string;
+};
+
+const Comp = memo((props: ICompProps & Record<string, unknown>) => {
+  const attrs = props as CustomAttrs;
+
+  return (
+    <div className={attrs.class} style={attrs.style}>
+      {attrs.title}
+    </div>
+  );
+});
+```
+
+## 10. 强约束与常见失败点
 
 1. 宏只能在 SFC 顶层，且必须赋值给变量
 2. 将被转为 Hook 的调用必须满足 React 顶层规则
 3. 动态/不可分析写法会告警、报错或被保守处理
-4. 事件名建议稳定字符串，避免动态 `emit(eventName)`
-5. 没有对路由配置内容进行手动调校，如没有将 `component` 选项的值改为 JSX 标签写法
+4. 事件名建议使用稳定的字符串，避免动态 `emit(eventName)` 写法
+5. 透传 Attribute 应使用显式的 `useAttrs()`，并手动使用其返回值
 
 ## 下一步
 

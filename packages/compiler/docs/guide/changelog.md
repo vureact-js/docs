@@ -2,6 +2,25 @@
 
 `vureact` 遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/) 语义化版本规范，版本按时间倒序排列。
 
+## v1.6.0 (2026-04-13)
+
+### ✨ 新增功能
+
+- 新增 SFC 元数据收集：解析阶段收集 props、emits、options 元数据
+- 新增 `useAttrs` 转换：Vue `useAttrs()` 转 React props，TS 环境自动断言为 `Record` 类型，隔离原有 props 类型提示
+- 新增 TS 交叉类型支持：使用 `useAttrs` 时自动为 props 追加 `Record` 交叉类型，保证类型完整
+
+### 🐞 修复问题
+
+- 修复 import 注入与顶部注释位置冲突，对齐注释与导入语句
+- 修复带特定指令的 `<template>` 节点错误迁移问题
+- 修复 `<template>` 节点 `:key` 未正确转移到首个子节点问题
+- 修复 SFC 顶层 TS 类型声明中函数字段被误转为 `ReactNode` 问题
+
+### 🚀 优化改进
+
+- 重构脚本元数据收集逻辑，模块化提升可维护性与扩展性
+
 ## v1.5.2 (2026-04-08)
 
 ### 🐞 修复问题

@@ -2,6 +2,25 @@
 
 `vureact` follows [Semantic Versioning 2.0.0](sslocal://flow/file_open?url=http%3A%2F%2Fsemver.org%2F&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=). Versions are in descending chronological order.
 
+## v1.6.0 (2026-04-13)
+
+### ✨ Features
+
+- Add SFC metadata collection: Collect props, emits, and options metadata during parsing
+- Add `useAttrs` transformation: Convert Vue `useAttrs()` to React props; automatically assert as `Record` type in TypeScript to isolate original props type hints
+- Add TypeScript intersection type support: Automatically append `Record` intersection type to props when `useAttrs` is used to ensure type integrity
+
+### 🐞 Bug Fixes
+
+- Fix import injection conflicting with top comments, align comments and import statements
+- Fix incorrect migration of `<template>` nodes with specific directives
+- Fix `:key` not properly transferred from `<template>` node to its first child
+- Fix function fields in SFC top-level TypeScript declarations incorrectly converted to `ReactNode` type
+
+### 🚀 Optimizations
+
+- Refactor script metadata collection logic; modularize for better maintainability and extensibility
+
 ## v1.5.2 (2026-04-08)
 
 ### 🐞 Bug Fixes
@@ -194,6 +213,11 @@
 - Full Vue SFC → React conversion (template / script setup / style)
 - Composition API → React Hooks mapping
 - Compile-time scoped / module CSS output
+- Basic CLI (build / watch), cache, Vite init, hybrid development
+
+> Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>
+> Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>
+
 - Basic CLI (build / watch), cache, Vite init, hybrid development
 
 > Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>
