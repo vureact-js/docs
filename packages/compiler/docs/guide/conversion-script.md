@@ -18,7 +18,7 @@
 | `onMounted` / `onUnmounted`                           | `useMounted` / `useUnmounted`                                  |
 | `onBeforeUpdate` / `onUpdated`                        | `useBeforeUpdate` / `useUpdated`                               |
 
-更多详细内容请移步 [运行时 Hooks 文档](https://runtime.vureact.top/guide/hooks/reactive.html)
+更多详细内容请移步 [VuReact Runtime](https://runtime.vureact.top/guide/hooks/reactive.html) 文档。
 
 ### 示例：`ref` + `computed`
 
@@ -531,11 +531,13 @@ const formattedValue = useMemo(() => memoizedObj.bar.toFixed(2), [memoizedObj.ba
 | `onBeforeRouteLeave` / `onBeforeRouteUpdate` / `onBeforeRouteEnter` | `useBeforeRouteLeave` / `useBeforeRouteUpdate` / `useBeforeRouteEnter` |
 | `createWebHistory` / `createWebHashHistory` / `createMemoryHistory` | `createWebHistory` / `createWebHashHistory` / `createMemoryHistory`    |
 
+更多详细内容请移步 [VuReact Router](https://router.vureact.top/) 文档。
+
 ## 9. `useAttrs`：透传属性处理
 
-Vue 的 `useAttrs()` 用于获取未在 `defineProps` / `defineProps` 中声明的透传属性（如 `class`、`style`、自定义属性等）。在 React 中，所有属性都通过 `props` 传递，因此 `useAttrs()` 被转换为对 `props` 的引用。
+> 透传 Attributes 本质上是一个无类型约束的 JavaScript 运行时对象，它会与已声明的 props 合并，共同构成组件的最终属性集合。
 
-> 透传 Attribute 本质上是一个无类型约束的 JavaScript 运行时对象，它会与已声明的 props 合并，共同构成组件的最终属性集合。
+Vue 的 `useAttrs()` 用于获取未在 `defineProps` / `defineProps` 中声明的透传属性（如 `class`、`style`、自定义属性等）。在 React 中，所有属性都通过 `props` 传递，因此 `useAttrs()` 被转换为对 `props` 的引用。
 
 ### 基本转换
 

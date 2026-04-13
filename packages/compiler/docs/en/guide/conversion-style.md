@@ -80,7 +80,7 @@ import './counter-abc1234.css';
 
 export default function Counter() {
   return (
-    <div className="card" data-v-abc1234>
+    <div className="card" data-css-abc1234>
       Content
     </div>
   );
@@ -89,7 +89,7 @@ export default function Counter() {
 
 ```css
 /* counter-abc1234.css */
-.card[data-v-abc1234] {
+.card[data-css-abc1234] {
   border: 1px solid #e5e5e5;
   border-radius: 8px;
 }
@@ -99,7 +99,7 @@ export default function Counter() {
 
 1. **Component elements**: No scope attributes are injected (e.g., custom components)
 2. **Dynamic components**: No scope attributes are injected (e.g., `<component :is="...">`)
-3. **Native elements**: `data-v-{hash}` attribute is automatically injected
+3. **Native elements**: `data-css-{hash}` attribute is automatically injected
 
 ## 3. CSS Modules Support
 
@@ -167,7 +167,7 @@ $primary: #42b883;
 ```
 
 ```vue
-<style lang="less" module>
+<style lang="less" module scoped>
 @border-color: #e5e5e5;
 
 .container {
@@ -187,6 +187,18 @@ $primary: #42b883;
   &:hover {
     background: darken($primary, 10%);
   }
+}
+```
+
+React Output (illustration):
+
+```css
+.button[data-css-abc1234] {
+  background: #42b883;
+}
+
+.button[data-css-abc1234]:hover {
+  background: rgba(#42b883, 10%);
 }
 ```
 

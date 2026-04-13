@@ -26,7 +26,7 @@ This chapter mainly explains:
 
 ## A Frequently Noticed Detail
 
-When using `ref` in Vue templates, `.value` is usually not written, but in the generated React code, VuReact will automatically add `.value` for access. This is the default behavior in template expression conversion, used to maintain semantic consistency and ensure the output is runnable.
+When using `ref` / `computed` in Vue templates, `.value` is usually not written, but in the generated React code, VuReact will automatically add `.value` for access. This is the default behavior in template expression conversion, used to maintain semantic consistency and ensure the output is runnable.
 
 ## Recommended Reading Order
 

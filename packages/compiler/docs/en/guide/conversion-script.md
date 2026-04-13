@@ -123,6 +123,100 @@ type ICompProps = {
 };
 ```
 
+### `defineOptions` and Component Name
+
+Vue Input:
+
+```vue
+<script setup lang="ts">
+defineOptions({
+  name: 'MyComponent',
+  inheritAttrs: false,
+});
+</script>
+```
+
+React Output (illustrative):
+
+```tsx
+const MyComponent = () => {};
+// inheritAttrs has no direct equivalent in React and will be ignored
+```
+
+Notes:
+
+- Other options such as `inheritAttrs`, `customOptions`, etc. have no direct equivalent in React and will be ignored or warned.
+- It is recommended to use the special comment `// @vr-name: Xxxx` to define the component name.
+
+### `defineExpose` and Exposing Component Data
+
+Vue Input:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+
+defineProps<{ title: string }>();
+
+const count = ref(0);
+const increment = () => count.value++;
+
+defineExpose({
+  count,
+  increment,
+});
+</script>
+```
+
+React Output (illustrative):
+
+```tsx
+import { forwardRef, useImperativeHandle, memo, useRef, useEffect } from 'react';
+import { useVRef } from '@vureact/runtime-core';
+
+type IComponentProps = { title: string };
+
+const Component = memo(
+  forwardRef<any, IComponentProps>((props, expose) => {
+    const count = useVRef(0);
+
+    const increment = () => count.value++;
+
+    useImperativeHandle(expose, () => ({
+      count,
+      increment,
+    }));
+
+    return <div>{count.value}</div>;
+  }),
+);
+
+export default Component;
+```
+
+Notes:
+
+- `defineExpose` is transformed into a `forwardRef` + `useImperativeHandle` combination.
+- The exposed ref object preserves `.value` access, matching Vue behavior.
+- The parent component can access exposed values via `ref.current.count.value`.
+- The ref type uses `any`; props types are preserved, and developers can add more specific typing.
+
+Parent Component Example:
+
+```tsx
+const Parent = () => {
+  const childRef = useRef<{ count: { value: number }; increment: () => void }>();
+
+  useEffect(() => {
+    console.log(childRef.current?.count.value); // 0
+    childRef.current?.increment();
+    console.log(childRef.current?.count.value); // 1
+  }, []);
+
+  return <Component ref={childRef} />;
+};
+```
+
 ## 3. `useTemplateRef`: `useRef` + `.current`
 
 Vue Input:

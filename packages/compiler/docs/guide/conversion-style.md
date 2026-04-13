@@ -80,7 +80,7 @@ import './counter-abc1234.css';
 
 export default function Counter() {
   return (
-    <div className="card" data-v-abc1234>
+    <div className="card" data-css-abc1234>
       Content
     </div>
   );
@@ -89,7 +89,7 @@ export default function Counter() {
 
 ```css
 /* counter-abc1234.css */
-.card[data-v-abc1234] {
+.card[data-css-abc1234] {
   border: 1px solid #e5e5e5;
   border-radius: 8px;
 }
@@ -97,9 +97,9 @@ export default function Counter() {
 
 ### 作用域注入规则
 
-1. **组件元素**：不注入作用域属性（如自定义组件）
-2. **动态组件**：不注入作用域属性（如 `<component :is="...">`）
-3. **原生元素**：自动注入 `data-v-{hash}` 属性
+1. **template 元素**：不注入作用域属性
+2. **slot 元素**：不注入作用域属性
+3. **存在 class/id 属性的元素**：自动注入 `data-css-{hash}` 属性
 
 ## 3. CSS Modules 支持
 
@@ -167,7 +167,7 @@ $primary: #42b883;
 ```
 
 ```vue
-<style lang="less" module>
+<style lang="less" module scoped>
 @border-color: #e5e5e5;
 
 .container {
@@ -187,6 +187,18 @@ $primary: #42b883;
   &:hover {
     background: darken($primary, 10%);
   }
+}
+```
+
+React 输出（示意）：
+
+```css
+.button[data-css-abc1234] {
+  background: #42b883;
+}
+
+.button[data-css-abc1234]:hover {
+  background: rgba(#42b883, 10%);
 }
 ```
 
@@ -264,6 +276,11 @@ export default function Component() {
 }
 ```
 
+### 辅助函数注入规则
+
+1. **class 值为变量**: 注入 `dir.cls` 函数在运行时处理
+2. **非静态字符串**：注入 `dir.cls` 函数在运行时处理
+
 ## 7. 约束与限制
 
 ### 多个样式块
@@ -273,21 +290,6 @@ export default function Component() {
 | 多个 `<style>` 块    | 不完整支持 | 仅首个生效，其余告警 |
 | 混合 `scoped` 和全局 | 支持       | 但建议统一风格       |
 | 动态样式块           | 不支持     | 编译时无法分析       |
-
-### @import 限制
-
-```vue
-<style scoped>
-/* 警告：@import 内容可能保留全局影响 */
-@import './base.css';
-
-.local {
-  color: red;
-}
-</style>
-```
-
-编译器会发出警告，建议内联导入的样式以保持作用域。
 
 ### CSS 变量（CSS Custom Properties）
 
@@ -302,11 +304,11 @@ export default function Component() {
 典型输出结构：
 
 ```txt
-.vureact/dist/src/components/
-├─ Counter.tsx                  # React 组件
-├─ counter.css                  # 普通样式文件
-├─ counter-abc1234.css          # Scoped 样式文件
-└─ counter-abc1234.module.css   # CSS Modules 文件
+.vureact/react-app/src/components/Counter
+├─ index.tsx                  # React 组件
+├─ index.css                  # 普通样式文件
+├─ index-abc1234.css          # Scoped 样式文件
+└─ index-abc1234.module.css   # CSS Modules 文件
 ```
 
 文件生成规则：
@@ -321,14 +323,16 @@ export default function Component() {
 
 1. **解析阶段**：提取 SFC 中的 `<style>` 块
 2. **预处理阶段**：
+   - 处理预处理器代码
    - 处理 `scoped` 样式，生成作用域标识
    - 处理 `module` 样式，生成模块映射
-   - 处理预处理器代码
-3. **文件生成阶段**：
-   - 生成 CSS 文件
-   - 注入作用域属性到模板
+3. **转换阶段**：
+   - 注入作用域标识属性到模板
    - 生成样式导入语句
-4. **后处理阶段**：
+4. **生成阶段**：
+   - 注入样式导入语句到组件
+   - 生成 CSS 文件
+5. **文件生成阶段**：
    - 优化 CSS 输出
    - 处理资源引用（如图片、字体）
 
