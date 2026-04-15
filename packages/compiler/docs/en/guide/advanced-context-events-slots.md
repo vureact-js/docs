@@ -104,7 +104,3 @@ const upgrade = useCallback(() => {
 1. `provide/inject` is adapted at runtime, not via string replacement.
 2. It is still recommended to use stable strings for `emit` event names.
 3. In advanced scenarios, scoped slots still retain the semantics of "function-type props".
-
-## Next Steps
-
-- See [SFC Style Processing Pipeline](./advanced-style-pipeline)

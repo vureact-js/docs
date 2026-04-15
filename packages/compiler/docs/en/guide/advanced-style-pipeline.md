@@ -145,7 +145,3 @@ CSS File Content `demo-<hash>.module.css`:
 1. Multiple `<style>` blocks: Currently, the first style block is used as the main path.
 2. `cssVars` (`v-bind()` CSS variables) are not in the scope of stable support.
 3. `scoped + @import` requires careful validation for global pollution.
-
-## Next Steps
-
-- See [Non-SFC Script File Pipeline](./advanced-script-only-pipeline)

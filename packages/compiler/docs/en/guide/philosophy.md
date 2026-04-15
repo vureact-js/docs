@@ -118,9 +118,3 @@ graph LR
 - Translate these principles into team work norms
 - Establish convention-based code review standards
 - Plan incremental technology evolution roadmaps
-
-## Next Steps
-
-- Check out [Why VuReact](./why) to learn about specific use cases
-- Read [Compilation Conventions](./specification) to master mandatory rules
-- Refer to [Best Practices](./best-practices) to establish team workflows

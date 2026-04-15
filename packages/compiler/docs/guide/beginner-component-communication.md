@@ -95,7 +95,3 @@ const UserCard = memo((props: IUserCardProps) => {
 3. 默认插槽映射为 `children`，且非作用域插槽没有变为 `props.children?.()` 调用。
 4. 作用域插槽映射为函数型 props，并自动推导对应简单值 TS 类型（本例 `footer`）。
 5. 事件和数据流都保持“父传子、子回调父”的清晰单向路径。
-
-## 下一步
-
-- 查看 [上下文 + 事件 + 插槽链路](./advanced-context-events-slots)

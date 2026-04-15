@@ -205,7 +205,7 @@ my-vue-app/
 │   │   └── src/
 │   │       └── components/
 │   │           ├── Counter.tsx
-│   │           └── Counter-[hash].css
+│   │           └── counter-[hash].css
 │   └── cache/          # 编译缓存
 ├── src/                # 原始 Vue 代码
 └── vureact.config.js   # 配置文件
@@ -235,7 +235,7 @@ npm run dev
 ```tsx
 import { memo, useCallback } from 'react';
 import { useVRef } from '@vureact/runtime-core';
-import './Counter-abc123.css';
+import './counter-abc123.css';
 
 const Counter = memo(() => {
   const count = useVRef(0);
@@ -250,14 +250,10 @@ const Counter = memo(() => {
 
   return (
     <div className="counter" data-css-abc123>
-      <h2 data-css-abc123>计数器示例</h2>
-      <p data-css-abc123>当前计数: {count.value}</p>
-      <button onClick={increment} data-css-abc123>
-        增加
-      </button>
-      <button onClick={reset} data-css-abc123>
-        重置
-      </button>
+      <h2>计数器示例</h2>
+      <p>当前计数: {count.value}</p>
+      <button onClick={increment}>增加</button>
+      <button onClick={reset}>重置</button>
     </div>
   );
 });
@@ -303,7 +299,7 @@ const increment = useCallback(() => {
   count.value++;
 }, [count.value]);
 
-// 自动添加 scoped 样式标记
+// 对具有 class 或 id 属性的元素，自动添加 scoped 样式标记
 <div className="counter" data-css-a1b2c3>
 ```
 
@@ -325,16 +321,7 @@ const increment = useCallback(() => {
 
 ### 生态集成
 
-- **[Vue 核心适配包](https://runtime.vureact.top/)**：提供 React 版的 Vue 常用内置组件、核心 Composition API 等
-- **[Vue 路由适配包](https://router.vureact.top/)**：支持 Vue Router 4.x -> React Router DOM 7.9+ 转换
-- **状态管理**：暂无
-- **UI 库**：暂无
+- **[VuReact Runtime](https://runtime.vureact.top/)**：提供 React 版的 Vue 常用内置组件、核心 Composition API 等
+- **[VuReact Router](https://router.vureact.top/)**：支持 Vue Router 4.x -> React Router DOM 7.9+ 转换
 
-如果确实需要，可以选择 [☣️混合编写](/guide/mind-control-readme)，以此直接使用 React 生态。
-
-## 下一步建议
-
-1. **阅读理念**：了解 [VuReact 的设计哲学](./philosophy)，理解"可控优先"的核心原则
-2. **评估适用性**：查看 [为什么选 VuReact](./why)，确认项目是否适合使用
-3. **尝试示例**：通过 [编译示例](./basic-tutorial) 了解更多转换模式
-4. **学习规范**：在正式使用前，务必通读 [编译约定](./specification)
+如果需要，可以选择 [☣️混合开发](/guide/mind-control-readme)，直接在 Vue 项目中引入 React 生态能力。

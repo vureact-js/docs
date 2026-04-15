@@ -81,9 +81,9 @@ const methods = {
 
 ## Step 2：配置编译器
 
-`vureact.config.js`
+`vureact.config.ts`
 
-```js
+```ts
 import { defineConfig } from '@vureact/compiler-core';
 
 export default defineConfig({
@@ -92,16 +92,14 @@ export default defineConfig({
   exclude: ['src/main.ts'],
   output: {
     workspace: '.vureact',
-    outDir: 'dist',
+    outDir: 'react-app',
     // 教程场景关闭环境初始化，便于观察纯编译产物
     bootstrapVite: false,
   },
-  format: {
-    enabled: true, // 开启格式化，同时这也会增加编译耗时。
-    formatter: 'prettier',
-  },
 });
 ```
+
+更多配置选项请参阅 [配置 API](/api/config)。
 
 ## Step 3：执行编译
 
@@ -137,11 +135,11 @@ my-app/
 ├─ .vureact/
 │  ├─ cache/
 │  │  └─ _metadata.json
-│  └─ dist/
+│  └─ react-app/
 │     └─ src/
 │        └─ components/
 │           ├─ Counter.tsx
-│           └─ Counter-<hash>.css
+│           └─ counter-<hash>.css
 ├─ src/
 │  └─ ...
 └─ vureact.config.js
@@ -154,7 +152,7 @@ my-app/
 ```tsx
 import { memo, useCallback, useMemo } from 'react';
 import { useComputed, useVRef } from '@vureact/runtime-core';
-import './Counter-a1b2c3.css';
+import './counter-a1b2c3.css';
 
 const Counter = memo(() => {
   // ref/computed 转换成了对等的适配 API
@@ -180,14 +178,10 @@ const Counter = memo(() => {
   return (
     <>
       <section className="counter-card" data-css-a1b2c3>
-        <h2 data-css-a1b2c3>{title.value}</h2>
-        <p data-css-a1b2c3>Count: {count.value}</p>
-        <button onClick={increment} data-css-a1b2c3>
-          +1
-        </button>
-        <button onClick={methods.decrease} data-css-a1b2c3>
-          -1
-        </button>
+        <h2>{title.value}</h2>
+        <p>Count: {count.value}</p>
+        <button onClick={increment}>+1</button>
+        <button onClick={methods.decrease}>-1</button>
       </section>
     </>
   );
@@ -216,7 +210,7 @@ CSS 文件内容：
 6. 顶层变量声明会尝试注入 `useMemo`
 7. 对 JSX 中的原 `ref` 状态值补上 `.value`
 8. `less` 样式被编译为 css 代码
-9. `scoped` 样式会生成带哈希的 css 文件，并在元素上标注作用域属性
+9. `scoped` 样式会生成带哈希的样式文件，并在具有 `class`/`id` 属性的元素上标注 `data-css-*`属性
 
 ## 常见失败点
 
@@ -224,8 +218,3 @@ CSS 文件内容：
 - 在非顶层调用会被转换为 Hook 的 API
 - 模板里出现不可分析表达式并被告警
 - 关闭样式预处理且使用 `scoped`，导致作用域失效
-
-## 下一步
-
-- 继续阅读 [能力矩阵总览](./capabilities-overview)
-- 遇到规则问题时回看 [编译约定](./specification)

@@ -289,7 +289,7 @@ export default defineConfig({
 });
 ```
 
-For detailed configuration, see the [Config API](/api/config) documentation.
+For detailed configuration, see the [Config API](/en/api/config) documentation.
 
 - Execute the migration:
 
@@ -342,18 +342,8 @@ npm run dev
 
 ## Appendix C: Troubleshooting Index
 
-- Blank routing page: First check the [Router Adaptation Guide](/guide/router-adaptation)
-- Syntax coverage: See [Capability Matrix](/guide/capabilities-overview)
-- Compilation warning handling: See [Best Practices](/guide/best-practices)
+- Blank routing page: First check the [Router Adaptation Guide](/en/guide/router-adaptation)
+- Compilation warning handling: See [Best Practices](/en/guide/best-practices)
 - Feedback Channels:
   - [Compiler Issues](https://github.com/vureact-js/core/issues)
   - [Router Issues](https://github.com/vureact-js/vureact-router/issues)
-
-## Appendix D: Next Learning Path
-
-After finishing this tutorial, continue in this order:
-
-1. [CLI Guide](/en/guide/cli): learn `build/watch`, input scope control, and command workflow.
-2. [Config API](/en/api/config): understand `input/exclude/output/router` and other core options.
-3. [Compilation Specification](/en/guide/specification): align with compiler conventions and boundary rules.
-4. [Best Practices](/en/guide/best-practices): establish a migration process that is rollback-friendly and verifiable.

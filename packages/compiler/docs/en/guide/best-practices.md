@@ -7,7 +7,7 @@
 3. Configure `exclude` to explicitly exclude entry points and unstable directories
 4. Use TypeScript + explicit props/emits definitions
 5. Fix input code first when encountering warnings, then continue expanding the migration scope
-6. It is recommended to have React development thinking
+6. Use AI to assist or take over the full compilation workflow, continuously optimizing and fixing potential issues in the React output
 
 ## Common Anti-Patterns
 
@@ -18,4 +18,4 @@
 
 ## Outcome-Oriented Suggestions
 
-Treat VuReact as a "compilation platform with boundaries" rather than an "unbounded fallback tool".
+Treat VuReact as a "compilation platform with boundaries" and a "strict AI collaborator", rather than an "unbounded fallback tool".

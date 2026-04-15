@@ -195,8 +195,6 @@ Issues can be submitted at [GitHub Issues](https://github.com/vureact-js/core/is
 
 **A:** Fully supports core features such as script setup, Composition API, defineProps/defineEmits/defineSlots, watch/computed, etc.
 
-For detailed support status, please refer to the [Capability Matrix](./capabilities-overview).
-
 ## Q19: What is the performance after conversion?
 
 **A:** Through compile-time optimization and a zero-runtime style solution, the converted React code is close to handwritten code by humans, and the application performance is comparable to native React applications.
@@ -213,7 +211,7 @@ For detailed support status, please refer to the [Capability Matrix](./capabilit
 
 **A:** The compiler adopts a **targeted identification strategy** instead of fully covering all Vue APIs:
 
-1. Scope locking mechanism: The compiler maintains a **clear scope of API adaptation** ([Capability Matrix Overview](/guide/capabilities-overview)) and only processes Vue APIs that are known and have implemented adaptations.
+1. Scope locking mechanism: The compiler maintains a **clear scope of API adaptation** and only processes Vue APIs that are known and have implemented adaptations.
 
 2. Selective adaptation principles:
    - **Core API first**: Prioritize adapting Vue 3's core reactive APIs and lifecycle hooks.

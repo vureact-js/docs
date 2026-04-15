@@ -161,9 +161,6 @@ export default defineConfig({
   // Input path containing Vue files to compile; single file 'xxx.vue' is allowed
   input: 'src',
 
-  // Enable compilation cache
-  cache: true,
-
   // Exclude Vue entry files to avoid semantic conflicts
   exclude: ['src/main.ts'],
 
@@ -174,8 +171,8 @@ export default defineConfig({
     // Output directory name
     outDir: 'react-app',
 
-    // Automatically initialize Vite React environment
-    bootstrapVite: true,
+    // Disable environment initialization for tutorial purposes
+    bootstrapVite: false,
   },
 });
 ```

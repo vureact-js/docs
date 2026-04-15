@@ -10,12 +10,14 @@ If you remember one sentence, make it this:
 ## 1. Core Concept: How Is It Different from Syntax-Level Conversion?
 
 The difference is simple:
+
 - syntax-level conversion asks “what does this look like?”
 - semantic-aware conversion asks “what does this actually do?”
 
 ### Comparison A: `ref` is not just a rename
 
 Vue input:
+
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -25,12 +27,14 @@ const inc = () => count.value++;
 ```
 
 Typical mechanical conversion (illustrative):
+
 ```tsx
 const [count, setCount] = useState(0); // similar syntax, different semantics
 const inc = () => count++; // incorrect behavior
 ```
 
 Semantic-aware output (illustrative):
+
 ```tsx
 const count = useVRef(0);
 const inc = useCallback(() => {
@@ -44,6 +48,7 @@ const inc = useCallback(() => {
 
 The real pain in Vue -> React migration is usually **semantic loss**, not syntax mismatch.
 Common issues:
+
 1. behavior drift after directive/structure conversion (conditions, loops, slots, two-way binding)
 2. unstable output across similar files
 3. weaker readability and maintainability
@@ -61,11 +66,13 @@ Why semantic-aware compilation helps:
 ## 3. How It Differs from Common Approaches
 
 Most approaches fall into three buckets:
+
 1. syntax replacement: fast but fragile in complex cases
 2. AST mapping: stricter, but still mechanical without semantic staging
 3. runtime proxying: fast short-term, but may shift complexity to runtime
 
 VuReact takes a different route:
+
 - staged processing (parse -> understand -> generate)
 - semantic context first, generation second
 - compile-time decisions whenever possible
@@ -77,6 +84,7 @@ VuReact takes a different route:
 ## 4.1 Template: structure, scope, and directive semantics
 
 Template processing focuses on:
+
 - branch relationships (`v-if / v-else-if / v-else`)
 - loop semantics (`v-for` source/value/index/key)
 - event modifier semantics (`v-on`)
@@ -86,11 +94,13 @@ Template processing focuses on:
 ### Comparison B: `v-model` is not only an event-name change
 
 Vue input:
+
 ```vue
 <ChildPanel v-model="title" />
 ```
 
 Semantic-aware output (illustrative):
+
 ```tsx
 <ChildPanel
   modelValue={title.value}
@@ -107,6 +117,7 @@ Semantic-aware output (illustrative):
 This is a core semantic case: not just replacing `v-if` with `? :`, but preserving branch dependency and fallback order.
 
 Vue input (illustrative):
+
 ```vue
 <template>
   <div v-if="user">
@@ -119,6 +130,7 @@ Vue input (illustrative):
 ```
 
 Semantic-aware output (illustrative):
+
 ```tsx
 {
   user ? (
@@ -138,10 +150,12 @@ Semantic-aware output (illustrative):
 ### Comparison D: `v-for` -> `map / Object.entries`
 
 `v-for` reconstruction depends on data shape:
+
 - arrays usually become `map`
 - objects usually become `Object.entries(...).map(...)`
 
 Vue input (illustrative):
+
 ```vue
 <template>
   <li v-for="(item, i) in list" :key="item.id">{{ i }} - {{ item.name }}</li>
@@ -150,9 +164,14 @@ Vue input (illustrative):
 ```
 
 Semantic-aware output (illustrative):
+
 ```tsx
 {
-  list.map((item, i) => <li key={item.id}>{i} - {item.name}</li>);
+  list.map((item, i) => (
+    <li key={item.id}>
+      {i} - {item.name}
+    </li>
+  ));
 }
 {
   Object.entries(obj).map(([key, val], i) => (
@@ -174,6 +193,7 @@ Semantic-aware output (illustrative):
 ## 4.2 Script: align reactivity, lifecycle, and setup logic
 
 Script processing handles:
+
 - reactive API mapping (`ref/computed/watch`)
 - macro semantics (`defineProps`, `defineEmits`, `defineExpose`, etc.)
 - lifecycle and dependency relationships
@@ -215,6 +235,7 @@ To avoid false positives, the strategy is conservative in these cases:
 ### 5.3 Complex nested case: object + array + function cross-references
 
 Vue input (illustrative):
+
 ```vue
 <script setup lang="ts">
 const fooRef = ref(0);
@@ -252,6 +273,7 @@ const computeFn = () => {
 ```
 
 Semantic-aware output (illustrative):
+
 ```tsx
 const memoizedObj = useMemo(
   () => ({
@@ -266,7 +288,10 @@ const memoizedObj = useMemo(
 
 const reactiveList = useMemo(() => [fooRef.value, 1, 2], [fooRef.value]);
 const mixedList = useMemo(
-  () => [{ name: reactiveState.foo, age: fooRef.value }, { name: 'A', age: 20 }],
+  () => [
+    { name: reactiveState.foo, age: fooRef.value },
+    { name: 'A', age: 20 },
+  ],
   [reactiveState.foo, fooRef.value],
 );
 
@@ -292,6 +317,7 @@ dependencies for `nestedObj` are collected across layers and references, not gue
 ### 5.4 Trace-back collection case: alias chains and destructuring
 
 Vue input (illustrative):
+
 ```vue
 <script setup lang="ts">
 const state = reactive({ foo: 'bar' });
@@ -313,6 +339,7 @@ const traceFn = () => {
 ```
 
 Semantic-aware output (illustrative):
+
 ```tsx
 const aliasA = useMemo(() => state.foo, [state.foo]);
 const aliasB = useMemo(() => aliasA, [aliasA]);
@@ -340,9 +367,11 @@ const traceFn = useCallback(() => {
 ## 6. Static Hoisting and Top-Level `useMemo` Optimization
 
 ### 6.1 Static Hoisting
+
 When top-level values are proven static, they are hoisted outside the component to avoid repeated creation.
 
 Vue input (illustrative):
+
 ```vue
 <script setup lang="ts">
 const TITLE = 'User Panel';
@@ -351,6 +380,7 @@ const RETRY_LIMIT = 3;
 ```
 
 Semantic-aware output (illustrative):
+
 ```tsx
 const TITLE = 'User Panel';
 const RETRY_LIMIT = 3;
@@ -365,6 +395,7 @@ const UserPanel = memo(() => {
 If a top-level variable depends on reactive state, semantic compilation rebuilds it with `useMemo` and inferred dependencies.
 
 Vue input (illustrative):
+
 ```vue
 <script setup lang="ts">
 const count = ref(1);
@@ -376,6 +407,7 @@ const profile = {
 ```
 
 Semantic-aware output (illustrative):
+
 ```tsx
 const profile = useMemo(
   () => ({
@@ -392,6 +424,7 @@ These macros define component interface semantics in Vue.
 Semantic-aware compilation rebuilds them into native React interface shapes.
 
 Vue input (illustrative):
+
 ```vue
 <script setup lang="ts">
 const props = defineProps<{ title: string }>();
@@ -403,6 +436,7 @@ defineExpose({ count });
 ```
 
 Semantic-aware output (illustrative):
+
 ```tsx
 type IComponentProps = {
   title: string;
@@ -417,12 +451,14 @@ type IComponentProps = {
 ## 8. What Does the Compiled Output Look Like?
 
 Typical shape (illustrative):
+
 ```tsx
 import { memo, useMemo, useCallback } from 'react';
 import { useVRef, useComputed } from '@vureact/runtime-core';
 ```
 
 Output characteristics:
+
 - **clear React component structure**
 - **runtime adapters** preserve Vue semantics where needed
 - **native React maintainability** is preserved for manual edits
@@ -439,16 +475,10 @@ Output characteristics:
 ## 10. Summary
 
 The real value of semantic-aware compilation is not rewrite speed, but:
+
 - **output stability**
 - **team readability**
 - **long-term editability**
 
 VuReact takes an engineering route:  
 more understanding and constraints at compile time, more reliable React output.
-
-Continue reading:
-1. [Philosophy](./philosophy)
-2. [Conversion Overview](./conversion-overview)
-3. [Template Conversion Guide](./conversion-template)
-4. [Script Conversion Guide](./conversion-script)
-5. [Router Adaptation Guide](./router-adaptation)

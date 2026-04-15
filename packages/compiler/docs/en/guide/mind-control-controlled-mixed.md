@@ -57,7 +57,3 @@ Stop when you notice:
 3. The team cannot quickly determine semantic ownership during reviews;
 
 At this point, refactor the code into clearer boundaries.
-
-## Next Steps
-
-- See [Full Ecosystem Unleashed](./mind-control-full-ecosystem)

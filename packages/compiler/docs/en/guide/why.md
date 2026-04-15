@@ -231,7 +231,7 @@ A: Post-migration, the project can be maintained like a regular React project. I
 
 ### Q: Does it support all Vue 3 features?
 
-A: The current experimental version supports core features of Vue 3 + `<script setup>`. For detailed support, refer to the [Capability Matrix](./capabilities-overview).
+A: The current experimental version supports core features of Vue 3 + `<script setup>`.
 
 ### Q: How to continue business development during migration?
 

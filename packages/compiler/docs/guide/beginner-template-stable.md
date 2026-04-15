@@ -92,7 +92,3 @@ const TemplateStableDemo = memo(() => {
 ## 4. 适用结论
 
 这类“显式、可分析、低动态”的模板写法，属于 VuReact 当前最稳定的转换路径。
-
-## 下一步
-
-- 查看 [组件通信稳态转换](./beginner-component-communication)

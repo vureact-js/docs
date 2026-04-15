@@ -344,17 +344,7 @@ npm run dev
 ## 附录 C：排错索引
 
 - 路由空白页：先看 [路由适配指南](/guide/router-adaptation)
-- 语法覆盖范围：看 [能力矩阵](/guide/capabilities-overview)
 - 编译告警处理建议：看 [最佳实践](/guide/best-practices)
 - 问题反馈：
   - [Compiler Issues](https://github.com/vureact-js/core/issues)
   - [Router Issues](https://github.com/vureact-js/vureact-router/issues)
-
-## 附录 D：继续学习导航
-
-完成本教程后，建议按以下顺序继续：
-
-1. [CLI 指南](/guide/cli)：掌握 `build/watch`、输入范围与工程化命令用法。
-2. [配置 API](/api/config)：系统理解 `input/exclude/output/router` 等核心配置项。
-3. [编译约定](/guide/specification)：明确编译器的行为边界与代码约定，降低迁移偏差。
-4. [最佳实践](/guide/best-practices)：建立可回滚、可验收、可扩展的迁移流程。

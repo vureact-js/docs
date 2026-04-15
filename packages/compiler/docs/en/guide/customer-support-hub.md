@@ -430,17 +430,7 @@ npm run dev
 ## Appendix C: Troubleshooting Index
 
 - Blank route page: First check [Router Adaptation Guide](/en/guide/router-adaptation)
-- Syntax coverage: See [Capability Matrix](/en/guide/capabilities-overview)
 - Compilation warning handling: See [Best Practices](/en/guide/best-practices)
 - Issue feedback:
   - [Compiler Issues](https://github.com/vureact-js/core/issues)
   - [Router Issues](https://github.com/vureact-js/vureact-router/issues)
-
-## Appendix D: Continued Learning Navigation
-
-After completing this tutorial, we recommend continuing with the following sequence:
-
-1. [CLI Guide](/en/guide/cli): Master usage of `build/watch`, input scope, and engineering commands.
-2. [Configuration API](/en/api/config): Systematically understand core configuration items like `input/exclude/output/router`.
-3. [Compilation Conventions](/en/guide/specification): Clarify compiler behavior boundaries and code conventions to reduce migration deviations.
-4. [Best Practices](/en/guide/best-practices): Establish a rollbackable, verifiable, and extensible migration process.

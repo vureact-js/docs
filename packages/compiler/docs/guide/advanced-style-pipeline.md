@@ -145,7 +145,3 @@ CSS 文件内容 `demo-<hash>.module.css`:
 1. 多个 `<style>` 块：当前以首个样式块为主路径。
 2. `cssVars`（`v-bind()` CSS 变量）不在稳定支持范围。
 3. `scoped + @import` 需谨慎验证全局污染。
-
-## 下一步
-
-- 查看 [脚本文件](./advanced-script-only-pipeline)

@@ -195,8 +195,6 @@ graph TD
 
 **A:** 完整支持 script setup、Composition API、defineProps/defineEmits/defineSlots、watch/computed 等核心特性。
 
-详细支持情况请查看 [能力矩阵](./capabilities-overview)。
-
 ## Q19: 转换后的性能如何？
 
 **A:** 通过编译时优化和零运行时样式方案，转换后的 React 代码接近人类手写，且应用性能与原生 React 应用相当。
@@ -213,7 +211,7 @@ graph TD
 
 **A:** 编译器采用**针对性识别策略**，而非全量覆盖所有 Vue API：
 
-1. 锁定范围机制：编译器维护一个**明确的 API 适配范围**（[能力矩阵总览](/guide/capabilities-overview)），仅处理已知且已实现适配的 Vue API。
+1. 锁定范围机制：编译器维护一个**明确的 API 适配范围**，仅处理已知且已实现适配的 Vue API。
 
 2. 选择性适配原则：
    - **核心 API 优先**：优先适配 Vue 3 的核心响应式 API 和生命周期钩子

@@ -521,9 +521,3 @@ VuReact 的模板转换遵循以下流程：
 1. **逐步转换**：先转换简单组件，再处理复杂逻辑
 2. **产物对比**：对比转换前后的功能行为
 3. **运行时检查**：关注控制台警告和错误信息
-
-## 下一步
-
-- 查看 [Script 转换指南](./conversion-script) - 了解脚本转换规则
-- 查看 [运行时组件](https://runtime.vureact.top/guide/components/keep-alive.html) - 了解运行时组件详细用法
-- 查看 [运行时辅助函数](https://runtime.vureact.top/guide/utils/adapter-utils.html) - 了解运行时辅助函数详细用法

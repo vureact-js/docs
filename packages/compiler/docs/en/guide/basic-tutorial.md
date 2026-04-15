@@ -92,13 +92,9 @@ export default defineConfig({
   exclude: ['src/main.ts'],
   output: {
     workspace: '.vureact',
-    outDir: 'dist',
+    outDir: 'react-app',
     // Disable environment initialization for tutorial purposes to easily inspect pure compilation output
     bootstrapVite: false,
-  },
-  format: {
-    enabled: true, // Enable formatting (this will increase compilation time).
-    formatter: 'prettier',
   },
 });
 ```
@@ -118,7 +114,7 @@ my-app/
 ├─ .vureact/
 │  ├─ cache/
 │  │  └─ _metadata.json
-│  └─ dist/
+│  └─ react-app/
 │     └─ src/
 │        └─ components/
 │           ├─ Counter.tsx
@@ -206,8 +202,3 @@ CSS file content:
 - Calling APIs that will be converted to Hooks outside the top level
 - Unanalyzable expressions appearing in templates (triggering warnings)
 - Disabling style preprocessing while using `scoped`, leading to scoping failure
-
-## Next Steps
-
-- Continue reading [Capability Matrix Overview](./capabilities-overview)
-- Review [Compilation Conventions](./specification) when encountering rule-related issues

@@ -57,7 +57,3 @@ const doubled = useMemo(() => count.value * 2, [count.value]);
 3. 团队评审时无法快速判断语义归属；
 
 就应该停下来，把代码拆分为更清晰的边界。
-
-## 下一步
-
-- 查看 [全生态释放](./mind-control-full-ecosystem)

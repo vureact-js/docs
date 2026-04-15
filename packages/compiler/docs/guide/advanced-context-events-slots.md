@@ -1,6 +1,6 @@
 ﻿# SFC 高级特性
 
-本章是“高级链路”示例：在一个场景中串联 `provide/inject`、`emits`、`scoped slot`。注意，VuReact 实际支持的特性远不止列举的这些，更多支持可查阅[脚本能力矩阵](/guide/capabilities-script.html#脚本能力矩阵)。
+本章是“高级链路”示例：在一个场景中串联 `provide/inject`、`emits`、`scoped slot`；注意，VuReact 实际支持的特性远不止列举的这些。
 
 ## 上下文 + 事件 + 插槽链路
 
@@ -104,7 +104,3 @@ const upgrade = useCallback(() => {
 1. `provide/inject` 走 runtime 适配，不是字符串替换。
 2. `emit` 事件名仍建议稳定字符串。
 3. scoped slot 在高级场景下仍是“函数型 props”语义。
-
-## 下一步
-
-- 查看 [组件内样式](./advanced-style-pipeline)

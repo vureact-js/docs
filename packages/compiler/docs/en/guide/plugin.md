@@ -561,7 +561,3 @@ const pluginDevTools = {
 3. **Handle asynchronous operations**: Plugins are currently synchronous; if asynchronous operations are needed, handle them inside the plugin
 4. **Error boundaries**: Ensure plugin errors do not cause the entire compilation process to fail
 5. **Compatibility**: Consider compatibility with different versions of VuReact and avoid using internal APIs
-
-## Next Steps
-
-- Refer to [API](../api/) for complete type definitions

@@ -521,9 +521,3 @@ The simpler and more statically analyzable template expressions are, the more st
 1. **Incremental conversion**: Convert simple components first, then handle complex logic
 2. **Output comparison**: Compare functional behavior before and after conversion
 3. **Runtime checks**: Pay attention to console warnings and errors
-
-## Next Steps
-
-- See [Script Conversion Guide](./conversion-script) - Learn about script conversion rules
-- See [Runtime Components](https://runtime.vureact.top/guide/components/keep-alive.html) - Learn about detailed usage of runtime components
-- See [Runtime Helper Functions](https://runtime.vureact.top/guide/utils/adapter-utils.html) - Learn about detailed usage of runtime helper functions

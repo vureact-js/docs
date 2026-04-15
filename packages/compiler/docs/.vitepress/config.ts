@@ -33,12 +33,17 @@ export default defineConfig({
         ],
         nav: [
           {
-            text: '联系',
-            link: '/guide/contact',
-          },
-          {
-            text: '赞助',
-            link: '/guide/sponsor',
+            text: '其他',
+            items: [
+              {
+                text: '赞助',
+                link: '/guide/sponsor',
+              },
+              {
+                text: '联系方式',
+                link: '/guide/contact',
+              },
+            ],
           },
           {
             text: '在线案例',
@@ -58,13 +63,13 @@ export default defineConfig({
             items: [
               { text: '介绍', link: '/guide/introduction' },
               { text: '更新日志', link: '/guide/changelog' },
-              { text: '教程与实战', link: '/guide/basic-tutorial' },
-              { text: '配置', link: '/guide/cli' },
-              { text: '常见问题', link: '/guide/faq' },
               { text: '规范与最佳实践', link: '/guide/specification' },
-              { text: '能力矩阵', link: '/guide/capabilities-overview' },
-              { text: '转换指南', link: '/guide/conversion-overview' },
+              { text: '入门与实战', link: '/guide/basic-tutorial' },
+              { text: '路由适配指南', link: '/guide/router-adaptation' },
+              { text: '常见问题', link: '/guide/faq' },
+              { text: 'CLI', link: '/guide/cli' },
               { text: 'API', link: '/api/' },
+              { text: '语义编译对照', link: '/guide/conversion-overview' },
             ],
           },
           {
@@ -86,13 +91,20 @@ export default defineConfig({
             items: [
               { text: '开始', link: '/guide/introduction' },
               { text: '理念', link: '/guide/philosophy' },
-              { text: '什么是语义感知', link: '/guide/what-is-semantic-aware' },
               { text: '为什么选 VuReact', link: '/guide/why' },
-              { text: '更新日志', link: '/guide/changelog' },
+              { text: '什么是语义编译', link: '/guide/what-is-semantic-aware' },
+            ],
+          },
+          { text: '更新日志', link: '/guide/changelog' },
+          {
+            text: '规范与最佳实践',
+            items: [
+              { text: '编译约定', link: '/guide/specification' },
+              { text: '最佳实践', link: '/guide/best-practices' },
             ],
           },
           {
-            text: '教程与实战',
+            text: '入门与实战',
             items: [
               {
                 text: '基础教程',
@@ -127,41 +139,11 @@ export default defineConfig({
               },
             ],
           },
-          {
-            text: '配置',
-            items: [
-              { text: 'CLI', link: '/guide/cli' },
-              { text: '插件', link: '/guide/plugin' },
-              { text: '路由适配', link: '/guide/router-adaptation' },
-              { text: 'ESLint 规则冲突', link: '/guide/eslint-rule-conflicts' },
-            ],
-          },
+          { text: '路由适配指南', link: '/guide/router-adaptation' },
+          { text: 'ESLint 规则冲突', link: '/guide/eslint-rule-conflicts' },
           { text: '常见问题', link: '/guide/faq' },
-          {
-            text: '规范与最佳实践',
-            items: [
-              { text: '编译约定', link: '/guide/specification' },
-              { text: '最佳实践', link: '/guide/best-practices' },
-            ],
-          },
-          {
-            text: '能力矩阵',
-            items: [
-              { text: '总览', link: '/guide/capabilities-overview' },
-              { text: '模板能力', link: '/guide/capabilities-template' },
-              { text: '脚本能力', link: '/guide/capabilities-script' },
-              { text: '样式能力', link: '/guide/capabilities-style' },
-            ],
-          },
-          {
-            text: '转换指南',
-            items: [
-              { text: '总览', link: '/guide/conversion-overview' },
-              { text: '模板指南', link: '/guide/conversion-template' },
-              { text: '脚本指南', link: '/guide/conversion-script' },
-              { text: '样式指南', link: '/guide/conversion-style' },
-            ],
-          },
+          { text: 'CLI', link: '/guide/cli' },
+          { text: '插件系统', link: '/guide/plugin' },
           {
             text: 'API',
             items: [
@@ -176,10 +158,19 @@ export default defineConfig({
             ],
           },
           {
+            text: '语义编译对照',
+            items: [
+              { text: '总览', link: '/guide/conversion-overview' },
+              { text: '模板指南', link: '/guide/conversion-template' },
+              { text: '脚本指南', link: '/guide/conversion-script' },
+              { text: '样式指南', link: '/guide/conversion-style' },
+            ],
+          },
+          {
             text: '其他',
             items: [
               { text: '赞助', link: '/guide/sponsor' },
-              { text: '联系', link: '/guide/contact' },
+              { text: '联系方式', link: '/guide/contact' },
             ],
           },
         ],
@@ -200,15 +191,26 @@ export default defineConfig({
             icon: 'gitee',
             link: 'https://gitee.com/vureact-js/core.git',
           },
+          {
+            icon: {
+              svg: '<svg t="1776145003696" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6924" width="200" height="200"><path d="M512 0c282.784 0 512 229.216 512 512s-229.216 512-512 512S0 794.784 0 512 229.216 0 512 0z m189.952 752l11.2-108.224c-31.904 9.536-100.928 16.128-147.712 16.128-134.464 0-205.728-47.296-195.328-146.304 11.584-110.688 113.152-145.696 232.64-145.696 54.784 0 122.432 8.8 151.296 18.336L768 272.704C724.544 262.24 678.272 256 599.584 256c-203.2 0-388.704 94.88-406.4 263.488C178.336 660.96 303.584 768 535.616 768c80.672 0 138.464-6.432 166.336-16z" p-id="6925"></path></svg>',
+            },
+            link: 'https://blog.csdn.net/weixin_46921149?spm=1011.2415.3001.10640',
+          },
         ],
         nav: [
           {
-            text: 'Contact',
-            link: '/en/guide/contact',
-          },
-          {
-            text: 'Sponsor',
-            link: '/en/guide/sponsor',
+            text: 'Others',
+            items: [
+              {
+                text: 'Sponsor',
+                link: '/en/guide/sponsor',
+              },
+              {
+                text: 'Contact',
+                link: '/en/guide/contact',
+              },
+            ],
           },
           {
             text: 'Playground',
@@ -226,15 +228,16 @@ export default defineConfig({
           {
             text: 'Guide',
             items: [
-              { text: 'Introduction', link: '/guide/introduction' },
-              { text: 'Changelog', link: '/guide/changelog' },
-              { text: 'Tuts & Practices', link: '/guide/basic-tutorial' },
-              { text: 'Configuration', link: '/guide/cli' },
-              { text: 'FAQ', link: '/guide/faq' },
-              { text: 'Specifications & Best Practices', link: '/guide/specification' },
-              { text: 'Capability Matrix', link: '/en/guide/capabilities-overview' },
-              { text: 'Conversion Guide', link: '/en/guide/conversion-overview' },
+              { text: 'Introduction', link: '/en/guide/introduction' },
+              { text: 'Changelog', link: '/en/guide/changelog' },
+              { text: 'Specifications & Best Practices', link: '/en/guide/specification' },
+              { text: 'Tuts & Practices', link: '/en/guide/basic-tutorial' },
+              { text: 'Configuration', link: '/en/guide/cli' },
+              { text: 'Router Adaptation', link: '/en/guide/router-adaptation' },
+              { text: 'FAQ', link: '/en/guide/faq' },
+              { text: 'CLI', link: '/guide/cli' },
               { text: 'API', link: '/api/' },
+              { text: 'Conversion Guide', link: '/en/guide/conversion-overview' },
             ],
           },
           {
@@ -256,9 +259,16 @@ export default defineConfig({
             items: [
               { text: 'Getting Started', link: '/en/guide/introduction' },
               { text: 'Philosophy', link: '/en/guide/philosophy' },
-              { text: 'What is Semantics-Aware', link: '/en/guide/what-is-semantic-aware' },
               { text: 'Why Choose VuReact', link: '/en/guide/why' },
-              { text: 'Change Log', link: '/en/guide/changelog' },
+              { text: 'What is Semantics-Aware', link: '/en/guide/what-is-semantic-aware' },
+            ],
+          },
+          { text: 'Change Log', link: '/en/guide/changelog' },
+          {
+            text: 'Specifications & Best Practices',
+            items: [
+              { text: 'Compilation Conventions', link: '/en/guide/specification' },
+              { text: 'Best Practices', link: '/en/guide/best-practices' },
             ],
           },
           {
@@ -318,33 +328,11 @@ export default defineConfig({
               },
             ],
           },
-          {
-            text: 'Configuration',
-            items: [
-              { text: 'CLI', link: '/en/guide/cli' },
-              { text: 'Plugin', link: '/en/guide/plugin' },
-              { text: 'Router Adaptation', link: '/en/guide/router-adaptation' },
-              { text: 'ESLint Rule Conflicts', link: '/en/guide/eslint-rule-conflicts' },
-            ],
-          },
+          { text: 'Router Adaptation', link: '/en/guide/router-adaptation' },
+          { text: 'ESLint Rule Conflicts', link: '/en/guide/eslint-rule-conflicts' },
           { text: 'FAQ', link: '/en/guide/faq' },
-          {
-            text: 'Specifications & Best Practices',
-            items: [
-              { text: 'Compilation Conventions', link: '/en/guide/specification' },
-              { text: 'Best Practices', link: '/en/guide/best-practices' },
-              { text: 'Router Adaptation', link: '/en/guide/router-adaptation' },
-            ],
-          },
-          {
-            text: 'Capability Matrix',
-            items: [
-              { text: 'Overview', link: '/en/guide/capabilities-overview' },
-              { text: 'Template Capabilities', link: '/en/guide/capabilities-template' },
-              { text: 'Script Capabilities', link: '/en/guide/capabilities-script' },
-              { text: 'Style Capabilities', link: '/en/guide/capabilities-style' },
-            ],
-          },
+          { text: 'CLI', link: '/en/guide/cli' },
+          { text: 'Plugin', link: '/en/guide/plugin' },
           {
             text: 'Conversion Guide',
             items: [

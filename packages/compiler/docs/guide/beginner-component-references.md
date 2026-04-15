@@ -321,7 +321,7 @@ A: VuReact 会保持原有的目录结构，确保引用关系正确。
 
 ### Q: 如何处理第三方 Vue 组件库？
 
-A: 对于第三方库，需要配置对应的适配器或使用兼容层。
+A: 对于第三方 Vue 组件库，VuReact 无法直接编译其源代码。建议优先寻找功能对等的 React 组件库进行替换。若必须保留原库，可考虑采用 [Vue + React 混写方案](/guide/mind-control-readme) 进行渐进式迁移。
 
 ## 总结
 
@@ -333,9 +333,3 @@ A: 对于第三方库，需要配置对应的适配器或使用兼容层。
 2. 掌握项目结构的组织原则
 3. 了解 VuReact 如何处理组件引用转换
 4. 应用最佳实践来优化项目结构
-
-在下一章中，我们将学习更复杂的组件通信模式，包括上下文、事件和插槽的综合应用。
-
----
-
-[在 Github 查看示例源码](https://github.com/vureact-js/core/tree/master/packages/compiler-core/examples)
