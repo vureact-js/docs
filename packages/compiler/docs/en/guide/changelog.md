@@ -216,9 +216,3 @@
 - Basic CLI (build / watch), cache, Vite init, hybrid development
 
 > Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>
-> Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>
-
-- Basic CLI (build / watch), cache, Vite init, hybrid development
-
-> Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>
-> Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>
