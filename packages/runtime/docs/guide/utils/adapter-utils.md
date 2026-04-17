@@ -64,6 +64,6 @@ const dir = adapterUtils;
 
 ## 注意事项
 
-- `nextTick` 是独立导出函数，不在 `AdapterUtil` 实例方法中。
+- `AdapterUtil` 实例仅包含上述列举的方法，其他工具（如 `nextTick`）为独立导出，不在此实例中。
 - `dir` 只是 `adapterUtils` 的别名，两者能力一致。
 - 复杂行为（修饰符优先级、属性映射规则）请分别参考各子文档。

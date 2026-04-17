@@ -18,22 +18,22 @@ export default defineConfig({
       themeConfig: {
         socialLinks: [
           {
-            icon: 'gitee',
-            link: 'https://gitee.com/vureact-js/core/tree/master/packages/runtime-core',
-          },
-          {
             icon: 'github',
             link: 'https://github.com/vureact-js/core/tree/master/packages/runtime-core',
+          },
+          {
+            icon: 'gitee',
+            link: 'https://gitee.com/vureact-js/core/tree/master/packages/runtime-core',
           },
         ],
         nav: [
           {
-            text: '在线示例',
+            text: '在线演示',
             link: 'https://codesandbox.io/p/sandbox/examples-f5rlpk',
           },
           {
-            text: '赞助',
-            link: 'https://afdian.com/a/vureact-js/plan',
+            text: '反馈问题',
+            link: 'https://github.com/vureact-js/core/issues/new',
           },
           {
             text: '生态系统',
@@ -106,12 +106,13 @@ export default defineConfig({
           {
             text: '适配工具',
             items: [
-              { text: 'nextTick', link: '/guide/utils/next-tick' },
               { text: 'adapterUtils', link: '/guide/utils/adapter-utils' },
               { text: 'vOn', link: '/guide/utils/v-on' },
               { text: 'vCls', link: '/guide/utils/v-cls' },
               { text: 'vStyle', link: '/guide/utils/v-style' },
               { text: 'vKeyless', link: '/guide/utils/v-keyless' },
+              { text: 'nextTick', link: '/guide/utils/next-tick' },
+              { text: 'defineAsyncComponent ', link: '/guide/utils/define-async-component' },
             ],
           },
         ],
@@ -122,8 +123,6 @@ export default defineConfig({
       label: 'English',
       lang: 'en-US',
       link: '/en/',
-      description:
-        "React adapter for Vue 3 built-in components, reactive APIs, and template directive utilities. Bring Vue's excellent development experience to React applications.",
       themeConfig: {
         socialLinks: [
           {
@@ -137,12 +136,12 @@ export default defineConfig({
         ],
         nav: [
           {
-            text: 'Online Demo',
+            text: 'Playground',
             link: 'https://codesandbox.io/p/sandbox/examples-f5rlpk',
           },
           {
-            text: 'Support',
-            link: 'https://afdian.com/a/vureact-js/plan',
+            text: 'Issue',
+            link: 'https://github.com/vureact-js/core/issues/new',
           },
           {
             text: 'Ecosystem',
@@ -215,12 +214,13 @@ export default defineConfig({
           {
             text: 'Adapter Utils',
             items: [
-              { text: 'nextTick', link: '/en/guide/utils/next-tick' },
               { text: 'adapterUtils', link: '/en/guide/utils/adapter-utils' },
               { text: 'vOn', link: '/en/guide/utils/v-on' },
               { text: 'vCls', link: '/en/guide/utils/v-cls' },
               { text: 'vStyle', link: '/en/guide/utils/v-style' },
               { text: 'vKeyless', link: '/en/guide/utils/v-keyless' },
+              { text: 'nextTick', link: '/en/guide/utils/next-tick' },
+              { text: 'defineAsyncComponent ', link: '/en/guide/utils/define-async-component' },
             ],
           },
         ],

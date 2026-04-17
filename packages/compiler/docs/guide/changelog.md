@@ -2,6 +2,13 @@
 
 `vureact` 遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/) 语义化版本规范，版本按时间倒序排列。
 
+## v1.6.1 (2026-04-17)
+
+### 🚀 优化改进
+
+- 简化 `defineAsyncComponent` 预处理逻辑，仅检查不支持的 `hydrate` 选项
+- 添加 `defineAsyncComponent` 到适配器映射
+
 ## v1.6.0 (2026-04-13)
 
 ### ✨ 新增功能

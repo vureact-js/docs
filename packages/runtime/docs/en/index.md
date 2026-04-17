@@ -3,8 +3,7 @@ layout: home
 
 title: "React adapter for Vue 3 built-in components, reactive APIs, and template directive utilities. Bring Vue's excellent development experience to React applications."
 hero:
-  name: 'VuReact'
-  text: 'Runtime Core'
+  name: 'VuReact Runtime'
   tagline: "Seamlessly integrate Vue 3's excellent components and reactive system into React"
   actions:
     - theme: brand
