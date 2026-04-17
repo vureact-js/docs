@@ -1,6 +1,6 @@
 # What Is Semantic-Aware Compilation?
 
-**Semantic-aware compilation** does not mechanically replace Vue syntax with React syntax.  
+[Semantic-aware compilation](/en/guide/semantic-comparison/overview) does not mechanically replace Vue syntax with React syntax.  
 It first understands runtime semantics (reactivity, lifecycle, data flow), then generates code that is valid in React.
 
 If you remember one sentence, make it this:

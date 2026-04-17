@@ -15,6 +15,10 @@ export default [
     ],
   },
   {
+    text: '反馈问题',
+    link: 'https://github.com/vureact-js/core/issues/new',
+  },
+  {
     text: '在线案例',
     items: [
       {
@@ -37,7 +41,7 @@ export default [
       { text: '常见问题', link: '/guide/faq' },
       { text: 'CLI', link: '/guide/cli' },
       { text: 'API', link: '/api/' },
-      { text: '语义编译对照', link: '/guide/conversion-overview' },
+      { text: '语义编译对照', link: '/guide/semantic-comparison/overview' },
     ],
   },
   {

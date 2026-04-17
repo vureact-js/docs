@@ -6,55 +6,40 @@ export default [
     items: [
       { text: 'Getting Started', link: '/en/guide/introduction' },
       { text: 'Philosophy', link: '/en/guide/philosophy' },
-      { text: 'Why Choose VuReact', link: '/en/guide/why' },
-      { text: 'What is Semantics-Aware', link: '/en/guide/what-is-semantic-aware' },
+      { text: 'Why VuReact', link: '/en/guide/why' },
+      { text: 'Semantic Compilation', link: '/en/guide/what-is-semantic-aware' },
     ],
   },
-  { text: 'Change Log', link: '/en/guide/changelog' },
+  { text: 'Changelog', link: '/en/guide/changelog' },
   {
-    text: 'Specifications & Best Practices',
+    text: 'Guidelines',
     items: [
       { text: 'Compilation Conventions', link: '/en/guide/specification' },
       { text: 'Best Practices', link: '/en/guide/best-practices' },
     ],
   },
   {
-    text: 'Tuts & Practices',
+    text: 'Guides',
     items: [
       {
         text: 'Basic Tutorials',
         items: [
           { text: 'Counter Component', link: '/en/guide/basic-tutorial' },
-          {
-            text: 'Template Basic',
-            link: '/en/guide/beginner-template-stable',
-          },
-          {
-            text: 'Component Communication',
-            link: '/en/guide/beginner-component-communication',
-          },
-          {
-            text: 'Component References',
-            link: '/en/guide/beginner-component-references',
-          },
-          {
-            text: 'SFC Advanced Features',
-            link: '/en/guide/advanced-context-events-slots',
-          },
-          { text: 'Styles in Components', link: '/en/guide/advanced-style-pipeline' },
-          { text: 'Script Files', link: '/en/guide/advanced-script-only-pipeline' },
-          { text: 'Style Files', link: '/en/guide/advanced-style-only-pipeline' },
+          { text: 'Template Basics', link: '/en/guide/beginner-template-stable' },
+          { text: 'Component Communication', link: '/en/guide/beginner-component-communication' },
+          { text: 'Component References', link: '/en/guide/beginner-component-references' },
+          { text: 'Advanced SFC Features', link: '/en/guide/advanced-context-events-slots' },
+          { text: 'Component Styling', link: '/en/guide/advanced-style-pipeline' },
+          { text: 'Script File Processing', link: '/en/guide/advanced-script-only-pipeline' },
+          { text: 'Style File Processing', link: '/en/guide/advanced-style-only-pipeline' },
         ],
       },
       {
-        text: 'Project Practice',
+        text: 'Real-World Projects',
         items: [
+          { text: 'CRM Admin Dashboard (Standard)', link: '/en/guide/crm-admin-backend' },
           {
-            text: 'CRM Admin Dashboard',
-            link: '/en/guide/crm-admin-backend',
-          },
-          {
-            text: 'Customer Support Hub',
+            text: 'Customer Support Hub (Mixed Mode)',
             link: '/en/guide/customer-support-hub',
           },
         ],
@@ -62,44 +47,73 @@ export default [
       {
         text: 'Mind Control',
         items: [
-          { text: 'Introduction', link: '/en/guide/mind-control-readme' },
-          {
-            text: 'Controlled Mixed Writing',
-            link: '/en/guide/mind-control-controlled-mixed',
-          },
-          {
-            text: 'Full Ecosystem Unleashed',
-            link: '/en/guide/mind-control-full-ecosystem',
-          },
+          { text: 'Overview', link: '/en/guide/mind-control-readme' },
+          { text: 'Controlled Mixed Mode', link: '/en/guide/mind-control-controlled-mixed' },
+          { text: 'Full Ecosystem Mode', link: '/en/guide/mind-control-full-ecosystem' },
         ],
       },
     ],
   },
   { text: 'ESLint Rule Conflicts', link: '/en/guide/eslint-rule-conflicts' },
-  { text: 'Router Adaptation', link: '/en/guide/router-adaptation' },
+  { text: 'Router Adaptation Guide', link: '/en/guide/router-adaptation' },
   { text: 'FAQ', link: '/en/guide/faq' },
   { text: 'CLI', link: '/en/guide/cli' },
-  { text: 'Plugin', link: '/en/guide/plugin' },
-  {
-    text: 'Conversion Guide',
-    items: [
-      { text: 'Overview', link: '/en/guide/conversion-overview' },
-      { text: 'Template Guide', link: '/en/guide/conversion-template' },
-      { text: 'Script Guide', link: '/en/guide/conversion-script' },
-      { text: 'Style Guide', link: '/en/guide/conversion-style' },
-    ],
-  },
+  { text: 'Plugin System', link: '/en/guide/plugin' },
   {
     text: 'API',
     items: [
       { text: 'Overview', link: '/en/api/' },
-      { text: 'Config API', link: '/en/api/config' },
+      { text: 'Configuration API', link: '/en/api/config' },
       { text: 'Compiler API', link: '/en/api/compiler' },
       { text: 'Pipeline API', link: '/en/api/pipeline' },
       { text: 'Plugin System API', link: '/en/api/plugin-system' },
       { text: 'Context API', link: '/en/api/compiler-context' },
       { text: 'Types & Results', link: '/en/api/types' },
-      { text: 'Exports Manifest', link: '/en/api/exports' },
+      { text: 'Exports', link: '/en/api/exports' },
+    ],
+  },
+  {
+    text: 'Semantic Comparison',
+    items: [
+      { text: 'Overview', link: '/en/guide/semantic-comparison/overview' },
+      {
+        text: 'Script',
+        items: [
+          { text: 'ref', link: '/en/guide/semantic-comparison/script/ref' },
+          { text: 'reactive', link: '/en/guide/semantic-comparison/script/reactive' },
+          { text: 'computed', link: '/en/guide/semantic-comparison/script/computed' },
+          { text: 'readonly', link: '/en/guide/semantic-comparison/script/readonly' },
+          { text: 'toRef(s)', link: '/en/guide/semantic-comparison/script/toRef(s)' },
+          { text: 'watch', link: '/en/guide/semantic-comparison/script/watch' },
+          { text: 'watchEffect', link: '/en/guide/semantic-comparison/script/watchEffect' },
+          { text: 'Lifecycle', link: '/en/guide/semantic-comparison/script/lifecycle' },
+          { text: 'defineProps', link: '/en/guide/semantic-comparison/script/define-props' },
+          { text: 'defineEmits', link: '/en/guide/semantic-comparison/script/define-emits' },
+          { text: 'defineOptions', link: '/en/guide/semantic-comparison/script/define-options' },
+          { text: 'defineSlots', link: '/en/guide/semantic-comparison/script/define-slots' },
+          { text: 'defineExpose', link: '/en/guide/semantic-comparison/script/define-expose' },
+          {
+            text: 'defineAsyncComponent',
+            link: '/en/guide/semantic-comparison/script/define-async-comp',
+          },
+          { text: 'useAttrs', link: '/en/guide/semantic-comparison/script/use-attrs' },
+          { text: 'useTemplateRef', link: '/en/guide/semantic-comparison/script/use-template-ref' },
+          { text: 'Constants & Variables', link: '/en/guide/semantic-comparison/script/const-var' },
+          { text: 'Arrow Functions', link: '/en/guide/semantic-comparison/script/arrow-function' },
+          {
+            text: 'Automatic Dependency Tracking',
+            link: '/en/guide/semantic-comparison/script/auto-deps',
+          },
+          {
+            text: 'Type Declarations',
+            link: '/en/guide/semantic-comparison/script/type-declaration',
+          },
+          { text: 'script setup', link: '/en/guide/semantic-comparison/script/script-setup' },
+          { text: 'Vue Router', link: '/en/guide/semantic-comparison/script/vue-router' },
+        ],
+      },
+      { text: 'Template', link: '/en/guide/semantic-comparison/template/' },
+      { text: 'Style', link: '/en/guide/semantic-comparison/style/' },
     ],
   },
   {

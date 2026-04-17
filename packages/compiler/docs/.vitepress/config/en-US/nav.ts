@@ -15,6 +15,10 @@ export default [
     ],
   },
   {
+    text: 'Issue',
+    link: 'https://github.com/vureact-js/core/issues/new',
+  },
+  {
     text: 'Playground',
     items: [
       {
@@ -31,13 +35,13 @@ export default [
     text: 'Guide',
     items: [
       { text: 'Changelog', link: '/en/guide/changelog' },
-      { text: 'Specifications & Best Practices', link: '/en/guide/specification' },
-      { text: 'Tuts & Practices', link: '/en/guide/basic-tutorial' },
+      { text: 'Compilation Conventions', link: '/en/guide/specification' },
+      { text: 'Basic Tutorials', link: '/en/guide/basic-tutorial' },
       { text: 'CLI', link: '/guide/cli' },
-      { text: 'Router Adaptation', link: '/en/guide/router-adaptation' },
+      { text: 'Router Adaptation Guide', link: '/en/guide/router-adaptation' },
       { text: 'FAQ', link: '/en/guide/faq' },
       { text: 'API', link: '/api/' },
-      { text: 'Conversion Guide', link: '/en/guide/conversion-overview' },
+      { text: 'Semantic Comparison', link: '/en/guide/semantic-comparison/overview' },
     ],
   },
   {
