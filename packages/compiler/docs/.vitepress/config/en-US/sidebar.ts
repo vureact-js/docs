@@ -112,7 +112,16 @@ export default [
           { text: 'Vue Router', link: '/en/guide/semantic-comparison/script/vue-router' },
         ],
       },
-      { text: 'Template', link: '/en/guide/semantic-comparison/template/' },
+      {
+        text: 'Template',
+        items: [
+          { text: 'v-show', link: '/en/guide/semantic-comparison/template/v-show' },
+          { text: 'v-for', link: '/en/guide/semantic-comparison/template/v-for' },
+          { text: 'v-if & v-else', link: '/en/guide/semantic-comparison/template/v-if-v-else' },
+          { text: 'v-html & v-text', link: '/en/guide/semantic-comparison/template/v-html-v-text' },
+          { text: 'v-memo & v-once', link: '/en/guide/semantic-comparison/template/v-memo-v-once' },
+        ],
+      },
       { text: 'Style', link: '/en/guide/semantic-comparison/style/' },
     ],
   },

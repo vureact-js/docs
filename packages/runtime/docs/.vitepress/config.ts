@@ -56,6 +56,7 @@ export default defineConfig({
               { text: '快速上手', link: '/guide/quick-start' },
             ],
           },
+          { text: '更新日志', link: '/guide/changelog' },
           {
             text: '适配组件',
             items: [
@@ -164,6 +165,7 @@ export default defineConfig({
               { text: 'Quick Start', link: '/en/guide/quick-start' },
             ],
           },
+          { text: 'Change Log', link: '/en/guide/changelog' },
           {
             text: 'Adapter Components',
             items: [

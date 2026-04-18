@@ -77,7 +77,7 @@ export default [
     items: [
       { text: '总览', link: '/guide/semantic-comparison/overview' },
       {
-        text: 'Script',
+        text: '脚本对照',
         items: [
           { text: 'ref', link: '/guide/semantic-comparison/script/ref' },
           { text: 'reactive', link: '/guide/semantic-comparison/script/reactive' },
@@ -106,8 +106,17 @@ export default [
           { text: 'Vue 路由', link: '/guide/semantic-comparison/script/vue-router' },
         ],
       },
-      { text: 'Template', link: '/guide/semantic-comparison/template/' },
-      { text: 'Style', link: '/guide/semantic-comparison/style/' },
+      {
+        text: '模板对照',
+        items: [
+          { text: 'v-show', link: '/guide/semantic-comparison/template/v-show' },
+          { text: 'v-for', link: '/guide/semantic-comparison/template/v-for' },
+          { text: 'v-if & v-else', link: '/guide/semantic-comparison/template/v-if-v-else' },
+          { text: 'v-html & v-text', link: '/guide/semantic-comparison/template/v-html-v-text' },
+          { text: 'v-memo & v-once', link: '/guide/semantic-comparison/template/v-memo-v-once' },
+        ],
+      },
+      { text: '样式对照', link: '/guide/semantic-comparison/style/' },
     ],
   },
   {

@@ -210,11 +210,11 @@
 
 ## v1.0.0 (2026-03-03)
 
-### 里程碑
+### 🚩 里程碑
 
-- 首个先行版本（代号“心灵控制”），Vue→React 编译从概念验证进入工程实践
+- 首个先行版本（代号“**心灵控制**”），Vue→React 编译从概念验证进入工程实践
 
-### 核心能力
+### ⚡ 核心能力
 
 - 完整 Vue SFC (template/script setup/style) 转 React 链路
 - Composition API 映射为 React Hooks
