@@ -63,7 +63,7 @@ import { dir } from '@vureact/runtime-core';
 <div style={dir.style({ color: textColor, fontSize: size + 'px', backgroundColor: bgColor })} />;
 ```
 
-从示例可以看到：复杂的 class 和 style 绑定被编译为使用 `dir.cls()` 和 `dir.style()` 辅助函数。VuReact 采用 **复杂绑定运行时处理策略**，将 Vue 的复杂表达式转换为运行时函数调用，**完全保持 Vue 的动态样式语义**。
+从示例可以看到：复杂的 class 和 style 绑定被编译为使用 [dir.cls()](https://runtime.vureact.top/guide/utils/v-cls.html) 和 [dir.style()](https://runtime.vureact.top/guide/utils/v-style.html) 辅助函数。VuReact 采用 **复杂绑定运行时处理策略**，将 Vue 的复杂表达式转换为运行时函数调用，**完全保持 Vue 的动态样式语义**。
 
 **运行时辅助函数的工作原理**：
 
@@ -110,7 +110,7 @@ import { dir } from '@vureact/runtime-core';
 <Comp {...dir.keyless(props)}>点击</Comp>;
 ```
 
-从示例可以看到：无参数的 `v-bind` 被编译为使用 `dir.keyless()` 辅助函数和对象展开语法。VuReact 采用 **对象展开编译策略**，将 Vue 的对象绑定转换为 React 的对象展开，**完全保持 Vue 的对象属性绑定语义**。
+从示例可以看到：无参数的 `v-bind` 被编译为使用 [dir.keyless()](https://runtime.vureact.top/guide/utils/v-keyless.html) 辅助函数和对象展开语法。VuReact 采用 **对象展开编译策略**，将 Vue 的对象绑定转换为 React 的对象展开，**完全保持 Vue 的对象属性绑定语义**。
 
 **`dir.keyless()` 辅助函数的作用**：
 
@@ -151,7 +151,7 @@ VuReact 的 v-bind 编译策略展示了**完整的属性绑定转换能力**：
 5. **动态属性名**：支持动态表达式作为属性名
 6. **组件 props 转换**：正确处理组件间的 props 传递
 
-**性能优化策略**：
+性能优化策略：
 
 1. **按需导入**：只有使用复杂绑定时才导入 `dir` 辅助函数
 2. **缓存优化**：智能缓存相同表达式的处理结果

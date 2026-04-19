@@ -52,7 +52,7 @@ import { dir } from '@vureact/runtime-core';
 <button onClick={dir.on('click.stop.prevent', submit)}>Submit</button>;
 ```
 
-从示例可以看到：带修饰符的 Vue 事件被编译为使用 `dir.on()` 辅助函数。VuReact 采用 **修饰符运行时处理策略**，将复杂的修饰符组合转换为运行时函数调用，**完全保持 Vue 的事件修饰符语义**。
+从示例可以看到：带修饰符的 Vue 事件被编译为使用 [dir.on()](https://runtime.vureact.top/guide/utils/v-on.html) 辅助函数。VuReact 采用 **修饰符运行时处理策略**，将复杂的修饰符组合转换为运行时函数调用，**完全保持 Vue 的事件修饰符语义**。
 
 **编译策略详解**：
 
