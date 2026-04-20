@@ -137,7 +137,15 @@ export default [
           { text: 'slot', link: '/en/guide/semantic-comparison/template/slot' },
         ],
       },
-      { text: 'Style', link: '/en/guide/semantic-comparison/style/' },
+      {
+        text: 'Style',
+        items: [
+          { text: 'Base Styles', link: '/en/guide/semantic-comparison/style/basic' },
+          { text: 'Scoped Styles', link: '/en/guide/semantic-comparison/style/scoped' },
+          { text: 'CSS Modules', link: '/en/guide/semantic-comparison/style/module' },
+          { text: 'Preprocessor Support', link: '/en/guide/semantic-comparison/style/lang' },
+        ],
+      },
     ],
   },
   {

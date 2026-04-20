@@ -2,7 +2,9 @@
 
 This section demonstrates how Vue code is compiled into React code by VuReact, and outlines the currently supported APIs and syntax.
 
-## Why “Semantic Mapping”
+> The compiled output is a **pure React application**. It does not rely on the Vue runtime, **nor is it a wrapper approach** that embeds a Vue container within React.
+
+## Why “Semantic Comparison”
 
 - Internal implementations may evolve, and file structures or layering can change
 - However, the mapping from **input semantics → output semantics** remains more stable
@@ -41,19 +43,22 @@ This section defines the current capability boundaries to help you evaluate whet
 
 ### Module-Level Matrix
 
-| Area                      | Status      | What You Should Pay Attention To                                                           |
-| ------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
-| Templates                 | `Supported` | Custom directives are limited; dynamic prop names may warn or degrade                      |
-| Script / Standalone Files | `Supported` | APIs like `ref`, `watch`, lifecycle, etc. map to React Hooks; strict top-level rules apply |
-| Style / Standalone Files  | `Supported` | Single `<style>` with scoped/module works; multiple styles/cssVars are limited             |
-| Vue Router                | `Supported` | Syntax and APIs are adapted                                                                |
+| Area                   | Status      | What You Need to Pay Attention To                                                                                |
+| ---------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------- |
+| SFC Template           | `Supported` | Custom directives are limited; dynamic attribute name expressions may trigger warnings or degrade                |
+| SFC Script             | `Supported` | APIs like `ref` / `watch` / lifecycle hooks are converted to React hooks; top‑level rules are strict             |
+| SFC Style              | `Supported` | Multiple `<style>` blocks and `cssVars` functionality are limited                                                |
+| Standalone Script File | `Supported` | Top‑level rules are the same as SFC script, but `ref` and other APIs are allowed inside top‑level function scope |
+| Standalone Style File  | `Supported` | -                                                                                                                |
+| Vue Router             | `Supported` | Syntax, APIs, and TS type interfaces are adapted, allowing a smooth transition from Vue Router usage habits      |
 
 ### Scenario Compatibility
 
-| Scenario                                      | Compatibility | Recommendation                           |
-| --------------------------------------------- | ------------- | ---------------------------------------- |
-| Convention-driven new or modern projects      | `High`        | Recommended as a primary approach        |
-| Incremental migration (module-by-module)      | `High`        | Start with a pilot, then scale gradually |
-| One-shot migration of complex legacy projects | `Low`         | Not recommended as the first option      |
-| Not using `<script setup>`                    | `Low`         | Use modern Vue syntax                    |
-| Vue 2 usage                                   | `None`        | Strongly not recommended                 |
+| Scenario                                                   | Compatibility | Recommendation                                                                     |
+| ---------------------------------------------------------- | ------------- | ---------------------------------------------------------------------------------- |
+| New or existing projects developed by convention           | `High`        | Recommended as the primary approach                                                |
+| Incremental migration (by module)                          | `High`        | Start with pilot modules and expand gradually                                      |
+| Developing React apps with Vue, no Vue runtime maintenance | `High`        | Directly use Vue syntax to write React components and integrate with its ecosystem |
+| One‑time migration of complex legacy projects              | `Low`         | Not recommended as the first choice                                                |
+| Not using `<script setup>`                                 | `Low`         | Recommend using modern Vue syntax                                                  |
+| Usage with Vue 2                                           | `None`        | Strongly discouraged                                                               |
