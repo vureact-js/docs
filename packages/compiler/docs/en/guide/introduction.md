@@ -6,6 +6,15 @@ VuReact (pronounced `/vjuːˈriːækt/`) is a compiler that allows you to write 
 
 It not only performs syntax-level conversions but also deeply understands the semantics of Vue code, generating high-quality React code that adheres to React best practices.
 
+<video controls preload="metadata" width="100%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin: 2rem 0;">
+  <source src="/static/hero_demo_3MB.mp4" type="video/mp4" />
+  Your browser does not support video playback.
+</video>
+
+<p style="text-align: center; color: #666; font-size: 0.9em; margin-top: 0.5rem;">
+  <em>Watch a 30s demo to quickly understand VuReact's compilation workflow</em>
+</p>
+
 The core goal of VuReact is not to "unconditionally convert arbitrary Vue code to React code automatically", but to provide a **predictable, analyzable, and maintainable** upgrade path, enabling developers to smoothly advance cross-framework evolution under the premise of engineering control.
 
 Furthermore, VuReact is not an isolated code rewriting tool. It consists of two synergistic components: **compile-time conversion** and **[runtime adaptation](https://runtime.vureact.top/)**:
@@ -59,12 +68,19 @@ It does not prioritize supporting:
 
 VuReact offers the following key capabilities:
 
-- **Deep `<script setup>` Support**: Full support for Vue 3 Composition API, providing a near-native development experience
-- **Complete TypeScript Support**: Preserve type definitions in Vue SFCs and automatically generate precise React component types
-- **Zero-Runtime Styling Solution**: Fully process `scoped` and `module` styles (even Less and Sass) at compile time, generating production-ready static CSS
-- **Mixed Development Support**: Allow Vue and React code to coexist in the same project, supporting progressive migration
-- **Complete Engineering Compilation**: More than just code conversion, it is a complete project compilation solution
-- **Intelligent Compilation**: Covering syntax conversion, template parsing, style processing, type preservation, and engineering optimization
+**🧠 Semantic-aware**：Understand Vue 3 like a compiler, generate maintainable React 18+ like a pro
+
+**⚖️ Incremental Migration**：Start small, scale to full projects—no risky rewrites
+
+**🧭 Convention-driven**：Predictable transforms powered by clear conventions, not guesses
+
+**⚛️ Complete Feature Adaptation**：Vue features, fully mapped to React—zero runtime cost
+
+**⚡ Excellent Developer Experience**：Vue mental model, seamless React dev; CLI build/watch, fast incremental compile, native-like
+
+**🌀 Innovative Exploration**：A new bridge between Vue and React at compile time
+
+**👽 Intelligent Compilation**: Covering syntax conversion, template parsing, style processing, type preservation, and engineering optimization
 
 ### Intelligent Compilation Features
 

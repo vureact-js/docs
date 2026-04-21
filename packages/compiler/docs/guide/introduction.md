@@ -6,6 +6,15 @@ VuReact（发音 `/vjuːˈriːækt/`）是一个让你用 Vue 3 语法编写 Rea
 
 它不仅执行语法层面的转换，更能深入理解 Vue 代码的语义，并生成遵循 React 最佳实践的优质代码。
 
+<video controls preload="metadata" width="100%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin: 2rem 0;">
+  <source src="/static/hero_demo_3MB.mp4" type="video/mp4" />
+  您的浏览器不支持视频播放。
+</video>
+
+<p style="text-align: center; color: #666; font-size: 0.9em; margin-top: 0.5rem;">
+  <em>观看30秒演示，快速了解 VuReact 的编译流程</em>
+</p>
+
 VuReact 的核心目标并非“无条件地将任意 Vue 代码自动转换为 React 代码”，而是提供一条 **可预测、可分析、可维护** 的升级路径，使开发者能够在工程可控的前提下，平稳推进跨框架演进。
 
 此外，VuReact 并非一个孤立的代码改写工具。它由 **编译时转换** 与 **[运行时适配](https://runtime.vureact.top/)** 两部分协同构成：
@@ -59,12 +68,19 @@ VuReact 旨在解决以下典型场景中的开发痛点：
 
 VuReact 提供以下关键能力：
 
-- **深度支持 `<script setup>`**：完整支持 Vue 3 Composition API，提供接近原生的开发体验
-- **完整的 TypeScript 支持**：保留 Vue SFC 中的类型定义，自动生成精确的 React 组件类型
-- **零运行时样式方案**：在编译时完全处理 `scoped` 和 `module` 样式，甚至 `Less` 和 `Sass`，生成生产就绪的静态 CSS
-- **混合开发支持**：允许 Vue 和 React 代码在同一项目中并存，支持渐进式迁移
-- **完整的工程化编译**：不仅是代码转换，更是完整的项目编译解决方案
-- **智能编译**：涵盖语法转换、模板解析、样式处理、类型保留与工程优化
+**🧠 语义感知**：深度理解Vue语法的完整语义结构，包括模板指令、script setup逻辑、组合式API和TypeScript类型等，智能生成符合React最佳实践的代码
+
+**⚖️ 渐进迁移**：支持从单文件到整个项目的可控渐进迁移，规避一次性大规模转换带来的技术债务和系统风险
+
+**🧭 约定驱动**：基于明确的语法约定而非启发式规则进行编译，确保转换行为的确定性、可分析性和可维护性，完整支持现代Vue语法
+
+**⚛️ 完整特性适配**：将响应式 API、生命周期、内置组件、路由等Vue核心特性完整适配到React，编译阶段完全处理scoped、module和样式语言等，实现零运行时开销
+
+**⚡ 优秀的开发体验**：延续 Vue 心智模型实现无感开发 React；提供 build/watch 双模式 CLI，支持极速增量编译与文件监听，让跨框架开发效率与体验达到原生级别
+
+**🌀 创新探索**：探索跨框架编译桥模式，允许Vue和React代码在编译层面共存，验证"Vue到React完整编译"的技术可行性
+
+**👽 智能编译**：涵盖语法转换、模板解析、样式处理、类型保留与工程优化
 
 ### 智能编译特性
 
