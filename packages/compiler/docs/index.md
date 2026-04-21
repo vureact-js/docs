@@ -32,11 +32,11 @@ features:
 
   - icon: ⚛️
     title: 完整特性适配
-    details: 将响应式系统、生命周期、内置组件、路由等Vue核心特性完整适配到React，编译阶段完全处理scoped、module和样式语言，实现零运行时开销
+    details: 将响应式 API、生命周期、内置组件、路由等Vue核心特性完整适配到React，编译阶段完全处理scoped、module和样式语言等，实现零运行时开销
 
   - icon: ⚡
-    title: 工程化工具链
-    details: 提供build/watch双模式CLI，支持增量编译与文件监听，实现从代码转换到完整项目编译的完整工程化流程
+    title: 优秀的开发体验
+    details: 延续 Vue 心智模型实现无感开发 React；提供 build/watch 双模式 CLI，支持极速增量编译与文件监听，让跨框架开发效率与体验达到原生级别
 
   - icon: 🌀
     title: 创新探索

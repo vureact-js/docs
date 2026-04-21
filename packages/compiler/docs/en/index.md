@@ -35,8 +35,8 @@ features:
     details: Vue features, fully mapped to React—zero runtime cost
 
   - icon: ⚡
-    title: Engineering Toolchain
-    details: Build, watch, and scale with a production-ready CLI
+    title: Excellent Developer Experience
+    details: Vue mental model, seamless React dev; CLI build/watch, fast incremental compile, native-like
 
   - icon: 🌀
     title: Innovative Exploration
