@@ -14,7 +14,7 @@ Help developers get started in the shortest time and complete the compilation an
 - Initialize a standard Vue + TS project using Vite:
 
 ```bash
-npx create-vite@latest my-app --template vue-ts
+npx create-vite@latest vue-app --template vue-ts
 ```
 
 - When prompted `Install with npm and start now?`, select `No`.
@@ -40,23 +40,17 @@ vue-app/
 
 ## Step 1: Installation
 
-- Navigate into the `vue-app` directory:
+- Navigate to the directory and install project dependencies:
 
 ```bash
 cd vue-app
+npm install
 ```
 
 - Install the VuReact compiler core:
 
 ```bash
-# Using npm
 npm install -D @vureact/compiler-core
-
-# Using yarn
-yarn add -D @vureact/compiler-core
-
-# Using pnpm
-pnpm add -D @vureact/compiler-core
 ```
 
 ## Step 2: Configure the Compiler

@@ -9,12 +9,22 @@
 3. 输出 TSX 与原始 SFC 的语义对应关系
 4. 编译器会自动分析并追加依赖，无需手动管理 React hooks 依赖项
 
+> 🎥 你可以先观看下方的演示视频，对整个流程建立直观印象。
+
+<!--
+TODO: 插入演示视频
+<video controls width="100%">
+  <source src="/static/quick-start-demo.mp4" type="video/mp4">
+  您的浏览器不支持视频播放，请参考下方的文字教程。
+</video>
+-->
+
 ## Step 0：准备 Vite + Vue 工程
 
 - 使用 Vite 新建一个标准的 Vue + TS 项目：
 
 ```bash
-npx create-vite@latest my-app --template vue-ts
+npx create-vite@latest vue-app --template vue-ts
 ```
 
 - 当出现交互式选择 `Install with npm and start now?` 时，选择 `No`。
@@ -40,23 +50,17 @@ vue-app/
 
 ## Step 1：安装 VuReact
 
-- 进入 `vue-app` 目录：
+- 进入目录并安装项目依赖：
 
 ```bash
 cd vue-app
+npm install
 ```
 
-- 安装：
+- 安装 VuReact 编译核心
 
 ```bash
-# 使用 npm
 npm install -D @vureact/compiler-core
-
-# 使用 yarn
-yarn add -D @vureact/compiler-core
-
-# 使用 pnpm
-pnpm add -D @vureact/compiler-core
 ```
 
 ## Step 2：配置 VuReact
