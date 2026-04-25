@@ -1,4 +1,4 @@
-# Preprocessor Support Semantic Comparison
+# Style Preprocessors Semantic Comparison
 
 How do style languages in Vue (like `SCSS`, `Less`, etc.) transform into React code after VuReact compilation?
 

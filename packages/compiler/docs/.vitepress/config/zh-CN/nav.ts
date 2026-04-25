@@ -16,7 +16,7 @@ export default [
   },
   {
     text: '反馈问题',
-    link: 'https://github.com/vureact-js/core/issues/new',
+    link: 'https://github.com/vureact-js/core/issues',
   },
   {
     text: '在线案例',

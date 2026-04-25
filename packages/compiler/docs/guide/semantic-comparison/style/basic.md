@@ -1,6 +1,6 @@
-# 基础 `<style>` 语义对照
+# 基础样式语义对照
 
-解析 Vue SFC 中的 `<style>` 样式块经过 VuReact 编译后会变成什么样的 React 代码？
+解析 Vue SFC 中的基础 `<style>` 样式块经过 VuReact 编译后会变成什么样的 React 代码？
 
 ## 前置约定
 

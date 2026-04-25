@@ -134,10 +134,11 @@ export default [
       {
         text: '样式对照',
         items: [
-          { text: 'SFC 样式块', link: '/guide/semantic-comparison/style/basic' },
-          { text: 'SFC 作用域样式', link: '/guide/semantic-comparison/style/scoped' },
-          { text: 'SFC 模块样式', link: '/guide/semantic-comparison/style/module' },
-          { text: '预处理器支持', link: '/guide/semantic-comparison/style/lang' },
+          { text: '基础样式', link: '/guide/semantic-comparison/style/basic' },
+          { text: '作用域样式', link: '/guide/semantic-comparison/style/scoped' },
+          { text: '模块化样式', link: '/guide/semantic-comparison/style/module' },
+          { text: '样式预处理器', link: '/guide/semantic-comparison/style/lang' },
+          { text: '穿透选择器', link: '/guide/semantic-comparison/style/deep-selector' },
         ],
       },
     ],

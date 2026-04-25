@@ -1,6 +1,6 @@
-# `<style module>` 语义对照
+# 模块化样式语义对照
 
-解析 Vue SFC 中的 `<style module>` CSS Modules 样式经过 VuReact 编译后会变成什么样的 React 代码？
+解析 Vue SFC 中的 `<style module>` 模块化样式经过 VuReact 编译后会变成什么样的 React 代码？
 
 ## 前置约定
 

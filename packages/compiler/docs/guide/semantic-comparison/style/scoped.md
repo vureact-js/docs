@@ -1,4 +1,4 @@
-# `<style scoped>` 语义对照
+# 作用域样式语义对照
 
 解析 Vue SFC 中的 `<style scoped>` 作用域样式经过 VuReact 编译后会变成什么样的 React 代码？
 

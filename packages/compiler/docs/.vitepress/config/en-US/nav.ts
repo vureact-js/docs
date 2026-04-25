@@ -15,8 +15,8 @@ export default [
     ],
   },
   {
-    text: 'Issue',
-    link: 'https://github.com/vureact-js/core/issues/new',
+    text: 'Issues',
+    link: 'https://github.com/vureact-js/core/issues',
   },
   {
     text: 'Playground',
