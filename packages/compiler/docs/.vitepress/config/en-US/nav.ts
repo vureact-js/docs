@@ -36,7 +36,7 @@ export default [
     items: [
       { text: 'Changelog', link: '/en/guide/changelog' },
       { text: 'Compilation Conventions', link: '/en/guide/specification' },
-      { text: 'Basic Tutorials', link: '/en/guide/basic-tutorial' },
+      { text: 'Quick Start', link: '/en/guide/quick-start' },
       { text: 'CLI', link: '/guide/cli' },
       { text: 'Router Adaptation Guide', link: '/en/guide/router-adaptation' },
       { text: 'FAQ', link: '/en/guide/faq' },

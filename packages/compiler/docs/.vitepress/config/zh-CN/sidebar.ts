@@ -18,40 +18,23 @@ export default [
       { text: '最佳实践', link: '/guide/best-practices' },
     ],
   },
+  { text: '快速开始', link: '/guide/quick-start' },
   {
-    text: '入门与实战',
+    text: '项目实战',
     items: [
+      { text: '客户关系管理后台（标准）', link: '/guide/crm-admin-backend' },
       {
-        text: '基础教程',
-        items: [
-          { text: '计数器组件', link: '/guide/basic-tutorial' },
-          { text: '模板基础', link: '/guide/beginner-template-stable' },
-          { text: '组件通信', link: '/guide/beginner-component-communication' },
-          { text: '组件引用', link: '/guide/beginner-component-references' },
-          { text: 'SFC高级特性', link: '/guide/advanced-context-events-slots' },
-          { text: '组件内样式', link: '/guide/advanced-style-pipeline' },
-          { text: '脚本文件处理', link: '/guide/advanced-script-only-pipeline' },
-          { text: '样式文件处理', link: '/guide/advanced-style-only-pipeline' },
-        ],
+        text: '客户支持协同后台（混写）',
+        link: '/guide/customer-support-hub',
       },
-      {
-        text: '项目实战',
-        items: [
-          { text: '客户关系管理后台（标准）', link: '/guide/crm-admin-backend' },
-          {
-            text: '客户支持协同后台（混写）',
-            link: '/guide/customer-support-hub',
-          },
-        ],
-      },
-      {
-        text: '心灵控制',
-        items: [
-          { text: '说明', link: '/guide/mind-control-readme' },
-          { text: '可控混写', link: '/guide/mind-control-controlled-mixed' },
-          { text: '全生态释放', link: '/guide/mind-control-full-ecosystem' },
-        ],
-      },
+    ],
+  },
+  {
+    text: '心灵控制（高级）',
+    items: [
+      { text: '说明', link: '/guide/mind-control-readme' },
+      { text: '可控混写', link: '/guide/mind-control-controlled-mixed' },
+      { text: '全生态释放', link: '/guide/mind-control-full-ecosystem' },
     ],
   },
   { text: 'ESLint 规则冲突', link: '/guide/eslint-rule-conflicts' },

@@ -36,7 +36,7 @@ export default [
     items: [
       { text: '更新日志', link: '/guide/changelog' },
       { text: '规范与最佳实践', link: '/guide/specification' },
-      { text: '入门与实战', link: '/guide/basic-tutorial' },
+      { text: '快速开始', link: '/guide/quick-start' },
       { text: '路由适配指南', link: '/guide/router-adaptation' },
       { text: '常见问题', link: '/guide/faq' },
       { text: 'CLI', link: '/guide/cli' },

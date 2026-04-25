@@ -18,40 +18,23 @@ export default [
       { text: 'Best Practices', link: '/en/guide/best-practices' },
     ],
   },
+  { text: 'Quick Start', link: '/en/guide/quick-start' },
   {
-    text: 'Guides',
+    text: 'Real-World Projects',
     items: [
+      { text: 'CRM Admin Dashboard (Standard)', link: '/en/guide/crm-admin-backend' },
       {
-        text: 'Basic Tutorials',
-        items: [
-          { text: 'Counter Component', link: '/en/guide/basic-tutorial' },
-          { text: 'Template Basics', link: '/en/guide/beginner-template-stable' },
-          { text: 'Component Communication', link: '/en/guide/beginner-component-communication' },
-          { text: 'Component References', link: '/en/guide/beginner-component-references' },
-          { text: 'Advanced SFC Features', link: '/en/guide/advanced-context-events-slots' },
-          { text: 'Component Styling', link: '/en/guide/advanced-style-pipeline' },
-          { text: 'Script File Processing', link: '/en/guide/advanced-script-only-pipeline' },
-          { text: 'Style File Processing', link: '/en/guide/advanced-style-only-pipeline' },
-        ],
+        text: 'Customer Support Hub (Mixed)',
+        link: '/en/guide/customer-support-hub',
       },
-      {
-        text: 'Real-World Projects',
-        items: [
-          { text: 'CRM Admin Dashboard (Standard)', link: '/en/guide/crm-admin-backend' },
-          {
-            text: 'Customer Support Hub (Mixed Mode)',
-            link: '/en/guide/customer-support-hub',
-          },
-        ],
-      },
-      {
-        text: 'Mind Control',
-        items: [
-          { text: 'Overview', link: '/en/guide/mind-control-readme' },
-          { text: 'Controlled Mixed Mode', link: '/en/guide/mind-control-controlled-mixed' },
-          { text: 'Full Ecosystem Mode', link: '/en/guide/mind-control-full-ecosystem' },
-        ],
-      },
+    ],
+  },
+  {
+    text: 'Mind Control',
+    items: [
+      { text: 'Overview', link: '/en/guide/mind-control-readme' },
+      { text: 'Controlled Mixed Mode', link: '/en/guide/mind-control-controlled-mixed' },
+      { text: 'Full Ecosystem Mode', link: '/en/guide/mind-control-full-ecosystem' },
     ],
   },
   { text: 'ESLint Rule Conflicts', link: '/en/guide/eslint-rule-conflicts' },
