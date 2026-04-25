@@ -2,14 +2,33 @@
 
 `VuReact` follows [Semantic Versioning 2.0.0](sslocal://flow/file_open?url=http%3A%2F%2Fsemver.org%2F&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=). Versions are in descending chronological order.
 
+## v1.7.0 (2026-04-26)
+
+### ✨ Features
+
+- Added `:deep()` penetration selector conversion support: covers multi-parameter, nested and other complex scenarios, styles can penetrate into child components
+- Added `:slotted()` penetration selector conversion support: precisely targets scoped styles to slot content
+- Added `:global()` penetration selector conversion support: allows declaring global style rules in scoped styles
+
+### 🐞 Bug Fixes
+
+- Fixed scoped styles `data-css-*` attribute not fully covering component DOM elements
+- Fixed hash attribute incorrectly applied to pseudo-classes/pseudo-elements/attribute selectors causing style failures
+- Fixed using timestamp as default when file ID does not exist, use stable fallback value instead
+
+### 🚀 Optimizations
+
+- Refactored scoped style handling into a modular architecture: split the postcss single file into multiple modules to improve maintainability and extensibility
+- Optimized selector parsing algorithm to enhance compatibility with complex CSS selector scenarios
+
 ## v1.6.2 (2026-04-21)
 
-### 🐞 修复问题
+### 🐞 Bug Fixes
 
 - Fixed incorrect handling of `:key` on `<template>` with multiple children; now warn that only one child is allowed for valid key propagation
 - Fixed `:key` being incorrectly added to unsupported nodes (e.g., `<template>`, `<slot>`); skip key transfer for invalid child types
 
-### 🚀 优化改进
+### 🚀 Optimizations
 
 - Bump runtime adapter packages to latest versions for version consistency
 
