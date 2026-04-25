@@ -15,6 +15,8 @@
 - Fixed scoped styles `data-css-*` attribute not fully covering component DOM elements
 - Fixed hash attribute incorrectly applied to pseudo-classes/pseudo-elements/attribute selectors causing style failures
 - Fixed using timestamp as default when file ID does not exist, use stable fallback value instead
+- Fixed issue where top-level variables optimized by `useMemo` did not import the Hook from React
+- Fixed incorrect recognition and handling of functions that need to be wrapped for `v-on`
 
 ### 🚀 Optimizations
 
