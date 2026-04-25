@@ -34,13 +34,13 @@ VuReact 旨在解决以下典型场景中的开发痛点：
 - **生态扩展**：丰富跨框架的开发工具链，为多技术栈共存或迁移提供标准化方案
 
 核心挑战在于：若输入代码的语义不可静态分析，编译器便无法稳定生成符合 React Hooks 规则的输出。
-因此，VuReact 采取 **“约定优先”** 的策略：先通过明确的编译约定界定可转换的代码范围，再在该范围内实现高效、可靠的转换。
+因此，VuReact 采取 **“约定优先”** 的策略：先通过明确的 [编译约定](/guide/specification) 界定可转换的代码范围，再在该范围内实现高效、可靠的转换。
 
 ## 项目定位
 
-当前阶段，VuReact 优先服务于以下场景：
+VuReact 精准服务于以下场景：
 
-- **新项目开发**：直接按照 VuReact 约定编写 Vue 风格的组件，并输出为 React 代码
+- **新项目开发**：按照 VuReact 约定编写 Vue 组件（包括脚本文件等），并输出为 React 代码
 - **现代语法支持**：专注于 Vue 3 Composition API 与 `<script setup>` 语法
 - **可控渐进迁移**：支持按目录、模块逐步迁移，允许 Vue 与 React 组件在项目中并存
 - **开发体验优化**：为希望享受 Vue 优秀心智模型并编写 React，或进行跨框架混合开发的团队提供高效方案
@@ -92,15 +92,32 @@ VuReact 提供以下关键能力：
 
 ## 快速开始
 
-本节将引导你完成第一个 VuReact 项目的创建、编译和运行。
+本节将引导你完成第一个 VuReact 项目的创建、编译和运行；
 
-### 前提条件
+完成后你会明确三件事：
 
-- Node.js 18+ 或更高版本
-- 包管理器（npm、yarn 或 pnpm）
-- 基本的 Vue 3 和 React 知识
+1. 输入 SFC 在什么约定下可稳定转换
+2. 编译后目录会长什么样
+3. 输出 TSX 与原始 SFC 的语义对应关系
+4. 编译器会自动分析并追加依赖，无需手动管理 React hooks 依赖项
 
-### 1. 安装
+### Step 0：准备目录
+
+先准备一个最小工程（示意）：
+
+```txt
+my-app/
+├─ src/
+│  ├─ components/
+│  │  └─ Counter.vue
+│  ├─ App.vue
+│  ├─ main.ts
+├─ package.json
+├─ tsconfig.json
+└─ vureact.config.js
+```
+
+### Step 1：安装
 
 在你的 Vue 项目中安装 VuReact 编译器：
 
@@ -115,70 +132,75 @@ yarn add -D @vureact/compiler-core
 pnpm add -D @vureact/compiler-core
 ```
 
-### 2. 创建示例项目
+### Step 2：编写输入 SFC
 
-假设你有一个干净简单的 Vue 3 项目结构：
+`src/components/Counter.vue`
 
-```txt
-my-vue-app/
-├── src/
-│   ├── components/
-│   │   └── Counter.vue
-│   └── main.ts
-├── package.json
-└── vureact.config.js
-```
-
-创建一个简单的计数器组件 `src/components/Counter.vue`：
-
-```vue
+```html
 <template>
-  <div class="counter">
-    <h2>计数器示例</h2>
-    <p>当前计数: {{ count }}</p>
-    <button @click="increment">增加</button>
-    <button @click="reset">重置</button>
-  </div>
+  <section class="counter-card">
+    <h2>{{ props.title || title }}</h2>
+    <p>Count: {{ count }}</p>
+    <button @click="increment">+1</button>
+    <button @click="methods.decrease">-1</button>
+  </section>
 </template>
 
-<script setup>
-// @vr-name: Counter （注：这段注释用于告诉编译器生成的组件名）
-import { ref } from 'vue';
+<script setup lang="ts">
+  // @vr-name: Counter （注：用于告诉编译器，该生成什么组件名）
+  import { computed, ref } from 'vue';
 
-const count = ref(0);
+  // 也可以使用宏定义组件名
+  defineOptions({ name: 'Counter' });
 
-const increment = () => {
-  count.value++;
-};
+  // 定义 props
+  const props = defineProps<{ title?: string }>();
 
-const reset = () => {
-  count.value = 0;
-};
+  // 定义 emits
+  const emits = defineEmits<{
+    (e: 'change'): void;
+    (e: 'update', value: number): number;
+  }>();
+
+  const step = ref(1);
+  const count = ref(0);
+  const title = computed(() => `Counter x${step.value}`);
+
+  const increment = () => {
+    count.value += step.value;
+    emits('update', count.value);
+  };
+
+  const methods = {
+    decrease() {
+      count.value -= step.value;
+    },
+  };
 </script>
 
-<style scoped>
-.counter {
-  padding: 20px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  max-width: 300px;
-}
+<style lang="less" scoped>
+  @border-color: #ddd;
+  @border-radius: 8px;
+  @padding-base: 12px;
+
+  .counter-card {
+    border: 1px solid @border-color;
+    border-radius: @border-radius;
+    padding: @padding-base;
+  }
 </style>
 ```
 
-### 3. 配置编译器
+### Step 3：配置编译器
 
-在项目根目录（假设是 my-vue-app）创建 `vureact.config.js`：
+`vureact.config.ts`
 
-```javascript
+```ts
 import { defineConfig } from '@vureact/compiler-core';
 
 export default defineConfig({
   // 输入路径，包含要编译的 Vue 文件；允许输入单文件 'xxx.vue'
-  input: 'src',
-
-  // 启用编译缓存
-  cache: true,
+  input: './src',
 
   // 排除 Vue 入口文件，避免语义冲突
   exclude: ['src/main.ts'],
@@ -198,146 +220,148 @@ export default defineConfig({
 
 实际上，除了 `exclude` 需要手动指定外，其他选项均采用示例配置中的默认值，无需额外配置。
 
-### 4. 运行编译
+### Step 4：执行编译
 
-在项目根目录执行编译命令：
+#### 方式一：使用 npx 命令
+
+在根目录下运行：
 
 ```bash
-# 一次性编译
 npx vureact build
-
-# 或使用监听模式（开发时推荐）
-npx vureact watch
 ```
 
-### 5. 查看输出
+#### 方式二：使用 npm scripts
 
-编译完成后，你将看到类似以下结构：
+在 `package.json` 里添加脚本命令：
+
+```json
+"scripts": {
+  "watch": "vureact watch",
+  "build": "vureact build"
+}
+```
+
+```bash
+npm run build
+```
+
+### Step 5：查看输出目录树
+
+编译后目录（示意）：
 
 ```txt
-my-vue-app/
-├── .vureact/           # 工作区
-│   ├── react-app/      # 生成的 React 代码
-│   │   └── src/
-│   │       └── components/
-│   │           ├── Counter.tsx
-│   │           └── counter-[hash].css
-│   └── cache/          # 编译缓存
-├── src/                # 原始 Vue 代码
-└── vureact.config.js   # 配置文件
+my-project/
+├── .vureact/              # 工作区（编译生成）
+│   ├── cache/             # 编译缓存
+│   ├── react-app/         # 生成的 React 代码
+│   │   ├── src/
+│   │   │   ├── components/
+│   │   │   │   ├── Counter.tsx
+│   │   │   │   └── counter-[hash].css
+│   │   │   └── App.tsx
+│   │   │   └── index.css
+│   │   │   └── main.tsx
+│   │   └── package.json
+│   │   └── tsconfig.json
+│   │   └── vite.config.ts
+│   │   └── ...
+│   │
+├── src/                   # 原始 Vue 代码
+│   ├── components/
+│   │   └── Counter.vue
+│   └── main.ts            # Vue 入口文件
+├── ...
+└── vureact.config.js      # VuReact 配置文件
 ```
 
-### 6. 运行 React 应用
+### Step 6：对照生成结果
 
-如果启用了 `bootstrapVite: true`，VuReact 会自动初始化一个标准的 Vite React 项目：
-
-```bash
-# 进入生成的 React 项目
-cd .vureact/react-app
-
-# 安装依赖
-npm install
-
-# 启动开发服务器
-npm run dev
-```
-
-现在你可以在浏览器中访问 `http://localhost:5173` 查看转换后的 React 应用。
-
-### 编译结果示例
-
-生成的 `Counter.tsx` 文件大致如下：
+下面是一个格式化后的典型输出（为说明做了轻微简化，实际哈希与属性名以本地产物为准）：
 
 ```tsx
-import { memo, useCallback } from 'react';
-import { useVRef } from '@vureact/runtime-core';
-import './counter-abc123.css';
+import { memo, useCallback, useMemo } from 'react';
+import { useComputed, useVRef } from '@vureact/runtime-core';
+import './counter-a1b2c3.css';
 
-const Counter = memo(() => {
+// 根据 defineProps 和 defineEmits 推导
+type ICounterType = {
+  title?: string;
+  onChange: () => void;
+  onUpdate: (value: number) => number;
+};
+
+// memo 包裹组件
+const Counter = memo((props: ICounterType) => {
+  // ref/computed 转换成了对等的适配 API
+  const step = useVRef(1);
   const count = useVRef(0);
+  const title = useComputed(() => `Counter x${step.value}`);
 
+  // 自动分析顶层箭头函数依赖，并追加 useCallback 优化
   const increment = useCallback(() => {
-    count.value++;
-  }, [count.value]);
+    count.value += step.value;
+    props.onUpdate?.(count.value); // emits 转换
+  }, [count.value, step.value, props.onUpdate]);
 
-  const reset = useCallback(() => {
-    count.value = 0;
-  }, [count.value]);
+  // 自动分析顶层对象中的依赖，并追加 useMemo 优化
+  const methods = useMemo(
+    () => ({
+      decrease() {
+        count.value -= step.value;
+      },
+    }),
+    [count.value, step.value],
+  );
 
   return (
-    <div className="counter" data-css-abc123>
-      <h2>计数器示例</h2>
-      <p>当前计数: {count.value}</p>
-      <button onClick={increment}>增加</button>
-      <button onClick={reset}>重置</button>
-    </div>
+    <>
+      <section className="counter-card" data-css-a1b2c3>
+        <h2 data-css-a1b2c3>{props.title || title.value}</h2>
+        <p data-css-a1b2c3>Count: {count.value}</p>
+        <button onClick={increment} data-css-a1b2c3>
+          +1
+        </button>
+        <button onClick={methods.decrease} data-css-a1b2c3>
+          -1
+        </button>
+      </section>
+    </>
   );
 });
 
 export default Counter;
 ```
 
-生成附属的 counter.css 文件：
+CSS 文件内容：
 
 ```css
-.counter[data-css-abc123] {
-  padding: 20px;
-  border: 1px solid #e0e0e0;
+.counter-card[data-css-a1b2c3] {
+  border: 1px solid #ddd;
   border-radius: 8px;
-  max-width: 300px;
+  padding: 12px;
 }
 ```
 
-## 迁移策略建议
+### 关键观察点
 
-### 渐进式迁移路径
-
-1. **共存阶段**：在 Vue 项目中引入 VuReact，新组件使用 Vue 编写
-2. **混合阶段**：逐步转换旧组件，Vue 和 React 组件共存
-3. **统一阶段**：完成所有组件转换，移除 Vue 依赖
-
-### 风险评估与规避
-
-- **技术风险**：通过编译约定确保转换可控
-- **团队风险**：保持开发体验一致，降低学习成本
-- **时间风险**：支持按模块渐进迁移，避免一次性重写
-
-### 代码示例的注释
-
-可以自主选择在生成的 Counter.tsx 示例中增加注释，说明转换逻辑：
-
-```tsx
-// 自动从 Vue 的 ref() 转换为 @vureact/runtime-core 提供的适配 useVRef()
-const count = useVRef(0);
-
-// 自动从 @click 转换为 onClick，并智能分析依赖，添加 useCallback 优化
-const increment = useCallback(() => {
-  count.value++;
-}, [count.value]);
-
-// 对具有 class 或 id 属性的元素，自动添加 scoped 样式标记
-<div className="counter" data-css-a1b2c3>
-```
-
-### 次要建议
-
-### 版本兼容性
-
-- Vue 3.x
-- React 18+
-- Node.js 18+
-
-### 性能表现
-
-在基准测试中，转换后的 React 应用：
-
-- 首屏加载时间：与原生 React 应用相当
-- 运行时内存占用：增加 < 5%
-- 构建产物大小：增加 < 10%
+1. `// @vr-name: Counter` 这段特殊注释定义了组件名
+2. `defineProps` 和 `defineEmits` 被转换成了 TS 组件类型
+3. 非纯 UI 展示组件，默认会走 `memo` 包装
+4. `ref` / `computed` 被转换为 runtime 适配 API（`useVRef` / `useComputed`）
+5. 模板事件回调会生成符合 React 语义的 `onClick`
+6. 顶层箭头函数自动分析依赖，尝试注入 `useCallback`
+7. 顶层变量声明自动分析依赖，尝试注入 `useMemo`
+8. 对 JSX 中的原 `ref` 状态值补上 `.value`
+9. `less` 样式被编译为 css 代码
+10. `scoped` 样式会生成带哈希的 css 文件，并在元素上标注作用域属性
 
 ### 生态集成
 
 - **[VuReact Runtime](https://runtime.vureact.top/)**：提供 React 版的 Vue 常用内置组件、核心 Composition API 等
 - **[VuReact Router](https://router.vureact.top/)**：支持 Vue Router 4.x -> React Router DOM 7.9+ 转换
 
-如果需要，可以选择 [☣️混合开发](/guide/mind-control-readme)，直接在 Vue 项目中引入 React 生态能力。
+如果需要，可以选择 [☣️混合编写](/guide/mind-control-readme)，直接在 Vue 项目中引入 React 生态能力。
+
+### 常见问题
+
+请移步 [VuReact 常见问题](https://vureact.top/guide/faq.html)！

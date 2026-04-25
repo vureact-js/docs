@@ -331,9 +331,7 @@ export default defineConfig({
 
 1. **GitHub Discussions**：技术讨论和问题解答 [GitHub Discussions](https://github.com/vureact-js/core/discussions)
 2. **GitHub**：Bug 报告和功能请求 [GitHub Issues](https://github.com/vureact-js/core/issues)
-3. **文档**：详细的 [使用指南](/guide/introduction)
-4. **示例项目**：参考 [示例代码](https://gitee.com/vureact-js/core/tree/master/packages/compiler-core/examples)
-5. **赞助**：支持作者！ [爱发电](https://afdian.com/a/vureact-js/plan)
+3. **赞助**：支持作者！ [爱发电](https://afdian.com/a/vureact-js/plan)
 
 ## Q34: 如何解决 React 中 "Objects are not valid as a React child" 的问题？
 
