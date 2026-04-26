@@ -6,15 +6,6 @@ VuReact（发音 `/vjuːˈriːækt/`）是一个让你用 Vue 3 语法编写 Rea
 
 它不仅执行语法层面的转换，更能深入理解 Vue 代码的语义，并生成遵循 React 最佳实践的优质代码。
 
-<video controls preload="metadata" width="100%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin: 2rem 0;">
-  <source src="/static/hero_demo_3MB.mp4" type="video/mp4" />
-  您的浏览器不支持视频播放。
-</video>
-
-<p style="text-align: center; color: #666; font-size: 0.9em; margin-top: 0.5rem;">
-  <em>观看30秒演示，快速了解 VuReact 的编译流程</em>
-</p>
-
 VuReact 的核心目标并非“无条件地将任意 Vue 代码自动转换为 React 代码”，而是提供一条 **可预测、可分析、可维护** 的升级路径，使开发者能够在工程可控的前提下，平稳推进跨框架演进。
 
 此外，VuReact 并非一个孤立的代码改写工具。它由 **编译时转换** 与 **[运行时适配](https://runtime.vureact.top/)** 两部分协同构成：
@@ -23,6 +14,15 @@ VuReact 的核心目标并非“无条件地将任意 Vue 代码自动转换为 
 - **运行时** 则提供关键的语义适配与行为兼容层，确保转换后的组件在 React 环境中稳定运行。
 
 两者紧密配合，共同保障了转换质量、运行稳定性与项目落地效率的平衡。
+
+<video controls preload="metadata" width="100%" style="border-radius: 4px; margin: 2rem 0;">
+  <source src="/static/hero_demo_3MB.mp4" type="video/mp4" />
+  您的浏览器不支持视频播放。
+</video>
+
+<p style="text-align: center; color: #666; font-size: 0.9em; margin-top: 0.5rem;">
+  <em>观看30秒演示，快速了解 VuReact 的编译流程</em>
+</p>
 
 ## 解决什么问题
 

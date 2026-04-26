@@ -1,6 +1,6 @@
 # CHANGELOG
 
-`VuReact` follows [Semantic Versioning 2.0.0](sslocal://flow/file_open?url=http%3A%2F%2Fsemver.org%2F&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=). Versions are in descending chronological order.
+`VuReact` follows [Semantic Versioning 2.0.0](https://semver.org). Versions are in descending chronological order.
 
 ## v1.7.0 (2026-04-26)
 
@@ -10,19 +10,19 @@
 
 ### 🐞 Bug Fixes
 
-- Fixed scoped styles `data-css-*` not fully covering component DOM elements
-- Fixed hash attribute incorrectly applied to pseudo-classes/pseudo-elements/attribute selectors
-- Fixed timestamp fallback for missing file IDs
-- Fixed `useMemo` optimized variables missing React Hook import
-- Fixed incorrect `v-on` function wrapping detection
-- Fixed component props not collected as Hook dependencies
+- Fixed scoped style `data-css-*` attributes not fully covering component DOM elements
+- Fixed CSS `hash` attribute incorrectly applied to pseudo-classes/elements/attribute selectors
+- Fixed missing default value when file ID does not exist
+- Fixed top-level variables not importing the Hook from React after being optimized with `useMemo`
+- Fixed incorrect recognition and conversion of `v-on` requiring function wrapping
+- Fixed component `props` not being collected as Hook dependencies
 
 ### 🚀 Optimizations
 
-- Refactored scoped style handling into modular architecture
-- Optimized selector parsing for complex CSS scenarios
-- Refactored `emit` call non-string event names to use computed properties with a warning
-- Refactored dependency analyzer into sub-modules for better organization and maintainability
+- Optimized CSS selector parsing algorithm to enhance compatibility with complex CSS selectors
+- Refactored `emit` calls with dynamic event names to use computed property access and emit a warning
+- Modularized dependency analyzer into submodules for better maintainability
+- Modularized scoped style processing for improved maintainability and extensibility
 
 ## v1.6.2 (2026-04-21)
 

@@ -6,15 +6,6 @@ VuReact (pronounced `/vjuːˈriːækt/`) is a compiler that allows you to write 
 
 It not only performs syntax-level conversions but also deeply understands the semantics of Vue code, generating high-quality React code that adheres to React best practices.
 
-<video controls preload="metadata" width="100%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin: 2rem 0;">
-  <source src="/static/hero_demo_3MB.mp4" type="video/mp4" />
-  Your browser does not support video playback.
-</video>
-
-<p style="text-align: center; color: #666; font-size: 0.9em; margin-top: 0.5rem;">
-  <em>Watch a 30s demo to quickly understand VuReact's compilation workflow</em>
-</p>
-
 The core goal of VuReact is not to "unconditionally convert arbitrary Vue code to React code automatically", but to provide a **predictable, analyzable, and maintainable** upgrade path, enabling developers to smoothly advance cross-framework evolution under the premise of engineering control.
 
 Furthermore, VuReact is not an isolated code rewriting tool. It consists of two synergistic components: **compile-time conversion** and **[runtime core](https://runtime.vureact.top/en)**:
@@ -23,6 +14,15 @@ Furthermore, VuReact is not an isolated code rewriting tool. It consists of two 
 - **Runtime**: Provides critical semantic adaptation and behavior compatibility layers to ensure converted components run stably in the React environment.
 
 These two parts work closely together to balance conversion quality, runtime stability, and project implementation efficiency.
+
+<video controls preload="metadata" width="100%" style="border-radius: 4px; margin: 2rem 0;">
+  <source src="/static/hero_demo_3MB.mp4" type="video/mp4" />
+  Your browser does not support video playback.
+</video>
+
+<p style="text-align: center; color: #666; font-size: 0.9em; margin-top: 0.5rem;">
+  <em>Watch a 30s demo to quickly understand VuReact's compilation workflow</em>
+</p>
 
 ## Problems Solved
 
