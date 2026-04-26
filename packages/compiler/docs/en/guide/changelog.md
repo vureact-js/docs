@@ -6,22 +6,21 @@
 
 ### ✨ Features
 
-- Added `:deep()` penetration selector conversion support: covers multi-parameter, nested and other complex scenarios, styles can penetrate into child components
-- Added `:slotted()` penetration selector conversion support: precisely targets scoped styles to slot content
-- Added `:global()` penetration selector conversion support: allows declaring global style rules in scoped styles
+- Added `:deep()`, `:slotted()`, `:global()` selector conversion support for scoped styles
 
 ### 🐞 Bug Fixes
 
-- Fixed scoped styles `data-css-*` attribute not fully covering component DOM elements
-- Fixed hash attribute incorrectly applied to pseudo-classes/pseudo-elements/attribute selectors causing style failures
-- Fixed using timestamp as default when file ID does not exist, use stable fallback value instead
-- Fixed issue where top-level variables optimized by `useMemo` did not import the Hook from React
-- Fixed incorrect recognition and handling of functions that need to be wrapped for `v-on`
+- Fixed scoped styles `data-css-*` not fully covering component DOM elements
+- Fixed hash attribute incorrectly applied to pseudo-classes/pseudo-elements/attribute selectors
+- Fixed timestamp fallback for missing file IDs
+- Fixed `useMemo` optimized variables missing React Hook import
+- Fixed incorrect `v-on` function wrapping detection
 
 ### 🚀 Optimizations
 
-- Refactored scoped style handling into a modular architecture: split the postcss single file into multiple modules to improve maintainability and extensibility
-- Optimized selector parsing algorithm to enhance compatibility with complex CSS selector scenarios
+- Refactored scoped style handling into modular architecture
+- Optimized selector parsing for complex CSS scenarios
+- Refactored `emit` non-string event names to use computed properties with a warning
 
 ## v1.6.2 (2026-04-21)
 
@@ -253,5 +252,7 @@
 - Composition API → React Hooks mapping
 - Compile-time scoped / module CSS output
 - Basic CLI (build / watch), cache, Vite init, hybrid development
+
+> Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>
 
 > Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>

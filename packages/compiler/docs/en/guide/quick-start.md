@@ -2,12 +2,21 @@
 
 Help developers get started in the shortest time and complete the compilation and conversion of a simple Vue project to a React project.
 
-### After completing this guide, you will understand
+### Overview
 
 1. What conventions the input SFC must follow for stable conversion
 2. What the output directory structure looks like
 3. The semantic correspondence between the output TSX and the original SFC
-4. The compiler automatically analyzes and adds dependencies—no need to manually manage React hooks dependencies
+4. The compiler automatically analyzes and appends React hook dependencies, eliminating the need for manual management
+
+> 🎥 You can first watch the demo video below to get a visual impression of the entire process.
+
+<!--
+<video controls width="100%">
+  <source src="/static/quick-start-demo.mp4" type="video/mp4">
+  Your browser does not support video playback.
+</video>
+-->
 
 ## Step 0: Prepare a Vite + Vue Project
 
@@ -112,7 +121,7 @@ Replace the original `HelloWorld.vue` with the counter component code:
 
   // defineEmits is required to define emits
   const emits = defineEmits<{
-    (e: 'update', value: number): number;
+    (e: 'update', value: number): void;
   }>();
 
   const step = ref(1);
@@ -147,7 +156,14 @@ Replace the original `HelloWorld.vue` with the counter component code:
 ```vue
 <!-- src/App.vue -->
 <template>
-  <HelloWorld title="Counter Component" @update="(v) => console.log(v)" />
+  <HelloWorld
+    title="Counter Component"
+    @update="
+      (v) => {
+        console.log(v);
+      }
+    "
+  />
 </template>
 ```
 

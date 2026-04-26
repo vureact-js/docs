@@ -2,12 +2,12 @@
 
 帮助开发者在最短时间内上手，并完成一个简单的 Vue 项目到 React 项目的编译转换。
 
-### 完成后你会明确三件事
+### 概述
 
 1. 输入 SFC 在什么约定下可稳定转换
 2. 编译后目录会长什么样
 3. 输出 TSX 与原始 SFC 的语义对应关系
-4. 编译器会自动分析并追加依赖，无需手动管理 React hooks 依赖项
+4. 编译器自动分析并追加 React hook 依赖，无需手动管理
 
 > 🎥 你可以先观看下方的演示视频，对整个流程建立直观印象。
 
@@ -122,7 +122,7 @@ export default defineConfig({
 
   // 必须使用 defineEmits 定义 emits
   const emits = defineEmits<{
-    (e: 'update', value: number): number;
+    (e: 'update', value: number): void;
   }>();
 
   const step = ref(1);
@@ -157,7 +157,14 @@ export default defineConfig({
 ```vue
 <!-- src/App.vue -->
 <template>
-  <HelloWorld title="计数器组件" @update="(v) => console.log(v)" />
+  <HelloWorld
+    title="计数器组件"
+    @update="
+      (v) => {
+        console.log(v);
+      }
+    "
+  />
 </template>
 ```
 
