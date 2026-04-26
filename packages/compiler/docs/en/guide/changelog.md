@@ -15,12 +15,14 @@
 - Fixed timestamp fallback for missing file IDs
 - Fixed `useMemo` optimized variables missing React Hook import
 - Fixed incorrect `v-on` function wrapping detection
+- Fixed component props not collected as Hook dependencies
 
 ### 🚀 Optimizations
 
 - Refactored scoped style handling into modular architecture
 - Optimized selector parsing for complex CSS scenarios
-- Refactored `emit` non-string event names to use computed properties with a warning
+- Refactored `emit` call non-string event names to use computed properties with a warning
+- Refactored dependency analyzer into sub-modules for better organization and maintainability
 
 ## v1.6.2 (2026-04-21)
 
