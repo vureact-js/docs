@@ -94,6 +94,31 @@ VuReact offers the following key capabilities:
 
 For a detailed tutorial, please refer to the [Quick Start](/en/guide/quick-start) section.
 
+### Configuration Example
+
+`vureact.config.ts`
+
+```ts
+import { defineConfig } from '@vureact/compiler-core';
+
+export default defineConfig({
+  input: './src',
+  exclude: ['src/main.ts'],
+  output: {
+    workspace: '.vureact',
+    outDir: 'react-app',
+    bootstrapVite: true,
+  },
+});
+```
+
+### Commands
+
+```bash
+npx vureact build      # Build project
+npx vureact watch      # Watch mode
+```
+
 ## Ecosystem Integration
 
 - **[VuReact Runtime Core](https://runtime.vureact.top/en)**: Provides React versions of Vue's commonly used built-in components, core Composition API, etc.

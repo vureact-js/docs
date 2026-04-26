@@ -94,6 +94,31 @@ VuReact 提供以下关键能力：
 
 详细引导教程请参见：[快速开始](/guide/quick-start) 章节。
 
+### 配置示例
+
+`vureact.config.ts`
+
+```ts
+import { defineConfig } from '@vureact/compiler-core';
+
+export default defineConfig({
+  input: './src',
+  exclude: ['src/main.ts'],
+  output: {
+    workspace: '.vureact',
+    outDir: 'react-app',
+    bootstrapVite: true,
+  },
+});
+```
+
+### 编译命令
+
+```bash
+npx vureact build      # 编译项目
+npx vureact watch      # 监听模式
+```
+
 ## 生态集成
 
 - **[VuReact Runtime](https://runtime.vureact.top/)**：提供 React 版的 Vue 常用内置组件、核心 Composition API 等
