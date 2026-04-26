@@ -99,71 +99,95 @@ export default defineConfig({
 
 将原来的 `HelloWorld.vue` 替换为计数器组件代码：
 
-```html
+```vue
 <!-- src/components/HelloWorld.vue -->
 <template>
   <section class="counter-card">
-    <h2>{{ props.title + title }}</h2>
-    <p>Count: {{ count }}</p>
+    <h1>{{ props.title }}</h1>
+    <h2>
+      <span class="vureact">VuReact</span>
+      ➕
+      <span class="vue">Vue</span>
+      🟰
+      <span class="react">React</span>
+      ({{ count }})
+    </h2>
+    <p>{{ title }}</p>
     <button @click="increment">+1</button>
     <button @click="methods.decrease">-1</button>
   </section>
 </template>
 
 <script setup lang="ts">
-  // @vr-name: HelloWorld
-  import { computed, ref } from 'vue';
+// @vr-name: HelloWorld
+import { computed, ref, watch } from 'vue';
 
-  // 除了顶部的特殊注释外，也可以使用宏定义组件名
-  // defineOptions({ name: 'HelloWorld' });
+// 除了顶部的特殊注释外，也可以使用宏定义组件名
+// defineOptions({ name: 'HelloWorld' });
 
-  // 必须使用 defineProps 定义 props
-  const props = defineProps<{ title?: string }>();
+// 必须使用 defineProps 定义 props
+const props = defineProps<{ title?: string }>();
 
-  // 必须使用 defineEmits 定义 emits
-  const emits = defineEmits<{
-    (e: 'update', value: number): void;
-  }>();
+// 必须使用 defineEmits 定义 emits
+const emits = defineEmits<{
+  (e: 'update', value: number): void;
+}>();
 
-  const step = ref(1);
-  const count = ref(0);
-  const title = computed(() => `x${step.value}`);
+const step = ref(1);
+const count = ref(0);
+const title = computed(() => `阶数：x${step.value}`);
 
-  const increment = () => {
-    count.value += step.value;
+const increment = () => {
+  count.value += step.value;
+  emits('update', count.value);
+};
+
+const methods = {
+  decrease() {
+    count.value -= step.value;
     emits('update', count.value);
-  };
+  },
+};
 
-  const methods = {
-    decrease() {
-      count.value -= step.value;
-      emits('update', count.value);
-    },
-  };
+watch(count, (newVal) => {
+  step.value = Math.floor(newVal / 10) || 1;
+});
 </script>
 
 <!-- VuReact 支持处理 Less 和 Sass -->
 <style scoped>
-  .counter-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 12px;
+.counter-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fafafa;
+  .vureact {
+    color: #9932cc;
   }
+  .vue {
+    color: #42b883;
+  }
+  .react {
+    color: #61dafb;
+  }
+}
 </style>
+
 ```
 
-### 3.2 修改 `App.vue` 的 `HelloWorld` 组件
+### 3.2 修改 `App.vue`
 
 ```vue
 <!-- src/App.vue -->
+<script setup lang="ts">
+// @vr-name: App
+import HelloWorld from './components/HelloWorld.vue';
+</script>
+
 <template>
   <HelloWorld
     title="计数器组件"
-    @update="
-      (v) => {
-        console.log(v);
-      }
-    "
+    @update="(v) => {console.log(v)}"
   />
 </template>
 ```
@@ -211,7 +235,7 @@ vue-app/
 │   │   ├── src/
 │   │   │   ├── components/
 │   │   │   │   ├── HelloWorld.tsx
-│   │   │   │   └── helloworld-[hash].css
+│   │   │   │   └── HelloWorld-[hash].css
 │   │   │   ├── App.tsx
 │   │   │   ├── index.css
 │   │   │   ├── main.tsx
@@ -255,22 +279,23 @@ npm run dev
 下面是一个格式化后的典型输出（为说明做了轻微简化，实际哈希与属性名以本地产物为准）：
 
 ```tsx
+import { useComputed, useVRef, useWatch } from '@vureact/runtime-core';
 import { memo, useCallback, useMemo } from 'react';
-import { useComputed, useVRef } from '@vureact/runtime-core';
-import './helloworld-abc123.css';
+import './HelloWorld-ebf8d8dc.css';
 
 // VuReact 根据 defineProps 和 defineEmits 自动生成
-type IHelloWorldType = {
+export type IHelloWorldProps = {
   title?: string;
-  onUpdate: (value: number) => number;
+} & {
+  onUpdate?: (value: number) => void;
 };
 
 // 自动使用 memo 优化组件
-const HelloWorld = memo((props: IHelloWorldType) => {
+const HelloWorld = memo((props: IHelloWorldProps) => {
   // ref/computed 转换成了对等的适配 API
   const step = useVRef(1);
   const count = useVRef(0);
-  const title = useComputed(() => `x${step.value}`);
+  const title = useComputed(() => `阶数：x${step.value}`);
 
   // 自动分析顶层箭头函数依赖，并追加 useCallback 优化
   const increment = useCallback(() => {
@@ -288,16 +313,30 @@ const HelloWorld = memo((props: IHelloWorldType) => {
     }),
     [count.value, step.value, props.onUpdate],
   );
+  
+  // watch 转成对等适配 API
+  useWatch(count, (newVal) => {
+    step.value = Math.floor(newVal / 10) || 1;
+  }); 
 
   return (
     <>
-      <section className="counter-card" data-css-abc123>
-        <h2 data-css-abc123>{props.title + title.value}</h2>
-        <p data-css-abc123>Count: {count.value}</p>
-        <button onClick={increment} data-css-abc123>
+      <section className="counter-card" data-css-ebf8d8dc>
+        <h1 data-css-ebf8d8dc>{props.title}</h1>
+        <h2 data-css-ebf8d8dc>
+          <span class="vureact" data-css-ebf8d8dc>VuReact</span>
+          ➕
+          <span class="vue" data-css-ebf8d8dc>Vue</span>
+          🟰
+          <span class="react" data-css-ebf8d8dc>React</span>
+          ({count.value})
+        </h2>
+        {/* 自动补齐 ref .value 访问 */}
+        <p data-css-ebf8d8dc>{title.value}</p>
+        <button onClick={increment} data-css-ebf8d8dc>
           +1
         </button>
-        <button onClick={methods.decrease} data-css-abc123>
+        <button onClick={methods.decrease} data-css-ebf8d8dc>
           -1
         </button>
       </section>
@@ -312,10 +351,20 @@ export default Counter;
 CSS 文件内容：
 
 ```css
-.counter-card[data-css-abc123] {
+.counter-card[data-css-ebf8d8dc] {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 12px;
+  background: #fafafa;
+  .vureact[data-css-ebf8d8dc] {
+    color: #9932cc;
+  }
+  .vue[data-css-ebf8d8dc] {
+    color: #42b883;
+  }
+  .react[data-css-ebf8d8dc] {
+    color: #61dafb;
+  }
 }
 ```
 
@@ -324,7 +373,7 @@ CSS 文件内容：
 1. `// @vr-name: Counter` 这段特殊注释定义了组件名
 2. `defineProps` 和 `defineEmits` 被转换成了 TS 组件类型
 3. 非纯 UI 展示组件，默认会走 `memo` 包装
-4. `ref` / `computed` 被转换为 runtime 适配 API（`useVRef` / `useComputed`）
+4. `ref` / `computed`/ `watch` 被转换为 runtime 适配 API（`useVRef` / `useComputed`/`useWatch`）
 5. 模板事件回调会生成符合 React 语义的 `onClick`
 6. 顶层箭头函数自动分析依赖，尝试注入 `useCallback`
 7. 顶层变量声明自动分析依赖，尝试注入 `useMemo`
@@ -360,6 +409,7 @@ VuReact 在编译过程中拥有以下核心转换能力：
 完成快速开始后，建议继续阅读以下章节：
 
 - [ESLint 规则冲突](/guide/eslint-rule-conflicts)：了解响应式 hooks 与 ESLint React Hooks 规则的冲突及解决方案
+- [编译约定](/guide/specification)：遵循 VuReact 的编译器约定，以此符合最佳实践
 - [编译器配置项](/api/config)：了解更多的 VuReact 配置 API
-- [语义编译对照](/guide/best-practices)：了解 Vue 被编译为什么样的 React 代码，及当前支持的 API 与语法范围。
 - [项目实战](/guide/crm-admin-backend)：通过真实项目案例（管理后台、协同后台）掌握大规模迁移流程
+- [语义编译对照](/guide/best-practices)：了解 Vue 被编译为什么样的 React 代码，及当前支持的 API 与语法范围。
