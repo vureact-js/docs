@@ -159,7 +159,6 @@ watch(count, (newVal) => {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 12px;
-  background: #fafafa;
   .vureact {
     color: #9932cc;
   }
