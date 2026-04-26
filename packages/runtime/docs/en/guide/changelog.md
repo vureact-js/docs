@@ -2,6 +2,12 @@
 
 `@vureact/runtime-core` adheres to the [Semantic Versioning 2.0.0](http://semver.org/) specification, and versions are listed in reverse chronological order.
 
+## v1.1.1（2026-04-26）
+
+### 🐞 Bug Fixes
+
+- Fixed `useWatch` callback `source` parameter inference issue
+
 ## v1.1.0 (2026-04-17)
 
 ### ✨ Features

@@ -2,6 +2,12 @@
 
 `@vureact/runtime-core` 遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/) 语义化版本规范，版本按时间倒序排列。
 
+## v1.1.1（2026-04-26）
+
+### 🐞 修复问题
+
+- 修复 `useWatch` 回调参数 `source` 为未解包的 `Ref` 时，回调参数能自动推导为解包后的类型
+
 ## v1.1.0（2026-04-17）
 
 ### ✨ 新增功能
