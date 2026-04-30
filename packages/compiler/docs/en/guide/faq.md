@@ -339,15 +339,15 @@ export default defineConfig({
 
 **A:** For a detailed solution, please refer to the [Router Adaptation Guide](/en/guide/router-adaptation). After following the guide, please restart the dev server.
 
-## Q35: What to do if page styles are lost after enabling a React app?
+## Q35: How to resolve abnormal or missing page styles after starting the React application?
 
-**A:** Please troubleshoot by following these steps:
+**A:** Follow these steps to troubleshoot:
 
-1. **Check style file imports**: Verify if the global style file (e.g., `app.css`) is imported in the entry file of the Vue project (e.g., `main.ts`). If it exists, ensure the **same import statement is retained** in the entry file of the generated React project (e.g., `main.tsx`).
+1. **Check style file imports**: Confirm whether other style files (e.g., `app.css` or `style.scss`) are imported in the Vue entry file (e.g., `main.ts`). If so, ensure that the same import statements are retained in the generated React entry file (e.g., `main.tsx`).
 
-2. **Check style file paths**: Confirm that the import paths of style files are correct. Since the project structure may have changed, check if the relative paths need to be adjusted.
+2. **Check file extensions**: Confirm that the imported style file extension in the React entry file (e.g., `main.tsx`) is `.css`, not `.scss` or `.less`, as these files have been automatically compiled into CSS files.
 
-3. **Check compilation configuration**: Make sure `preprocessStyles: false` is not set in `vureact.config.js`; otherwise, the style code may not be processed correctly.
+3. **Check compilation configuration**: Confirm that `preprocessStyles: false` is not set in the `vureact` configuration, otherwise the style code may not be processed correctly.
 
 ---
 
