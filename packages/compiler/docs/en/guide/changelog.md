@@ -2,6 +2,24 @@
 
 `VuReact` follows [Semantic Versioning 2.0.0](https://semver.org). Versions are in descending chronological order.
 
+## v1.8.0 (2026-05-03)
+
+### 🚀 Optimizations
+
+- Optimized file scanning: files are scanned only once, results shared across all compilation stages
+- Optimized cache read/write: unified to once per compilation, improving full build speed by ~30-40%
+- Optimized cache cleanup: replaced disk-based with in-memory operations to prevent sync issues
+- Optimized terminal output: unified progress display and post-build guidance
+
+### 🐞 Bug Fixes
+
+- Fixed full build deleting the workspace directory when cache is disabled: optimized cleanup logic to only delete cache files
+- Fixed CLI startup version check not working: corrected update detection logic
+
+### ♻️ Removals
+
+- Removed redundant file scanning and cache operations: unified to single pass, shared across all stages
+
 ## v1.7.0 (2026-04-26)
 
 ### ✨ Features
@@ -145,7 +163,7 @@
 - Refactored dependency analyzer; reduced unnecessary `useCallback`
 - Modularized compiler architecture; functional config for better maintainability
 
-### Removals
+### ♻️ Removals
 
 - Removed auto router guide output
 - Removed behavior-related CLI options

@@ -15,7 +15,7 @@ hero:
 
     - theme: alt
       text: Quick Start
-      link: /en/guide/introduction#quick-start
+      link: /en/guide/quick-start
 
 features:
   - icon: 🧠

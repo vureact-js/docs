@@ -18,7 +18,15 @@ export default [
       { text: '最佳实践', link: '/guide/best-practices' },
     ],
   },
-  { text: '快速开始', link: '/guide/quick-start' },
+  {
+    text: '入门',
+    items: [
+      { text: '快速开始', link: '/guide/quick-start' },
+      { text: '监听模式', link: '/guide/watch-mode' },
+      { text: '关键配置说明', link: '/guide/key-configuration' },
+      { text: '渐进式迁移指南', link: '/guide/incremental-migration' },
+    ],
+  },
   {
     text: '项目实战',
     items: [

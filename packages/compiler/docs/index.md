@@ -15,7 +15,7 @@ hero:
 
     - theme: alt
       text: 快速上手
-      link: /guide/introduction#快速开始
+      link: /guide/quick-start
 
 features:
   - icon: 🧠

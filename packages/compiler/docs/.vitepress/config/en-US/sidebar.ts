@@ -18,7 +18,16 @@ export default [
       { text: 'Best Practices', link: '/en/guide/best-practices' },
     ],
   },
-  { text: 'Quick Start', link: '/en/guide/quick-start' },
+  {
+    text: 'Basics',
+    items: [
+      { text: 'Quick Start', link: '/en/guide/quick-start' },
+      { text: 'Watch Mode', link: '/en/guide/watch-mode' },
+      { text: 'Key Configuration', link: '/en/guide/key-configuration' },
+      { text: 'Incremental Migration Guide', link: '/en/guide/incremental-migration' },
+    ],
+  },
+
   {
     text: 'Real-World Projects',
     items: [
