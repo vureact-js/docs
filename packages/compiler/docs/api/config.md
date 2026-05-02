@@ -27,8 +27,7 @@ interface CompilerOptions {
    * - 若为文件，则编译该单个文件。
    * - 若为目录，则递归编译该目录下所有 .vue 文件。
    *
-   * @default
-   * 'src/' // 根目录下的 src 目录
+   * @default 'src/'
    */
   input?: string;
 
@@ -47,7 +46,7 @@ interface CompilerOptions {
 
     /**
      * 输出目录名称，相对于 `output.workspace`
-     * @default 'dist'
+     * @default 'react-app'
      */
     outDir?: string;
 

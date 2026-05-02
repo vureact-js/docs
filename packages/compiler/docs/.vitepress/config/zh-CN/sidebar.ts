@@ -12,19 +12,15 @@ export default [
   },
   { text: '更新日志', link: '/guide/changelog' },
   {
-    text: '规范与最佳实践',
-    items: [
-      { text: '编译约定', link: '/guide/specification' },
-      { text: '最佳实践', link: '/guide/best-practices' },
-    ],
-  },
-  {
-    text: '入门',
+    text: '教程指南',
     items: [
       { text: '快速开始', link: '/guide/quick-start' },
       { text: '监听模式', link: '/guide/watch-mode' },
-      { text: '关键配置说明', link: '/guide/key-configuration' },
-      { text: '渐进式迁移指南', link: '/guide/incremental-migration' },
+      { text: '增量编译', link: '/guide/incremental-compilation' },
+      { text: '关键配置', link: '/guide/key-configuration' },
+      { text: '渐进式迁移', link: '/guide/progressive-migration' },
+      { text: '编译约定', link: '/guide/specification' },
+      { text: '最佳实践', link: '/guide/best-practices' },
     ],
   },
   {
@@ -45,9 +41,9 @@ export default [
       { text: '全生态释放', link: '/guide/mind-control-full-ecosystem' },
     ],
   },
+  { text: '常见问题', link: '/guide/faq' },
   { text: 'ESLint 规则冲突', link: '/guide/eslint-rule-conflicts' },
   { text: '路由适配指南', link: '/guide/router-adaptation' },
-  { text: '常见问题', link: '/guide/faq' },
   { text: 'CLI', link: '/guide/cli' },
   { text: '插件系统', link: '/guide/plugin' },
   {

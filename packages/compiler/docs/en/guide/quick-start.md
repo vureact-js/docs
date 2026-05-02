@@ -2,19 +2,19 @@
 
 Help developers get started in the shortest time and complete the compilation and conversion of a simple Vue project to a React project.
 
-> 🎥 Check out the 2-minute demo below for a quick overview.
-
-<video controls width="100%">
-  <source src="/static/quick_start_18MB.mp4" type="video/mp4">
-  Your browser does not support video playback.
-</video>
-
 ### Overview
 
 1. What conventions the input SFC must follow for stable conversion
 2. What the output directory structure looks like
 3. The semantic correspondence between the output TSX and the original SFC
 4. The compiler automatically analyzes and appends React hook dependencies, eliminating the need for manual management
+
+<video controls width="100%">
+  <source src="/static/quick_start_18MB.mp4" type="video/mp4">
+  Your browser does not support video playback.
+</video>
+
+> 🎥 Check out the 2-minute demo below for a quick overview.
 
 ## Step 0: Prepare a Vite + Vue Project
 

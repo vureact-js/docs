@@ -2,19 +2,19 @@
 
 帮助开发者在最短时间内上手，并完成一个简单的 Vue 项目到 React 项目的编译转换。
 
-> 🎥 推荐先观看下方的 2 分钟演示视频，快速建立对整个流程的直观印象。
-
-<video controls preload="metadata" width="100%" style="border-radius: 4px; margin: 2rem 0;">
-  <source src="/static/quick_start_18MB.mp4" type="video/mp4">
-  您的浏览器不支持视频播放，请参考下方的文字教程。
-</video>
-
 ### 概述
 
 1. 输入 SFC 在什么约定下可稳定转换
 2. 编译后目录会长什么样
 3. 输出 TSX 与原始 SFC 的语义对应关系
 4. 编译器自动分析并追加 React hook 依赖，无需手动管理
+
+<video controls preload="metadata" width="100%" style="border-radius: 4px; margin: 2rem 0;">
+  <source src="/static/quick_start_18MB.mp4" type="video/mp4">
+  您的浏览器不支持视频播放，请参考下方的文字教程。
+</video>
+
+> 🎥 推荐先观看上方的 2 分钟演示视频，快速建立对整个流程的直观印象。
 
 ## Step 0：准备 Vite + Vue 工程
 

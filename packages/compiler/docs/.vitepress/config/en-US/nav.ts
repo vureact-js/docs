@@ -34,14 +34,15 @@ export default [
   {
     text: 'Guide',
     items: [
-      { text: 'Changelog', link: '/en/guide/changelog' },
-      { text: 'Compilation Conventions', link: '/en/guide/specification' },
       { text: 'Quick Start', link: '/en/guide/quick-start' },
-      { text: 'CLI', link: '/guide/cli' },
-      { text: 'Router Adaptation Guide', link: '/en/guide/router-adaptation' },
+      { text: 'Progressive Migration', link: '/en/guide/progressive-migration' },
+      { text: 'Best Practices', link: '/en/guide/best-practices' },
       { text: 'FAQ', link: '/en/guide/faq' },
+      { text: 'Router Adaptation Guide', link: '/en/guide/router-adaptation' },
+      { text: 'Semantic Compilation Reference', link: '/en/guide/semantic-comparison/overview' },
+      { text: 'CLI', link: '/en/guide/cli' },
       { text: 'API', link: '/api/' },
-      { text: 'Semantic Comparison', link: '/en/guide/semantic-comparison/overview' },
+      { text: 'Changelog', link: '/en/guide/changelog' },
     ],
   },
   {

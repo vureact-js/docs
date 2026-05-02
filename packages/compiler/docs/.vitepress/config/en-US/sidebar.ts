@@ -12,22 +12,17 @@ export default [
   },
   { text: 'Changelog', link: '/en/guide/changelog' },
   {
-    text: 'Guidelines',
-    items: [
-      { text: 'Compilation Conventions', link: '/en/guide/specification' },
-      { text: 'Best Practices', link: '/en/guide/best-practices' },
-    ],
-  },
-  {
     text: 'Basics',
     items: [
       { text: 'Quick Start', link: '/en/guide/quick-start' },
       { text: 'Watch Mode', link: '/en/guide/watch-mode' },
+      { text: 'Incremental Compilation', link: '/en/guide/incremental-compilation' },
       { text: 'Key Configuration', link: '/en/guide/key-configuration' },
-      { text: 'Incremental Migration Guide', link: '/en/guide/incremental-migration' },
+      { text: 'Progressive Migration', link: '/en/guide/progressive-migration' },
+      { text: 'Compilation Conventions', link: '/en/guide/specification' },
+      { text: 'Best Practices', link: '/en/guide/best-practices' },
     ],
   },
-
   {
     text: 'Real-World Projects',
     items: [
@@ -46,9 +41,9 @@ export default [
       { text: 'Full Ecosystem Mode', link: '/en/guide/mind-control-full-ecosystem' },
     ],
   },
+  { text: 'FAQ', link: '/en/guide/faq' },
   { text: 'ESLint Rule Conflicts', link: '/en/guide/eslint-rule-conflicts' },
   { text: 'Router Adaptation Guide', link: '/en/guide/router-adaptation' },
-  { text: 'FAQ', link: '/en/guide/faq' },
   { text: 'CLI', link: '/en/guide/cli' },
   { text: 'Plugin System', link: '/en/guide/plugin' },
   {
