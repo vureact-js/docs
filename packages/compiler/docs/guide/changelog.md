@@ -2,7 +2,7 @@
 
 `vureact` 遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/) 语义化版本规范，版本按时间倒序排列。
 
-## v1.8.0 (2026-05-03)
+## v1.8.0 (2026-05-05)
 
 ### 🚀 优化改进
 
