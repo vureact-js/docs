@@ -151,7 +151,7 @@ watch(count, (newVal) => {
 });
 </script>
 
-<!-- VuReact 支持处理 Less 和 Sass -->
+<!-- VuReact 也支持处理 Less 和 Sass -->
 <style scoped>
 .counter-card {
   border: 1px solid #ddd;
@@ -257,7 +257,7 @@ cd .vureact/react-app
 - 安装依赖：
 
 ```bash
-npm run install
+npm install
 ```
 
 - 启动项目：
@@ -266,13 +266,13 @@ npm run install
 npm run dev
 ```
 
-> 进入页面后，你可能会发现与 Vue 的页面样式存在差异，这是因为 Vite 初始化 React 后，自带的默认样式 `index.css` 注入到了 `main.tsx` 中导致的，手动调整即可。
+> 进入页面后，你可能会发现与 Vue 的页面样式存在差异，这是因为 Vite 初始化 React 后，自带的默认样式 `index.css` 注入到了 `main.tsx` 中导致的，可选择移除该样式文件。
 
 如遇问题，可查阅 [常见问题](/guide/faq) 章节。
 
 ## Step 7：对照生成结果
 
-下面是一个格式化后的典型输出（为说明做了轻微简化，实际哈希与属性名以本地产物为准）：
+下面是一个格式化后的典型输出 `HelloWorld.tsx`（为说明做了轻微简化，实际哈希与属性名以本地产物为准）：
 
 ```tsx
 import { useComputed, useVRef, useWatch } from '@vureact/runtime-core';
@@ -369,7 +369,7 @@ CSS 文件内容：
 1. `// @vr-name: Counter` 这段特殊注释定义了组件名
 2. `defineProps` 和 `defineEmits` 被转换成了 TS 组件类型
 3. 非纯 UI 展示组件，默认会走 `memo` 包装
-4. `ref` / `computed`/ `watch` 被转换为 runtime 适配 API（`useVRef` / `useComputed`/`useWatch`）
+4. `ref` / `computed`/ `watch` 被转换为 runtime 适配 API（`useVRef` / `useComputed`/`useWatch` 等）
 5. 模板事件回调会生成符合 React 语义的 `onClick`
 6. 顶层箭头函数自动分析依赖，尝试注入 `useCallback`
 7. 顶层变量声明自动分析依赖，尝试注入 `useMemo`
@@ -390,7 +390,7 @@ CSS 文件内容：
 VuReact 在编译过程中拥有以下核心转换能力：
 
 - Vue 模板语法 → React JSX（`v-if`/`v-slot`/`v-model`/`<slot>` 等）
-- Composition API → React Hooks（`ref` → `useVRef`、`computed` → `useComputed`）
+- Composition API → React Hooks（`ref` → `useVRef`、`computed` → `useComputed` 等）
 - 响应式依赖分析 → 自动注入 `useCallback`/`useMemo` 依赖数组
 - 组件通信 → Props 类型推导 + 事件回调映射
 - 样式处理 → Scoped CSS / CSS Modules / 预处理器一站式编译

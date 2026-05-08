@@ -151,7 +151,7 @@ watch(count, (newVal) => {
 });
 </script>
 
-<!-- VuReact supports processing Less and Sass -->
+<!-- VuReact also supports processing Less and Sass -->
 <style scoped>
 .counter-card {
   border: 1px solid #ddd;
@@ -254,7 +254,7 @@ cd .vureact/react-app
 - Install dependencies:
 
 ```bash
-npm run install
+npm install
 ```
 
 - Start the project:
@@ -269,7 +269,7 @@ If you encounter any issues, refer to the [FAQ](/en/guide/faq) section.
 
 ## Step 7: Compare the Generated Output
 
-Below is a formatted typical output (slightly simplified for explanation; actual hashes and property names depend on your local build):
+Below is a formatted typical output `HelloWorld.tsx` (slightly simplified for explanation; actual hashes and property names depend on your local build):
 
 ```tsx
 import { useComputed, useVRef, useWatch } from '@vureact/runtime-core';
@@ -356,7 +356,7 @@ CSS file content:
 1. `// @vr-name: Counter` — This special comment defines the component name
 2. `defineProps` and `defineEmits` are converted to typed TypeScript component interfaces
 3. Non-pure UI display components are automatically wrapped with `memo`
-4. `ref`/`computed`/`watch` are converted to equivalent runtime adapter APIs (`useVRef`/`useComputed`/`useWatch`)
+4. `ref`/`computed`/`watch` are converted to equivalent runtime adapter APIs (`useVRef`/`useComputed`/`useWatch` etc.)
 5. Template event callbacks generate React-compatible event handlers like `onClick`
 6. Top-level arrow functions are automatically analyzed for dependencies and wrapped with `useCallback`
 7. Top-level variable declarations are automatically analyzed for dependencies and wrapped with `useMemo`
@@ -377,7 +377,7 @@ Through the steps above, you have completed the full compilation process from a 
 VuReact provides the following core conversion capabilities:
 
 - Vue template syntax → React JSX (`v-if`/`v-slot`/`v-model`/`<slot>` etc.)
-- Composition API → React Hooks (`ref` → `useVRef`, `computed` → `useComputed`)
+- Composition API → React Hooks (`ref` → `useVRef`, `computed` → `useComputed` etc.)
 - Reactive dependency analysis → Automatic injection of `useCallback`/`useMemo` dependency arrays
 - Component communication → Props type inference + event callback mapping
 - Style processing → Scoped CSS / CSS Modules / preprocessor support all-in-one compilation
