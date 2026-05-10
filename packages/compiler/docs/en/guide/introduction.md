@@ -2,18 +2,16 @@
 
 ## What is VuReact
 
-VuReact (pronounced `/vjuːˈriːækt/`) is a compiler that allows you to write React 18+ applications using Vue 3 syntax. Its core value extends beyond project migration, focusing on seamlessly integrating Vue's development experience with React's ecosystem capabilities, producing maintainable, evolvable, and production-ready React code.
+VuReact (pronounced `/vjuːˈriːækt/`) is a **Vue-to-React** compiler that **fully compiles** Vue 3 SFC, scripts & styles into **pure React 18+ code** (no runtime bridge), covering core `<script setup>` features.
 
-It not only performs syntax-level conversions but also deeply understands the semantics of Vue code, generating high-quality React code that adheres to React best practices.
+It goes beyond syntax-level transformation to deeply understand Vue code semantics, generating high-quality code following React best practices. Its core goal is not "unconditionally convert any Vue code to React," but to provide a **predictable, analyzable, maintainable** upgrade path for smooth cross-framework evolution under engineering control.
 
-The core goal of VuReact is not to "unconditionally convert arbitrary Vue code to React code automatically", but to provide a **predictable, analyzable, and maintainable** upgrade path, enabling developers to smoothly advance cross-framework evolution under the premise of engineering control.
+VuReact is not an isolated code rewriting tool. It consists of three parts working together: **Compile-time Transformation**, **[Runtime](https://runtime.vureact.top/en/)**, and **[Router](https://router.vureact.top/en/)**:
 
-Furthermore, VuReact is not an isolated code rewriting tool. It consists of two synergistic components: **compile-time conversion** and **[runtime core](https://runtime.vureact.top/en)**:
+- **Compile-time** converts Vue code that meets conventions into well-structured, maintainable React code, automatically injecting necessary runtime dependencies;
+- **Runtime** provides a critical semantic adaptation and behavior compatibility layer to ensure stable operation in the React environment.
 
-- **Compile-time**: Converts Vue code that complies with conventions into clear, maintainable React code, and automatically injects necessary runtime dependencies;
-- **Runtime**: Provides critical semantic adaptation and behavior compatibility layers to ensure converted components run stably in the React environment.
-
-These two parts work closely together to balance conversion quality, runtime stability, and project implementation efficiency.
+Together, they balance conversion quality, operational stability, and project delivery efficiency.
 
 <video controls preload="metadata" width="100%" style="border-radius: 4px; margin: 2rem 0;">
   <source src="/static/hero_demo_3MB.mp4" type="video/mp4" />
@@ -49,6 +47,8 @@ It does not prioritize supporting:
 
 - **Complex Legacy Projects**: Historical codebases that expect "zero-modification one-click migration"
 - **Mixed Historical Syntax**: Projects containing a large number of traditional Options API or non-standard patterns that are difficult to unify in the short term
+
+Its core value extends beyond project migration, seamlessly combining Vue's development experience with React's ecosystem capabilities to produce maintainable, evolvable, production-ready React code.
 
 ## What It Is / What It Is Not
 
