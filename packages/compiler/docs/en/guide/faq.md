@@ -93,13 +93,9 @@ Project root/
 
 ## Q8: How to clear the compilation cache?
 
-**A:** Delete the workspace directory:
+**A:** Delete the workspace cache:
 
 ```bash
-# Delete the entire workspace
-rm -rf .vureact
-
-# Or delete only the cache
 rm -rf .vureact/cache
 ```
 
@@ -339,15 +335,14 @@ export default defineConfig({
 
 **A:** For a detailed solution, please refer to the [Router Adaptation Guide](/en/guide/router-adaptation). After following the guide, please restart the dev server.
 
-## Q35: How to resolve abnormal or missing page styles after starting the React application?
+## Q35: How to fix missing or broken page styles?
 
 **A:** Follow these steps to troubleshoot:
 
-1. **Check style file imports**: Confirm whether other style files (e.g., `app.css` or `style.scss`) are imported in the Vue entry file (e.g., `main.ts`). If so, ensure that the same import statements are retained in the generated React entry file (e.g., `main.tsx`).
-
-2. **Check file extensions**: Confirm that the imported style file extension in the React entry file (e.g., `main.tsx`) is `.css`, not `.scss` or `.less`, as these files have been automatically compiled into CSS files.
-
-3. **Check compilation configuration**: Confirm that `preprocessStyles: false` is not set in the `vureact` configuration, otherwise the style code may not be processed correctly.
+1. **Clear default styles**: Remove useless styles introduced by Vite by default (such as `style.css`) from the React entry file (`main.tsx`).
+2. **Check entry style imports**: Verify if the Vue entry (`main.ts`) imports custom styles (such as `app.css`). If so, retain the import in the React entry.
+3. **Adjust style file extensions**: Change preprocessor imports like `.scss`/`.less` in the entry to `.css` (since they have been automatically compiled to CSS).
+4. **Check compilation configuration**: Ensure `preprocessStyles: false` is not set, otherwise styles may not be correctly transformed.
 
 ---
 

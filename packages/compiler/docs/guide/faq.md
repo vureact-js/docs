@@ -93,13 +93,9 @@ export default defineConfig({
 
 ## Q8: 如何清理编译缓存？
 
-**A:** 删除工作区目录：
+**A:** 删除缓存：
 
 ```bash
-# 删除整个工作区
-rm -rf .vureact
-
-# 或只删除缓存
 rm -rf .vureact/cache
 ```
 
@@ -337,13 +333,14 @@ export default defineConfig({
 
 **A:** 解决方案请移步 [路由适配指南](/guide/router-adaptation)，按照指南处理之后请重启 dev 服务。
 
-## Q35: 启动 React 应用后，页面样式异常或丢失如何解决？
+## Q35: 页面样式异常或丢失如何解决？
 
 **A:** 请按以下步骤排查：
 
-1. **检查样式文件导入**：确认 Vue 入口文件（如 `main.ts`）中是否导入了其他样式文件（如 `app.css` 或 `style.scss`）。若存在，请确保在生成的 React 入口文件（如 `main.tsx`）中保留相同的导入语句。
-2. **检查文件后缀**：确认 React 入口文件（如 `main.tsx`）中导入的样式文件后缀为 `.css`，而非 `.scss` 或 `.less`，因为这些文件已被自动编译为 CSS 文件。
-3. **检查编译配置**：确认 `vureact` 配置中未设置 `preprocessStyles: false`，否则样式代码可能未被正确处理。
+1. **清理默认样式**：移除 React 入口文件（`main.tsx`）中 Vite 默认引入的无用样式（如 `style.css`）。
+2. **检查入口样式导入**：确认 Vue 入口（`main.ts`）是否引入了自定义样式（如 `app.css`），若有，需在 React 入口中保留该导入。
+3. **调整样式文件后缀**：将入口中 `.scss`/`.less` 等预处理器导入改为 `.css`（因已自动编译为 CSS）。
+4. **检查编译配置**：确保未设置 `preprocessStyles: false`，否则样式可能未被正确转换。
 
 ---
 
