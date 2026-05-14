@@ -17,12 +17,12 @@ These three parts work together to protect conversion quality, improve runtime s
 ---
 
 <video controls preload="metadata" width="100%" style="border-radius: 4px; margin: 2rem 0;">
-  <source src="/static/hero_demo_3MB.mp4" type="video/mp4" />
+  <source src="/static/vureact_showcase.mp4" type="video/mp4" />
   Your browser does not support HTML5 video.
 </video>
 
 <p style="text-align: center; color: #666; font-size: 0.9em;">
-  <em>Watch a 30-second demo to get a quick feel for the VuReact compilation flow.</em>
+  <em>Watch the showcase to quickly understand the VuReact compilation flow</em>
 </p>
 
 ## What problems does it solve?

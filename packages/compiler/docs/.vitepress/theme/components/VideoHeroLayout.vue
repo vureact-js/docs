@@ -12,7 +12,7 @@
           class="hero-video"
           poster="/images/hero_demo_poster.jpg"
         >
-          <source src="/static/hero_demo_3MB.mp4" type="video/mp4" />
+          <source src="/static/vureact_showcase.mp4" type="video/mp4" />
           您的浏览器不支持视频播放。
         </video>
       </div>
