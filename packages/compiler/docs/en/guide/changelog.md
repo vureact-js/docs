@@ -2,6 +2,12 @@
 
 `VuReact` follows [Semantic Versioning 2.0.0](https://semver.org). Versions are in descending chronological order.
 
+## v1.8.1 (2026-05-14)
+
+### 🐞 Bug Fixes
+
+- Fixed partial cache data loss during incremental compilation: optimized persistence for data integrity
+
 ## v1.8.0 (2026-05-05)
 
 ### 🚀 Optimizations
