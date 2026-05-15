@@ -342,6 +342,10 @@ export default defineConfig({
 3. **调整样式文件后缀**：将入口中 `.scss`/`.less` 等预处理器导入改为 `.css`（因已自动编译为 CSS）。
 4. **检查编译配置**：确保未设置 `preprocessStyles: false`，否则样式可能未被正确转换。
 
+## Q36: `// @vr-name` 注释或 `defineOptions` 的 `name` 选项能否自定义 React 组件名？
+
+**A:** 该功能仅用于告知编译器当前 Vue 组件的名称，以便在生成 React 组件函数时保持命名一致，避免组件名出现差异。
+
 ---
 
 **没有找到答案？** 请查看完整文档或提交新的问题 [GitHub Issues](https://github.com/vureact-js/core/issues)。

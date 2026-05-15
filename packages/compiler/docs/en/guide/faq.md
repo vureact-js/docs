@@ -344,6 +344,10 @@ export default defineConfig({
 3. **Adjust style file extensions**: Change preprocessor imports like `.scss`/`.less` in the entry to `.css` (since they have been automatically compiled to CSS).
 4. **Check compilation configuration**: Ensure `preprocessStyles: false` is not set, otherwise styles may not be correctly transformed.
 
+## Q36: Can `// @vr-name` or `defineOptions`'s `name` customize the React component name?
+
+**A:** It is only used to inform the compiler of the current Vue component's name, so as to maintain naming consistency when generating the React component function and avoid differences in component names.
+
 ---
 
 **Didn't find an answer?** Please check the complete documentation or submit a new issue [GitHub Issues](https://github.com/vureact-js/core/issues).
