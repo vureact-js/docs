@@ -2,6 +2,13 @@
 
 `VuReact` follows [Semantic Versioning 2.0.0](https://semver.org). Versions are in descending chronological order.
 
+## v1.8.3 (2026-05-15)
+
+### 🐞 Bug Fixes
+
+- Fixed watch mode not triggering hot update when reverting to initial content: optimized cache validation to detect changes correctly on file restoration
+- Removed redundant warning for component name fallback to filename: no longer logs warning when component name is derived from filename
+
 ## v1.8.1 (2026-05-14)
 
 ### 🐞 Bug Fixes
@@ -278,7 +285,5 @@
 - Composition API → React Hooks mapping
 - Compile-time scoped / module CSS output
 - Basic CLI (build / watch), cache, Vite init, hybrid development
-
-> Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>
 
 > Details for 1.0.0: <https://github.com/vureact-js/core/blob/master/packages/compiler-core/CHANGELOG.md>
