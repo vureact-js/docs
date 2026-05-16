@@ -16,14 +16,14 @@ VuReact 由三部分协同构成：编译时转换、[Runtime](https://runtime.v
 
 ---
 
-<video controls preload="metadata" width="100%" style="border-radius: 4px; margin: 2rem 0;">
-  <source src="/static/vureact_showcase.mp4" type="video/mp4" />
+<video controls preload="metadata" width="100%" style="border-radius: 4px; margin: 2rem 0;" >
+  <source src="/static/vureact-showcase (3.7MB).mp4" type="video/mp4" />
   您的浏览器不支持视频播放。
 </video>
 
-<p style="text-align: center; color: #666; font-size: 0.9em;">
+<div style="text-align: center; color: #666; font-size: 0.9em;">
   <em>观看终端交互演示，快速了解 VuReact 的编译流程</em>
-</p>
+</div>
 
 ## 解决什么问题
 

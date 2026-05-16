@@ -10,10 +10,10 @@
           playsinline
           preload="metadata"
           class="hero-video"
-          poster="/images/hero_demo_poster.jpg"
+          poster="/images/vureact-showcase-poster.jpg"
         >
-          <source src="/static/vureact_showcase.mp4" type="video/mp4" />
-          您的浏览器不支持视频播放。
+          <source src="/static/vureact-showcase (3.7MB).mp4" type="video/mp4" />
+          Your browser does not support video playback.
         </video>
       </div>
     </template>
