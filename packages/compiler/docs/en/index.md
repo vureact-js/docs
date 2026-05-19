@@ -1,11 +1,11 @@
 ﻿---
 layout: home
 
-title: Write in Vue, compile to React
+title: Write Vue. Get Pure React.
 
 hero:
   name: 'VuReact'
-  text: 'Write in Vue, compile to React'
+  text: 'Write Vue. Get Pure React.'
   tagline: 'Semantic-aware · Incremental migration · Convention-driven'
 
   actions:
