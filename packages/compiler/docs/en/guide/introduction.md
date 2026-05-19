@@ -1,6 +1,6 @@
 # Introduction
 
-## What is VuReact
+## What is VuReact?
 
 VuReact (pronounced `/vjuːˈriːækt/`) is a **Vue-to-React** compiler that turns Vue 3 SFCs, scripts, and styles into code that runs on React 18+ without runtime bridging. It also covers the common patterns used in `<script setup>`.
 
@@ -38,23 +38,24 @@ The core challenge is this: if the input code cannot be statically analyzed, the
 
 That is why VuReact takes a **convention-first** approach. It first defines a convertible subset of Vue through explicit [compilation conventions](/en/guide/specification), and then focuses on making conversion inside that boundary efficient and reliable.
 
+## Use Cases
+
+### Recommended
+
+- Projects need to migrate incrementally from Vue 3 to React, but do not want to rewrite from scratch, preferring to find existing solutions first.
+- Some developers use Vue as their primary technology stack, are accustomed to its mental model, and consider React's overhead to be heavier than Vue's.
+- Backend developers do not want to learn both frameworks; Vue is quick to pick up and intuitive, and they are reluctant to engage with React.
+- The converted React code must completely detach from the Vue runtime to avoid performance and bundle size issues caused by a dual-framework runtime.
+
+### Caveats
+
+- **Controllability first:** current focus is engineering scenarios prioritizing predictability.
+- **Convention-driven:** [compilation relies](/en/guide/specification) on clear conventions.
+- **Modern syntax:** targets Vue 3 Composition API and `<script setup>`.
+
+> Optionally, use [Hybrid Authoring](/en/guide/mind-control-readme) to leverage React ecosystem capabilities within a Vue project.
+
 ## Project positioning
-
-VuReact is best suited for the following scenarios:
-
-- **New project development**: write Vue-style components and related script files under VuReact conventions, and output React code
-- **Modern Vue syntax**: primarily targets Vue 3 Composition API and `<script setup>`
-- **Controlled progressive migration**: migrate by directory or module, allowing Vue and React components to coexist during the transition
-- **Developer experience optimization**: ideal for teams that want Vue’s mental model while building for React, or need controlled cross-framework collaboration
-
-VuReact does **not** currently prioritize:
-
-- **Complex legacy projects** that expect a zero-touch, one-click migration
-- **Mixed historical codebases** with large amounts of legacy Options API or non-standard patterns that are difficult to normalize in the short term
-
-Its value is not limited to migration. More broadly, it aims to combine Vue’s authoring experience with the React ecosystem and produce React code that is maintainable, evolvable, and production-ready.
-
-## What it is / what it is not
 
 **VuReact is:**
 
