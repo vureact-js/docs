@@ -6,7 +6,8 @@ import zhCN from './zh-CN';
 export default defineConfig({
   ...commonConfig,
   title: 'VuReact',
-  description: 'Write in Vue 3, compile to React 18+ code.',
+  description:
+    'A compiler toolchain for migrating from Vue to React — and for writing React with Vue syntax. It converts Vue 3 SFCs, scripts, and styles into pure React without a runtime bridge, with full script setup support and progressive migration.',
   locales: {
     ...zhCN,
     ...enUS,

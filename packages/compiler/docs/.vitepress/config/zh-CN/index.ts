@@ -8,7 +8,8 @@ export default {
     label: '简体中文',
     lang: 'zh-CN',
     link: '/',
-    description: '一个让你用 Vue 3 语法编写 React 18+ 应用的编译器。',
+    description:
+      '一个面向 Vue 到 React 迁移、兼具 「用 Vue 写 React」 双重能力的编译工具链。将 Vue 3 SFCs・Scripts・Styles 完整转为原生 React 代码（非运行时桥接），覆盖 script setup 核心全特性，支持渐进式迁移和混合开发。',
     themeConfig: {
       socialLinks,
       nav,

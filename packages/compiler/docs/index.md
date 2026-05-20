@@ -1,11 +1,11 @@
 ﻿---
 layout: home
 
-title: 写 Vue，生成可维护的 React
+title: 写 Vue，输出可维护的 React
 
 hero:
   name: 'VuReact'
-  text: '写 Vue，生成可维护的 React'
+  text: '写 Vue，输出可维护的 React'
   tagline: '语义感知 · 渐进迁移 · 约定驱动'
 
   actions:
