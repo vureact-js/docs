@@ -1,120 +1,176 @@
 ﻿# Philosophy
 
-VuReact's design adheres to a set of core principles that define its behavioral boundaries and engineering orientation. Understanding these principles will help you use VuReact more effectively and make sound technical decisions in your projects.
+The design of VuReact does not revolve around "how to rewrite Vue syntax into React syntax." Instead, it is centered on a more fundamental question: **How can Vue code be stably established in React.**
 
-## 1. Controllability Over Coverage
+Therefore, VuReact's goal is not to become a "universal converter" capable of handling any legacy code, but rather to provide a cross-framework engineering path that is **analyzable, predictable, maintainable, and incrementally adoptable.** The principles below define VuReact's behavioral boundaries and explain why it adopts the current collaborative architecture of Compiler, Runtime, and Router.
 
-**Core Principle**: It is better to explicitly reject unanalyzable code than to generate unmaintainable React output.
+## 1. Controllability over Full Coverage
 
-### What This Means
+**Principle**: It is better to explicitly reject unanalyzable code than to generate unmaintainable React output.
 
-- VuReact proactively requires your code to comply with specific conventions
-- When encountering code that cannot be statically analyzed, it will issue clear warnings or errors
-- Conversion quality takes precedence over conversion coverage
+The difficulty of migrating from Vue to React usually lies not in surface-level syntax, but in the reconstruction of reactive semantics, lifecycle, dependency relationships, and component boundaries. React Hook rules require that the generated output must satisfy strict static analysis prerequisites; if the input code itself is unanalyzable, the compiler cannot stably produce output that conforms to the rules.
 
-### Why This Design Choice?
+Therefore, VuReact proactively requires that the input code adheres to clear conventions, such as:
 
-React Hook rules mandate that code must meet strict static analysis criteria. If the input code itself is unanalyzable, no conversion tool can stably generate React code that complies with the rules. Rather than producing code that may crash at runtime, it is better to clearly define boundaries at compile time.
+- Based on Vue 3 and `<script setup>`
+- Reactive APIs are called at the top level
+- Template expressions are statically analyzable
+- Component boundaries are clearly declared
 
-## 2. Enabling Modern Cross-Framework Web Development
+The direct benefits of this design are:
 
-**Vision**: To make migration between Vue and React no longer a "one-time rewrite", but a plannable and verifiable engineering process.
+- Problems surface at compile time, not at runtime
+- Teams can clearly distinguish between "migratable scope" and "code that needs prior cleanup"
+- Similar inputs yield consistent outputs more easily, facilitating ongoing maintenance and automated verification
 
-### Traditional Migration vs. VuReact Approach
+## 2. Semantics over Syntax
 
-| Dimension                  | Traditional Migration Approach                        | VuReact Approach                                             |
-| -------------------------- | ----------------------------------------------------- | ------------------------------------------------------------ |
-| **Conversion Strategy**    | String-replacement-based scripts                      | Complete compilation pipeline (Parse → Transform → Generate) |
-| **Predictability**         | Unpredictable results, reliant on manual verification | Deterministic conversion based on conventions                |
-| **Maintainability**        | Generated code is hard to understand and maintain     | Produces code aligned with React best practices              |
-| **Incremental Capability** | Usually requires one-time completion                  | Supports modular, phased migration                           |
+**Principle**: The focus of conversion is not "to look like React," but "to preserve correct semantics in React."
 
-### Four Pillars of Cross-Framework Flow
+VuReact takes a semantic compilation approach. It does not mechanically replace code based on syntactic form alone. Instead, it first understands the reactive sources, data flow direction, component interfaces, and dependency relationships in the code, and then decides what structure to generate.
 
-1. **Analyzable**: Input code must be amenable to static analysis
-2. **Verifiable**: Conversion results can be automatically validated in CI
-3. **Reproducible**: The same input always yields the same output
-4. **Extensible**: Can start small and gradually expand migration scope
+Take `ref` as an example. Mechanical replacement can easily produce results that "look syntactically like React but have already changed semantically":
 
-Nowadays, Vue → React migration is not a new concept, but VuReact aims to prove that with clear conventions in place, a stable engineering flow between Vue and React can be established.
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
 
-## 3. Conventions as Collaborative Interfaces
+const count = ref(0);
+const inc = () => count.value++;
+</script>
+```
 
-**Philosophy**: Clear conventions are more valuable than complex runtime fallbacks.
+If only surface-level replacement is performed, the result might look like:
 
-### Role of Conventions
+```tsx
+const [count, setCount] = useState(0);
+const inc = () => count++;
+```
 
-- **Reduce cognitive load**: The team shares a common understanding of "what can/cannot be converted"
-- **Improve conversion quality**: Results are more stable and reliable within convention boundaries
-- **Simplify troubleshooting**: Issues can be quickly traced to specific convention violations
+This does not preserve the behavioral semantics of Vue's `ref`. VuReact's reconstruction goal is closer to the following structure:
 
-### Examples of Conventions
+```tsx
+const count = useVRef(0);
+const inc = useCallback(() => {
+  count.value++;
+}, [count.value]);
+```
 
-- Vue 3 + `<script setup>` syntax
-- Reactive APIs must be called at the top level
-- Template expressions must be statically analyzable
-- Component naming must be explicitly declared
+The key point here is not which Hook `ref` has been replaced by, but rather:
 
-## 4. Incremental Rather Than Big Bang
+- `count` is recognized as a reactive source
+- `inc` is recognized as a top-level callback target
+- The dependency relationships within the callback can be collected and reconstructed
 
-**Migration Philosophy**: Mitigate migration risks through controlled, small-step iterations.
+This is also the value of VuReact's automated dependency analysis. It does not simply "put variables into a dependency array"; rather, it triggers analysis around a clear reconstruction target, then collects dependencies along reference chains, aliases, and destructuring relationships, thereby generating more stable React structures.
 
-### Recommended Approach
+## 3. Conventions as a Collaboration Interface
+
+**Principle**: Clear conventions are more valuable than complex runtime fallbacks.
+
+VuReact's conventions are not solely about making the compiler "easier to implement." More importantly, they help teams form a shared understanding of migration boundaries. For cross-framework migration, conventions themselves serve as a collaboration interface:
+
+- Developers know which coding styles are more stable and favorable for conversion
+- Reviewers know which issues constitute convention violations
+- Teams can incorporate these conventions into code review and CI rules
+
+For example, `defineProps`, `defineEmits`, and `defineExpose` in Vue describe the input, output, and exposure boundaries of a component. VuReact does not preserve these macros themselves but instead reconstructs them into more natural interface forms in React:
+
+```vue
+<script setup lang="ts">
+const props = defineProps<{ title: string }>();
+const emit = defineEmits<{ (e: 'save', id: number): void }>();
+const count = ref(0);
+
+defineExpose({ count });
+</script>
+```
+
+The corresponding React form would typically be close to:
+
+```tsx
+type IComponentProps = {
+  title: string;
+  onSave?: (id: number) => void;
+};
+
+const Component = memo(
+  forwardRef<any, IComponentProps>((props, expose) => {
+    const count = useVRef(0);
+
+    useImperativeHandle(expose, () => ({ count }));
+
+    return null;
+  }),
+);
+```
+
+What is preserved here is not the macro call form, but the component boundary semantics:
+
+- `defineProps` → Input contract
+- `defineEmits` → Output callback protocol
+- `defineExpose` → Exposed capability boundary
+
+## 4. Compile-time and Runtime Synergy
+
+**Principle**: What can be determined at compile time should be resolved there; what must preserve runtime semantics should be handled by the Runtime.
+
+VuReact's overall processing pipeline can be summarized as:
+
+```mermaid
+flowchart LR
+    A[Vue SFC Input] --> B[Parsing]
+    B --> C[Semantic Analysis]
+    C --> D[Convention Validation]
+    D --> E[Dependency Collection / Hook Compliant Reconstruction]
+    E --> F[React TSX Output]
+    F --> G[Runtime Semantic Adaptation]
+    G --> H[Router / Project Integration]
+```
+
+Within this pipeline:
+
+- **Compiler** is responsible for parsing Vue SFCs, understanding template and script semantics, validating conventions, reconstructing dependency-driven structures, and outputting code that closely follows React engineering practices.
+- **Runtime** provides semantic adaptation capabilities such as `useVRef` and `useComputed`, handling framework differences that cannot be fully resolved at compile time.
+- **Router** offers adaptation capabilities for Vue Router-style routing when needed, extending the migration path to the full project.
+
+This layering serves three purposes:
+
+- Digest as much uncertainty as possible at compile time
+- Limit runtime responsibilities to the necessary and limited scope of semantic adaptation
+- Keep the generated output readable and maintainable as native React code
+
+Therefore, VuReact is neither a pure string replacement tool nor a bridge solution reliant on large-scale runtime interpretation.
+
+## 5. Gradual Evolution, Not Big Bang
+
+**Principle**: Migration should be completed through controllable, incremental iterations rather than a one-time rewrite.
+
+VuReact's recommended approach is not to "translate" the entire Vue project into React at once, but to first establish a stable closed loop, then gradually expand scope by page, directory, or business module. This method is better suited for real-world projects and more conducive to team collaboration.
 
 ```mermaid
 graph LR
     A[Select Pilot Module] --> B[Fix Compilation Warnings]
-    B --> C[Verify Functionality]
-    C --> D[Extend to Adjacent Modules]
+    B --> C[Verify Main Flow]
+    C --> D[Expand to Adjacent Modules]
     D --> E[Establish Team Workflow]
 ```
 
-### Key Practices
+The value of gradual migration is主要体现在:
 
-1. **Pilot first, scale later**: Start with a module with clear boundaries
-2. **Maintain rollback capability**: Design rollback plans for each migration step
-3. **Define acceptance criteria**: Clarify what constitutes "migration completion"
-4. **Build a pattern library**: Turn successful cases into team knowledge
+- Risk is partitioned by module rather than concentrated in a single event
+- Each step can define acceptance criteria and rollback plans
+- Compilation warnings, fix patterns, and success stories can progressively become team standards
+- Vue source code can remain the primary maintenance target, while React output serves as the compilation result for verification
 
-## 5. Compiler-Runtime Collaboration
+This is also why VuReact is more suitable for integration into engineering workflows, rather than being used as a one-time code processing tool.
 
-**Architectural Choice**: Rational distribution of complexity between compile time and runtime.
+## 6. What These Principles Mean
 
-### Compile Time (Compiler)
+When taken together, the above principles clarify VuReact's positioning:
 
-- Syntax transformation: Vue SFC → React TSX
-- Static analysis: Verify code compliance with conventions
-- Dependency management: Automatically add runtime dependencies
-- Code optimization: Generate code aligned with React best practices
+- It focuses on **software engineering controllability**, not just the speed of syntactic rewriting
+- It emphasizes **semantic reconstruction**, not just surface-level code mapping
+- It provides a **verifiable migration path**, not just a one-time transformation result
 
-### Runtime
-
-- Semantic adaptation: Provide Vue-style APIs (e.g., `useVRef`, `useComputed`)
-- Behavioral fallback: Handle subtle differences between frameworks
-- Developer experience: Offer debugging tools and error prompts
-
-### Collaborative Advantages
-
-- **Compile-time correctness**: Avoid runtime errors through static analysis
-- **Runtime flexibility**: Deliver Vue development experience within controlled boundaries
-- **Engineering through combination**: Neither pure string replacement nor pure runtime interpretation
-
-## What These Principles Mean for You
-
-### If You Are a Technical Decision-Maker
-
-- Evaluate if your project is suitable for VuReact based on these principles
-- Develop reasonable migration plans and manage expectations
-- Understand the tool's limitations and strengths to make informed technology choices
-
-### If You Are a Developer
-
-- Know why specific conventions must be followed
-- Understand the design considerations behind compilation warnings
-- Use the tool more efficiently and reduce trial-and-error costs
-
-### If You Are a Team Lead
-
-- Translate these principles into team work norms
-- Establish convention-based code review standards
-- Plan incremental technology evolution roadmaps
+Therefore, VuReact's value is first and foremost reflected at the engineering level: helping teams establish stable boundaries, define clear rules, control risks, and continuously produce maintainable React code during cross-framework evolution.
