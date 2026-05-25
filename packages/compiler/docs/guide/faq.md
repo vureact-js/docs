@@ -307,6 +307,7 @@ export default defineConfig({
    - **忽略报错**：可以安全地忽略这些 ESLint 警告。
    - **关闭检测**：在 ESLint 配置中关闭相关规则（如 `react-hooks/exhaustive-deps`）。
    - **TypeScript 编译**：如果运行 `tsc -b` 命令报错，建议改用其他构建命令（如 `vite build`）。
+   - [如何处理生成后的 React 代码 TSLint 警告不允许使用 any 类型](#q38-如何处理生成后的-react-代码-tslint-警告不允许使用-any-类型)。
 
 ## Q31: 迁移完成后如何维护？
 
@@ -345,6 +346,31 @@ export default defineConfig({
 ## Q36: `// @vr-name` 注释或 `defineOptions` 的 `name` 选项能否自定义 React 组件名？
 
 **A:** 该功能仅用于告知编译器当前 Vue 组件的名称，以便在生成 React 组件函数时保持命名一致，避免组件名出现差异。
+
+## Q37: 迁移过程中如何处理 Vuex 或 Pinia 状态管理？
+
+**A:** 推荐直接使用 React 生态中的状态管理库（如 Redux、Zustand、Recoil 等），并逐步替换 Vuex/Pinia 的使用。编译器会保留直接的 React 代码。
+
+## Q38: 如何处理生成后的 React 代码， TSLint 警告不允许使用 `any` 类型？
+
+**A:** 生成的 React 代码中可能会包含一些 `any` 类型的定义，这是因为编译器在某些情况下无法准确推断类型。建议：
+
+1. **手动优化**：可以在生成的 React 代码中手动替换 `any` 类型为更具体的类型定义。
+2. **使用类型断言**：在需要的地方使用 TypeScript 的类型断言来明确类型。
+3. **忽略特定警告**：在 eslint.config.js 中配置忽略特定的 TSLint 警告：
+
+```js
+extends: [
+// ...其他配置,
+tseslint.configs.recommended.map(config => ({
+ ...config,
+ rules: {
+   ...config.rules,
+   '@typescript-eslint/no-explicit-any': 'off',
+ },
+})),
+]
+```
 
 ---
 

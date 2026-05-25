@@ -307,6 +307,7 @@ export default defineConfig({
    - **Ignore errors**: These ESLint warnings can be safely ignored.
    - **Disable detection**: Turn off relevant rules (e.g., `react-hooks/exhaustive-deps`) in the ESLint configuration.
    - **TypeScript compilation**: If running the `tsc -b` command reports errors, it is recommended to use other build commands (e.g., `vite build`).
+   - [How to handle TSLint warnings about not allowing `any` types in the generated React code](#q38-how-to-handle-tslint-warnings-about-not-allowing-any-types-in-the-generated-react-code).
 
 ## Q31: How to maintain after migration is completed?
 
@@ -347,6 +348,31 @@ export default defineConfig({
 ## Q36: Can `// @vr-name` or `defineOptions`'s `name` customize the React component name?
 
 **A:** It is only used to inform the compiler of the current Vue component's name, so as to maintain naming consistency when generating the React component function and avoid differences in component names.
+
+## Q37: How to handle Vuex or Pinia state management during migration?
+
+**A:** It is recommended to directly use state management libraries from the React ecosystem (such as Redux, Zustand, Recoil, etc.) and gradually replace the usage of Vuex/Pinia. The compiler will retain the direct React code.
+
+## Q38: How to handle TSLint warnings about not allowing `any` types in the generated React code?
+
+**A:** The generated React code may contain some `any` type definitions because the compiler cannot accurately infer types in some cases. Recommendations:
+
+1. **Manual optimization**: Manually replace `any` types with more specific type definitions in the generated React code.
+2. **Use type assertions**: Use TypeScript type assertions to clarify types where needed.
+3. **Ignore specific warnings**: Configure eslint.config.js to ignore specific TSLint warnings:
+
+```js
+extends: [
+// ...other configs,
+tseslint.configs.recommended.map(config => ({
+ ...config,
+ rules: {
+   ...config.rules,
+   '@typescript-eslint/no-explicit-any': 'off',
+ },
+})),
+]
+```
 
 ---
 
