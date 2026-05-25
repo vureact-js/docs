@@ -1,12 +1,12 @@
 ﻿---
 layout: home
 
-title: 写 Vue，输出可维护的 React
+title: 一个面向 Vue 迁移/混合 React 的完整解决方案
 
 hero:
-  name: 'VuReact'
-  text: '写 Vue，输出可维护的 React'
-  tagline: '语义感知 · 渐进迁移 · 约定驱动'
+  name: VuReact
+  text: 写 Vue，输出可维护的 React
+  tagline: 一个面向 Vue 迁移/混合 React 的完整解决方案。
 
   actions:
     - theme: brand

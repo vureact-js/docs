@@ -1,12 +1,12 @@
 ﻿---
 layout: home
 
-title: Write Vue. Get Pure React.
+title: A complete Vue-to-React migration solution
 
 hero:
   name: 'VuReact'
   text: 'Write Vue. Get Pure React.'
-  tagline: 'Semantic-aware · Incremental migration · Convention-driven'
+  tagline: 'A complete Vue-to-React migration solution'
 
   actions:
     - theme: brand
