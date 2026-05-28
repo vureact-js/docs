@@ -2,6 +2,13 @@
 
 `vureact` 遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/) 语义化版本规范，版本按时间倒序排列。
 
+## v1.8.5 (2026-05-27)
+
+### 🐞 修复问题
+
+- 修复 `provide()` 内部使用如 `computed()` 等可映射的 API 时，会漏转为 React 产物 [#46](https://github.com/vureact-js/core/issues/46)
+- 修复无模板组件中使用 provide 后，生成的 React jsx 丢失 `<Provider>` 组件 [#51](https://github.com/vureact-js/core/issues/51)
+
 ## v1.8.4 (2026-05-25)
 
 ### 🐞 修复问题

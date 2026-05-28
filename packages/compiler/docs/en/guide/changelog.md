@@ -2,6 +2,13 @@
 
 `VuReact` follows [Semantic Versioning 2.0.0](https://semver.org). Versions are in descending chronological order.
 
+## v1.8.5 (2026-05-27)
+
+### 🐞 Bug Fixes
+
+- Fixed `provide()` internally using mappable APIs like `computed()` not being converted to React output [#46](https://github.com/vureact-js/core/issues/46)
+- Fixed missing `<Provider>` component in generated React JSX when using provide in a template-less component [#51](https://github.com/vureact-js/core/issues/51)
+
 ## v1.8.4 (2026-05-25)
 
 ### 🐞 Bug Fixes
