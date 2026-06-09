@@ -15,21 +15,21 @@ export default [
     ],
   },
   {
-    text: '反馈问题',
-    link: 'https://github.com/vureact-js/core/issues',
-  },
-  {
-    text: '在线案例',
+    text: '在线演练',
     items: [
+      {
+        text: '客户支持协同后台（混合开发）',
+        link: 'https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true',
+      },
       {
         text: '客户关系管理后台（标准）',
         link: 'https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master',
       },
-      {
-        text: '客户支持协同后台（混写）',
-        link: 'https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true',
-      },
     ],
+  },
+  {
+    text: '问题反馈',
+    link: 'https://github.com/vureact-js/core/issues',
   },
   {
     text: '指南',

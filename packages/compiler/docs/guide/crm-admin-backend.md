@@ -1,350 +1,254 @@
 # 客户关系管理后台
 
-客户关系管理后台 Vue 项目迁移实战。
+这是一篇可跟练的迁移实战教程，目标是让你从一个典型的**纯 Vue 3 + Vue Router** 后台项目出发，完整完成一次 VuReact 迁移闭环。
 
-## 概述
+在这个案例里，你会看到：
 
-这是一篇可跟练的迁移教程，目标是让你基于 `Vue3 + Vite + Vue Router` 项目，独立完成一次 VuReact 迁移闭环。
+- 如何克隆并安装示例仓库
+- 如何通过目录树找到迁移关键文件
+- 如何执行编译并观察 React 产物
+- 如何启动产物并完成业务验收
 
-同时，VuReact 不仅支持处理 SFC 文件，还支持处理独立的 Script 和 Style 文件，并自动拷贝静态资产文件。
+如果你想先在线体验，可以访问以下链接：
 
-适用读者：
+- 仓库：<https://github.com/vureact-js/example-crm-admin-backend>
+- 在线演示：<https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master>
+- 在线预览：<https://r862dm-5173.csb.app>
 
-1. 已经在维护 Vue 3 业务项目，希望渐进式迁移到 React 生态。
-2. 享受 Vue 优秀的心智模型并编写 React。
-3. 体验真正的跨框架 Vue + React 混合开发，并产出 React 代码。
+## 先看目录
 
-在开始之前，你可以提前访问本教程的 [在线演示](https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master) 进行 [预览](https://r862dm-5173.csb.app) 和体验。
+先对这个后台项目的结构建立一个整体认识。源代码目录大致如下：
 
-## 学前检查
+```text
+crm-admin-backend/
+├─ package.json
+├─ vureact.config.ts
+├─ vite.config.ts
+├─ index.html
+├─ public/
+│  ├─ config.js
+│  ├─ logo.png
+│  └─ File
+├─ git-shells/
+│  ├─ git-sync-hub.sh
+│  └─ git-sync-hub.en.sh
+└─ src/
+   ├─ main.ts
+   ├─ App.vue
+   ├─ styles/
+   │  └─ app.scss
+   ├─ data/
+   │  ├─ mock.ts
+   │  └─ mock-api.ts
+   ├─ components/
+   │  ├─ CustomerTable.vue
+   │  ├─ ThemeCard.vue
+   │  ├─ FilterBar.vue
+   │  └─ ...
+   ├─ pages/
+   │  ├─ Dashboard.vue
+   │  ├─ Customers.vue
+   │  ├─ LeadsPipeline.vue
+   │  ├─ TasksBoard.vue
+   │  ├─ NotificationsCenter.vue
+   │  ├─ ApprovalsCenter.vue
+   │  ├─ Settings.vue
+   │  └─ auth/
+   │     ├─ Login.vue
+   │     └─ Register.vue
+   └─ router/
+      ├─ index.ts
+      └─ routes.ts
+```
 
-### 适用场景
+这个结构里，最值得优先关注的是：
 
-- 你的项目使用 Vue3（含 `<script setup>`）。
-- 你接受“可控迁移”，而不是“一键零修改全自动”。
-- 你希望先跑通一个真实案例，再迁移自己的业务仓。
-- 你正计划 **与编程 AI 协作**，将 Vue 项目迁移至 React（`推荐`）。
+- `src/main.ts`，它决定源仓入口如何被编译成 React 入口
+- `src/router/index.ts`，它决定路由如何接入 VuReact 的适配层
+- `src/data/mock-api.ts`，它负责演示后台业务动作的状态变化
+- `src/pages/`，它决定最终验收能覆盖哪些业务链路
 
-### 能力边界（请先确认）
+## Step 1：克隆仓库与安装依赖
 
-- 路由支持自动适配，但在部分项目结构下仍需人工校正入口与路由文件。
-- 迁移目标是“可运行、可维护、可继续演进”，不是“逐字符无差异”。
-- 未支持的 API 或类型接口会保持原样迁移到 React 产物中。
-- 示例覆盖常见后台场景，但不包含后端接口和权限平台的完整对接，仅使用模拟接口。
-
-### 准备项
-
-- Node.js 19+
-- npm 9+
-- 已克隆 [crm-admin-backend](https://github.com/vureact-js/example-crm-admin-backend) 仓并安装依赖
-
-## Step 1：准备示例与配置
-
-### 命令
+先把仓库拉到本地并安装依赖：
 
 ```bash
+git clone https://github.com/vureact-js/example-crm-admin-backend.git
 cd crm-admin-backend
 npm install
 ```
 
-### 你会看到什么
-
-- 依赖安装完成，项目目录中 `package.json` 可执行 `vr:build`。
+安装完成后，请先确认 `package.json` 中存在以下脚本：
 
 ```json
-"scripts": {
-  "vr:watch": "vureact watch",
-  "vr:build": "vureact build"
+{
+  "scripts": {
+    "vr:watch": "vureact watch",
+    "vr:build": "vureact build"
+  }
 }
 ```
 
-- 根目录存在 `vureact.config.ts` 与 `src/`。
+### 关键点
 
-### 失败时检查
-
-- `npm` 命令不可用：检查 Node/npm 安装。
-- 安装失败：优先清理锁文件冲突后重试。
-- 不会解决：复制错误并求助于 AI。
+- 这个案例是标准后台项目，适合先跑通“源仓 -> 产物 -> 启动 -> 验收”的完整流程
+- 和混写项目不同，这里更适合观察路由、页面和状态联动是如何在 React 产物里成立的
+- 如果安装阶段就失败，优先检查 Node.js、npm 和网络环境
 
 ### 通过标准
 
-- `npm install` 无阻塞性错误。
+- `npm install` 无阻塞性错误
+- 根目录可以识别 `vureact.config.ts`
+- 你能继续执行 `npm run vr:build`
 
-## Step 2：执行 VuReact 编译
+## Step 2：先跑通编译闭环
 
-### 命令
+先执行一次完整编译：
 
 ```bash
 npm run vr:build
 ```
 
-### 你会看到什么
-
-- 控制台输出编译统计（SFC/script/style 处理数量）。
-
-<img src="../public/images/crm-admin-backend/1.png" />
-
-- 生成 `.vureact/react-app` 目录，且与 Vue 源结构一致。
-
-<div style="display: flex;">
-  <div style="font-size: 14px; text-align: center;">
-    <img src="../public/images/crm-admin-backend/2.png" />
-    <p>(Vue 目录)</p>
-  </div>
- <div style="font-size: 14px; text-align: center; margin-left: 46px">
-    <img src="../public/images/crm-admin-backend/2-1.png" style="width: 172px; height: 482px" />
-    <p>(.vureact 目录)</p>
- </div>
-</div>
-
-- 若有 warning，会显示具体文件位置。
-
-### 失败时检查
-
-- Npm/Network 错误：检查当前是否联网。
-- SFC 语法错误：先修复源 Vue 文件再编译。
-- 路由相关告警：继续执行 [Step 3](#step-3-处理路由接入-关键) 进行路由接入校正。
-
-### 通过标准
-
-- 输出目录存在且包含 `src/main.tsx`、`src/router` 等 React 工程文件。
-
-## Step 3：处理路由接入（关键）
-
-> 详细背景请阅读：[路由适配指南](/guide/router-adaptation)
-
-### 命令
+如果你希望在修改源文件时持续看到产物更新，再开启监听模式：
 
 ```bash
-cd .vureact/react-app
-npm install
+npm run vr:watch
 ```
-
-如需手动校正，重点检查：
-
-- `src/main.tsx` 是否渲染 `<router.RouterProvider />`
-- 路由配置是否从 `@vureact/router` 导入
 
 ### 你会看到什么
 
-- 应用入口统一由 `RouterProvider` 承载：
+- 控制台输出编译统计信息
+- 项目根目录下生成 `.vureact/react-app`
+- 生成的 React 产物会保留与 Vue 源结构一致的组织方式
 
-```tsx
-// src/main.tsx
-import RouterInstance from './router/index';
+### 关键点
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterInstance.RouterProvider />
-  </StrictMode>,
-);
-```
-
-- 路由 `'vue-router'` 导入被替换为 `'@vureact/router'`：
-
-```ts
-// src/router/index.ts
-import { createRouter, createWebHashHistory } from '@vureact/router';
-import { isAuthed } from '../data/mock-api';
-import routes from './routes';
-
-const router = createRouter({ history: createWebHashHistory(), routes });
-
-router.beforeEach((to, _from, next) => {
-  if (to.meta.public) {
-    next();
-    return;
-  }
-  if (!isAuthed()) {
-    next({ name: 'login', query: { redirect: to.fullPath } });
-    return;
-  }
-  next();
-});
-
-export default router;
-```
-
-- 页面路由（如 Dashboard/Customers/Leads/Tasks 等）可被访问。
-
-<img src="../public/images/crm-admin-backend/4.png"  />
+- 这一步的目标不是先看页面，而是先确认编译器可以稳定生成工程产物
+- 如果产物目录没有生成，优先检查 `vureact.config.ts`
+- 这个项目包含后台常见的路由、表单、列表和看板结构，编译通过之后，后续验证会更清晰
 
 ### 失败时检查
 
-- 页面空白：通常是 `main.tsx` 仍直接渲染 `<App />`。
-- 路由组件报错：检查 `router/index` 导出是否正确。
-- 仍不通：按路由适配文档的“手动适配方案”逐项对照。
+- 如果 `build` 失败，先看源码是否存在语法问题
+- 如果产物目录缺失，确认命令是在项目根目录执行的
+- 如果 `watch` 不同步，确认监听进程仍在运行
 
 ### 通过标准
 
-- 启动后可以正常切换路由，不出现全局白屏。
+- `.vureact/react-app` 成功生成
+- 你可以在重复执行 `npm run vr:build` 时稳定得到产物
+
+## Step 3：理解关键文件
+
+这一步的目标是让你知道迁移时应该盯住哪些入口。
+
+### 1. 路由入口
+
+`src/router/index.ts` 是最重要的文件之一。它负责路由守卫、页面切换和入口接入，也是教程里最常见的验收检查点。
+
+如果项目启用了路由适配，通常会在配置里显式指向它：
+
+```ts
+router: {
+  configFile: 'src/router/index.ts',
+}
+```
+
+### 2. 业务状态入口
+
+`src/data/mock-api.ts` 和 `src/data/mock.ts` 提供后台演示所需的状态与动作。只要你能看懂它们，就能更容易理解页面如何联动。
+
+### 3. 页面入口
+
+`src/pages/` 下是本案例的业务验收面：
+
+- `Dashboard.vue`
+- `Customers.vue`
+- `LeadsPipeline.vue`
+- `TasksBoard.vue`
+- `NotificationsCenter.vue`
+- `ApprovalsCenter.vue`
+- `Settings.vue`
+- `auth/Login.vue`
+- `auth/Register.vue`
+
+### 关键点
+
+- 先看路由，再看状态，再看页面
+- 后台类教程最容易卡住的地方，往往不是某个组件本身，而是页面跳转、守卫和状态更新链路
+- 如果你能把“哪个页面读哪个状态、哪个动作会改哪个状态”说明白，验收就会非常直接
 
 ## Step 4：启动 React 产物
 
-### 命令
+进入生成的 React 工程并启动开发服务器：
 
 ```bash
-npm run dev
-```
-
-### 你会看到什么
-
-- Vite dev server 启动成功（默认本地端口）。
-
-<img src="../public/images/crm-admin-backend/5.png"  />
-
-- 浏览器打开后进入登录页，再进入 CRM 主界面。
-
-<img src="../public/images/crm-admin-backend/6.png"  />
-
-### 失败时检查
-
-- 缺依赖：安装日志里补齐缺失包后重启。
-- TS 报错：优先检查路由入口与导入路径。
-- Vite 报错：优先检查当前 Node.js 版本是否兼容 Vite 8.x。
-- 检查是否可升级最新版本 VuReact。
-
-### 通过标准
-
-- React 产物可访问、可热更新、无阻塞性启动错误。
-- 修改 Vue 源文件 React 产物与页面同步更新。
-
-## Step 5：页面验收（业务闭环）
-
-在运行中的页面手动验收以下路径。
-
-### 你会看到什么
-
-- 通知中心：筛选、关键词、单条处理、全部已读。
-- 审批中心：发起审批、通过/驳回、审批历史可追踪。
-- 线索管道：高价值线索触发审批联动。
-- 任务看板：任务进入阻塞触发协同通知。
-- 仪表盘：协同摘要（未读/待审批/今日处理）联动更新。
-
-### 失败时检查
-
-- 联动不触发：检查 `mock-api` 中规则入口是否被页面调用。
-- 数据不刷新：检查页面 reload/watch 逻辑。
-
-### 通过标准
-
-- “线索/任务动作 -> 协同中心 -> 仪表盘摘要”链路完整跑通。
-
-## Step 6：就近排错（按症状）
-
-### 命令
-
-```bash
-# 重新编译
-npm run vr:build
-
-# 重新启动产物
-cd .vureact/react-app && npm run dev
-
-# 或删除产物后再重编译
-rm .vureact
-npm run vr:build
-cd .vureact/react-app && npm install && npm run dev
-
-```
-
-### 你会看到什么
-
-- 大多数问题可归类为：路由入口、依赖缺失、源文件语法、类型约束、版本不兼容。
-
-### 失败时检查
-
-- 路由空白：优先看 [Step 3](#step-3-处理路由接入-关键)。
-- 编译失败：回到报错文件，修源代码后重编译。
-- 类型不通过：检查生成产物中路由/运行时包导入是否正确，或不检查类型。
-
-### 通过标准
-
-- 能在 10 分钟内定位并修复常见阻塞错误。
-
-## Step 7：迁移到你的业务仓（最小模板）
-
-### 命令
-
-- 在你的 Vue 项目安装编译器。
-
-```bash
-npm i -D @vureact/compiler-core
-```
-
-- 接着在项目根目录下创建配置文件。
-
-```ts
-// vureact.config.ts
-import { defineConfig } from '@vureact/compiler-core';
-
-// 最小化示例配置，可根据实际需求进行调整
-export default defineConfig({
-  input: 'src',
-  exclude: ['src/main.ts'],
-  output: {
-    workspace: '.vureact',
-    outDir: 'react-app',
-    bootstrapVite: true,
-  },
-});
-```
-
-具体配置方法请参考 [配置 API](/api/config) 文档。
-
-- 执行迁移。
-
-```bash
-npx vureact build
-
-# 或指定编译某个目录（可选）
-npx vureact build -i src/components
-
-# 或指定编译某个文件（可选）
-npx vureact build -i src/pages/Home.vue
-```
-
-### 你会看到什么
-
-- 你的业务仓生成对应 React 产物目录。
-- 可复用本教程的 [Step 3](#step-3-处理路由接入-关键)~[Step 6](#step-6-就近排错-按症状) 验收路径。
-
-### 失败时检查
-
-- 先缩小迁移范围（目录级渐进），不要一次性全仓推进。
-- 遇到路由复杂场景，先走“手动适配”保证可运行。
-
-### 通过标准
-
-- 你的业务项目至少 1 条核心业务链路在 React 产物可运行。
-
-## 附录 A：命令速查
-
-```bash
-# Vue 示例目录
-cd crm-ops-portal
-npm install
-npm run vr:build
-
-# React 产物目录
 cd .vureact/react-app
 npm install
 npm run dev
 ```
 
-## 附录 B：能力映射（本案例）
+### 你会看到什么
 
-- 模板：覆盖常用指令和事件等
-- 组件：`defineProps` / `defineEmits` / slot
-- 脚本：`ref` / `computed` / `watch` 等
-- 依赖注入：`provide` / `inject`
-- 路由：`createRouter` / `router-link` / `router-view` 和守卫等
-- 样式：`scoped` / Sass 语法
+- Vite dev server 正常启动
+- 浏览器先进入登录页
+- 登录后可以进入 CRM 主界面
+- 修改 Vue 源文件后，React 产物可以持续同步
 
-## 附录 C：排错索引
+### 关键点
 
-- 路由空白页：先看 [路由适配指南](/guide/router-adaptation)
-- 编译告警处理建议：看 [最佳实践](/guide/best-practices)
+- 这一步验证的是“产物能不能独立运行”
+- 对标准后台项目来说，路由入口和页面联动通常是最先要确认的内容
+- 你应当把 React 产物当成编译结果来验证，而不是把它当成主源码去直接维护
+
+### 通过标准
+
+- `npm run dev` 可成功启动
+- 页面可以从登录流进入业务主界面
+- 修改源文件后，产物页面能够同步更新
+
+## Step 5：完成业务验收
+
+当页面启动后，按下面的链路验收即可：
+
+### 你应该能完成的事情
+
+- 从登录页进入系统
+- 打开 Dashboard、Customers、LeadsPipeline、TasksBoard、NotificationsCenter、ApprovalsCenter、Settings 等页面
+- 在通知中心完成筛选、关键词检索和单条处理
+- 在审批中心完成发起、通过、驳回和历史查看
+- 在线索管道中观察审批联动
+- 在任务看板中观察阻塞与协同通知
+- 在仪表盘中观察摘要信息联动更新
+
+### 你应该重点观察什么
+
+- 路由守卫是否能正确放行登录页、拦截业务页
+- `mock-api` 的动作是否能驱动页面数据变化
+- 列表、看板和摘要是否能随着状态变化同步更新
+
+### 失败时检查
+
+- 登录后仍回到登录页，优先检查路由守卫和会话状态
+- 数据不刷新，优先检查页面是否调用了对应的 mock-api
+- 某个看板不联动，优先检查状态是否正确写入并被页面订阅
+
+### 通过标准
+
+- 登录、路由、通知、审批、线索、任务、仪表盘等核心链路都能跑通
+- 你可以明确说出每个页面依赖的状态和动作
+- 你已经完成一次从 Vue 源码到 React 产物的完整闭环验证
+
+## 小结
+
+这个案例的重点不是“看图认路”，而是“按步骤把一个后台项目从源码跑到验收”。
+
+如果你按上面的顺序完成了克隆、安装、编译、启动和验收，那么你已经走完了 VuReact 的标准迁移工作流：先让编译成立，再让产物运行，最后用业务闭环验证迁移结果。
+
+## 附录：排错索引
+
+- 路由报错：[路由适配指南](/guide/router-adaptation)
+- 编译告警处理建议：看 [编译约定](/guide/specification)
 - 问题反馈：
   - [Compiler Issues](https://github.com/vureact-js/core/issues)
   - [Router Issues](https://github.com/vureact-js/vureact-router/issues)

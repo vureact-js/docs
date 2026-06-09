@@ -26,11 +26,11 @@ export default [
   {
     text: 'Real-World Projects',
     items: [
-      { text: 'CRM Admin Dashboard (Standard)', link: '/en/guide/crm-admin-backend' },
       {
-        text: 'Customer Support Hub (Mixed)',
+        text: 'Support Hub (Hybrid)',
         link: '/en/guide/customer-support-hub',
       },
+      { text: 'CRM Backend (Standard)', link: '/en/guide/crm-admin-backend' },
     ],
   },
   {

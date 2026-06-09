@@ -15,21 +15,21 @@ export default [
     ],
   },
   {
-    text: 'Issues',
-    link: 'https://github.com/vureact-js/core/issues',
-  },
-  {
     text: 'Playground',
     items: [
       {
-        text: 'CRM Admin Dashboard (Standard)',
-        link: 'https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master',
-      },
-      {
-        text: 'Customer Support Hub (Mixed)',
+        text: 'Customer Support Hub (Hybrid)',
         link: 'https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true',
       },
+      {
+        text: 'CRM Admin Backend (Standard)',
+        link: 'https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master',
+      },
     ],
+  },
+  {
+    text: 'Bug Report',
+    link: 'https://github.com/vureact-js/core/issues',
   },
   {
     text: 'Guide',

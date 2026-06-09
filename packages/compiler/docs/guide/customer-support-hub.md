@@ -1,437 +1,253 @@
-# 客户支持协同后台
+# 客户支持协同后台（混合开发）
 
-客户支持协同后台 Vue + React 生态，混写项目迁移实战。
+这是一个贴近真实业务场景的多渠道客服协同后台的迁移实战教程，旨在让你从一个 **Vue + React 混合开发**项目出发，完整经历一次 VuReact 在复杂后台场景下的混写与转换能力迁移闭环。
 
-## 概述
+在这个案例里，你会看到：
 
-这是一篇可跟练的迁移教程，目标是让你基于
+- 如何克隆并启动示例仓库
+- 如何阅读项目目录，快速找到迁移关键文件
+- 如何通过 `build` 和 `watch` 观察编译产物
+- 如何启动 React 产物并完成业务验收
 
-`Vue + Vue Router + Ant Design (React) + Zustand (React)`，实现全生态释放，完成在真实业务场景下的 VuReact “可控混写” 迁移闭环。
+重点使用的混合技术栈：
 
-### 在线演示
+- Vue 3
+- Vue Router 4
+- Ant Design 6（React）
+- Zustand（React）
 
-在开始之前，你可以提前访问本教程的 [在线演示](https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true) 进行 [预览](https://skx7pn-5173.csb.app/) 和体验。
+如果你想先在线体验，可以访问以下链接：
 
-### 视频演示
+- 仓库：<https://github.com/vureact-js/example-customer-support-hub>
+- 在线演示：<https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true>
+- 在线预览：<https://skx7pn-5173.csb.app/>
 
-你也可以通过以下视频快速了解整个迁移过程：
+## 先看目录
 
-<video controls preload="metadata">
-  <source src="/static/demo_customer-support-hub.mp4" type="video/mp4" />
-  您的浏览器不支持视频播放。
-</video>
+开始之前，先对项目结构建立一个整体印象。这个示例的源代码结构大致如下：
 
-### 准备项
+```text
+customer-support-hub/
+├─ package.json
+├─ vureact.config.ts
+├─ vite.config.ts
+├─ index.html
+└─ src/
+   ├─ main.ts
+   ├─ App.vue
+   ├─ styles/
+   │  └─ app.scss
+   ├─ data/
+   │  ├─ mock.ts
+   │  └─ mock-api.ts
+   ├─ store/
+   │  └─ useAppStore.ts
+   ├─ components/
+   │  ├─ ConversationPanel.vue
+   │  ├─ TicketFilterBar.vue
+   │  ├─ TicketTimeline.vue
+   │  └─ ...
+   ├─ pages/
+   │  ├─ Dashboard.vue
+   │  ├─ TicketsList.vue
+   │  ├─ TicketDetail.vue
+   │  ├─ Customers.vue
+   │  ├─ Agents.vue
+   │  ├─ ConversationCenter.vue
+   │  ├─ KnowledgeBase.vue
+   │  ├─ SlaBoard.vue
+   │  ├─ Settings.vue
+   │  └─ auth/Login.vue
+   └─ router/
+      ├─ index.ts
+      └─ routes.ts
+```
 
-- Node.js 19+
-- 已克隆 [customer-support-hub](https://github.com/vureact-js/example-customer-support-hub) 仓并安装依赖
+这个结构的重点有三个：
 
-## Step 1：准备示例与配置
+- `src/main.ts` 是 Vue 源仓入口，编译后会生成对应的 React 入口
+- `src/router/index.ts` 是路由适配的关键位置
+- `src/store/useAppStore.ts` 负责跨页面状态，是验收业务链路时最值得关注的文件之一
 
-### 1.1 命令
+## Step 1：克隆仓库与安装依赖
+
+先把仓库拉到本地并安装依赖：
 
 ```bash
+git clone https://github.com/vureact-js/example-customer-support-hub.git
 cd customer-support-hub
 npm install
 ```
 
-### 1.2 你会看到什么
-
-- 依赖安装完成，项目目录中 `package.json` 可执行 `vr:watch` 与 `vr:build`。
+安装完成后，请先确认 `package.json` 中存在以下脚本：
 
 ```json
-"scripts": {
-  "vr:watch": "vureact watch",
-  "vr:build": "vureact build"
+{
+  "scripts": {
+    "vr:watch": "vureact watch",
+    "vr:build": "vureact build"
+  }
 }
 ```
 
-- 根目录存在 `vureact.config.ts` 与 `src/`。
+### 关键点
 
-- 路由配置入口在 `vureact.config.ts` 中声明为 `src/router/index.ts`。
+- 这个示例是“先维护 Vue 源码，再观察 React 产物”的模式
+- 迁移的起点不是改产物，而是先让编译闭环跑通
+- 如果安装阶段就失败，优先检查 Node.js、npm 和网络环境
+
+### 通过标准
+
+- `npm install` 无阻塞性错误
+- 根目录可以识别 `vureact.config.ts`
+- 你能继续执行 `npm run vr:build`
+
+## Step 2：先跑通编译闭环
+
+先执行一次完整编译：
+
+```bash
+npm run vr:build
+```
+
+如果你希望在修改源文件时持续看到产物更新，再开启监听模式：
+
+```bash
+npm run vr:watch
+```
+
+### 你会看到什么
+
+- 控制台输出编译统计信息
+- 项目根目录下生成 `.vureact/react-app`
+- 生成的 React 产物会保持与 Vue 源结构相近的目录组织
+
+### 关键点
+
+- 这一步的目标不是“看见页面”，而是先确认编译器可以稳定产出 React 工程
+- 如果产物目录没有生成，优先检查 `vureact.config.ts` 是否存在
+- 这个示例会通过配置在编译成功后补齐必要的产物处理逻辑，因此产物入口和样式导入要以最终生成结果为准
+
+### 失败时检查
+
+- 如果 `build` 失败，先看源码是否存在语法问题
+- 如果产物目录缺失，确认命令是在项目根目录执行的
+- 如果 `watch` 不同步，确认监听进程仍在运行
+
+### 通过标准
+
+- `.vureact/react-app` 成功生成
+- 你可以在重复执行 `npm run vr:build` 时稳定得到产物
+
+## Step 3：理解关键文件
+
+这一步不是为了逐个读完所有代码，而是为了知道“迁移时应该盯哪些文件”。
+
+### 1. 路由入口
+
+`src/router/index.ts` 是最优先要看的文件，因为它决定了应用如何从 Vue 路由进入 React 产物：
 
 ```ts
 router: {
   configFile: 'src/router/index.ts',
-},
-```
-
-### 1.3 失败时检查
-
-- `npm` 命令不可用：检查 Node/npm 安装。
-- 安装失败：优先清理锁文件冲突后重试。
-- 不会解决：复制错误并求助于 AI。
-
-### 1.4 通过标准
-
-- `npm install` 无阻塞性错误。
-- 能在根目录执行 `npm run vr:build`。
-
-## Step 2：执行 VuReact 编译
-
-### 2.1 命令
-
-```bash
-npm run vr:build
-```
-
-可选：增量迁移可使用监听模式。
-
-```bash
-npm run vr:watch
-```
-
-### 2.2 你会看到什么
-
-- 控制台输出编译统计（SFC/script/style 处理数量）。
-
-<img src="../public/images/customer-support-hub/console.png"  />
-
-- 生成 `.vureact/react-app` 目录，且与 Vue 源结构一致。
-
-<img src="../public/images/customer-support-hub/menus.png"  />
-
-- 编译成功后，会按 `vureact.config.ts` 配置自动处理 React 入口样式导入（由 `onSuccess` 钩子完成）。
-
-```ts
-{
-  onSuccess: async () => {
-    /*
-      对 main.tsx 注入缺失的 styles/app.css 导入
-    */
-    const __dirname = path.dirname(fileURLToPath(import.meta.url));
-    const entryFile = path.resolve(__dirname, './.vureact/react-app/src/main.tsx');
-    const data = fs.readFileSync(entryFile, 'utf-8');
-    const newData = data.replace('index.css', 'styles/app.css');
-    fs.writeFileSync(entryFile, newData, 'utf-8');
-  };
 }
 ```
 
-### 2.3 失败时检查
+### 2. 状态入口
 
-- Network/NPM 错误：检查当前是否联网。
-- SFC 语法错误：先修复源 Vue 文件再编译。
-- 产物目录缺失：确认在项目根目录执行命令，且 `vureact.config.ts` 存在。
+`src/store/useAppStore.ts` 负责会话、筛选条件和活动流等跨页面状态。只要状态变化链路通了，页面联动通常也就通了。
 
-### 2.4 通过标准
+### 3. 页面入口
 
-- 输出目录存在且包含 `src/main.tsx`、`src/router` 等 React 工程文件。
-- 重新执行 `npm run vr:build` 可稳定复现产物。
+`src/pages/` 下的页面决定了你最终验收的业务面：
 
-## Step 3：观察产物路由
+- `Dashboard.vue`
+- `TicketsList.vue`
+- `TicketDetail.vue`
+- `Customers.vue`
+- `Agents.vue`
+- `KnowledgeBase.vue`
+- `SlaBoard.vue`
+- `Settings.vue`
+- `auth/Login.vue`
 
-### 3.1 你会看到什么
+### 关键点
 
-- React 产物应用入口 `main.tsx` 统一由 `RouterProvider` 承载。
+- 先看路由，再看状态，最后看页面
+- 迁移教程最容易卡住的地方，通常不是单个组件，而是页面与状态的联动
+- 如果你能说清楚“哪个页面读哪个状态、哪个动作会改哪个状态”，后面的验收就会轻松很多
 
-```tsx
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterInstance.RouterProvider />
-  </StrictMode>,
-);
-```
+## Step 4：启动 React 产物
 
-- 路由守卫会放行 `meta.public` 页面（如登录页），其余页面在无会话时跳转登录。
-
-```ts
-// react-app/src/router/index.ts
-router.beforeEach((to, _from, next) => {
-  if (to.meta.public) {
-    next();
-    return;
-  }
-  const session = appStore.getState().session;
-  if (!session.user) {
-    next({ name: 'login', query: { redirect: to.fullPath } });
-    return;
-  }
-  next();
-});
-```
-
-- 页面路由（如 Dashboard/Tickets/Customers/Agents/Knowledge/SLA/Settings）可被访问。
-
-<img src="../public/images/customer-support-hub/pages.png"  />
-
-### 3.2 失败时检查
-
-- 页面空白：通常是 `main.tsx` 仍直接渲染 `<App />`。
-- 路由组件报错：检查 `router/index` 导出与 `routes` 导入是否正确。
-- 登录后仍被重定向：检查会话读写逻辑是否正常（`localStorage` 与 store 同步）。
-
-### 3.3 通过标准
-
-- 启动后可访问登录页，登录后可正常切换业务路由，不出现全局白屏。
-
-## Step 4：观察 Vue + Zustand
-
-本节我们将从 Vue 源码视角出发，观察 zustand 的使用方式。
-
-### 4.1 你会看到什么
-
-- 状态集中在 `src/store/useAppStore.ts`，用 `zustand/vanilla` 创建 `appStore`
-
-```ts
-import { createStore } from 'zustand/vanilla';
-
-// 核心：创建 store + 动作
-export const appStore = createStore<AppState>((set) => ({...}));
-```
-
-- 需要关注的状态字段：`session`、`ticketFilters`、`slaConfig`、`activities`
-
-```ts
-{
-  session: { ... },
-  ticketFilters: { ... },
-  slaConfig: { ... },
-  activities: [],
-}
-```
-
-- 需要关注的动作：`login/logout`、`setTicketFilters`、`setSlaConfig`、`appendActivity`
-
-```ts
-{
-  login: (user) => set((state) => ({ ... })),
-  setTicketFilters: (patch) => set((state) => ({ ... })),
-  appendActivity: (text) => set((state) => ({ ... }))
-  // ...
-}
-```
-
-- 路由守卫从 store 读取 `session.user`；未登录会跳到登录页
-
-```ts
-// src/router/index.ts
-import { appStore } from './store/useAppStore';
-
-router.beforeEach((to, _from, next) => {
-  // ...
-  const session = appStore.getState().session;
-  // ...
-});
-```
-
-- 业务页面通过 `appStore.subscribe(...)` 或 `getState()` 触发筛选/刷新，从而驱动页面数据更新
-
-```ts
-// src/App.vue
-appStore.subscribe((state) => {
-  userName.value = state.session.user?.name || '访客';
-});
-```
-
-### 4.2 失败时怎么查
-
-- 登录后仍被重定向：优先检查 `router.beforeEach` 是否读取到 `session.user`
-- 筛选不生效：优先检查页面是否订阅了 `ticketFilters`，以及点击筛选后是否调用 `setTicketFilters` 并刷新
-- 活动流不更新：优先检查触发链路是否调用了 `appendActivity`
-
-### 4.3 通过标准
-
-- 你能明确对应出：`session -> 路由守卫`，`ticketFilters -> 页面列表刷新`，以及 `appendActivity -> 动态/活动流出现`
-
-## Step 5：观察 Vue + Ant Design
-
-本节我们将从 Vue 源码视角出发，观察 antd 的使用方式。
-
-### 5.1 你会看到什么
-
-- 工单处理主区：`AntTable` + `AntSelect` + `AntButton`（表格/筛选/接单/升级）
-
-```vue
-<!-- src/pages/TicketsList.vue -->
-<AntTable
-  :columns="columns"
-  :data-source="rows"
-  :pagination="pagination"
-  row-key="id"
-  :loading="loading"
-  @change="onTableChange"
-/>
-...
-```
-
-- 客户详情：`AntDrawer`（抽屉）承载信息展示与“快捷建单”
-
-```vue
-<!-- src/pages/Customers.vue -->
-<AntDrawer :open="drawerOpen" width="560" title="客户详情" @close="onCloseDrawer">
- ...
-</AntDrawer>
-```
-
-- 客户风险展示：`AntDescriptions/AntTag/AntProgress`（画像趋势、风险分、风险因子进度条）
-
-```vue
-<!-- src/pages/Customers.vue -->
-...
-<AntProgress :percent="point.score" :stroke-color="point.color" :show-info="false" />
-```
-
-- SLA 看板：`AntRadioGroup + AntTable`（切换“全部/风险/已超时”筛选结果）
-
-```vue
-<!-- src/pages/SlaBoard.vue -->
-<AntRadioGroup :value="riskFilter" @change="onFilterChange">
-  ...
-</AntRadioGroup>
-...
-```
-
-- 验证方式：通过产物或源代码中定位到 `from 'antd'` 的组件导入，即可快速关联到对应页面区域
-
-### 5.3 失败时怎么查
-
-- 表格不显示/列不对：优先检查 `columns` 的 `dataIndex` 是否与 `rows` 字段匹配，`row-key` 是否仍是 `id`
-- 选择器没反应：优先检查 `:value` 绑定字段与回调（如 `onActiveTicketChange`）是否正确
-- 抽屉/表单不工作：优先检查抽屉 `open` 状态是否切换，提交动作是否调用了 mock-api（如建单）
-
-### 5.4 通过标准
-
-- 你在页面里能完成“筛选/接单/升级/建单”等关键交互，并且页面数据与状态更新能观察到变化
-
-## Step 6：启动 React 产物
-
-### 6.1 命令
-
-在 `.vureact/react-app` 目录下：
+进入生成的 React 工程并启动开发服务器：
 
 ```bash
-npm run dev
-```
-
-### 6.2 你会看到什么
-
-- Vite dev server 启动成功（默认本地端口）。
-- 浏览器打开后进入登录页。
-
-<img src="../public/images/customer-support-hub/login.png"  />
-
-- 登录后进入客服协同主界面。
-
-<img src="../public/images/customer-support-hub/dashboard.png"  />
-
-- 热更新可用：修改 Vue 源文件，React 产物页面同步更新。
-
-在 `customer-support-hub` 根目录下：
-
-```bash
-npm run vr:watch
-```
-
-### 6.3 失败时检查
-
-- 缺依赖：安装日志里补齐缺失包后重启。
-- TS 报错：优先检查路由入口、运行时包导入和路径别名。
-- Vite 报错：优先检查当前 Node.js 版本是否兼容。
-
-### 6.4 通过标准
-
-- React 产物可访问、可热更新、无阻塞性启动错误。
-
-## Step 7：页面验收（业务闭环）
-
-在运行中的页面手动验收以下路径。
-
-### 7.1 你会看到什么
-
-- 登录与守卫：未登录访问业务页会跳转登录，登录后可回跳目标页面。
-- 工单列表与详情：可筛选/搜索工单，进入详情页后可查看时间线与 SLA 快照。
-
-<img src="../public/images/customer-support-hub/tickets.png"  />
-
-- 工单动作联动：执行接单、分配、升级、状态更新后，活动流会新增对应记录。
-
-<img src="../public/images/customer-support-hub/ticket-detail.png"  />
-
-- SLA 看板联动：工单升级或临期后，看板风险状态同步变化；更新 SLA 配置后阈值即时生效。
-- 客户页联动：可查看客户风险评分，并通过“快捷建单”生成新工单，随后在工单列表中可检索到。
-
-<img src="../public/images/customer-support-hub/customer-detail.png"  />
-
-- 知识库检索：按关键词或标签筛选文章，分页数据正常。
-
-<img src="../public/images/customer-support-hub/knowledge.png"  />
-
-### 7.2 失败时检查
-
-- 联动不触发：检查 `mock-api` 对应方法是否被页面调用（如 `claimTicket/escalateTicket/updateTicketStatus`）。
-- 活动流不更新：检查 store 中 `appendActivity` 是否执行。
-- 搜索结果异常：检查 Fuse.js 关键字字段与筛选条件是否冲突。
-
-### 7.3 通过标准
-
-- “工单动作 -> 活动流/SLA -> 仪表盘或看板”链路完整跑通。
-- “客户建单 -> 工单列表检索 -> 详情处理”链路完整跑通。
-
-## Step 8：就近排错（按症状）
-
-### 8.1 命令
-
-```bash
-# 重新编译
-npm run vr:build
-
-# 重新启动产物
-cd .vureact/react-app && npm run dev
-```
-
-或删除产物后重编译：
-
-```bash
-rm -rf .vureact
-npm run vr:build
-cd .vureact/react-app && npm install && npm run dev
-```
-
-### 8.2 你会看到什么
-
-- 大多数问题可归类为：路由入口、依赖缺失、源文件语法、类型约束、版本不兼容。
-
-### 8.3 失败时检查
-
-- 路由空白：优先回看 Step 3 的路由接入检查项。
-- 编译失败：回到报错文件，修源代码后重编译。
-- 类型不通过：检查生成产物中路由/运行时包导入是否正确。
-- watch 不同步：确认根目录 `npm run vr:watch` 正在运行。
-
-### 8.4 通过标准
-
-- 能在 10 分钟内定位并修复常见阻塞错误。
-
-## 附录 A：命令速查
-
-```bash
-# Vue 示例目录
-cd customer-support-hub
-npm install
-npm run vr:build
-
-# React 产物目录
 cd .vureact/react-app
 npm install
 npm run dev
 ```
 
-## 附录 B：能力映射（本案例）
+### 你会看到什么
 
-- 模板：覆盖常用指令和事件等
-- 组件：`defineProps` / `defineEmits` / slot
-- 脚本：`ref` / `computed` / `watch` 等
-- UI库：`ant design` 全量使用布局、表格、表单等
-- 状态：`zustand` store 跨页面状态管理
-- 路由：`createRouter` / 守卫 / 嵌套路由 / 动态路由
-- 样式：`scoped` / Sass 语法
-- 业务：工单流转、SLA 风险、知识库检索、客户风险评分
+- Vite dev server 正常启动
+- 浏览器先进入登录页
+- 登录后可以进入客服协同主界面
+- 修改 Vue 源文件后，React 产物可以持续同步
 
-## 附录 C：排错索引
+### 关键点
 
-- 路由空白页：先看 [路由适配指南](/guide/router-adaptation)
-- 编译告警处理建议：看 [最佳实践](/guide/best-practices)
+- 这一步验证的是“产物能不能独立运行”
+- 对混写项目来说，Vue 源码和 React 产物是两条同时存在、但职责不同的链路
+- 你应当把 React 产物当成编译结果来验证，而不是把它当成主源码去直接维护
+
+### 通过标准
+
+- `npm run dev` 可成功启动
+- 页面可以从登录流进入业务主界面
+- 修改源文件后，产物页面能够同步更新
+
+## Step 5：完成业务验收
+
+当页面启动后，按下面的链路验收即可：
+
+### 你应该能完成的事情
+
+- 从登录页进入系统
+- 打开 Dashboard、Tickets、Customers、KnowledgeBase、SlaBoard、Settings 等页面
+- 在工单列表里进行筛选、切换、查看详情
+- 在客户页查看风险信息，并观察状态联动
+- 在 SLA 看板中观察风险状态变化
+- 在知识库中进行内容浏览和检索
+
+### 你应该重点观察什么
+
+- `session` 是否能驱动登录与路由守卫
+- `ticketFilters` 是否能驱动列表刷新
+- `activities` 是否会随着工单动作新增记录
+- `slaConfig` 变化后，SLA 看板是否同步更新
+
+### 失败时检查
+
+- 登录后仍回到登录页，优先检查路由守卫和会话状态
+- 列表筛选不生效，优先检查筛选状态是否正确写入 store
+- 活动流不更新，优先检查动作是否调用了对应的 mock-api
+
+### 通过标准
+
+- 登录、路由、筛选、详情、SLA、知识库等核心链路都能跑通
+- 你可以明确说出每个页面依赖的状态和动作
+- 你已经完成一次从 Vue 源码到 React 产物的完整闭环验证
+
+## 小结
+
+这个示例的核心不是“看图认识项目”，而是“顺着目录和步骤完成一次真实迁移闭环”。
+
+如果你按上面的顺序完成了克隆、安装、编译、启动和验收，那么你已经建立起了 VuReact 的最小工作流：先让编译成立，再让产物运行，最后用业务链路验证迁移结果。
+
+## 附录：排错索引
+
+- 路由报错：[路由适配指南](/guide/router-adaptation)
+- 编译告警处理建议：看 [编译约定](/guide/specification)
 - 问题反馈：
   - [Compiler Issues](https://github.com/vureact-js/core/issues)
   - [Router Issues](https://github.com/vureact-js/vureact-router/issues)
