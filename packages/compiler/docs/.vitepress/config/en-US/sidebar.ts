@@ -76,9 +76,10 @@ export default [
           { text: 'Lifecycle', link: '/en/guide/semantic-comparison/script/lifecycle' },
           { text: 'defineProps', link: '/en/guide/semantic-comparison/script/define-props' },
           { text: 'defineEmits', link: '/en/guide/semantic-comparison/script/define-emits' },
+          { text: 'defineModel', link: '/en/guide/semantic-comparison/script/define-model' },
+          { text: 'defineExpose', link: '/en/guide/semantic-comparison/script/define-expose' },
           { text: 'defineOptions', link: '/en/guide/semantic-comparison/script/define-options' },
           { text: 'defineSlots', link: '/en/guide/semantic-comparison/script/define-slots' },
-          { text: 'defineExpose', link: '/en/guide/semantic-comparison/script/define-expose' },
           {
             text: 'defineAsyncComponent',
             link: '/en/guide/semantic-comparison/script/define-async-comp',

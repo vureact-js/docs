@@ -35,7 +35,6 @@ const { Layout: DefaultThemeLayout } = DefaultTheme;
 
 .hero-video {
   width: 100%;
-  border: 1px solid #fff;
   border-radius: 12px;
   transition: box-shadow 0.3s ease;
 }
