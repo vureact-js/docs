@@ -2,6 +2,12 @@
 
 `vureact` 遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/) 语义化版本规范，版本按时间倒序排列。
 
+## v1.9.0 (2026-06-23)
+
+### ✨ 新增功能
+
+- 新增 `defineModel` 宏 API 转换支持，仅支持 `type`、`default`、`require` 选项及自定义 prop name [#56](https://github.com/vureact-js/core/issues/56)
+
 ## v1.8.5 (2026-05-27)
 
 ### 🐞 修复问题

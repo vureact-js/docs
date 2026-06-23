@@ -2,6 +2,12 @@
 
 `VuReact` follows [Semantic Versioning 2.0.0](https://semver.org). Versions are in descending chronological order.
 
+## v1.9.0 (2026-06-23)
+
+### ✨ Features
+
+- Added `defineModel` API conversion support, only supports `type`, `default`, `require` options and custom prop name [#56](https://github.com/vureact-js/core/issues/56)
+
 ## v1.8.5 (2026-05-27)
 
 ### 🐞 Bug Fixes
