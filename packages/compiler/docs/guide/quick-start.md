@@ -408,4 +408,4 @@ VuReact 在编译过程中拥有以下核心转换能力：
 - [编译约定](/guide/specification)：遵循 VuReact 的编译器约定，以此符合最佳实践
 - [编译器配置项](/api/config)：了解更多的 VuReact 配置 API
 - [项目实战](/guide/crm-admin-backend)：通过真实项目案例（管理后台、协同后台）掌握大规模迁移流程
-- [语义编译对照](/guide/best-practices)：了解 Vue 被编译为什么样的 React 代码，及当前支持的 API 与语法范围。
+- [语义编译对照](/guide/semantic-comparison/overview)：了解 Vue 被编译为什么样的 React 代码，及当前支持的 API 与语法范围。

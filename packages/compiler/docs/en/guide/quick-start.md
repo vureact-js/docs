@@ -395,4 +395,4 @@ After completing the Getting Started guide, we recommend continuing with the fol
 - [Compilation Conventions](/en/guide/specification): Follow the compiler conventions of VuReact to align with best practices
 - [Compiler Configuration](/api/config): Learn more about VuReact configuration API
 - [Real-World Projects](/en/guide/crm-admin-backend): Master large-scale migration workflows through real project examples (admin dashboard, collaborative backend)
-- [Semantic Compilation Comparison](/en/guide/best-practices): Understand how Vue is compiled into React code, and the currently supported API and syntax scope
+- [Semantic Compilation Comparison](/en/guide/semantic-comparison/overview): Understand how Vue is compiled into React code, and the currently supported API and syntax scope
