@@ -2,10 +2,9 @@
 
 ## 什么是 VuReact
 
-VuReact（发音 `/vjuːˈriːækt/`）是一套面向 Vue 迁移 React 和混合开发的解决方案，兼具 「用 Vue 写 React」 双重能力的编译工具。
-它用于将 Vue 3 SFCs・Scripts・Styles 完整转为原生 React 代码（非运行时桥接），覆盖 `<script setup>` 核心全特性，支持渐进式迁移。
+VuReact（发音 `/vjuːˈriːækt/`）是专为 Vue 迁移 React 设计的智能编译器。它用于将 Vue 3 单文件组件・脚本・样式完整转为纯 React（非运行时桥接）代码并输出工程化产物，覆盖 `<script setup>` 核心全特性，支持渐进式迁移与 Vue+React 混合开发。
 
-此外，它绝非简单替换语法，而是深入理解 Vue 的语义，输出符合 React 最佳实践、可读且易于维护的代码。我们的目标并非“一键将任意 Vue 代码转为 React”，而是提供一条清晰、可预测、便于分析与维护的迁移路径，帮助团队在可控范围内平稳推进跨框架演进。
+它绝非简单替换语法，而是深入理解 Vue 的语义，输出符合 React 最佳实践、可读且易于维护的代码。我们的目标并非“一键将任意 Vue 代码转为 React”，而是提供一条清晰、可预测、便于分析与维护的迁移路径，帮助团队在可控范围内平稳推进跨框架演进。
 
 VuReact 由三部分协同构成：编译时转换、[Runtime](https://runtime.vureact.top/)（运行时）和 [Router](https://router.vureact.top/)（路由适配）：
 

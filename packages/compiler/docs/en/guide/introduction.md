@@ -2,7 +2,9 @@
 
 ## What is VuReact?
 
-VuReact (pronounced `/vjuːˈriːækt/`) is a compiler for migrating from Vue to React — and for writing React with Vue syntax. It converts Vue 3 SFCs, scripts, and styles into pure React without a runtime bridge, with full `<script setup>` support and progressive migration.
+VuReact (pronounced `/vjuːˈriːækt/`) is a smart compiler built for migrating Vue to React.
+It fully converts Vue 3 single-file components, scripts, and styles into pure React code (no runtime bridge), outputting production-ready artifacts.
+It covers all core features of `<script setup>`, supporting progressive migration and Vue+React hybrid development.
 
 It does more than rewrite syntax. VuReact understands Vue semantics and generates readable, maintainable React code that follows best practices. Our goal is not to “convert any Vue code to React with one click”; it is to provide a clear, predictable migration path that is easy to analyze and maintain, helping teams move across frameworks in a controlled way.
 
