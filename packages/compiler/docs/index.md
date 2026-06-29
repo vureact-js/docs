@@ -1,12 +1,12 @@
 ﻿---
 layout: home
 
-title: 一套面向 Vue 迁移 React 和混合开发的解决方案
+title: 专为 Vue 迁移 React 设计的智能编译器
 
 hero:
   name: VuReact
   text: 写 Vue，输出可维护的 React
-  tagline: 一套面向 Vue 迁移 React 和混合开发的解决方案。
+  tagline: 专为 Vue 迁移 React 设计的智能编译器。
 
   actions:
     - theme: brand

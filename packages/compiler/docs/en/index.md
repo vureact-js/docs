@@ -1,12 +1,12 @@
 ﻿---
 layout: home
 
-title: A complete Vue-to-React migration solution
+title: A compiler built for migrating Vue to React
 
 hero:
   name: 'VuReact'
   text: 'Write Vue. Get Pure React.'
-  tagline: 'A complete Vue-to-React migration solution'
+  tagline: 'A compiler built for migrating Vue to React'
 
   actions:
     - theme: brand
