@@ -2,6 +2,20 @@
 
 `vureact` 遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/) 语义化版本规范，版本按时间倒序排列。
 
+## v1.10.0 (2026-07-01)
+
+### ✨ 新增功能
+
+- 新增 `withDefaults` 宏 API 转换支持 [#63](https://github.com/vureact-js/core/issues/63)
+
+### 🐞 修复问题
+
+- 修复使用免 import 插件下，编译器无法识别 Vue API 来源，导致跳过转换的问题 [#62](https://github.com/vureact-js/core/issues/62)
+
+### 🚀 优化改进
+
+- 优化编译流程的提示更加友好，细分为 3 阶段：`Compiling components/scripts/styles...`
+
 ## v1.9.0 (2026-06-23)
 
 ### ✨ 新增功能

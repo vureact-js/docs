@@ -2,6 +2,20 @@
 
 `VuReact` follows [Semantic Versioning 2.0.0](https://semver.org). Versions are in descending chronological order.
 
+## v1.10.0 (2026-07-01)
+
+### ✨ Features
+
+- Added support for `withDefaults` macro API conversion [#63](https://github.com/vureact-js/core/issues/63)
+
+### 🐞 Bug Fixes
+
+- Fixed issue where the compiler could not recognize Vue API sources when using the import-free plugin, causing skipped conversion [#62](https://github.com/vureact-js/core/issues/62)
+
+### 🚀 Optimizations
+
+- Optimized compilation flow prompts, subdivided into 3 stages: `Compiling components/scripts/styles...`
+
 ## v1.9.0 (2026-06-23)
 
 ### ✨ Features
