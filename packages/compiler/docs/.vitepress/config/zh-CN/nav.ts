@@ -19,11 +19,11 @@ export default [
     items: [
       {
         text: '客户支持协同后台（混合开发）',
-        link: 'https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true',
+        link: 'https://codesandbox.io/p/devbox/customer-support-hub-666fjs',
       },
       {
         text: '客户关系管理后台（标准）',
-        link: 'https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master',
+        link: 'https://codesandbox.io/p/devbox/crm-ops-portal-fy7g7f',
       },
     ],
   },
