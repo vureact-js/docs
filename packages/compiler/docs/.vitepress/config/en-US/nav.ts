@@ -19,11 +19,11 @@ export default [
     items: [
       {
         text: 'Customer Support Hub (Hybrid)',
-        link: 'https://codesandbox.io/p/github/vureact-js/example-customer-support-hub/master?import=true',
+        link: 'https://codesandbox.io/p/devbox/customer-support-hub-666fjs',
       },
       {
         text: 'CRM Admin Backend (Standard)',
-        link: 'https://codesandbox.io/p/github/vureact-js/example-crm-admin-backend/master',
+        link: 'https://codesandbox.io/p/devbox/crm-ops-portal-fy7g7f',
       },
     ],
   },
